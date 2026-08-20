@@ -24,7 +24,10 @@ jobs:
           node --check catalog.js
           node --check scripts/validate.mjs
           node --check scripts/validate-schema-age.mjs
+          node --check scripts/validate-matching.mjs
       - name: Canonical integrity
         run: node scripts/validate.mjs
       - name: Schema age semantics
         run: node scripts/validate-schema-age.mjs
+      - name: Exhaustive selector state space
+        run: node scripts/validate-matching.mjs
