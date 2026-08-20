@@ -40,57 +40,25 @@ jobs:
               return text[:m.start(1)] + new + text[m.end(1):]
 
           corrections = {
-            'Magyar nyelv tanítás | Schwedenplatz, 1. csoport': [
-              ('6–14 év', '6–10 év'),
-              ('Szombatonként 10:00–12:00', 'Kéthetente szombatonként 10:00–11:30'),
-            ],
-            'Magyar nyelv tanítás | Schwedenplatz, 2. csoport': [
-              ('6–14 év', '6–10 év'),
-              ('Szombatonként 12:00–14:00', 'Kéthetente szombatonként 12:00–13:30'),
-            ],
-            'Alapozó Terápia': [
-              ('5–10 év', '5–8 év'),
-              ('Kedden és csütörtökön 13:30–15:00', 'Hétfőnként 14:30–15:30'),
-              ('Hetente kétszer', 'Hetente'),
-              ('Schwedenplatz 2, 1010 Wien', 'Schwedenplatz 2 / Top 9, 1010 Wien'),
-            ],
-            'RAJZTÁBLA': [
-              ('10–18 év', '10+ év'),
-              ('Minden hétfőn 16:30–18:00 (1,5 óra)', 'Szombaton 14:00–15:30'),
-              ('Hetente', 'Havonta 1–2 alkalom'),
-              ('70 € / 4 alkalom', '60 € / hó'),
-              ('Schwedenplatz 2, 1010 Wien', 'Schwedenplatz 2 / Top 9, 1010 Wien'),
-            ],
-            'Varázsceruza': [
-              ('9–14 év', '6–12 év'),
-            ],
-            'Kicsi Svung': [
-              ('8–13 év', '6–12 év'),
-            ],
-            'Gimi-Svung': [
-              ('14–19 év', '12–18 év'),
-              ('70 € / fő / 4 alkalom', '70 € / hó'),
-            ],
-            'Filmes Műhely': [
-              ('Minden szerdán 15:30–17:00', 'Szerdánként 15:15–16:45'),
-            ],
-            'Cserkészet': [
-              ('Alliiertenstraße 2., 1020 Wien', 'Alliiertenstrasse 2., 1020 Wien'),
-            ],
+            'Magyar nyelv tanítás | Schwedenplatz, 1. csoport': [('6–14 év','6–10 év'),('Szombatonként 10:00–12:00','Kéthetente szombatonként 10:00–11:30')],
+            'Magyar nyelv tanítás | Schwedenplatz, 2. csoport': [('6–14 év','6–10 év'),('Szombatonként 12:00–14:00','Kéthetente szombatonként 12:00–13:30')],
+            'Alapozó Terápia': [('5–10 év','5–8 év'),('Kedden és csütörtökön 13:30–15:00','Hétfőnként 14:30–15:30'),('Hetente kétszer','Hetente'),('Schwedenplatz 2, 1010 Wien','Schwedenplatz 2 / Top 9, 1010 Wien')],
+            'RAJZTÁBLA': [('10–18 év','10+ év'),('Minden hétfőn 16:30–18:00 (1,5 óra)','Szombaton 14:00–15:30'),('Hetente','Havonta 1–2 alkalom'),('70 € / 4 alkalom','60 € / hó'),('Schwedenplatz 2, 1010 Wien','Schwedenplatz 2 / Top 9, 1010 Wien')],
+            'Varázsceruza': [('9–14 év','6–12 év')],
+            'Kicsi Svung': [('8–13 év','6–12 év')],
+            'Gimi-Svung': [('14–19 év','12–18 év'),('70 € / fő / 4 alkalom','70 € / hó')],
+            'Filmes Műhely': [('Minden szerdán 15:30–17:00','Szerdánként 15:15–16:45')],
+            'Cserkészet': [('Alliiertenstraße 2., 1020 Wien','Alliiertenstrasse 2., 1020 Wien')],
           }
 
           for path in html_files:
               text = path.read_text(encoding='utf-8')
               for title, repls in corrections.items():
                   text = update_article(text, title, repls)
-              # Partner-program wording: no invented prices.
-              text = text.replace('A Napraforgók a BMI partneregyesülete – a részvételi feltételekről a napraforgok.at oldalon lehet érdeklődni',
-                                  'Tagegyesületi partnerprogram – a részvételi feltételekről és az esetleges díjról a napraforgok.at oldalon lehet érdeklődni')
-              text = text.replace('A cserkészcsapat a BMI partnerszervezete – a részvételi feltételekről a cserkesz.at oldalon lehet érdeklődni',
-                                  'Tagegyesületi partnerprogram – a részvételi feltételekről és az esetleges díjról a cserkesz.at oldalon lehet érdeklődni')
+              text = text.replace('A Napraforgók a BMI partneregyesülete – a részvételi feltételekről a napraforgok.at oldalon lehet érdeklődni','Tagegyesületi partnerprogram – a részvételi feltételekről és az esetleges díjról a napraforgok.at oldalon lehet érdeklődni')
+              text = text.replace('A cserkészcsapat a BMI partnerszervezete – a részvételi feltételekről a cserkesz.at oldalon lehet érdeklődni','Tagegyesületi partnerprogram – a részvételi feltételekről és az esetleges díjról a cserkesz.at oldalon lehet érdeklődni')
               path.write_text(text, encoding='utf-8')
 
-          # AI-readable source of truth.
           path = Path('llms-full.txt')
           text = path.read_text(encoding='utf-8')
 
@@ -108,72 +76,24 @@ jobs:
               return text[:m.start(1)] + new + text[m.end(1):]
 
           md = {
-            'Magyar nyelv tanítás | Schwedenplatz, 1. csoport': [
-              ('Korosztály: 6–14 év', 'Korosztály: 6–10 év'),
-              ('Időpont: Szombatonként 10:00–12:00', 'Időpont: Kéthetente szombaton 10:00–11:30'),
-              ('Jelentkezés: https://www.magyariskola.at/event-details/magyarnyelv-schwedenplatz-1', 'Jelentkezés: https://www.magyariskola.at/event-details/magyar-nyelv-tanitas-1'),
-            ],
-            'Magyar nyelv tanítás | Schwedenplatz, 2. csoport': [
-              ('Korosztály: 6–14 év', 'Korosztály: 6–10 év'),
-              ('Időpont: Szombatonként 12:00–14:00', 'Időpont: Kéthetente szombaton 12:00–13:30'),
-            ],
-            'Alapozó Terápia': [
-              ('Korosztály: 5–10 év', 'Korosztály: 5–8 év'),
-              ('Napok: Kedd, Csütörtök', 'Napok: Hétfő'),
-              ('Időpont: Kedden és csütörtökön 13:30–15:00', 'Időpont: Hétfőnként 14:30–15:30'),
-              ('Gyakoriság: Hetente kétszer', 'Gyakoriság: Hetente'),
-              ('Helyszín: Schwedenplatz 2, 1010 Wien', 'Helyszín: Bécsi Magyar Iskola, Schwedenplatz 2 / Top 9, 1010 Wien'),
-              ('Jelentkezés: https://www.magyariskola.at/event-details/alapozoterapia-2026', 'Jelentkezés: https://www.magyariskola.at/event-details/mozgasfejlesztes'),
-            ],
-            'RAJZTÁBLA': [
-              ('Korosztály: 10–18 év', 'Korosztály: 10+ év'),
-              ('Napok: Hétfő', 'Napok: Szombat'),
-              ('Időpont: Minden hétfőn 16:30–18:00 (1,5 óra)', 'Időpont: Szombaton 14:00–15:30'),
-              ('Gyakoriság: Hetente', 'Gyakoriság: Havonta 1–2 alkalom'),
-              ('Helyszín: Schwedenplatz 2, 1010 Wien', 'Helyszín: Bécsi Magyar Iskola, Schwedenplatz 2 / Top 9, 1010 Wien'),
-              ('Díj: 70 € / 4 alkalom', 'Díj: 60 € / hó'),
-              ('Jelentkezés: https://www.magyariskola.at/event-details/rajztabla-2026', 'Jelentkezés: https://www.magyariskola.at/event-details/rajztabla-schwedenplatz'),
-            ],
-            'Varázsceruza': [
-              ('Korosztály: 9–14 év', 'Korosztály: 6–12 év'),
-              ('Jelentkezés: https://www.magyariskola.at/event-details/varazsceruza-2026', 'Jelentkezés: https://www.magyariskola.at/event-details/varazsceruza-schwedenplatz'),
-            ],
-            'Kicsi Svung': [
-              ('Korosztály: 8–13 év', 'Korosztály: 6–12 év'),
-              ('Jelentkezés: https://www.magyariskola.at/event-details/kicsisvung-2026', 'Jelentkezés: https://www.magyariskola.at/event-details/kicsi-svung-drama-foglalkozas-schwedenplatz-1'),
-            ],
-            'Gimi-Svung': [
-              ('Korosztály: 14–19 év', 'Korosztály: 12–18 év'),
-              ('Díj: 70 € / fő / 4 alkalom', 'Díj: 70 € / hó'),
-              ('Jelentkezés: https://www.magyariskola.at/event-details/gimisvung-2026', 'Jelentkezés: https://www.magyariskola.at/event-details/gimi-svung-dramafoglalkozas-schwedenplatz'),
-            ],
-            'Filmes Műhely': [
-              ('Időpont: Minden szerdán 15:30–17:00', 'Időpont: Szerdánként 15:15–16:45'),
-              ('Jelentkezés: https://www.magyariskola.at/event-details/filmesmuhely-2026', 'Jelentkezés: https://www.magyariskola.at/event-details/filmes-muhely'),
-            ],
-            'Cserkészet': [
-              ('Helyszín: Alliiertenstraße 2., 1020 Wien – csapatotthon', 'Helyszín: Alliiertenstrasse 2., 1020 Wien – csapatotthon'),
-              ('Díj: A cserkészcsapat a BMI partnerszervezete – a részvételi feltételekről a cserkesz.at oldalon lehet érdeklődni', 'Díj: Tagegyesületi partnerprogram – a részvételi feltételekről és az esetleges díjról a cserkesz.at oldalon lehet érdeklődni'),
-            ],
-            'Napraforgócskák': [
-              ('Díj: A Napraforgók a BMI partneregyesülete – a részvételi feltételekről a napraforgok.at oldalon lehet érdeklődni', 'Díj: Tagegyesületi partnerprogram – a részvételi feltételekről és az esetleges díjról a napraforgok.at oldalon lehet érdeklődni'),
-            ],
-            'Kezdő néptánc felnőtteknek': [
-              ('Díj: A Napraforgók a BMI partneregyesülete – a részvételi feltételekről a napraforgok.at oldalon lehet érdeklődni', 'Díj: Tagegyesületi partnerprogram – a részvételi feltételekről és az esetleges díjról a napraforgok.at oldalon lehet érdeklődni'),
-            ],
-            'Napraforgók haladó csoport': [
-              ('Díj: A Napraforgók a BMI partneregyesülete – a részvételi feltételekről a napraforgok.at oldalon lehet érdeklődni', 'Díj: Tagegyesületi partnerprogram – a részvételi feltételekről és az esetleges díjról a napraforgok.at oldalon lehet érdeklődni'),
-            ],
+            'Magyar nyelv tanítás | Schwedenplatz, 1. csoport': [('Korosztály: 6–14 év','Korosztály: 6–10 év'),('Időpont: Szombatonként 10:00–12:00','Időpont: Kéthetente szombaton 10:00–11:30'),('Jelentkezés: https://www.magyariskola.at/event-details/magyarnyelv-schwedenplatz-1','Jelentkezés: https://www.magyariskola.at/event-details/magyar-nyelv-tanitas-1')],
+            'Magyar nyelv tanítás | Schwedenplatz, 2. csoport': [('Korosztály: 6–14 év','Korosztály: 6–10 év'),('Időpont: Szombatonként 12:00–14:00','Időpont: Kéthetente szombaton 12:00–13:30')],
+            'Alapozó Terápia': [('Korosztály: 5–10 év','Korosztály: 5–8 év'),('Napok: Kedd, Csütörtök','Napok: Hétfő'),('Időpont: Kedden és csütörtökön 13:30–15:00','Időpont: Hétfőnként 14:30–15:30'),('Gyakoriság: Hetente kétszer','Gyakoriság: Hetente'),('Helyszín: Schwedenplatz 2, 1010 Wien','Helyszín: Bécsi Magyar Iskola, Schwedenplatz 2 / Top 9, 1010 Wien'),('Jelentkezés: https://www.magyariskola.at/event-details/alapozoterapia-2026','Jelentkezés: https://www.magyariskola.at/event-details/mozgasfejlesztes')],
+            'RAJZTÁBLA': [('Korosztály: 10–18 év','Korosztály: 10+ év'),('Napok: Hétfő','Napok: Szombat'),('Időpont: Minden hétfőn 16:30–18:00 (1,5 óra)','Időpont: Szombaton 14:00–15:30'),('Gyakoriság: Hetente','Gyakoriság: Havonta 1–2 alkalom'),('Helyszín: Schwedenplatz 2, 1010 Wien','Helyszín: Bécsi Magyar Iskola, Schwedenplatz 2 / Top 9, 1010 Wien'),('Díj: 70 € / 4 alkalom','Díj: 60 € / hó'),('Jelentkezés: https://www.magyariskola.at/event-details/rajztabla-2026','Jelentkezés: https://www.magyariskola.at/event-details/rajztabla-schwedenplatz')],
+            'Varázsceruza': [('Korosztály: 9–14 év','Korosztály: 6–12 év'),('Jelentkezés: https://www.magyariskola.at/event-details/varazsceruza-2026','Jelentkezés: https://www.magyariskola.at/event-details/varazsceruza-schwedenplatz')],
+            'Kicsi Svung': [('Korosztály: 8–13 év','Korosztály: 6–12 év'),('Jelentkezés: https://www.magyariskola.at/event-details/kicsisvung-2026','Jelentkezés: https://www.magyariskola.at/event-details/kicsi-svung-drama-foglalkozas-schwedenplatz-1')],
+            'Gimi-Svung': [('Korosztály: 14–19 év','Korosztály: 12–18 év'),('Díj: 70 € / fő / 4 alkalom','Díj: 70 € / hó'),('Jelentkezés: https://www.magyariskola.at/event-details/gimisvung-2026','Jelentkezés: https://www.magyariskola.at/event-details/gimi-svung-dramafoglalkozas-schwedenplatz')],
+            'Filmes Műhely': [('Időpont: Minden szerdán 15:30–17:00','Időpont: Szerdánként 15:15–16:45'),('Jelentkezés: https://www.magyariskola.at/event-details/filmesmuhely-2026','Jelentkezés: https://www.magyariskola.at/event-details/filmes-muhely')],
+            'Cserkészet': [('Helyszín: Alliiertenstraße 2., 1020 Wien – csapatotthon','Helyszín: Alliiertenstrasse 2., 1020 Wien – csapatotthon'),('Díj: A cserkészcsapat a BMI partnerszervezete – a részvételi feltételekről a cserkesz.at oldalon lehet érdeklődni','Díj: Tagegyesületi partnerprogram – a részvételi feltételekről és az esetleges díjról a cserkesz.at oldalon lehet érdeklődni')],
+            'Napraforgócskák': [('Díj: A Napraforgók a BMI partneregyesülete – a részvételi feltételekről a napraforgok.at oldalon lehet érdeklődni','Díj: Tagegyesületi partnerprogram – a részvételi feltételekről és az esetleges díjról a napraforgok.at oldalon lehet érdeklődni')],
+            'Kezdő néptánc felnőtteknek': [('Díj: A Napraforgók a BMI partneregyesülete – a részvételi feltételekről a napraforgok.at oldalon lehet érdeklődni','Díj: Tagegyesületi partnerprogram – a részvételi feltételekről és az esetleges díjról a napraforgok.at oldalon lehet érdeklődni')],
+            'Napraforgók haladó csoport': [('Díj: A Napraforgók a BMI partneregyesülete – a részvételi feltételekről a napraforgok.at oldalon lehet érdeklődni','Díj: Tagegyesületi partnerprogram – a részvételi feltételekről és az esetleges díjról a napraforgok.at oldalon lehet érdeklődni')],
           }
 
           for title, repls in md.items():
               text = update_md_section(text, title, repls)
 
-          # User-confirmed drumming details: 20 EUR/occasion; do not over-emphasize crafts.
-          text = update_md_section(text, 'Világfa Sárkányai', [
-              ('Díj: 20 € / alkalom (havi befizetéssel vagy féléves tagsági díjjal rendezhető)', 'Díj: 20 € / alkalom'),
-          ])
-
+          text = update_md_section(text, 'Világfa Sárkányai', [('Díj: 20 € / alkalom (havi befizetéssel vagy féléves tagsági díjjal rendezhető)','Díj: 20 € / alkalom')])
           path.write_text(text, encoding='utf-8')
           PY
 
@@ -188,3 +108,5 @@ jobs:
           git add -- foglalkozasok.html korosztalyok.html llms-full.txt
           git commit -m "Align program data with Wix source of truth"
           git push origin HEAD:main
+
+# trigger: 2026-08-20T12:53+02:00
