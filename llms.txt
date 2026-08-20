@@ -2,20 +2,21 @@
 
 > A Bécsi Magyar Iskola (BMI, Wiener Ungarische Schule) hivatalos programválasztója. Az intézmény 1987 szeptemberében indult, ezért 2027-ben ünnepli fennállásának 40. évfordulóját.
 > A 2026/2027-es tanév programválasztója pontosan 22 fix programmal dolgozik.
-> A kereső pontos életkor, érdeklődés, kívánt nap és rendszeresség alapján keres exact egyezést. Ha nincs pontos BMI-találat, ezt jelzi, és felajánlja az Ungarisch Lernen és az AMAPED oldalát is.
+> A kereső pontos életkor, érdeklődés, kívánt nap és rendszeresség alapján keres egyezést. Ha nincs pontos BMI-találat, ezt jelzi, és felajánlja az Ungarisch Lernen és az AMAPED oldalát is.
 
 ## Canonical architektúra
-- Egyetlen operatív programregistry: https://programvalaszto.magyariskola.at/data.js
-- A kereső, az összes-program nézet, a korosztályos nézet és a Course/ItemList Schema ugyanebből a 22 rekordból épül fel.
-- A gépi szöveges tükör: https://programvalaszto.magyariskola.at/llms-full.txt
-- A repo validátora ellenőrzi a 22 rekordot, az egyedi ID-ket, a canonical link allowlistet, a partner providereket, a cserkészet 5–22 éves tartományát és a régi Wix-slugok tiltását.
+- Egyetlen programadat-forrás: https://programvalaszto.magyariskola.at/data.js
+- A `window.BMI_FINDER.programs` tömb pontosan 22 canonical rekordot tartalmaz.
+- A kereső, az összes-program nézet, a korosztályos nézet és a Course/ItemList Schema ugyanebből a registryből épül fel.
+- Az LLM-discovery magyarázó fájlja: https://programvalaszto.magyariskola.at/llms-full.txt
+- Az `llms-full.txt` szándékosan nem másolja le a programrekordokat; a teljes aktuális programadatért mindig a `data.js` registryt kell olvasni.
 
 ## Oldalak
 - Kereső: https://programvalaszto.magyariskola.at/
 - Összes 22 program: https://programvalaszto.magyariskola.at/foglalkozasok.html
 - Korosztályok: https://programvalaszto.magyariskola.at/korosztalyok.html
 - Gyakori kérdések: https://programvalaszto.magyariskola.at/gyik.html
-- Teljes LLM-adattár: https://programvalaszto.magyariskola.at/llms-full.txt
+- Gépi forrásmagyarázat: https://programvalaszto.magyariskola.at/llms-full.txt
 
 ## Identitás
 - Hivatalos intézményi oldal: https://www.magyariskola.at/
@@ -29,8 +30,11 @@
 ## Kötelező 2026/27-es forrásszabály
 - Kizárólag a registryben rögzített 22 aktuális canonical programlink használható programadat-forrásként.
 - Korábbi tanévek Wix eseményoldalai, régi event-details slugok és régi keresőindex-találatok kifejezetten kizártak.
-- A BMI saját programjainál a rögzített 2026/27-es magyariskola.at programoldal az irányadó.
-- A Napraforgócskák és a Kezdő néptánc felnőtteknek esetén a megadott napraforgok.at programszakasz az elsődleges; a Cserkészetnél a cserkesz.at/cserkesz-raj/ oldal.
+- A BMI saját programjainál az aktuális 2026/27-es magyariskola.at programoldal és az ahhoz tartozó aktuális Wix Events rekord az irányadó.
+- A Napraforgócskák és a Kezdő néptánc esetén a registryben megadott napraforgok.at programszakasz az elsődleges; a Cserkészetnél a cserkesz.at/cserkesz-raj/ oldal.
+- A Világfa Sárkányai saját 2026/27-es oldala a taltosdob.magyariskola.at.
+- `sourceNote` jelzi az aktuális forráson belüli bizonyított ellentmondást.
+- `ageRangeOperational` és `ageRangeComposite` jelzi, ha a választómotor numerikus korbesorolása nem szó szerinti forrás-korhatár.
 - A Világfa Sárkányai egyetlen, két egymásra épülő részből álló program; nem számolható külön dobkörként.
 - A Napraforgók haladó csoport nem része a fix 22 programnak.
 - Ha egy aktuális 2026/27-es oldalon egy részlet nem ellenőrizhető, azt ismeretlennek kell tekinteni; régi Wix-oldallal tilos kipótolni.
