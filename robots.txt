@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# AI-ügynököknek: strukturált összefoglaló
+# https://www.magyariskola.at/foglalkozaskereso/llms.txt
+# https://www.magyariskola.at/foglalkozaskereso/llms-full.txt
+
+Sitemap: https://www.magyariskola.at/foglalkozaskereso/sitemap.xml
