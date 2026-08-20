@@ -104,6 +104,10 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Configure or enable Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - name: Force GitHub Pages workflow build mode
         env:
           GH_TOKEN: ${{ github.token }}
@@ -111,10 +115,6 @@ jobs:
         run: |
           set -euo pipefail
           gh api --method PUT "repos/${GITHUB_REPOSITORY}/pages" -f build_type=workflow >/dev/null
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
       - name: Deploy exact artifact
         id: deployment
         uses: actions/deploy-pages@v4
