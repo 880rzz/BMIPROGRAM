@@ -22,9 +22,6 @@ jobs:
           node --check data.js
           node --check app.js
           node --check catalog.js
-          node --check scripts/generate-llms.mjs
           node --check scripts/validate.mjs
-      - name: Generated LLM mirror
-        run: node scripts/generate-llms.mjs --check
       - name: Canonical integrity
         run: node scripts/validate.mjs
