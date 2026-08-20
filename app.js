@@ -35,6 +35,7 @@ function renderStep(){
 }
 function isExact(p){return ageEligible(p)&&p.interests.indexOf(state.interest)!==-1&&(state.day==='mindegy'||p.day===state.day)&&(state.pace==='mindegy'||p.pace===state.pace)}
 function resultReason(){var parts=['életkorban megfelelő','a választott témához illik'];if(state.day!=='mindegy')parts.push('a választott napon van');if(state.pace!=='mindegy')parts.push('a kívánt rendszerességű');return parts.join(', ')+'.'}
+function meta(label,value){return value?'<div style="margin:5px 0;color:#425b69;font-size:.92rem"><strong>'+esc(label)+':</strong> '+esc(value)+'</div>':''}
 function showResults(){
   progress(4);
   var exact=cfg.programs.filter(isExact),top=exact.slice(0,3);
@@ -42,7 +43,9 @@ function showResults(){
   if(top.length){
     var heading=exact.length===1?'1 pontos találat':exact.length<=3?exact.length+' pontos találat':exact.length+' pontos találat – a legjobb 3 ajánlás';
     html+='<h3 style="margin-top:8px">'+heading+'</h3><p>A rendszer a <strong>'+esc(state.age)+' éves</strong> életkort, az érdeklődést, a napot és a rendszerességet együtt vette figyelembe.</p><div class="result-grid">';
-    top.forEach(function(p){html+='<article class="result-card"><b>'+esc(p.name)+'</b><span class="result-when">'+esc(p.when)+'</span><p>'+esc(p.why)+'</p><p class="result-reason"><strong>Miért ezt?</strong> '+esc(resultReason())+'</p><p><a class="btn" href="'+esc(p.url)+'" target="_blank" rel="noopener">Regisztráció / jelentkezés</a></p></article>'});
+    top.forEach(function(p){
+      html+='<article class="result-card"><b>'+esc(p.name)+'</b><span class="result-when">'+esc(p.when)+'</span><p>'+esc(p.why)+'</p>'+meta('Helyszín',p.location)+meta('Oktató',p.teacher)+meta('Hozzájárulási díj',p.fee)+meta('Első alkalom',p.firstDate)+'<p class="result-reason"><strong>Miért ezt?</strong> '+esc(resultReason())+'</p><p><a class="btn" href="'+esc(p.url)+'" target="_blank" rel="noopener">Regisztráció / jelentkezés</a></p></article>';
+    });
     html+='</div>';
   }else{
     html+='<h3 style="margin-top:8px">Nincs pontos BMI-találat</h3><p>A megadott életkorhoz, érdeklődéshez, időponthoz és rendszerességhez jelenleg nincs olyan fix 2026/27-es BMI-program, amely mind a négy feltételnek megfelel.</p><div class="result-card"><b>Más bécsi magyar lehetőségek</b><p>Érdemes megnézni a másik két bécsi hétvégi magyar iskola aktuális kínálatát is.</p><div class="wizard-nav" style="justify-content:flex-start"><a class="btn" href="https://ungarischlernen.at" target="_blank" rel="noopener">Ungarisch Lernen</a><a class="btn ghost" href="https://amaped.at" target="_blank" rel="noopener">AMAPED</a></div></div>';
