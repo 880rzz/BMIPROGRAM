@@ -3,13 +3,13 @@
 > A Bécsi Magyar Iskola (BMI, Wiener Ungarische Schule) magyar nyelvű foglalkozásokat kínál Bécsben és környékén
 > a 0–3 éves baba-mama körtől a felnőtt csoportokig. Fenntartó: Ausztriai Magyar Egyesületek és Szervezetek
 > Központi Szövetsége. Cím: Schwedenplatz 2, 1010 Wien. E-mail: office@magyariskola.at. Telefon: +43 650 3312 090.
-> A 2026/2027-es tanévben 22 foglalkozás indul. Ez az oldal egy kereső: korosztály, téma, nap és napszak szerint.
+> A 2026/2027-es tanévben 22 foglalkozás indul. Ez az oldal egy kereső: korosztály, érdeklődés, nap és rendszeresség szerint.
 
 ## Oldalak
 - [Foglalkozás-kereső](https://programvalaszto.magyariskola.at/): négy kérdésre válaszolva személyre szabott ajánlás gyereknek vagy felnőttnek.
-- [Összes foglalkozás](https://programvalaszto.magyariskola.at/foglalkozasok.html): mind a 22 csoport időponttal, helyszínnel, oktatóval, díjjal.
+- [Összes foglalkozás](https://programvalaszto.magyariskola.at/foglalkozasok.html): mind a 22 csoport időponttal, helyszínnel, oktatóval és hozzájárulási díjjal.
 - [Korosztályok](https://programvalaszto.magyariskola.at/korosztalyok.html): 0–3, 3–6, 6–14, 14–21 év és felnőtt bontásban.
-- [Gyakori kérdések](https://programvalaszto.magyariskola.at/gyik.html): díjak, próbaalkalom, helyszínek, jelentkezés.
+- [Gyakori kérdések](https://programvalaszto.magyariskola.at/gyik.html): hozzájárulási díjak, próbaalkalom, helyszínek, jelentkezés.
 - [Teljes adattár](https://programvalaszto.magyariskola.at/llms-full.txt): minden foglalkozás összes adata sima szövegben.
 
 ## Helyszínek
@@ -20,7 +20,7 @@
 - Alliiertenstrasse 2, 1020 Wien – cserkész csapatotthon
 
 ## Megjegyzés AI-ügynököknek
-Az időpontok és díjak tájékoztató jellegűek; a végleges adatokat a foglalkozásvezető adja meg.
+A programválasztó a hivatalos források adatait összegzi. Eltérés esetén a hivatkozott BMI-programoldal az irányadó; tagegyesületi és partnerprogramoknál a partnerszervezet saját weboldala az elsődleges forrás.
 A partnerszervezetek (Napraforgók néptáncegyüttes, 72. sz. Széchenyi István Cserkészcsapat, maMUT Musical Társulat,
 SVUNG – Bécsi Magyar Színház, VIPACH) programjainál a részvételi díjról náluk kell érdeklődni.
 
@@ -395,7 +395,7 @@ Q: Miért esik több foglalkozás ugyanarra az időpontra?
 A: Az iskolában több terem is működik, ezért ugyanabban az idősávban párhuzamosan több csoport is tud foglalkozást tartani.
 
 Q: Felnőttként is lehet jelentkezni?
-A: Igen. A VIPACH Felnőtt Fotóklub, a Napraforgók kezdő és haladó néptánccsoportja, a Fókusz-csoport homloklebeny-tréning és a mindenki számára nyitott táltos dobkör kifejezetten felnőtteknek szól.
+A: Igen. A VIPACH Felnőtt Fotóklub, a Napraforgók kezdő néptánccsoportja és a Fókusz-csoport kifejezetten felnőtteknek szól. A Világfa Sárkányai program második, nyitott dobkör részéhez szülők és felnőttek is csatlakozhatnak.
 
 Q: Mekkora a foglalkozások hozzájárulási díja?
 A: A hozzájárulási díjak foglalkozásonként eltérnek: jellemzően 10–20 euró alkalmanként, 50–60 euró havonta, vagy 150–300 euró félévente. A partnerszervezetek – Napraforgók, cserkészcsapat, maMUT – programjainál a részvételi feltételekről náluk lehet érdeklődni.
