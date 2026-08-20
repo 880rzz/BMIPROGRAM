@@ -55,12 +55,10 @@ jobs:
                   text=text.replace(org,enriched,1)
               path.write_text(text,encoding='utf-8')
 
-          # Correct homepage location count: at least five location groups are present.
           p=Path('index.html')
           text=p.read_text(encoding='utf-8').replace('<div class="stat"><b>4</b><span>helyszín</span></div>','<div class="stat"><b>5+</b><span>helyszín</span></div>')
           p.write_text(text,encoding='utf-8')
 
-          # LLM identity layer.
           for name in ['llms.txt','llms-full.txt']:
               p=Path(name)
               text=p.read_text(encoding='utf-8')
@@ -96,3 +94,5 @@ jobs:
           git add -- index.html foglalkozasok.html korosztalyok.html gyik.html styles.css llms.txt llms-full.txt
           git commit -m "Add BMI 40-year identity and press trust layer"
           git push origin HEAD:main
+
+# trigger 2026-08-20T13:08+02:00
