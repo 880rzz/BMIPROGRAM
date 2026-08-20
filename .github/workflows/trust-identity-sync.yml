@@ -1,0 +1,98 @@
+name: Apply BMI trust and identity update
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    if: ${{ github.actor != 'github-actions[bot]' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: Add 40-year identity, press trust and creator credit
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          pages=[Path('index.html'),Path('foglalkozasok.html'),Path('korosztalyok.html'),Path('gyik.html')]
+          desktop='<a class="item jubilee-link" href="https://www.magyariskola.at/tortenetunk" target="_blank" rel="noopener">1987–2027 · 40 éves BMI</a>'
+          mobile='<a href="https://www.magyariskola.at/tortenetunk" target="_blank" rel="noopener">1987–2027 · 40 éves BMI</a>'
+          trust='''<div class="footer-trust" aria-label="Hitelesség és sajtó">
+    <p class="official-note"><strong>A Bécsi Magyar Iskola (BMI) hivatalos programválasztója.</strong> A Wiener Ungarische Schule 1987 szeptemberében indult; 2027-ben ünnepli fennállásának 40. évfordulóját. Fenntartója az Ausztriai Magyar Egyesületek és Szervezetek Központi Szövetsége.</p>
+    <div class="trust-links">
+      <a href="https://www.magyariskola.at/tortenetunk" target="_blank" rel="noopener">Történetünk · 1987–2027</a>
+      <a href="https://hu.wikipedia.org/wiki/B%C3%A9csi_Magyar_Iskola" target="_blank" rel="noopener">Wikipédia</a>
+      <a href="https://rolunk.at/nepcsoportunk/a-megujult-becsi-magyar-iskola-elmult-egy-eve-video/" target="_blank" rel="noopener">Rólunk.at · A megújult BMI</a>
+      <a href="https://rolunk.at/kultura/ujdonsagok-a-becsi-magyar-iskola-2024-25-os-taneveben/" target="_blank" rel="noopener">Rólunk.at · Oktatás és programok</a>
+    </div>
+    <p class="creator-credit">Készítette a <strong>VIPACH Be Smart Kids Club csapata</strong> · <a href="https://rolunk.at/aktualis/a-fiataloknak-ma-mar-bizonyitek-kell-egy-becsi-kreativ-kozosseg-uj-generaciot-epit/" target="_blank" rel="noopener">Ismerd meg a projektet a Rólunk.at cikkében</a></p>
+  </div>'''
+
+          for path in pages:
+              text=path.read_text(encoding='utf-8')
+              if desktop not in text:
+                  anchor='<a class="btn sun" href="https://2026.magyariskola.at" target="_blank" rel="noopener">Tanévbeszámoló</a>'
+                  if anchor in text:
+                      text=text.replace(anchor,desktop+'\n      '+anchor,1)
+              if mobile not in text:
+                  anchor2='<a href="https://2026.magyariskola.at" target="_blank" rel="noopener">25/26-os tanév beszámolója</a>'
+                  if anchor2 in text:
+                      text=text.replace(anchor2,mobile+'\n      '+anchor2,1)
+              if trust not in text:
+                  text=text.replace('</footer>',trust+'\n</footer>',1)
+              org='"url": "https://www.magyariskola.at",'
+              enriched='"url": "https://www.magyariskola.at",\n   "foundingDate": "1987-09",\n   "sameAs": [\n    "https://hu.wikipedia.org/wiki/B%C3%A9csi_Magyar_Iskola",\n    "https://www.magyariskola.at/tortenetunk"\n   ],'
+              if '"foundingDate": "1987-09"' not in text and org in text:
+                  text=text.replace(org,enriched,1)
+              path.write_text(text,encoding='utf-8')
+
+          # Correct homepage location count: at least five location groups are present.
+          p=Path('index.html')
+          text=p.read_text(encoding='utf-8').replace('<div class="stat"><b>4</b><span>helyszín</span></div>','<div class="stat"><b>5+</b><span>helyszín</span></div>')
+          p.write_text(text,encoding='utf-8')
+
+          # LLM identity layer.
+          for name in ['llms.txt','llms-full.txt']:
+              p=Path(name)
+              text=p.read_text(encoding='utf-8')
+              marker='> A 2026/2027-es tanévben 24 foglalkozás indul.'
+              extra='> Ez a Bécsi Magyar Iskola (BMI) hivatalos programválasztója. Az intézmény 1987 szeptemberében indult, így 2027-ben ünnepli fennállásának 40. évfordulóját. Fenntartó: Ausztriai Magyar Egyesületek és Szervezetek Központi Szövetsége.\n'
+              if extra not in text and marker in text:
+                  text=text.replace(marker,extra+marker,1)
+              p.write_text(text,encoding='utf-8')
+
+          css=Path('styles.css')
+          text=css.read_text(encoding='utf-8')
+          extra_css='''
+.jubilee-link{white-space:nowrap}
+.footer-trust{margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,255,255,.16)}
+.footer-trust p{margin:0;color:#c8dbe4}
+.footer-trust .official-note{max-width:980px;line-height:1.65}
+.footer-trust strong{color:#fff}
+.trust-links{display:flex;flex-wrap:wrap;gap:8px 16px;margin:15px 0 18px}
+.trust-links a,.creator-credit a{color:#fff;text-underline-offset:.2em}
+.creator-credit{font-size:.9rem}
+@media(max-width:960px){.jubilee-link{white-space:normal}}
+'''
+          if '.footer-trust{' not in text:
+              text += extra_css
+              css.write_text(text,encoding='utf-8')
+          PY
+
+      - name: Commit trust update
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- index.html foglalkozasok.html korosztalyok.html gyik.html styles.css llms.txt llms-full.txt
+          git commit -m "Add BMI 40-year identity and press trust layer"
+          git push origin HEAD:main
