@@ -3,7 +3,7 @@
 var cfg=window.BMI_FINDER;
 if(!cfg||!Array.isArray(cfg.programs)||cfg.programs.length!==22)return;
 var programs=cfg.programs;
-function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c]})}
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 function ageLabel(p){return p.ageText||((p.minAge===18&&p.maxAge===99)?'Felnőtt':(p.maxAge===99?p.minAge+'+ év':p.minAge+'–'+p.maxAge+' év'))}
 function weekdayLabel(v){return{hetfo:'Hétfő',kedd:'Kedd',szerda:'Szerda',csutortok:'Csütörtök',pentek:'Péntek',szombat:'Szombat',rugalmas:'Rugalmas'}[v]||v}
 function weekdayLabels(p){return (p.weekdays||[p.weekday]).map(weekdayLabel).join(' + ')}
