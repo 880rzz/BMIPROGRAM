@@ -17,13 +17,13 @@ A `data.js` `window.BMI_FINDER.programs` tömbje tartalmazza a 2026/2027-es tan�
 - `sourceNote` forráskontekztust vagy értelmezési pontosítást ad. Ez lehet nyitott korhatár, operatív keresési besorolás vagy a szokásos rendtől eltérő, de forrás szerint szabályos kivétel; nem jelent automatikusan hibát.
 - `ageRangeOperational` jelzi, ha a numerikus keresési sáv a választómotor működéséhez szükséges besorolás, miközben a forrás nem közöl ugyanilyen számszerű korhatárt.
 - `ageRangeComposite` jelzi, ha egyetlen program különböző részei eltérő életkori közönségnek szólnak.
-- A Világfa Sárkányai egyetlen, két részből álló program; nincs külön 23. dobkör-program.
+- A Világfa Sárkányai egyetlen, két részből álló program: gyermekfoglalkozás 6–14 éveseknek, utána felnőtt dzsemelés 18+ közönségnek. A választómotor 15–17 éves életkornál nem kezeli exact találatként.
 - A Napraforgók haladó csoport nem része a fix 22 programnak.
 
 ## Programválasztó
 https://programvalaszto.magyariskola.at/
 
-A kereső pontos életkor, érdeklődés, kívánt nap és rendszeresség alapján keres. Minden BMI-találat közvetlenül az adott program canonical jelentkezési oldalára vezet.
+A kereső pontos életkor, érdeklődés, konkrét kívánt nap és rendszeresség alapján keres. A napválasztás Hétfő, Kedd, Szerda, Csütörtök, Péntek, Szombat vagy Mindegy. Többnapos program a saját összes rögzített napján találat lehet; a rugalmasan egyeztethető program bármely napválasztásnál szóba jöhet. Minden BMI-találat közvetlenül az adott program canonical jelentkezési oldalára vezet.
 
 Ha nincs pontos BMI-találat, a rendszer alternatív bécsi magyar lehetőségként az alábbi oldalakat ajánlja:
 - https://ungarischlernen.at
