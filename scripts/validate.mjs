@@ -44,7 +44,7 @@ for(const p of programs){
 
 // Direct current-source invariants. Never resolve these from older Wix years.
 assert(byId('kicsi-svung')?.minAge===8&&byId('kicsi-svung')?.maxAge===13&&byId('kicsi-svung')?.weekday==='hetfo'&&byId('kicsi-svung')?.when==='Hétfőnként 16:30–18:00','Kicsi Svung must stay 8–13, Monday 16:30–18:00');
-assert(byId('kicsi-svung')?.sourceNote,'Kicsi Svung current-source conflict must remain documented');
+assert(!byId('kicsi-svung')?.sourceNote,'Kicsi Svung resolved Wix conflict must not remain flagged');
 assert(byId('mamut')?.minAge===7&&byId('mamut')?.maxAge===12&&byId('mamut')?.weekday==='csutortok','maMUT must stay 7–12, Thursday');
 assert(byId('schweden-1')?.minAge===10&&byId('schweden-1')?.maxAge===14&&byId('schweden-1')?.teacher==='Kiss Ágnes'&&byId('schweden-1')?.when.includes('10:00–12:00'),'Schwedenplatz group 1 must stay 10–14 with Kiss Ágnes, 10:00–12:00');
 assert(byId('schweden-2')?.minAge===10&&byId('schweden-2')?.maxAge===14&&byId('schweden-2')?.teacher==='Kiss Ágnes'&&byId('schweden-2')?.when.includes('12:00–14:00'),'Schwedenplatz group 2 must stay 10–14 with Kiss Ágnes, 12:00–14:00');
@@ -55,9 +55,10 @@ assert(byId('rajztabla')?.sourceNote,'RAJZTÁBLA open-ended 10+ source range mus
 assert(byId('varazsceruza')?.minAge===9&&byId('varazsceruza')?.maxAge===14,'Varázsceruza must stay 9–14');
 assert(byId('iskola-baden')?.minAge===7&&byId('iskola-baden')?.maxAge===8&&/Makfalvi Rita/.test(byId('iskola-baden')?.teacher||''),'Baden school must stay 7–8 with Makfalvi Rita');
 assert(byId('filmes')?.minAge===13&&byId('filmes')?.maxAge===17&&byId('filmes')?.when==='Minden szerdán 15:30–17:00','Filmes Műhely must stay 13–17, Wednesday 15:30–17:00');
-assert(byId('aspern')?.sourceNote,'Aspern current-source time conflict must remain documented');
+assert(!byId('aspern')?.sourceNote&&byId('aspern')?.when==='Keddenként 15:30–17:00','Aspern resolved Wix time must stay 15:30–17:00 without conflict flag');
 assert(byId('gimi-svung')?.ageRangeOperational===true&&byId('gimi-svung')?.sourceNote,'Gimi operational numeric age range must remain explicitly documented');
-assert(byId('vilagfa')?.ageRangeComposite===true&&/6–14/.test(byId('vilagfa')?.ageText||'')&&byId('vilagfa')?.fee==='20 € / gyermek / alkalom'&&byId('vilagfa')?.teacher==='Hupczik Andrea'&&byId('vilagfa')?.sourceNote,'Világfa composite child/adult semantics and current-source date conflict must remain explicit');
+assert(byId('vilagfa')?.ageRangeComposite===true&&/6–14/.test(byId('vilagfa')?.ageText||'')&&byId('vilagfa')?.fee==='20 € / gyermek / alkalom'&&byId('vilagfa')?.teacher==='Hupczik Andrea','Világfa composite child/adult semantics must remain explicit');
+assert(byId('vilagfa')?.firstDate==='2026. szeptember 27. (vasárnap)'&&/kivételesen vasárnap/.test(byId('vilagfa')?.sourceNote||'')&&/jellemzően szombatonként/.test(byId('vilagfa')?.when||''),'Világfa must preserve the Sep 27 Sunday exception and usual Saturday rhythm');
 assert(byId('napraforgocskak')?.provider==='Napraforgók'&&byId('napraforgocskak')?.ageRangeOperational===true&&byId('napraforgocskak')?.sourceNote&&/Varga Bernadette/.test(byId('napraforgocskak')?.teacher||''),'Napraforgócskák must preserve partner-source semantics and operational age range');
 assert(byId('kezdo-neptanc')?.provider==='Napraforgók'&&byId('kezdo-neptanc')?.minAge===18&&byId('kezdo-neptanc')?.ageRangeOperational===true&&byId('kezdo-neptanc')?.sourceNote,'Adult beginner folk dance must use explicit operational adult classification');
 assert(byId('cserkeszet')?.minAge===5&&byId('cserkeszet')?.maxAge===22&&byId('cserkeszet')?.provider==='72. sz. Széchenyi István Cserkészcsapat','Cserkészet must cover partner-published ages 5–22');
