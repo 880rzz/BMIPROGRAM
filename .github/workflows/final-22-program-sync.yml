@@ -1,0 +1,126 @@
+name: Canonical 22 program sync
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    if: ${{ github.actor != 'github-actions[bot]' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: Align site to the canonical 22 upcoming programs
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re, json
+
+          # Global count wording.
+          for name in ['index.html','foglalkozasok.html','korosztalyok.html','gyik.html','llms.txt','llms-full.txt','app.js']:
+              p=Path(name)
+              if not p.exists(): continue
+              text=p.read_text(encoding='utf-8')
+              text=text.replace('24 foglalkozás','22 foglalkozás')
+              text=text.replace('mind a 24','mind a 22')
+              text=text.replace('Mind a 24','Mind a 22')
+              text=text.replace('a 24 foglalkozás','a 22 foglalkozás')
+              text=text.replace('24 csoport','22 csoport')
+              text=text.replace('24 program','22 program')
+              p.write_text(text,encoding='utf-8')
+
+          # Main homepage stat: exact 24 -> 22 in the program count tile only.
+          p=Path('index.html')
+          text=p.read_text(encoding='utf-8')
+          text=text.replace('<div class="stat"><b>24</b><span>foglalkozás</span></div>', '<div class="stat"><b>22</b><span>foglalkozás</span></div>')
+          p.write_text(text,encoding='utf-8')
+
+          # Full program page: remove two non-independent records.
+          p=Path('foglalkozasok.html')
+          text=p.read_text(encoding='utf-8')
+          for pid in ['taltos-dobkor-mindenkinek','napraforgok-halado-csoport']:
+              text=re.sub(r'<article class="item" id="'+re.escape(pid)+r'">.*?</article>\s*', '', text, flags=re.S)
+
+          # Merge the open drum circle into Világfa Sárkányai as phase 2.
+          marker='A cél nem az évszámok bemagolása, hanem hogy a gyerekek átéljék és megszeressék a történeteket.'
+          merged=marker+' A gyermekfoglalkozás után ugyanennek a programnak a második részeként nyitott közös dobkör következik, ahol szülők, felnőttek és nagyobb gyerekek is bekapcsolódhatnak az együtt dobolásba és éneklésbe.'
+          text=text.replace(marker, merged)
+          text=text.replace('<li><span class="k">Jó tudni</span><span>Létszám: 10–20 fő · A tanév végén rövid műsorral lépnek a közönség elé · További alkalmak:', '<li><span class="k">Jó tudni</span><span>Két részből áll: gyermekfoglalkozás, majd nyitott közös dobkör · Hozzájárulási díj: 20 € / alkalom · Létszám: 10–20 fő · A tanév végén rövid műsorral lépnek a közönség elé · További alkalmak:')
+
+          # JSON-LD: filter the ItemList, merge description, renumber positions.
+          m=re.search(r'<script type="application/ld\+json">\s*(\{.*?\})\s*</script>', text, flags=re.S)
+          if m:
+              data=json.loads(m.group(1))
+              for node in data.get('@graph',[]):
+                  if node.get('@type')=='ItemList' and isinstance(node.get('itemListElement'),list):
+                      kept=[]
+                      for li in node['itemListElement']:
+                          item=li.get('item',{})
+                          name=item.get('name','')
+                          if name in ['Táltos dobkör mindenkinek','Napraforgók haladó csoport']:
+                              continue
+                          if name=='Világfa Sárkányai':
+                              desc=item.get('description','')
+                              extra=' A gyermekfoglalkozást nyitott közös dobkör követi ugyanazon program második részeként, amelyhez szülők és felnőttek is csatlakozhatnak.'
+                              if extra.strip() not in desc:
+                                  item['description']=desc+extra
+                          kept.append(li)
+                      for i,li in enumerate(kept,1): li['position']=i
+                      node['itemListElement']=kept
+              js=json.dumps(data,ensure_ascii=False,indent=1)
+              text=text[:m.start(1)]+js+text[m.end(1):]
+          p.write_text(text,encoding='utf-8')
+
+          # Age-group page: remove any card linking to the two removed IDs.
+          p=Path('korosztalyok.html')
+          text=p.read_text(encoding='utf-8')
+          for pid in ['taltos-dobkor-mindenkinek','napraforgok-halado-csoport']:
+              text=re.sub(r'<article class="item">(?:(?!</article>).)*?href="foglalkozasok\.html#'+re.escape(pid)+r'"(?:(?!</article>).)*?</article>\s*','',text,flags=re.S)
+          # Merge second-part wording into all Világfa summary cards.
+          text=text.replace('A cél nem az évszámok bemagolása, hanem hogy a gyerekek átéljék és megszeressék a történeteket.</p>', 'A cél nem az évszámok bemagolása, hanem hogy a gyerekek átéljék és megszeressék a történeteket. A gyermekrész után nyitott közös dobkör következik ugyanennek a programnak a második részeként.</p>')
+          # Recalculate visible section counts from article count inside each age section.
+          def recount(match):
+              sec=match.group(0)
+              n=len(re.findall(r'<article class="item">',sec))
+              sec=re.sub(r'<h2>\d+ foglalkozás</h2>',f'<h2>{n} foglalkozás</h2>',sec,count=1)
+              return sec
+          text=re.sub(r'<section class="section(?: tint)?" id="[^"]+">.*?</section>',recount,text,flags=re.S)
+          p.write_text(text,encoding='utf-8')
+
+          # LLM full: remove sections and merge open drum circle into Világfa.
+          p=Path('llms-full.txt')
+          text=p.read_text(encoding='utf-8')
+          for title in ['Táltos dobkör mindenkinek','Napraforgók haladó csoport']:
+              text=re.sub(r'^##\s+\d+\.\s+'+re.escape(title)+r'\n.*?(?=^##\s+\d+\.|^#\s+Gyakori|\Z)','',text,flags=re.S|re.M)
+          marker='- Leírás: A magyar eredetmondákon – Csodaszarvas, Hunor és Magor, Emese álma, a vérszerződés, a honfoglalás – vezet végig a tanév. Minden alkalom mese, dobos dal, jelképek megismerése, közös ritmusgyakorlat, mozgásos játék. A cél nem az évszámok bemagolása, hanem hogy a gyerekek átéljék és megszeressék a történeteket.'
+          text=text.replace(marker, marker+' A gyermekfoglalkozás után ugyanennek a programnak a második részeként nyitott közös dobkör következik, ahol szülők, felnőttek és nagyobb gyerekek is bekapcsolódhatnak.')
+          # Sequential renumbering after deletions.
+          counter=0
+          def renum(m):
+              nonlocal_dummy=None
+              return m.group(0)
+          lines=text.splitlines()
+          out=[]; n=0
+          for line in lines:
+              if re.match(r'^##\s+\d+\.\s+',line):
+                  n+=1
+                  line=re.sub(r'^##\s+\d+\.',f'## {n}.',line)
+              out.append(line)
+          p.write_text('\n'.join(out)+'\n',encoding='utf-8')
+          PY
+
+      - name: Commit canonical 22-program set
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html foglalkozasok.html korosztalyok.html gyik.html llms.txt llms-full.txt app.js
+          git commit -m "Align program selector to canonical 22-program set"
+          git push origin HEAD:main
