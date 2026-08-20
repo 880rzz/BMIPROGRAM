@@ -3,11 +3,11 @@
 > A Bécsi Magyar Iskola (BMI, Wiener Ungarische Schule) magyar nyelvű foglalkozásokat kínál Bécsben és környékén
 > a 0–3 éves baba-mama körtől a felnőtt csoportokig. Fenntartó: Ausztriai Magyar Egyesületek és Szervezetek
 > Központi Szövetsége. Cím: Schwedenplatz 2, 1010 Wien. E-mail: office@magyariskola.at. Telefon: +43 650 3312 090.
-> A 2026/2027-es tanévben 24 foglalkozás indul. Ez az oldal egy kereső: korosztály, téma, nap és napszak szerint.
+> A 2026/2027-es tanévben 22 foglalkozás indul. Ez az oldal egy kereső: korosztály, téma, nap és napszak szerint.
 
 ## Oldalak
 - [Foglalkozás-kereső](https://programvalaszto.magyariskola.at/): négy kérdésre válaszolva személyre szabott ajánlás gyereknek vagy felnőttnek.
-- [Összes foglalkozás](https://programvalaszto.magyariskola.at/foglalkozasok.html): mind a 24 csoport időponttal, helyszínnel, oktatóval, díjjal.
+- [Összes foglalkozás](https://programvalaszto.magyariskola.at/foglalkozasok.html): mind a 22 csoport időponttal, helyszínnel, oktatóval, díjjal.
 - [Korosztályok](https://programvalaszto.magyariskola.at/korosztalyok.html): 0–3, 3–6, 6–14, 14–21 év és felnőtt bontásban.
 - [Gyakori kérdések](https://programvalaszto.magyariskola.at/gyik.html): díjak, próbaalkalom, helyszínek, jelentkezés.
 - [Teljes adattár](https://programvalaszto.magyariskola.at/llms-full.txt): minden foglalkozás összes adata sima szövegben.
@@ -293,27 +293,12 @@ SVUNG – Bécsi Magyar Színház, VIPACH) programjainál a részvételi díjró
 - Indulás: Bemutató óra: 2026. szeptember 27.
 - Kapcsolat: hupczik@gmail.com · +43 670 653 9011
 - Jó tudni: Létszám: 10–20 fő · A tanév végén rövid műsorral lépnek a közönség elé · További alkalmak: okt. 24., nov. 28., jan. 16., febr. 13., márc. 13., ápr. 17., máj. 22., évzáró júniusban
-- Leírás: A magyar eredetmondákon – Csodaszarvas, Hunor és Magor, Emese álma, a vérszerződés, a honfoglalás – vezet végig a tanév. Minden alkalom mese, dobos dal, jelképek megismerése, közös ritmusgyakorlat, mozgásos játék. A cél nem az évszámok bemagolása, hanem hogy a gyerekek átéljék és megszeressék a történeteket.
+- Leírás: A magyar eredetmondákon – Csodaszarvas, Hunor és Magor, Emese álma, a vérszerződés, a honfoglalás – vezet végig a tanév. Minden alkalom mese, dobos dal, jelképek megismerése, közös ritmusgyakorlat, mozgásos játék. A cél nem az évszámok bemagolása, hanem hogy a gyerekek átéljék és megszeressék a történeteket. A gyermekfoglalkozás után ugyanennek a programnak a második részeként nyitott közös dobkör következik, ahol szülők, felnőttek és nagyobb gyerekek is bekapcsolódhatnak.
 - Az oktatóról: A Regélő Fehér Táltos Hagyományőrző Egyesület Dobcsapata 2007-ben alakult önkéntes közösség. Előadásaikon dobolással, énekkel, korhű viselettel és a magyar mondavilággal idézik meg a múltat; rendszeresen fellépnek hagyományőrző rendezvényeken, köztük a Kurultájon és az Ősök Napján. 2009 óta szerveznek gyermekeknek dobos táborokat, ebből nőtt ki a Zengő Dobosok gyermekdobcsapat.
 - Források: taltosdob.hu – a Dobcsapat hivatalos oldala (https://www.taltosdob.hu/)
 - Jelentkezés: https://taltosdob.magyariskola.at
 
-## 18. Táltos dobkör mindenkinek
-- Alcím: Kötetlen közös dobolás szülőknek, gyerekeknek, bárkinek
-- Korosztály: 8–99 év (BMI besorolás: Minden korosztály)
-- Napok: Szombat
-- Időpont: Szombat délután, a gyermekfoglalkozás után, 2 óra
-- Gyakoriság: Havonta 1 alkalom
-- Helyszín: Bécsi Magyar Iskola, Schwedenplatz 2, 1010 Wien
-- Foglalkozásvezető: Hupczik Andrea és a Regélő Fehér Táltos Dobcsapat
-- Hozzájárulási díj: 10 € / fő
-- Indulás: 2026 őszétől, a gyermekfoglalkozásokkal együtt
-- Kapcsolat: hupczik@gmail.com · +43 670 653 9011
-- Jó tudni: Létszám: 10–30 fő · Zenei vagy dobos előképzettség nem szükséges · Felnőttek önmagukban is jöhetnek
-- Leírás: Könnyen tanulható dobos dalok, ritmusok és közismert magyar népdalok – a hangsúly az együtt zenélés örömén és a közösségi élményen van. Nyitott alkalom, ahol a generációk együtt dobolnak és énekelnek.
-- Jelentkezés: https://taltosdob.magyariskola.at
-
-## 19. Napraforgócskák
+## 18. Napraforgócskák
 - Alcím: Gyermek néptánccsoport Bécsben
 - Korosztály: 6–14 év (BMI besorolás: 6–14 év)
 - Napok: Szerda
@@ -330,7 +315,7 @@ SVUNG – Bécsi Magyar Színház, VIPACH) programjainál a részvételi díjró
 - Források: ORF Magyarok – Nyár Ünnep és évzáró a BMI-ben (2026) (https://volksgruppen.orf.at/magyarok/stories/3359672/); Rólunk.at – Követik a Nap útját az égen (https://rolunk.at/nepcsoportunk/napraforgok-neptancegyuttes/); napraforgok.at – hivatalos oldal (https://www.napraforgok.at/)
 - Jelentkezés: https://napraforgok.at/r%C3%B3lunk#napraforgocskak
 
-## 20. Cserkészet
+## 19. Cserkészet
 - Alcím: 72. sz. Széchenyi István Cserkészcsapat, Bécs
 - Korosztály: 5–18 év (BMI besorolás: 6–14 és 14–21 év)
 - Napok: Szombat
@@ -347,7 +332,7 @@ SVUNG – Bécsi Magyar Színház, VIPACH) programjainál a részvételi díjró
 - Források: cserkesz.at – Mi a cserkészet? (https://cserkesz.at/mi-a-cserkeszet/); cserkesz.at – Vezetőink (https://cserkesz.at/vezetoink/)
 - Jelentkezés: https://cserkesz.at/cserkesz-raj/
 
-## 21. Láss a Mesterek Szemével
+## 20. Láss a Mesterek Szemével
 - Alcím: VIPACH Felnőtt Fotóklub (2026/2027)
 - Korosztály: 18–99 év (BMI besorolás: Felnőtt)
 - Napok: Csütörtök
@@ -364,7 +349,7 @@ SVUNG – Bécsi Magyar Színház, VIPACH) programjainál a részvételi díjró
 - Források: banhalmi.art – hivatalos művészeti archívum (https://www.banhalmi.art); banhalmi.art – sajtómegjelenések (https://www.banhalmi.art/press.html); banhalmi.art – közösség és oktatás (https://www.banhalmi.art/community.html); Wikipédia – Bánhalmi Norbert (https://hu.wikipedia.org/wiki/B%C3%A1nhalmi_Norbert); Wikipédia – VIPACH (https://hu.wikipedia.org/wiki/VIPACH)
 - Jelentkezés: https://www.magyariskola.at/event-details/fotoklub-2026
 
-## 22. Fókusz-csoport
+## 21. Fókusz-csoport
 - Alcím: Homloklebeny-tréning felnőtteknek
 - Korosztály: 18–99 év (BMI besorolás: Felnőtt)
 - Napok: Rugalmas
@@ -379,7 +364,7 @@ SVUNG – Bécsi Magyar Színház, VIPACH) programjainál a részvételi díjró
 - Leírás: Strukturált gyakorlatok a figyelemért, önirányításért és lelki rugalmasságért: időgazdálkodás, teendők tervezése, halogatás, érzelemszabályozás, valós jelenlét.
 - Jelentkezés: https://www.magyariskola.at/event-details/fokuszcsoport-2026
 
-## 23. Kezdő néptánc felnőtteknek
+## 22. Kezdő néptánc felnőtteknek
 - Alcím: Napraforgók kezdő csoport
 - Korosztály: 16–99 év (BMI besorolás: Felnőtt)
 - Napok: Hétfő
@@ -394,22 +379,6 @@ SVUNG – Bécsi Magyar Színház, VIPACH) programjainál a részvételi díjró
 - Leírás: Játékos, támogató közegben az első tánclépések. Az idei tananyag a nyárádmenti táncok, amelyeket a Táncháztalálkozón is bemutattak.
 - Források: Rólunk.at – Erre pörögnek a Napraforgók (https://rolunk.at/aktualis/erre-porognek-a-napraforgok/); napraforgok.at – hivatalos oldal (https://www.napraforgok.at/)
 - Jelentkezés: https://napraforgok.at/r%C3%B3lunk#kezdocsoport
-
-## 24. Napraforgók haladó csoport
-- Alcím: Felnőtt-ifjúsági néptánc a Kárpát-medence táncaiból
-- Korosztály: 15–99 év (BMI besorolás: 14–21 év és felnőtt)
-- Napok: Szerda
-- Időpont: Szerdánként 19:00–22:00
-- Gyakoriság: Hetente
-- Helyszín: Bécsi Magyar Iskola, Schwedenplatz 2 / Laurenzerberg 5, Top 8.
-- Foglalkozásvezető: Napraforgók – Bécsi Magyar Néptánc és Népzene Egyesület (művészeti vezető: Németh Zsuzsanna)
-- Hozzájárulási díj: Tagegyesületi partnerprogram – a részvételi feltételekről és az esetleges díjról a napraforgok.at oldalon lehet érdeklődni
-- Indulás: 2026/27-es tanév
-- Kapcsolat: napraforgok.tancegyuttes@gmail.com · napraforgok.at
-- Jó tudni: Az 1999-ben alakult, 2024-ben 25 éves együttes felnőtt-ifjúsági tagozata · Jelentkezni a napraforgok.at űrlapján is lehet
-- Leírás: Már táncoló fiataloknak és felnőtteknek: a Kárpát-medence teljes táncanyagát ápoló, rendszeresen színpadra lépő együttes heti próbái, neves szakemberek vezetésével.
-- Források: Rólunk.at – Napraforgók Néptáncegyüttes (https://rolunk.at/nepcsoportunk/napraforgok-neptancegyuttes/)
-- Jelentkezés: https://napraforgok.at/r%C3%B3lunk
 
 # Gyakori kérdések
 
