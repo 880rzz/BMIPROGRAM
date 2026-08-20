@@ -1,0 +1,2 @@
+BMIPROGRAM production release trigger
+2026-08-20T18:34:00+02:00
