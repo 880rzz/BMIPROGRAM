@@ -42,25 +42,26 @@ for(const p of programs){
   if(p.weekdays.some(d=>d!=='szombat'))assert(p.day==='hetkoznap',`weekday/rugalmas program must use day=hetkoznap: ${p.id}`);
 }
 
-// Direct 2026/27 Wix Events invariants. These values came from the user's approved current URLs, never older Wix years.
+// Direct current-source invariants. Never resolve these from older Wix years.
 assert(byId('kicsi-svung')?.minAge===8&&byId('kicsi-svung')?.maxAge===13&&byId('kicsi-svung')?.weekday==='hetfo'&&byId('kicsi-svung')?.when==='Hétfőnként 16:30–18:00','Kicsi Svung must stay 8–13, Monday 16:30–18:00');
 assert(byId('kicsi-svung')?.sourceNote,'Kicsi Svung current-source conflict must remain documented');
 assert(byId('mamut')?.minAge===7&&byId('mamut')?.maxAge===12&&byId('mamut')?.weekday==='csutortok','maMUT must stay 7–12, Thursday');
-assert(byId('schweden-1')?.minAge===10&&byId('schweden-1')?.maxAge===14&&byId('schweden-1')?.when.includes('10:00–12:00'),'Schwedenplatz group 1 must stay 10–14, 10:00–12:00');
-assert(byId('schweden-2')?.minAge===10&&byId('schweden-2')?.maxAge===14&&byId('schweden-2')?.when.includes('12:00–14:00'),'Schwedenplatz group 2 must stay 10–14, 12:00–14:00');
+assert(byId('schweden-1')?.minAge===10&&byId('schweden-1')?.maxAge===14&&byId('schweden-1')?.teacher==='Kiss Ágnes'&&byId('schweden-1')?.when.includes('10:00–12:00'),'Schwedenplatz group 1 must stay 10–14 with Kiss Ágnes, 10:00–12:00');
+assert(byId('schweden-2')?.minAge===10&&byId('schweden-2')?.maxAge===14&&byId('schweden-2')?.teacher==='Kiss Ágnes'&&byId('schweden-2')?.when.includes('12:00–14:00'),'Schwedenplatz group 2 must stay 10–14 with Kiss Ágnes, 12:00–14:00');
 assert(byId('alapozo')?.minAge===5&&byId('alapozo')?.maxAge===10&&JSON.stringify(byId('alapozo')?.weekdays)===JSON.stringify(['kedd','csutortok'])&&byId('alapozo')?.when==='Kedden és csütörtökön 13:30–15:00','Alapozó must stay 5–10, Tuesday + Thursday 13:30–15:00');
+assert(byId('alapozo')?.firstDate==='2026. szeptember 15.','Alapozó first date must stay Sep 15, 2026');
 assert(byId('rajztabla')?.weekday==='hetfo'&&byId('rajztabla')?.when==='Minden hétfőn 16:30–18:00','RAJZTÁBLA must stay Monday 16:30–18:00');
 assert(byId('rajztabla')?.sourceNote,'RAJZTÁBLA open-ended 10+ source range must remain documented');
 assert(byId('varazsceruza')?.minAge===9&&byId('varazsceruza')?.maxAge===14,'Varázsceruza must stay 9–14');
-assert(byId('iskola-baden')?.minAge===7&&byId('iskola-baden')?.maxAge===8,'Baden school must stay 7–8 / grades 1–2');
+assert(byId('iskola-baden')?.minAge===7&&byId('iskola-baden')?.maxAge===8&&/Makfalvi Rita/.test(byId('iskola-baden')?.teacher||''),'Baden school must stay 7–8 with Makfalvi Rita');
 assert(byId('filmes')?.minAge===13&&byId('filmes')?.maxAge===17&&byId('filmes')?.when==='Minden szerdán 15:30–17:00','Filmes Műhely must stay 13–17, Wednesday 15:30–17:00');
 assert(byId('aspern')?.sourceNote,'Aspern current-source time conflict must remain documented');
 assert(byId('gimi-svung')?.ageRangeOperational===true&&byId('gimi-svung')?.sourceNote,'Gimi operational numeric age range must remain explicitly documented');
-assert(byId('cserkeszet')?.minAge===5&&byId('cserkeszet')?.maxAge===22,'Cserkészet must cover ages 5–22');
-assert(byId('cserkeszet')?.provider==='72. sz. Széchenyi István Cserkészcsapat','Cserkészet provider must be the partner troop');
-assert(byId('napraforgocskak')?.provider==='Napraforgók','Napraforgócskák provider must be Napraforgók');
-assert(byId('kezdo-neptanc')?.provider==='Napraforgók','Adult beginner folk dance provider must be Napraforgók');
-assert(byId('fokusz')?.weekday==='rugalmas','Fókusz must use weekday=rugalmas');
+assert(byId('vilagfa')?.ageRangeComposite===true&&/6–14/.test(byId('vilagfa')?.ageText||'')&&byId('vilagfa')?.fee==='20 € / gyermek / alkalom'&&byId('vilagfa')?.teacher==='Hupczik Andrea'&&byId('vilagfa')?.sourceNote,'Világfa composite child/adult semantics and current-source date conflict must remain explicit');
+assert(byId('napraforgocskak')?.provider==='Napraforgók'&&byId('napraforgocskak')?.ageRangeOperational===true&&byId('napraforgocskak')?.sourceNote&&/Varga Bernadette/.test(byId('napraforgocskak')?.teacher||''),'Napraforgócskák must preserve partner-source semantics and operational age range');
+assert(byId('kezdo-neptanc')?.provider==='Napraforgók'&&byId('kezdo-neptanc')?.minAge===18&&byId('kezdo-neptanc')?.ageRangeOperational===true&&byId('kezdo-neptanc')?.sourceNote,'Adult beginner folk dance must use explicit operational adult classification');
+assert(byId('cserkeszet')?.minAge===5&&byId('cserkeszet')?.maxAge===22&&byId('cserkeszet')?.provider==='72. sz. Széchenyi István Cserkészcsapat','Cserkészet must cover partner-published ages 5–22');
+assert(byId('fokusz')?.weekday==='rugalmas'&&/Horányi Bori/.test(byId('fokusz')?.teacher||''),'Fókusz must remain flexible-day and identify Horányi Bori');
 assert(!programs.some(p=>/haladó/i.test(p.name)&&/napraforg/i.test(p.name)),'Napraforgók haladó must not be in the fixed 22');
 assert(programs.filter(p=>p.id==='vilagfa').length===1,'Világfa must be exactly one program');
 
@@ -68,11 +69,13 @@ const files=['data.js','app.js','catalog.js','index.html','foglalkozasok.html','
 const combined=files.map(read).join('\n');
 for(const bad of ['/event-details/mozgasfejlesztes','/event-details/rajztabla-schwedenplatz','/event-details/varazsceruza-schwedenplatz','/event-details/becs-craft-workshop-hetfo','/event-details/kicsi-svung-drama-foglalkozas-schwedenplatz-1','/event-details/gimi-svung-dramafoglalkozas-schwedenplatz','/event-details/filmes-muhely','/event-details/magyar-nyelv-tanitas-1'])assert(!combined.includes(bad),`legacy/stale value must not occur: ${bad}`);
 
+// LLM discovery must point to the single source, not duplicate the 22 records.
 const llms=read('llms-full.txt');
-for(const url of allowed)assert(llms.includes(url),`llms-full.txt missing canonical URL: ${url}`);
-assert((llms.match(/Canonical 2026\/27:/g)||[]).length===22,'llms-full.txt must enumerate exactly 22 canonical links');
-assert(llms.includes('központi data.js registryjéből generált'),'llms-full.txt must identify itself as generated from data.js');
-assert(llms.includes('Wix Events 2026/27'),'LLM mirror must identify current Wix Events source records');
+assert(llms.includes('https://programvalaszto.magyariskola.at/data.js'),'llms-full.txt must point directly to canonical data.js');
+assert(llms.includes('egyetlen programadat-forrást'),'llms-full.txt must explicitly describe single-source architecture');
+assert(llms.includes('Korábbi tanévek Wix eseményoldalai teljesen kizártak'),'llms-full.txt must forbid prior-year Wix sources');
+assert(llms.includes('ageRangeOperational')&&llms.includes('ageRangeComposite'),'llms-full.txt must explain operational/composite age semantics');
+assert(!llms.includes('Canonical 2026/27:'),'llms-full.txt must not duplicate the 22 program records');
 
 const app=read('app.js');
 assert(app.includes('https://ungarischlernen.at'),'zero-match fallback must include Ungarisch Lernen');
@@ -80,7 +83,10 @@ assert(app.includes('https://amaped.at'),'zero-match fallback must include AMAPE
 assert(app.includes("cfg.interests,'interest'"),'interest choices must not be pre-filtered away');
 assert(app.includes("cfg.days,'day'"),'day choices must not be pre-filtered away');
 assert(app.includes("cfg.pace,'pace'"),'pace choices must not be pre-filtered away');
+assert(app.includes("p.weekday==='rugalmas'"),'flexible-day programs must not be excluded by the day preference');
 assert(app.includes('Regisztráció / jelentkezés'),'every exact result must render a registration CTA');
+assert(app.includes("meta('Helyszín'"), 'finder results must expose verified location metadata when available');
+assert(app.includes("meta('Hozzájárulási díj'"), 'finder results must expose verified contribution fee when available');
 
 const catalog=read('catalog.js');
 assert(catalog.includes("'numberOfItems':22"),'catalog Schema must declare 22 items');
