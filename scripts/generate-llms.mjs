@@ -8,7 +8,9 @@ if(!cfg||!Array.isArray(cfg.programs)||cfg.programs.length!==22)throw new Error(
 
 const weekday={hetfo:'Hétfő',kedd:'Kedd',szerda:'Szerda',csutortok:'Csütörtök',pentek:'Péntek',szombat:'Szombat',rugalmas:'Rugalmas'};
 const pace={rendszeres:'Rendszeres',rugalmas:'Ritkább / rugalmasabb'};
-const age=p=>p.maxAge===99?`${p.minAge}+ év`:`${p.minAge}–${p.maxAge} év`;
+const age=p=>p.ageText||(p.maxAge===99?`${p.minAge}+ év`:`${p.minAge}–${p.maxAge} év`);
+const days=p=>(p.weekdays||[p.weekday]).map(d=>weekday[d]||d).join(' + ');
+const field=(label,value)=>value?`- ${label}: ${value}\n`:'';
 
 let out=`# Bécsi Magyar Iskola – 2026/2027 canonical program-adattár
 
@@ -18,8 +20,9 @@ Ez a fájl a programválasztó központi data.js registryjéből generált gépi
 - Pontosan 22 fix program van.
 - Kizárólag a registryben szereplő 22 canonical 2026/27-es link használható programadat-forrásként.
 - Korábbi tanévek Wix eseményoldalai teljesen kizártak.
+- A BMI-programok aktuális adatai a 2026/27-es Wix Events rekordokból származnak.
 - Partnerprogramnál a partner saját oldala az elsődleges.
-- Ha egy aktuális programoldalon egy részlet nem ellenőrizhető, azt ismeretlennek kell tekinteni; régi Wix-oldallal tilos kipótolni.
+- Ha a 2026/27-es Wix-oldal saját mezői egymásnak ellentmondanak, a registry sourceNote mezője jelzi az eltérést; régi tanévvel tilos felülírni.
 - A Világfa Sárkányai egyetlen, két részből álló program; nincs külön 23. dobkör-program.
 - A Napraforgók haladó csoport nem része a fix 22 programnak.
 
@@ -30,11 +33,18 @@ cfg.programs.forEach((p,i)=>{
   out+=`\n${i+1}. ${p.name}\n`;
   out+=`- ID: ${p.id}\n`;
   out+=`- Kor: ${age(p)}\n`;
-  out+=`- Nap: ${weekday[p.weekday]||p.weekday}\n`;
+  out+=`- Nap: ${days(p)}\n`;
   out+=`- Ritmus: ${pace[p.pace]||p.pace}\n`;
   out+=`- Idő: ${p.when}\n`;
+  out+=field('Helyszín',p.location);
+  out+=field('Oktató',p.teacher);
+  out+=field('Hozzájárulási díj',p.fee);
+  out+=field('Első alkalom',p.firstDate);
+  out+=field('Próbaalkalom',p.trial);
   out+=`- Programgazda: ${p.provider==='BMI'?'Bécsi Magyar Iskola':p.provider}\n`;
+  out+=`- Forrástípus: ${p.sourceType||'canonical 2026/27 programoldal'}\n`;
   out+=`- Röviden: ${p.why}\n`;
+  out+=field('Forrásmegjegyzés',p.sourceNote);
   out+=`- Canonical 2026/27: ${p.url}\n`;
 });
 
@@ -42,10 +52,7 @@ out+=`\n## Programválasztó logika\n- 1. kérdés: pontos életkor 0–99.\n- 2
 
 if(process.argv.includes('--check')){
   const current=fs.readFileSync('llms-full.txt','utf8');
-  if(current!==out){
-    console.error('llms-full.txt is out of sync with data.js. Run: node scripts/generate-llms.mjs');
-    process.exit(1);
-  }
+  if(current!==out){console.error('llms-full.txt is out of sync with data.js. Run: node scripts/generate-llms.mjs');process.exit(1)}
   console.log('PASS: llms-full.txt matches canonical registry.');
 }else{
   fs.writeFileSync('llms-full.txt',out);
