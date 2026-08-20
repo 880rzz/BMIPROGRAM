@@ -3,7 +3,7 @@ name: Normalize program selector domain
 on:
   push:
     branches:
-      - fix/domain-metadata-20260820
+      - main
 
 permissions:
   contents: write
@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: fix/domain-metadata-20260820
+          ref: main
       - name: Normalize canonical and entity URLs
         run: |
           python - <<'PY'
@@ -54,4 +54,4 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -- index.html foglalkozasok.html korosztalyok.html gyik.html llms-full.txt
           git commit -m "Normalize program selector domain URLs"
-          git push origin HEAD:fix/domain-metadata-20260820
+          git push origin HEAD:main
