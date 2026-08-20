@@ -1,4 +1,4 @@
-name: Sync verified BMI program data
+name: Finalize verified BMI structured data
 
 on:
   push:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  sync:
+  finalize:
     if: ${{ github.actor != 'github-actions[bot]' }}
     runs-on: ubuntu-latest
     steps:
@@ -17,31 +17,37 @@ jobs:
         with:
           ref: main
           fetch-depth: 1
-
-      - name: Normalize cserkész address across public and AI sources
+      - name: Align JSON-LD age ranges with visible verified data
         run: |
           python - <<'PY'
           from pathlib import Path
-          for name in ['index.html','gyik.html','foglalkozasok.html','korosztalyok.html','llms.txt','llms-full.txt']:
-              path=Path(name)
-              if not path.exists():
-                  continue
-              text=path.read_text(encoding='utf-8')
-              text=text.replace('Alliiertenstraße 2.', 'Alliiertenstrasse 2.')
-              text=text.replace('Alliiertenstraße 2,', 'Alliiertenstrasse 2,')
-              path.write_text(text,encoding='utf-8')
+          text = Path('foglalkozasok.html').read_text(encoding='utf-8')
+          def near(title, old, new, window=9000):
+              global text
+              start=text.find(title)
+              if start < 0:
+                  raise SystemExit(f'Missing title: {title}')
+              pos=text.find(old,start,start+window)
+              if pos < 0:
+                  print(f'Already fixed or not present: {title} / {old}')
+                  return
+              text=text[:pos]+new+text[pos+len(old):]
+          near('Magyar nyelv tanítás | Schwedenplatz, 1. csoport','"typicalAgeRange": "6-14"','"typicalAgeRange": "6-10"')
+          near('Magyar nyelv tanítás | Schwedenplatz, 2. csoport','"typicalAgeRange": "6-14"','"typicalAgeRange": "6-10"')
+          near('Alapozó Terápia','"typicalAgeRange": "5-10"','"typicalAgeRange": "5-8"')
+          near('RAJZTÁBLA','"typicalAgeRange": "10-18"','"typicalAgeRange": "10+"')
+          near('Varázsceruza','"typicalAgeRange": "9-14"','"typicalAgeRange": "6-12"')
+          near('Kicsi Svung','"typicalAgeRange": "8-13"','"typicalAgeRange": "6-12"')
+          near('Gimi-Svung','"typicalAgeRange": "14-19"','"typicalAgeRange": "12-18"')
+          Path('foglalkozasok.html').write_text(text,encoding='utf-8')
           PY
-
-      - name: Commit normalized address
+      - name: Commit structured-data alignment
         run: |
-          if git diff --quiet; then
-            echo "No changes needed."
-            exit 0
-          fi
+          if git diff --quiet; then exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- index.html gyik.html foglalkozasok.html korosztalyok.html llms.txt llms-full.txt
-          git commit -m "Normalize cserkész address spelling"
+          git add foglalkozasok.html
+          git commit -m "Align structured ages with Wix source of truth"
           git push origin HEAD:main
 
-# final address normalization trigger 2026-08-20T12:58+02:00
+# final structured-data trigger 2026-08-20T13:00+02:00
