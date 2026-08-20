@@ -8,10 +8,20 @@ if(!cfg||!Array.isArray(cfg.programs)||cfg.programs.length!==22){
   root.innerHTML='<div class="wizard-card"><h3>A kereső átmenetileg nem elérhető</h3><p>Az összes foglalkozást továbbra is meg tudod nézni.</p><a class="btn" href="foglalkozasok.html">Összes foglalkozás</a></div>';
   return;
 }
+cfg.days=[
+  {id:'hetfo',label:'Hétfő'},
+  {id:'kedd',label:'Kedd'},
+  {id:'szerda',label:'Szerda'},
+  {id:'csutortok',label:'Csütörtök'},
+  {id:'pentek',label:'Péntek'},
+  {id:'szombat',label:'Szombat'},
+  {id:'mindegy',label:'Mindegy'}
+];
 var state={},idx=0,totalSteps=4;
 function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 function ageEligible(p){if(!Number.isInteger(state.age))return false;if(p.ageRangeComposite&&p.id==='vilagfa')return(state.age>=6&&state.age<=14)||state.age>=18;return state.age>=p.minAge&&state.age<=p.maxAge}
 function feeForAge(p){if(p.ageRangeComposite&&p.id==='vilagfa'&&state.age>=18)return'';return p.fee||''}
+function dayEligible(p){if(state.day==='mindegy'||p.weekday==='rugalmas')return true;return(p.weekdays||[p.weekday]).indexOf(state.day)!==-1}
 function progress(n){document.querySelectorAll('#prog i').forEach(function(b,i){b.classList.toggle('on',i<=n)})}
 function renderAge(){
   progress(0);
@@ -31,10 +41,10 @@ function renderChoices(title,text,options,key){
 function renderStep(){
   if(idx===0){renderAge();return}
   if(idx===1){renderChoices('Mi érdekli leginkább?','Válaszd azt is nyugodtan, amire lehet, hogy most nincs BMI-program. Ha nincs pontos találat, mutatunk más bécsi magyar lehetőségeket.',cfg.interests,'interest');return}
-  if(idx===2){renderChoices('Mikor lenne a legjobb?','A kívánt időpontot add meg, ne azt, amiről feltételezed, hogy nálunk elérhető.',cfg.days,'day');return}
+  if(idx===2){renderChoices('Melyik nap lenne a legjobb?','Válaszd ki a konkrét napot. A rugalmasan egyeztethető programok bármely napválasztásnál szóba jöhetnek.',cfg.days,'day');return}
   renderChoices('Milyen ritmus fér bele?','A saját igényetek szerint válassz. A rendszer csak a végén dönti el, van-e pontos egyezés.',cfg.pace,'pace');
 }
-function isExact(p){var dayMatch=state.day==='mindegy'||p.weekday==='rugalmas'||p.day===state.day;return ageEligible(p)&&p.interests.indexOf(state.interest)!==-1&&dayMatch&&(state.pace==='mindegy'||p.pace===state.pace)}
+function isExact(p){return ageEligible(p)&&p.interests.indexOf(state.interest)!==-1&&dayEligible(p)&&(state.pace==='mindegy'||p.pace===state.pace)}
 function resultReason(p){var parts=['életkorban megfelelő','a választott témához illik'];if(state.day!=='mindegy')parts.push(p.weekday==='rugalmas'?'rugalmasan egyeztethető':'a választott napon van');if(state.pace!=='mindegy')parts.push('a kívánt rendszerességű');return parts.join(', ')+'.'}
 function meta(label,value){return value?'<div style="margin:5px 0;color:#425b69;font-size:.92rem"><strong>'+esc(label)+':</strong> '+esc(value)+'</div>':''}
 function showResults(){
