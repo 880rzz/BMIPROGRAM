@@ -1,0 +1,57 @@
+name: Normalize program selector domain
+
+on:
+  push:
+    branches:
+      - fix/domain-metadata-20260820
+
+permissions:
+  contents: write
+
+jobs:
+  normalize:
+    if: ${{ github.actor != 'github-actions[bot]' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/domain-metadata-20260820
+      - name: Normalize canonical and entity URLs
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          files = [
+              Path('index.html'),
+              Path('foglalkozasok.html'),
+              Path('korosztalyok.html'),
+              Path('gyik.html'),
+              Path('llms-full.txt'),
+          ]
+          replacements = [
+              ('https://www.magyariskola.at/foglalkozaskereso/index.html', 'https://programvalaszto.magyariskola.at/'),
+              ('https://www.magyariskola.at/foglalkozaskereso/', 'https://programvalaszto.magyariskola.at/'),
+              ('https://programvalaszto.magyariskola.at/og-kep.jpg', 'https://programvalaszto.magyariskola.at/og-kep.png'),
+          ]
+
+          for path in files:
+              if not path.exists():
+                  continue
+              text = path.read_text(encoding='utf-8')
+              updated = text
+              for old, new in replacements:
+                  updated = updated.replace(old, new)
+              if updated != text:
+                  path.write_text(updated, encoding='utf-8')
+          PY
+      - name: Commit normalized URLs
+        run: |
+          if git diff --quiet; then
+            echo "No URL changes needed."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- index.html foglalkozasok.html korosztalyok.html gyik.html llms-full.txt
+          git commit -m "Normalize program selector domain URLs"
+          git push origin HEAD:fix/domain-metadata-20260820
