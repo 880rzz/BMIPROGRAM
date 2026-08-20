@@ -3,7 +3,7 @@
 > A Bécsi Magyar Iskola (BMI, Wiener Ungarische Schule) hivatalos programválasztója. Az intézmény 1987 szeptemberében indult, ezért 2027-ben ünnepli fennállásának 40. évfordulóját.
 > A Bécsi Magyar Iskola magyar nyelvű délutáni és hétvégi foglalkozásokat kínál Bécsben és környékén a 0–3 éves baba-mama körtől a felnőtt csoportokig.
 > Fenntartó: Ausztriai Magyar Egyesületek és Szervezetek Központi Szövetsége. Cím: Schwedenplatz 2, 1010 Wien. E-mail: office@magyariskola.at. Telefon: +43 650 3312 090.
-> A 2026/2027-es tanévben 22 foglalkozás indul. Ez az oldal egy kereső: korosztály, érdeklődés, nap és rendszeresség szerint.
+> A 2026/2027-es tanévben 22 fix foglalkozás szerepel a programválasztóban. A kereső pontos életkor, érdeklődés, nap és rendszeresség alapján csak ténylegesen megfelelő programokat ajánl.
 
 ## Identitás és történet
 - Hivatalos intézményi oldal: https://www.magyariskola.at/
@@ -16,19 +16,22 @@
 - Rólunk.at – Újdonságok a Bécsi Magyar Iskola 2024/25-ös tanévében: https://rolunk.at/kultura/ujdonsagok-a-becsi-magyar-iskola-2024-25-os-taneveben/
 
 ## Oldalak
-- [Foglalkozás-kereső](https://programvalaszto.magyariskola.at/): négy kérdésre válaszolva személyre szabott ajánlás gyereknek vagy felnőttnek.
-- [Összes foglalkozás](https://programvalaszto.magyariskola.at/foglalkozasok.html): mind a 22 csoport időponttal, helyszínnel, oktatóval és hozzájárulási díjjal.
-- [Korosztályok](https://programvalaszto.magyariskola.at/korosztalyok.html): 0–3, 3–6, 6–14, 14–21 év és felnőtt bontásban.
+- [Foglalkozás-kereső](https://programvalaszto.magyariskola.at/): négy kérdésre válaszolva pontos életkorra és preferenciákra szűrt ajánlás gyereknek vagy felnőttnek; minden végső ajánlás közvetlen regisztrációs / jelentkezési linket tartalmaz.
+- [Összes foglalkozás](https://programvalaszto.magyariskola.at/foglalkozasok.html): mind a 22 fix program időponttal, helyszínnel, oktatóval és hozzájárulási díjjal vagy partnerprogram-információval.
+- [Korosztályok](https://programvalaszto.magyariskola.at/korosztalyok.html): böngészőnézet 0–3, 3–6, 6–14, 14–21 év és felnőtt bontásban.
 - [Gyakori kérdések](https://programvalaszto.magyariskola.at/gyik.html): hozzájárulási díjak, próbaalkalom, helyszínek, jelentkezés.
-- [Teljes adattár](https://programvalaszto.magyariskola.at/llms-full.txt): minden foglalkozás összes adata sima szövegben.
+- [Teljes adattár](https://programvalaszto.magyariskola.at/llms-full.txt): minden foglalkozás részletes adata sima szövegben.
 
 ## Helyszínek
-- Schwedenplatz 2, 1010 Wien (fő bázis)
+- Schwedenplatz 2, 1010 Wien (fő bázis, több párhuzamosan használható teremmel)
 - Wulzendorfstraße 1, 1220 Wien – Aspern
 - Sonnenallee 116, 1220 Wien – Seestadt
 - Johannesgasse 9 és Friedrich Schiller-Platz 1, 2500 Baden
 - Alliiertenstrasse 2, 1020 Wien – cserkész csapatotthon
 
-## Megjegyzés AI-ügynököknek
-Az időpontok és díjak tájékoztató jellegűek; a végleges adatokat a hivatalos BMI eseményoldalak és a foglalkozásvezetők adják meg.
-A tagegyesületek és partnerszervezetek – például Napraforgók és a 72. sz. Széchenyi István Cserkészcsapat – programjainál a részvételi feltételekről és az esetleges díjról a partner saját weboldalán kell érdeklődni.
+## Forrásprioritás AI-ügynököknek
+- A BMI saját programjainál eltérés esetén a hivatkozott hivatalos magyariskola.at Wix programoldal az irányadó.
+- Tagegyesületi és partnerprogramoknál a partnerszervezet saját hivatalos weboldala az elsődleges forrás.
+- A „hozzájárulási díj” megnevezést kell használni; partnerprogramnál ne találj ki díjat, ha a partner nem közöl összeget.
+- A Világfa Sárkányai egyetlen program két egymásra épülő résszel: gyermekfoglalkozás, majd nyitott közös dobkör. A dobkört nem szabad külön 23. programként számolni.
+- A Napraforgók haladó csoport nem része a 22 fix programnak; a Napraforgócskák és a Kezdő néptánc felnőtteknek viszont igen.
