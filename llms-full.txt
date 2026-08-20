@@ -6,11 +6,11 @@
 > A 2026/2027-es tanévben 24 foglalkozás indul. Ez az oldal egy kereső: korosztály, téma, nap és napszak szerint.
 
 ## Oldalak
-- [Foglalkozás-kereső](https://www.magyariskola.at/foglalkozaskereso/index.html): négy kérdésre válaszolva személyre szabott ajánlás gyereknek vagy felnőttnek.
-- [Összes foglalkozás](https://www.magyariskola.at/foglalkozaskereso/foglalkozasok.html): mind a 24 csoport időponttal, helyszínnel, oktatóval, díjjal.
-- [Korosztályok](https://www.magyariskola.at/foglalkozaskereso/korosztalyok.html): 0–3, 3–6, 6–14, 14–21 év és felnőtt bontásban.
-- [Gyakori kérdések](https://www.magyariskola.at/foglalkozaskereso/gyik.html): díjak, próbaalkalom, helyszínek, jelentkezés.
-- [Teljes adattár](https://www.magyariskola.at/foglalkozaskereso/llms-full.txt): minden foglalkozás összes adata sima szövegben.
+- [Foglalkozás-kereső](https://programvalaszto.magyariskola.at/): négy kérdésre válaszolva személyre szabott ajánlás gyereknek vagy felnőttnek.
+- [Összes foglalkozás](https://programvalaszto.magyariskola.at/foglalkozasok.html): mind a 24 csoport időponttal, helyszínnel, oktatóval, díjjal.
+- [Korosztályok](https://programvalaszto.magyariskola.at/korosztalyok.html): 0–3, 3–6, 6–14, 14–21 év és felnőtt bontásban.
+- [Gyakori kérdések](https://programvalaszto.magyariskola.at/gyik.html): díjak, próbaalkalom, helyszínek, jelentkezés.
+- [Teljes adattár](https://programvalaszto.magyariskola.at/llms-full.txt): minden foglalkozás összes adata sima szövegben.
 
 ## Helyszínek
 - Schwedenplatz 2, 1010 Wien (fő bázis)
