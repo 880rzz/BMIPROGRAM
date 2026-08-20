@@ -1,4 +1,4 @@
-name: Finalize verified BMI structured data
+name: Finalize verified BMI structured schedules
 
 on:
   push:
@@ -17,37 +17,30 @@ jobs:
         with:
           ref: main
           fetch-depth: 1
-      - name: Align JSON-LD age ranges with visible verified data
+      - name: Align JSON-LD schedule days
         run: |
           python - <<'PY'
           from pathlib import Path
-          text = Path('foglalkozasok.html').read_text(encoding='utf-8')
-          def near(title, old, new, window=9000):
+          text=Path('foglalkozasok.html').read_text(encoding='utf-8')
+          def replace_in_course(title, old, new, window=9000):
               global text
-              start=text.find(title)
+              start=text.find('"name": "'+title+'"')
               if start < 0:
-                  raise SystemExit(f'Missing title: {title}')
+                  raise SystemExit('Missing course '+title)
               pos=text.find(old,start,start+window)
-              if pos < 0:
-                  print(f'Already fixed or not present: {title} / {old}')
-                  return
-              text=text[:pos]+new+text[pos+len(old):]
-          near('Magyar nyelv tanítás | Schwedenplatz, 1. csoport','"typicalAgeRange": "6-14"','"typicalAgeRange": "6-10"')
-          near('Magyar nyelv tanítás | Schwedenplatz, 2. csoport','"typicalAgeRange": "6-14"','"typicalAgeRange": "6-10"')
-          near('Alapozó Terápia','"typicalAgeRange": "5-10"','"typicalAgeRange": "5-8"')
-          near('RAJZTÁBLA','"typicalAgeRange": "10-18"','"typicalAgeRange": "10+"')
-          near('Varázsceruza','"typicalAgeRange": "9-14"','"typicalAgeRange": "6-12"')
-          near('Kicsi Svung','"typicalAgeRange": "8-13"','"typicalAgeRange": "6-12"')
-          near('Gimi-Svung','"typicalAgeRange": "14-19"','"typicalAgeRange": "12-18"')
+              if pos >= 0:
+                  text=text[:pos]+new+text[pos+len(old):]
+          replace_in_course('Alapozó Terápia','"byDay": [\n         "Tuesday",\n         "Thursday"\n        ]','"byDay": [\n         "Monday"\n        ]')
+          replace_in_course('RAJZTÁBLA','"byDay": [\n         "Monday"\n        ]','"byDay": [\n         "Saturday"\n        ]')
           Path('foglalkozasok.html').write_text(text,encoding='utf-8')
           PY
-      - name: Commit structured-data alignment
+      - name: Commit schedule alignment
         run: |
           if git diff --quiet; then exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add foglalkozasok.html
-          git commit -m "Align structured ages with Wix source of truth"
+          git commit -m "Align structured schedule days with Wix"
           git push origin HEAD:main
 
-# final structured-data trigger 2026-08-20T13:00+02:00
+# final schedule trigger 2026-08-20T13:02+02:00
