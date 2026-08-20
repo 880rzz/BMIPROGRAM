@@ -33,7 +33,7 @@
 - A BMI saját programjainál az aktuális 2026/27-es magyariskola.at programoldal és az ahhoz tartozó aktuális Wix Events rekord az irányadó.
 - A Napraforgócskák és a Kezdő néptánc esetén a registryben megadott napraforgok.at programszakasz az elsődleges; a Cserkészetnél a cserkesz.at/cserkesz-raj/ oldal.
 - A Világfa Sárkányai saját 2026/27-es oldala a taltosdob.magyariskola.at.
-- `sourceNote` jelzi az aktuális forráson belüli bizonyított ellentmondást.
+- `sourceNote` az aktuális forrás értelmezéséhez szükséges kontextust dokumentálhat: például forráskonfliktust, operatív korbesorolást vagy szabályos időpont-kivételt.
 - `ageRangeOperational` és `ageRangeComposite` jelzi, ha a választómotor numerikus korbesorolása nem szó szerinti forrás-korhatár.
 - A Világfa Sárkányai egyetlen, két egymásra épülő részből álló program; nem számolható külön dobkörként.
 - A Napraforgók haladó csoport nem része a fix 22 programnak.
