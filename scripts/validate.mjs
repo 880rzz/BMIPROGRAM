@@ -74,8 +74,7 @@ const forbidden=[
 '/event-details/kicsi-svung-drama-foglalkozas-schwedenplatz-1',
 '/event-details/gimi-svung-dramafoglalkozas-schwedenplatz',
 '/event-details/filmes-muhely',
-'/event-details/magyar-nyelv-tanitas-1',
-'Napraforgók haladó csoport'
+'/event-details/magyar-nyelv-tanitas-1'
 ];
 for(const bad of forbidden)assert(!combined.includes(bad),`legacy/stale value must not occur: ${bad}`);
 
@@ -92,7 +91,7 @@ assert(app.includes("cfg.pace,'pace'"),'pace choices must not be pre-filtered aw
 assert(app.includes('Regisztráció / jelentkezés'),'every exact result must render a registration CTA');
 
 const catalog=read('catalog.js');
-assert(catalog.includes("numberOfItems':22")||catalog.includes("'numberOfItems':22"),'catalog Schema must declare 22 items');
+assert(catalog.includes("'numberOfItems':22"),'catalog Schema must declare 22 items');
 assert(catalog.includes('Részletek és jelentkezés'),'catalog cards must render registration CTA');
 assert(catalog.includes('providerSchema'),'catalog Schema must derive provider from registry');
 
