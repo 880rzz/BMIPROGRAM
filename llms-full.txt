@@ -1,199 +1,243 @@
 # Bécsi Magyar Iskola – 2026/2027 canonical program-adattár
 
-A Bécsi Magyar Iskola (BMI, Wiener Ungarische Schule) hivatalos programválasztójának gépi olvasásra szánt adattára.
+Ez a fájl a programválasztó központi data.js registryjéből generált gépi tükör. Kézzel nem szerkesztendő.
 
 ## Kötelező forrásszabály
-- A 2026/27-es tanévben pontosan 22 fix program szerepel.
-- Kizárólag az alább megadott 22 canonical programlink használható a 2026/27-es programadatok forrásaként.
-- Korábbi tanévek Wix eseményoldalai teljesen kizártak: ne használd őket ellenőrzésre, adatpótlásra vagy konfliktus feloldására.
-- Partnerprogramnál a partner saját oldala az elsődleges forrás.
-- Ha egy részlet az aktuális canonical oldalon nem ellenőrizhető, jelöld ismeretlennek; ne pótold régi oldalról.
-- A Világfa Sárkányai egy program két egymásra épülő résszel; a nyitott dobkör nem külön 23. program.
+- Pontosan 22 fix program van.
+- Kizárólag a registryben szereplő 22 canonical 2026/27-es link használható programadat-forrásként.
+- Korábbi tanévek Wix eseményoldalai teljesen kizártak.
+- Partnerprogramnál a partner saját oldala az elsődleges.
+- Ha egy aktuális programoldalon egy részlet nem ellenőrizhető, azt ismeretlennek kell tekinteni; régi Wix-oldallal tilos kipótolni.
+- A Világfa Sárkányai egyetlen, két részből álló program; nincs külön 23. dobkör-program.
 - A Napraforgók haladó csoport nem része a fix 22 programnak.
 
-## 22 program
+## Programok
 
 1. Borsófőzde
+- ID: borsofozde
 - Kor: 0–3 év
-- Ritmus: rendszeres, hétköznap
-- Idő: hétfőnként 10:00-tól
+- Nap: Hétfő
+- Ritmus: Rendszeres
+- Idő: Hétfőnként 10:00-tól
 - Programgazda: Bécsi Magyar Iskola
-- Röviden: baba–mama közeg, magyar mondókák, ének és játékos mozgás.
+- Röviden: Baba–mama közeg, magyar mondókák, ének és játékos mozgás.
 - Canonical 2026/27: https://www.magyariskola.at/event-details/borsofozde-2026
 
 2. Bécsi Magyar Óvoda | Schwedenplatz
+- ID: ovoda
 - Kor: 3–6 év
-- Ritmus: rendszeres, szombat
-- Idő: szombaton 10:00–12:00
+- Nap: Szombat
+- Ritmus: Rendszeres
+- Idő: Szombaton 10:00–12:00
 - Programgazda: Bécsi Magyar Iskola
-- Röviden: magyar nyelv, mese, játék és alkotás óvodásoknak.
+- Röviden: Magyar nyelv, mese, játék és alkotás óvodásoknak.
 - Canonical 2026/27: https://www.magyariskola.at/event-details/ovoda-2026
 
 3. Bécsi Magyar Óvoda | Baden
+- ID: ovoda-baden
 - Kor: 3–6 év
-- Ritmus: rendszeres, hétköznap
-- Idő: csütörtökön 16:00–18:00
+- Nap: Csütörtök
+- Ritmus: Rendszeres
+- Idő: Csütörtökön 16:00–18:00
 - Programgazda: Bécsi Magyar Iskola
-- Röviden: magyar óvodai közösség Badenben, mesével, dallal és játékos foglalkozásokkal.
+- Röviden: Magyar óvodai közösség Badenben, mesével, dallal és játékos foglalkozásokkal.
 - Canonical 2026/27: https://www.magyariskola.at/event-details/ovoda-baden-2026
 
 4. Magyar Iskola Badenben
+- ID: iskola-baden
 - Kor: 6–9 év
-- Ritmus: rendszeres, hétköznap
-- Idő: keddenként 16:00–17:30
+- Nap: Kedd
+- Ritmus: Rendszeres
+- Idő: Keddenként 16:00–17:30
 - Programgazda: Bécsi Magyar Iskola
-- Röviden: olvasás, szókincs és szövegértés kétnyelvű környezetben.
+- Röviden: Olvasás, szókincs és szövegértés kétnyelvű környezetben.
 - Canonical 2026/27: https://www.magyariskola.at/event-details/iskolabaden-2026
 
 5. Magyar nyelv tanítás | Aspern
+- ID: aspern
 - Kor: 6–10 év
-- Ritmus: rendszeres, hétköznap
-- Idő: keddenként 15:30–17:00
+- Nap: Kedd
+- Ritmus: Rendszeres
+- Idő: Keddenként 15:30–17:00
 - Programgazda: Bécsi Magyar Iskola
-- Röviden: kisiskolások magyar nyelvi fejlesztése játékos, személyre szabott feladatokkal.
+- Röviden: Kisiskolások magyar nyelvi fejlesztése játékos, személyre szabott feladatokkal.
 - Canonical 2026/27: https://www.magyariskola.at/event-details/magyaroktatas-kedd-2026
 
 6. Magyar nyelv tanítás | Seestadt
+- ID: seestadt
 - Kor: 6–10 év
-- Ritmus: rendszeres, hétköznap
-- Idő: szerdánként 16:00–17:30
+- Nap: Szerda
+- Ritmus: Rendszeres
+- Idő: Szerdánként 16:00–17:30
 - Programgazda: Bécsi Magyar Iskola
-- Röviden: magyar nyelv, játék, vers, ének és dramatizálás Seestadtban.
+- Röviden: Magyar nyelv, játék, vers, ének és dramatizálás Seestadtban.
 - Canonical 2026/27: https://www.magyariskola.at/event-details/magyarnyelv-szerda-2026
 
 7. Magyar nyelv tanítás | Schwedenplatz | 1-es csoport
+- ID: schweden-1
 - Kor: 6–10 év
-- Ritmus: rendszeres, szombat
-- Idő: kéthetente szombaton 10:00–11:30
+- Nap: Szombat
+- Ritmus: Rendszeres
+- Idő: Kéthetente szombaton 10:00–11:30
 - Programgazda: Bécsi Magyar Iskola
-- Röviden: szókincsbővítés és magabiztos magyar nyelvhasználat közösségben.
+- Röviden: Szókincsbővítés és magabiztos magyar nyelvhasználat közösségben.
 - Canonical 2026/27: https://www.magyariskola.at/event-details/magyarnyelv-schwedenplatz-1
 
 8. Magyar nyelv tanítás | Schwedenplatz | 2-es csoport
+- ID: schweden-2
 - Kor: 6–10 év
-- Ritmus: rendszeres, szombat
-- Idő: kéthetente szombaton 12:00–13:30
+- Nap: Szombat
+- Ritmus: Rendszeres
+- Idő: Kéthetente szombaton 12:00–13:30
 - Programgazda: Bécsi Magyar Iskola
-- Röviden: a schwedenplatzi magyar nyelvi program későbbi szombati idősávban.
+- Röviden: A schwedenplatzi magyar nyelvi program későbbi szombati idősávban.
 - Canonical 2026/27: https://www.magyariskola.at/event-details/magyarnyelv-schwedenplatz-2
 
 9. Alapozó Terápia | Schwedenplatz
+- ID: alapozo
 - Kor: 5–8 év
-- Ritmus: rendszeres, hétköznap
-- Idő: hétfőnként 14:30–15:30
+- Nap: Hétfő
+- Ritmus: Rendszeres
+- Idő: Hétfőnként 14:30–15:30
 - Programgazda: Bécsi Magyar Iskola
-- Röviden: mozgásalapú idegrendszeri fejlesztés kis létszámú csoportban.
+- Röviden: Mozgásalapú idegrendszeri fejlesztés kis létszámú csoportban.
 - Canonical 2026/27: https://www.magyariskola.at/event-details/alapozoterapia-2026
 
 10. RAJZTÁBLA – Rajzfoglalkozás | Schwedenplatz
+- ID: rajztabla
 - Kor: 10–18 év
-- Ritmus: ritkább / rugalmasabb, szombat
-- Idő: szombaton 14:00–15:30, havonta 1–2 alkalom
+- Nap: Szombat
+- Ritmus: Ritkább / rugalmasabb
+- Idő: Szombaton 14:00–15:30, havonta 1–2 alkalom
 - Programgazda: Bécsi Magyar Iskola
-- Röviden: rajzi technika, kompozíció és árnyékolás 10 éves kortól.
+- Röviden: Rajzi technika, kompozíció és árnyékolás 10 éves kortól.
 - Canonical 2026/27: https://www.magyariskola.at/event-details/rajztabla-2026
 
 11. Varázsceruza | Schwedenplatz
+- ID: varazsceruza
 - Kor: 6–12 év
-- Ritmus: rendszeres, hétköznap
-- Idő: csütörtökön 16:30–18:00
+- Nap: Csütörtök
+- Ritmus: Rendszeres
+- Idő: Csütörtökön 16:30–18:00
 - Programgazda: Bécsi Magyar Iskola
-- Röviden: elmélyült kreatív alkotóműhely sokféle anyaggal és technikával.
+- Röviden: Elmélyült kreatív alkotóműhely sokféle anyaggal és technikával.
 - Canonical 2026/27: https://www.magyariskola.at/event-details/varazsceruza-2026
 
 12. BÉCS-CRAFT Workshop | Schwedenplatz
+- ID: becscraft
 - Kor: 6–15 év
-- Ritmus: rendszeres, hétköznap
-- Idő: hétfőnként 16:30–17:30 + havi helyszíni bejárás
+- Nap: Hétfő
+- Ritmus: Rendszeres
+- Idő: Hétfőnként 16:30–17:30 + havi helyszíni bejárás
 - Programgazda: Bécsi Magyar Iskola
 - Röviden: Minecraft, építészet, történelem és mérés egy közös projektben.
 - Canonical 2026/27: https://www.magyariskola.at/event-details/becscraft-2026
 
 13. Kicsi Svung – Dráma foglalkozás | Schwedenplatz
+- ID: kicsi-svung
 - Kor: 6–12 év
-- Ritmus: rendszeres, hétköznap
-- Idő: hétfőn 16:30–18:00
+- Nap: Hétfő
+- Ritmus: Rendszeres
+- Idő: Hétfőn 16:30–18:00
 - Programgazda: Bécsi Magyar Iskola
-- Röviden: színjátszás, improvizáció és magyar nyelvi önkifejezés gyerekeknek.
+- Röviden: Színjátszás, improvizáció és magyar nyelvi önkifejezés gyerekeknek.
 - Canonical 2026/27: https://www.magyariskola.at/event-details/kicsisvung-2026
 
 14. Bécsi Magyar Musical Társulat (maMUT) – Musical Stúdió
+- ID: mamut
 - Kor: 8–13 év
-- Ritmus: rendszeres, hétköznap
-- Idő: csütörtökön 16:30–18:00
-- Programgazda: Bécsi Magyar Iskola / maMUT együttműködés
-- Röviden: ének, mozgás és színpadi játék musical-projektekben.
+- Nap: Csütörtök
+- Ritmus: Rendszeres
+- Idő: Csütörtökön 16:30–18:00
+- Programgazda: Bécsi Magyar Iskola
+- Röviden: Ének, mozgás és színpadi játék musical-projektekben.
 - Canonical 2026/27: https://www.magyariskola.at/event-details/mammut-2026
 
 15. Gimi Svung – Magyar nyelvű drámafoglalkozás
+- ID: gimi-svung
 - Kor: 12–18 év
-- Ritmus: rendszeres, hétköznap
-- Idő: péntekenként 16:30–18:00
-- Programgazda: Bécsi Magyar Iskola / SVUNG együttműködés
-- Röviden: improvizáció, drámaírás és saját színpadi produkció gimnazistáknak.
+- Nap: Péntek
+- Ritmus: Rendszeres
+- Idő: Péntekenként 16:30–18:00
+- Programgazda: Bécsi Magyar Iskola
+- Röviden: Improvizáció, drámaírás és saját színpadi produkció gimnazistáknak.
 - Canonical 2026/27: https://www.magyariskola.at/event-details/gimisvung-2026
 
 16. Filmes Műhely Workshop | Schwedenplatz
+- ID: filmes
 - Kor: 13–17 év
-- Ritmus: rendszeres, hétköznap
-- Idő: szerdánként 15:15–16:45
+- Nap: Szerda
+- Ritmus: Rendszeres
+- Idő: Szerdánként 15:15–16:45
 - Programgazda: Bécsi Magyar Iskola
-- Röviden: forgatókönyv, kamera, hang, rendezés és vágás egy közös film elkészítéséig.
+- Röviden: Forgatókönyv, kamera, hang, rendezés és vágás egy közös film elkészítéséig.
 - Canonical 2026/27: https://www.magyariskola.at/event-details/filmesmuhely-2026
 
 17. Világfa Sárkányai | Schwedenplatz
-- Kor: gyermekrész 6–14 év; a második, nyitott dobkörhöz nagyobb gyerekek és felnőttek is csatlakozhatnak; registry tartomány 6–99.
-- Ritmus: ritkább / rugalmasabb, szombat
-- Idő: havonta egy szombat délután; gyermekrész + utána nyitott közös dobkör
+- ID: vilagfa
+- Kor: 6+ év
+- Nap: Szombat
+- Ritmus: Ritkább / rugalmasabb
+- Idő: Havonta egy szombat délután; gyermekrész + utána nyitott közös dobkör
 - Programgazda: Regélő Fehér Táltos Hagyományőrző Egyesület
-- Röviden: egyetlen program két egymásra épülő résszel: magyar eredetmondák és dobos gyermekfoglalkozás, majd nyitott közös dobkör.
+- Röviden: Egyetlen program két egymásra épülő résszel: magyar eredetmondák és dobos gyermekfoglalkozás, majd nyitott közös dobkör.
 - Canonical 2026/27: https://taltosdob.magyariskola.at
 
 18. Napraforgócskák – Néptánc kicsiknek | Schwedenplatz
+- ID: napraforgocskak
 - Kor: 6–14 év
-- Ritmus: rendszeres, hétköznap
-- Idő: szerdánként 17:00–18:00
+- Nap: Szerda
+- Ritmus: Rendszeres
+- Idő: Szerdánként 17:00–18:00
 - Programgazda: Napraforgók
-- Röviden: magyar gyermeknéptánc, zene és közösség.
-- Canonical partneroldal: https://napraforgok.at/r%C3%B3lunk#napraforgocskak
+- Röviden: Magyar gyermeknéptánc, zene és közösség a Napraforgók vezetésével.
+- Canonical 2026/27: https://napraforgok.at/r%C3%B3lunk#napraforgocskak
 
 19. Cserkészet | Alliiertenstrasse
+- ID: cserkeszet
 - Kor: 5–22 év
-- Bontás a partneroldal szerint: kiscserkész 5–10, cserkész 10–16, vándor 17–22.
-- Ritmus: rendszeres, szombat
-- Idő: kéthetente szombaton 16:00–19:00
+- Nap: Szombat
+- Ritmus: Rendszeres
+- Idő: Kéthetente szombaton 16:00–19:00
 - Programgazda: 72. sz. Széchenyi István Cserkészcsapat
-- Röviden: magyar közösség, természet, hagyomány és önállóságra nevelés.
-- Canonical partneroldal: https://cserkesz.at/cserkesz-raj/
+- Röviden: Kiscserkész, cserkész és vándor korosztály magyar közösségben, természetben és hagyományőrző programokon.
+- Canonical 2026/27: https://cserkesz.at/cserkesz-raj/
 
 20. Láss a Mesterek Szemével: VIPACH Felnőtt Fotóklub
-- Kor: 18–99 év
-- Ritmus: rendszeres, hétköznap
-- Idő: csütörtökön 18:30–20:30
-- Programgazda: Bécsi Magyar Iskola / VIPACH
-- Röviden: fotográfiai látásmód, alkotás és technika felnőtteknek.
+- ID: fotoklub
+- Kor: 18+ év
+- Nap: Csütörtök
+- Ritmus: Rendszeres
+- Idő: Csütörtökön 18:30–20:30
+- Programgazda: Bécsi Magyar Iskola
+- Röviden: Fotográfiai látásmód, alkotás és technika felnőtteknek.
 - Canonical 2026/27: https://www.magyariskola.at/event-details/fotoklub-2026
 
 21. FÓKUSZ-CSOPORT | Schwedenplatz
-- Kor: 18–99 év
-- Ritmus: ritkább / rugalmasabb, hétköznap
+- ID: fokusz
+- Kor: 18+ év
+- Nap: Rugalmas
+- Ritmus: Ritkább / rugalmasabb
 - Idő: 75 perces alkalmak, egyeztetett időpontban
 - Programgazda: Bécsi Magyar Iskola
-- Röviden: figyelem, tervezés, érzelemszabályozás és önirányítás felnőtteknek.
+- Röviden: Figyelem, tervezés, érzelemszabályozás és önirányítás felnőtteknek.
 - Canonical 2026/27: https://www.magyariskola.at/event-details/fokuszcsoport-2026
 
 22. Kezdő néptánc felnőtteknek | Schwedenplatz
-- Kor: 16–99 év
-- Ritmus: rendszeres, hétköznap
-- Idő: hétfőnként 19:00–21:00
+- ID: kezdo-neptanc
+- Kor: 16+ év
+- Nap: Hétfő
+- Ritmus: Rendszeres
+- Idő: Hétfőnként 19:00–21:00
 - Programgazda: Napraforgók
-- Röviden: belépő szintű magyar néptánc felnőtteknek, közösségi formában.
-- Canonical partneroldal: https://napraforgok.at/r%C3%B3lunk#kezdocsoport
+- Röviden: Belépő szintű magyar néptánc felnőtteknek, közösségi formában.
+- Canonical 2026/27: https://napraforgok.at/r%C3%B3lunk#kezdocsoport
 
 ## Programválasztó logika
-- 1. kérdés: pontos életkor (0–99).
+- 1. kérdés: pontos életkor 0–99.
 - 2. kérdés: érdeklődés.
-- 3. kérdés: kívánt nap (hétköznap / szombat / mindegy).
-- 4. kérdés: rendszeresség (rendszeres / ritkább-rugalmasabb / mindegy).
-- A rendszer nem rejti el az olyan preferenciát, amelyhez nincs BMI-program. Ha nincs pontos egyezés, ezt kimondja, majd felajánlja a https://ungarischlernen.at és https://amaped.at oldalakat is.
-- Minden BMI-találatnál közvetlen „Regisztráció / jelentkezés” gomb jelenik meg az adott canonical programoldalra.
+- 3. kérdés: kívánt nap: hétköznap / szombat / mindegy.
+- 4. kérdés: rendszeresség: rendszeres / ritkább-rugalmasabb / mindegy.
+- A preferenciák nincsenek előre elrejtve. Ha nincs exact BMI-egyezés, a rendszer ezt kimondja.
+- 0 találatnál alternatív bécsi magyar lehetőségként megjelenik: https://ungarischlernen.at és https://amaped.at .
+- Minden BMI-találat közvetlen Regisztráció / jelentkezés gombot kap a canonical programoldalra.
