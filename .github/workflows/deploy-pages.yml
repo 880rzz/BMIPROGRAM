@@ -1,0 +1,135 @@
+name: Deploy BMIPROGRAM to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+env:
+  PRODUCTION_URL: https://programvalaszto.magyariskola.at
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: JavaScript syntax
+        run: |
+          node --check data.js
+          node --check app.js
+          node --check catalog.js
+          node --check scripts/validate.mjs
+          node --check scripts/validate-schema-age.mjs
+          node --check scripts/validate-matching.mjs
+      - name: Canonical integrity
+        run: node scripts/validate.mjs
+      - name: Schema age semantics
+        run: node scripts/validate-schema-age.mjs
+      - name: Exhaustive selector state space
+        run: node scripts/validate-matching.mjs
+
+  build:
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build immutable Pages artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf _site
+          mkdir _site
+          rsync -a ./ _site/ \
+            --exclude '.git/' \
+            --exclude '.github/' \
+            --exclude 'scripts/' \
+            --exclude '_site/' \
+            --exclude 'release.txt'
+          short_sha="${GITHUB_SHA::12}"
+          built_at="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          cat > _site/release.txt <<EOF
+          BMIPROGRAM_RELEASE=2026-08-20-${short_sha}
+          GIT_SHA=${GITHUB_SHA}
+          SCHOOL_YEAR=2026/2027
+          PROGRAM_COUNT=22
+          SOURCE_POLICY=canonical-current-2026-27-only
+          BUILT_AT=${built_at}
+          EOF
+          cat > _site/version.json <<EOF
+          {"release":"2026-08-20-${short_sha}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":22,"sourcePolicy":"canonical-current-2026-27-only","builtAt":"${built_at}"}
+          EOF
+          test -f _site/index.html
+          test -f _site/data.js
+          test -f _site/CNAME
+          test "$(cat _site/CNAME)" = "programvalaszto.magyariskola.at"
+          grep -F "GIT_SHA=${GITHUB_SHA}" _site/release.txt
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - name: Deploy exact artifact
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  smoke:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify exact production release
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected_sha="${GITHUB_SHA}"
+          base="${PRODUCTION_URL%/}"
+          fetch() {
+            local path="$1"
+            curl --fail --silent --show-error --location \
+              --connect-timeout 10 --max-time 20 \
+              -H 'Cache-Control: no-cache' \
+              "${base}${path}?verify=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          }
+          release=''
+          for attempt in $(seq 1 30); do
+            if release="$(fetch /release.txt 2>/dev/null)" && grep -Fq "GIT_SHA=${expected_sha}" <<<"${release}"; then
+              break
+            fi
+            echo "Production has not converged to ${expected_sha} yet (attempt ${attempt}/30)."
+            sleep 10
+          done
+          grep -Fq "GIT_SHA=${expected_sha}" <<<"${release}"
+          grep -Fq 'PROGRAM_COUNT=22' <<<"${release}"
+          grep -Fq 'SOURCE_POLICY=canonical-current-2026-27-only' <<<"${release}"
+          home="$(fetch /)"
+          grep -Fq 'Foglalkozás-kereső 2026/27' <<<"${home}"
+          data="$(fetch /data.js)"
+          grep -Fq 'schoolYear:"2026/2027"' <<<"${data}"
+          grep -Fq 'excludePriorYearWix:true' <<<"${data}"
+          grep -Fq 'https://ungarischlernen.at' "app.js" 2>/dev/null || true
+          for path in / /foglalkozasok.html /korosztalyok.html /gyik.html /data.js /app.js /catalog.js /llms.txt /llms-full.txt /robots.txt /sitemap.xml /release.txt /version.json; do
+            fetch "${path}" >/dev/null
+          done
+          echo "EXACT-LIVE: ${expected_sha} is serving on ${base}."
