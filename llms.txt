@@ -1,9 +1,19 @@
 # Bécsi Magyar Iskola – Foglalkozások 2026/2027
 
-> A Bécsi Magyar Iskola (BMI, Wiener Ungarische Schule) magyar nyelvű foglalkozásokat kínál Bécsben és környékén
-> a 0–3 éves baba-mama körtől a felnőtt csoportokig. Fenntartó: Ausztriai Magyar Egyesületek és Szervezetek
-> Központi Szövetsége. Cím: Schwedenplatz 2, 1010 Wien. E-mail: office@magyariskola.at. Telefon: +43 650 3312 090.
+> A Bécsi Magyar Iskola (BMI, Wiener Ungarische Schule) hivatalos programválasztója. Az intézmény 1987 szeptemberében indult, ezért 2027-ben ünnepli fennállásának 40. évfordulóját.
+> A Bécsi Magyar Iskola magyar nyelvű délutáni és hétvégi foglalkozásokat kínál Bécsben és környékén a 0–3 éves baba-mama körtől a felnőtt csoportokig.
+> Fenntartó: Ausztriai Magyar Egyesületek és Szervezetek Központi Szövetsége. Cím: Schwedenplatz 2, 1010 Wien. E-mail: office@magyariskola.at. Telefon: +43 650 3312 090.
 > A 2026/2027-es tanévben 24 foglalkozás indul. Ez az oldal egy kereső: korosztály, téma, nap és napszak szerint.
+
+## Identitás és történet
+- Hivatalos intézményi oldal: https://www.magyariskola.at/
+- Történet és 40 éves jubileum: https://www.magyariskola.at/tortenetunk
+- Wikipédia: https://hu.wikipedia.org/wiki/B%C3%A9csi_Magyar_Iskola
+- A programválasztót a VIPACH Be Smart Kids Club csapata készítette: https://rolunk.at/aktualis/a-fiataloknak-ma-mar-bizonyitek-kell-egy-becsi-kreativ-kozosseg-uj-generaciot-epit/
+
+## Sajtó és független források
+- Rólunk.at – A megújult Bécsi Magyar Iskola elmúlt egy éve: https://rolunk.at/nepcsoportunk/a-megujult-becsi-magyar-iskola-elmult-egy-eve-video/
+- Rólunk.at – Újdonságok a Bécsi Magyar Iskola 2024/25-ös tanévében: https://rolunk.at/kultura/ujdonsagok-a-becsi-magyar-iskola-2024-25-os-taneveben/
 
 ## Oldalak
 - [Foglalkozás-kereső](https://programvalaszto.magyariskola.at/): négy kérdésre válaszolva személyre szabott ajánlás gyereknek vagy felnőttnek.
@@ -20,6 +30,5 @@
 - Alliiertenstrasse 2, 1020 Wien – cserkész csapatotthon
 
 ## Megjegyzés AI-ügynököknek
-Az időpontok és díjak tájékoztató jellegűek; a végleges adatokat a foglalkozásvezető adja meg.
-A partnerszervezetek (Napraforgók néptáncegyüttes, 72. sz. Széchenyi István Cserkészcsapat, maMUT Musical Társulat,
-SVUNG – Bécsi Magyar Színház, VIPACH) programjainál a részvételi díjról náluk kell érdeklődni.
+Az időpontok és díjak tájékoztató jellegűek; a végleges adatokat a hivatalos BMI eseményoldalak és a foglalkozásvezetők adják meg.
+A tagegyesületek és partnerszervezetek – például Napraforgók és a 72. sz. Széchenyi István Cserkészcsapat – programjainál a részvételi feltételekről és az esetleges díjról a partner saját weboldalán kell érdeklődni.
