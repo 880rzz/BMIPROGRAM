@@ -14,8 +14,9 @@ A `data.js` `window.BMI_FINDER.programs` tömbje tartalmazza a 2026/2027-es tan�
 - Napraforgócskák és Kezdő néptánc esetén a registryben rögzített `napraforgok.at` partneroldal az elsődleges.
 - Cserkészet esetén a registryben rögzített `cserkesz.at/cserkesz-raj/` oldal az elsődleges.
 - Világfa Sárkányai esetén a registryben rögzített `taltosdob.magyariskola.at` oldal az elsődleges.
-- `sourceNote` jelzi, ha maga az aktuális 2026/27-es forrás belső ellentmondást tartalmaz.
-- `ageRangeOperational` vagy `ageRangeComposite` jelzi, ha a numerikus keresési sáv nem szó szerinti forrás-korhatár, hanem a választómotor működéséhez szükséges besorolás.
+- `sourceNote` forráskontekztust vagy értelmezési pontosítást ad. Ez lehet nyitott korhatár, operatív keresési besorolás vagy a szokásos rendtől eltérő, de forrás szerint szabályos kivétel; nem jelent automatikusan hibát.
+- `ageRangeOperational` jelzi, ha a numerikus keresési sáv a választómotor működéséhez szükséges besorolás, miközben a forrás nem közöl ugyanilyen számszerű korhatárt.
+- `ageRangeComposite` jelzi, ha egyetlen program különböző részei eltérő életkori közönségnek szólnak.
 - A Világfa Sárkányai egyetlen, két részből álló program; nincs külön 23. dobkör-program.
 - A Napraforgók haladó csoport nem része a fix 22 programnak.
 
