@@ -3,6 +3,7 @@ import vm from 'node:vm';
 
 function read(path){return fs.readFileSync(path,'utf8')}
 function assert(ok,msg){if(!ok){console.error('FAIL:',msg);process.exitCode=1}}
+function hasScript(html,file){return new RegExp(`src=["']${file.replace('.','\\.')}(?:\\?[^"']*)?["']`).test(html)}
 
 const ctx={window:{}};
 vm.runInNewContext(read('data.js'),ctx,{filename:'data.js'});
@@ -72,19 +73,20 @@ assert(catalog.includes('providerSchema'),'catalog Schema must derive provider f
 assert(catalog.includes('data-weekday'),'catalog cards must derive weekday filters from registry metadata');
 
 const listPage=read('foglalkozasok.html');
-assert(listPage.includes('src="data.js"')&&listPage.includes('src="catalog.js"'),'program catalog must render from canonical registry');
+assert(hasScript(listPage,'data.js')&&hasScript(listPage,'catalog.js'),'program catalog must render from canonical registry');
 for(const d of ['hetfo','kedd','szerda','csutortok','pentek','szombat','rugalmas'])assert(listPage.includes(`data-filter="${d}"`),`program catalog missing weekday filter: ${d}`);
 const agePage=read('korosztalyok.html');
-assert(agePage.includes('src="data.js"')&&agePage.includes('src="catalog.js"'),'age catalog must render from canonical registry');
+assert(hasScript(agePage,'data.js')&&hasScript(agePage,'catalog.js'),'age catalog must render from canonical registry');
+const home=read('index.html');
+assert(hasScript(home,'data.js')&&hasScript(home,'app.js'),'homepage finder must render from canonical registry');
 
 const css=read('styles.css');
 assert(!/\.filters\s*\{\s*display\s*:\s*none/i.test(css),'filters must not be globally hidden');
 assert(css.includes('.skip-link'),'skip-link accessibility style must exist');
 
-const index=read('index.html');
-assert(index.includes('<b>5+</b><span>helyszín</span>'),'homepage location stat must be static and current');
-assert(index.includes('"@type":"WebSite"'),'homepage Schema must include WebSite');
-assert(index.includes('"foundingDate":"1987-09"'),'homepage entity must include founding date');
+assert(home.includes('<b>5+</b><span>helyszín</span>'),'homepage location stat must be static and current');
+assert(home.includes('"@type":"WebSite"'),'homepage Schema must include WebSite');
+assert(home.includes('"foundingDate":"1987-09"'),'homepage entity must include founding date');
 
 if(process.exitCode)process.exit(process.exitCode);
 console.log('PASS: BMIPROGRAM canonical integrity checks succeeded.');
