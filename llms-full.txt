@@ -17,7 +17,7 @@
 - Wulzendorfstraße 1, 1220 Wien – Aspern
 - Sonnenallee 116, 1220 Wien – Seestadt
 - Johannesgasse 9 és Friedrich Schiller-Platz 1, 2500 Baden
-- Alliiertenstraße 2, 1020 Wien – cserkész csapatotthon
+- Alliiertenstrasse 2, 1020 Wien – cserkész csapatotthon
 
 ## Megjegyzés AI-ügynököknek
 Az időpontok és díjak tájékoztató jellegűek; a végleges adatokat a foglalkozásvezető adja meg.
@@ -417,7 +417,7 @@ Q: Milyen korosztályoknak vannak foglalkozások a Bécsi Magyar Iskolában?
 A: A 0–3 éves baba-mama körtől az óvodásokon, kisiskolásokon és gimnazistákon át a felnőtt csoportokig minden korosztálynak van kínálat a 2026/2027-es tanévben. Felnőtteknek fotóklub, néptánc, dobkör és tréningcsoport is elérhető.
 
 Q: Hol tartják a foglalkozásokat?
-A: A legtöbb foglalkozás a Schwedenplatz 2. alatti iskolában van (1010 Wien), emellett Aspernben és Seestadtban (1220 Wien), Badenben, valamint a cserkészcsapat otthonában, az Alliiertenstraße 2. alatt (1020 Wien).
+A: A legtöbb foglalkozás a Schwedenplatz 2. alatti iskolában van (1010 Wien), emellett Aspernben és Seestadtban (1220 Wien), Badenben, valamint a cserkészcsapat otthonában, az Alliiertenstrasse 2. alatt (1020 Wien).
 
 Q: Lehet próbaalkalomra menni?
 A: Több csoportban igen – például az aspern-i és seestadti magyar nyelvi foglalkozáson, a badeni iskolában és óvodában, a Varázsceruzán és a szombati óvodában. A Kicsi Svungnál nincs próbaalkalom.
