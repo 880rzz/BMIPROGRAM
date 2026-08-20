@@ -18,74 +18,21 @@ jobs:
           ref: main
           fetch-depth: 1
 
-      - name: Apply verified Wix and partner-source corrections
+      - name: Normalize cserkész address across public and AI sources
         run: |
           python - <<'PY'
           from pathlib import Path
-
-          files = [Path('foglalkozasok.html'), Path('korosztalyok.html'), Path('llms-full.txt')]
-
-          def replace_near(text, title, old, new, window=6000):
-              start = text.find(title)
-              if start < 0:
-                  print(f'WARN title not found: {title}')
-                  return text
-              pos = text.find(old, start, start + window)
-              if pos < 0:
-                  print(f'WARN text not found near {title}: {old}')
-                  return text
-              return text[:pos] + new + text[pos+len(old):]
-
-          for path in files:
-              text = path.read_text(encoding='utf-8')
-
-              # Unique, source-verified schedule and URL corrections.
-              replacements = [
-                ('Szombatonként 10:00–12:00', 'Kéthetente szombatonként 10:00–11:30'),
-                ('Szombatonként 12:00–14:00', 'Kéthetente szombatonként 12:00–13:30'),
-                ('Kedden és csütörtökön 13:30–15:00', 'Hétfőnként 14:30–15:30'),
-                ('Minden hétfőn 16:30–18:00 (1,5 óra)', 'Szombaton 14:00–15:30'),
-                ('Minden szerdán 15:30–17:00', 'Szerdánként 15:15–16:45'),
-                ('70 € / 4 alkalom', '60 € / hó'),
-                ('https://www.magyariskola.at/event-details/magyarnyelv-schwedenplatz-1', 'https://www.magyariskola.at/event-details/magyar-nyelv-tanitas-1'),
-                ('https://www.magyariskola.at/event-details/alapozoterapia-2026', 'https://www.magyariskola.at/event-details/mozgasfejlesztes'),
-                ('https://www.magyariskola.at/event-details/rajztabla-2026', 'https://www.magyariskola.at/event-details/rajztabla-schwedenplatz'),
-                ('https://www.magyariskola.at/event-details/varazsceruza-2026', 'https://www.magyariskola.at/event-details/varazsceruza-schwedenplatz'),
-                ('https://www.magyariskola.at/event-details/kicsisvung-2026', 'https://www.magyariskola.at/event-details/kicsi-svung-drama-foglalkozas-schwedenplatz-1'),
-                ('https://www.magyariskola.at/event-details/gimisvung-2026', 'https://www.magyariskola.at/event-details/gimi-svung-dramafoglalkozas-schwedenplatz'),
-                ('https://www.magyariskola.at/event-details/filmesmuhely-2026', 'https://www.magyariskola.at/event-details/filmes-muhely'),
-                ('Alliiertenstraße 2., 1020 Wien', 'Alliiertenstrasse 2., 1020 Wien'),
-                ('A Napraforgók a BMI partneregyesülete – a részvételi feltételekről a napraforgok.at oldalon lehet érdeklődni', 'Tagegyesületi partnerprogram – a részvételi feltételekről és az esetleges díjról a napraforgok.at oldalon lehet érdeklődni'),
-                ('A cserkészcsapat a BMI partnerszervezete – a részvételi feltételekről a cserkesz.at oldalon lehet érdeklődni', 'Tagegyesületi partnerprogram – a részvételi feltételekről és az esetleges díjról a cserkesz.at oldalon lehet érdeklődni'),
-                ('20 € / alkalom (havi befizetéssel vagy féléves tagsági díjjal rendezhető)', '20 € / alkalom'),
-              ]
-              for old, new in replacements:
-                  text = text.replace(old, new)
-
-              # Age/frequency values that are not globally unique: update only near program title.
-              scoped = [
-                ('Magyar nyelv tanítás | Schwedenplatz, 1. csoport', '6–14 év', '6–10 év'),
-                ('Magyar nyelv tanítás | Schwedenplatz, 2. csoport', '6–14 év', '6–10 év'),
-                ('Alapozó Terápia', '5–10 év', '5–8 év'),
-                ('Alapozó Terápia', 'Kedd, Csütörtök', 'Hétfő'),
-                ('Alapozó Terápia', 'Hetente kétszer', 'Hetente'),
-                ('Alapozó Terápia', 'Schwedenplatz 2, 1010 Wien', 'Schwedenplatz 2 / Top 9, 1010 Wien'),
-                ('RAJZTÁBLA', '10–18 év', '10+ év'),
-                ('RAJZTÁBLA', 'Hétfő', 'Szombat'),
-                ('RAJZTÁBLA', 'Hetente', 'Havonta 1–2 alkalom'),
-                ('RAJZTÁBLA', 'Schwedenplatz 2, 1010 Wien', 'Schwedenplatz 2 / Top 9, 1010 Wien'),
-                ('Varázsceruza', '9–14 év', '6–12 év'),
-                ('Kicsi Svung', '8–13 év', '6–12 év'),
-                ('Gimi-Svung', '14–19 év', '12–18 év'),
-                ('Gimi-Svung', '70 € / fő / 4 alkalom', '70 € / hó'),
-              ]
-              for title, old, new in scoped:
-                  text = replace_near(text, title, old, new)
-
-              path.write_text(text, encoding='utf-8')
+          for name in ['index.html','gyik.html','foglalkozasok.html','korosztalyok.html','llms.txt','llms-full.txt']:
+              path=Path(name)
+              if not path.exists():
+                  continue
+              text=path.read_text(encoding='utf-8')
+              text=text.replace('Alliiertenstraße 2.', 'Alliiertenstrasse 2.')
+              text=text.replace('Alliiertenstraße 2,', 'Alliiertenstrasse 2,')
+              path.write_text(text,encoding='utf-8')
           PY
 
-      - name: Commit verified corrections
+      - name: Commit normalized address
         run: |
           if git diff --quiet; then
             echo "No changes needed."
@@ -93,8 +40,8 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- foglalkozasok.html korosztalyok.html llms-full.txt
-          git commit -m "Align program data with Wix source of truth"
+          git add -- index.html gyik.html foglalkozasok.html korosztalyok.html llms.txt llms-full.txt
+          git commit -m "Normalize cserkész address spelling"
           git push origin HEAD:main
 
-# hardened trigger 2026-08-20T12:56+02:00
+# final address normalization trigger 2026-08-20T12:58+02:00
