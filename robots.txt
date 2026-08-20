@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # AI-ügynököknek: strukturált összefoglaló
-# https://www.magyariskola.at/foglalkozaskereso/llms.txt
-# https://www.magyariskola.at/foglalkozaskereso/llms-full.txt
+# https://programvalaszto.magyariskola.at/llms.txt
+# https://programvalaszto.magyariskola.at/llms-full.txt
 
-Sitemap: https://www.magyariskola.at/foglalkozaskereso/sitemap.xml
+Sitemap: https://programvalaszto.magyariskola.at/sitemap.xml
