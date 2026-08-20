@@ -1,0 +1,26 @@
+name: Validate BMIPROGRAM integrity
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: JavaScript syntax
+        run: |
+          node --check data.js
+          node --check app.js
+          node --check catalog.js
+      - name: Canonical integrity
+        run: node scripts/validate.mjs
