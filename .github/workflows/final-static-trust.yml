@@ -1,0 +1,86 @@
+name: Final static trust and schema pass
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    if: ${{ github.actor != 'github-actions[bot]' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - name: Make trust, jubilee and identity static
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re, json
+
+          htmls=[Path('index.html'),Path('foglalkozasok.html'),Path('korosztalyok.html'),Path('gyik.html')]
+          jub='<a class="item jubilee-link" href="https://www.magyariskola.at/tortenetunk" target="_blank" rel="noopener">1987–2027 · 40 éves BMI</a>\n      '
+          jub_mobile='<a class="jubilee-mobile" href="https://www.magyariskola.at/tortenetunk" target="_blank" rel="noopener">1987–2027 · 40 éves BMI</a>\n      '
+          trust='''<div class="footer-trust" aria-label="Hitelesség és sajtó">
+    <p class="official-note"><strong>A Bécsi Magyar Iskola (BMI) hivatalos programválasztója.</strong> A Wiener Ungarische Schule 1987 szeptemberében indult; 2027-ben ünnepli fennállásának 40. évfordulóját. Fenntartója az Ausztriai Magyar Egyesületek és Szervezetek Központi Szövetsége.</p>
+    <div class="trust-links"><a href="https://www.magyariskola.at/tortenetunk" target="_blank" rel="noopener">Történetünk · 1987–2027</a><a href="https://hu.wikipedia.org/wiki/B%C3%A9csi_Magyar_Iskola" target="_blank" rel="noopener">Wikipédia</a><a href="https://rolunk.at/nepcsoportunk/a-megujult-becsi-magyar-iskola-elmult-egy-eve-video/" target="_blank" rel="noopener">Rólunk.at · A megújult BMI</a><a href="https://rolunk.at/kultura/ujdonsagok-a-becsi-magyar-iskola-2024-25-os-taneveben/" target="_blank" rel="noopener">Rólunk.at · Oktatás és programok</a></div>
+    <p class="creator-credit">Készítette a <strong>VIPACH Be Smart Kids Club csapata</strong> · <a href="https://rolunk.at/aktualis/a-fiataloknak-ma-mar-bizonyitek-kell-egy-becsi-kreativ-kozosseg-uj-generaciot-epit/" target="_blank" rel="noopener">Ismerd meg a projektet a Rólunk.at cikkében</a></p>
+  </div>'''
+          for p in htmls:
+              text=p.read_text(encoding='utf-8')
+              if 'class="item jubilee-link"' not in text:
+                  marker='<a class="btn sun" href="https://2026.magyariskola.at"'
+                  text=text.replace(marker,jub+marker,1)
+              if 'class="jubilee-mobile"' not in text:
+                  marker='<a href="https://2026.magyariskola.at"'
+                  text=text.replace(marker,jub_mobile+marker,1)
+              if 'class="footer-trust"' not in text:
+                  text=text.replace('</div></footer>',trust+'\n</div></footer>',1)
+              p.write_text(text,encoding='utf-8')
+
+          p=Path('index.html'); text=p.read_text(encoding='utf-8')
+          text=text.replace('<div class="stat"><b>4</b><span>helyszín</span></div>','<div class="stat"><b>5+</b><span>helyszín</span></div>')
+          text=text.replace('A korosztály szigorú szűrő, a többi választ pedig súlyozzuk. A végén két-három konkrét javaslatot kapsz, indoklással.','A pontos életkor szigorú szűrő. Ezután csak ténylegesen elérhető témákat, napokat és rendszerességet mutatunk. A végén legfeljebb három, minden választott feltételnek megfelelő programot kapsz közvetlen regisztrációval.')
+          m=re.search(r'<script type="application/ld\+json">\s*(\{.*?\})\s*</script>',text,re.S)
+          if m:
+              data=json.loads(m.group(1))
+              graph=data.get('@graph',[])
+              org=next((x for x in graph if x.get('@type')=='EducationalOrganization'),None)
+              if org:
+                  org['foundingDate']='1987'
+                  org['sameAs']=[
+                    'https://www.magyariskola.at/tortenetunk',
+                    'https://hu.wikipedia.org/wiki/B%C3%A9csi_Magyar_Iskola',
+                    'https://www.magyariskola.at/orf-at',
+                    'https://rolunk.at/tag/becsi-magyar-iskola/'
+                  ]
+              website=next((x for x in graph if x.get('@type')=='WebSite'),None)
+              if not website:
+                  website={'@type':'WebSite','@id':'https://programvalaszto.magyariskola.at/#website','url':'https://programvalaszto.magyariskola.at/','name':'Bécsi Magyar Iskola – Programválasztó','inLanguage':'hu','publisher':{'@id':'https://www.magyariskola.at/#org'}}
+                  graph.insert(1,website)
+              page=next((x for x in graph if x.get('@type')=='WebPage'),None)
+              if page:
+                  page['isPartOf']={'@id':'https://programvalaszto.magyariskola.at/#website'}
+                  page['about']={'@id':'https://www.magyariskola.at/#org'}
+              js=json.dumps(data,ensure_ascii=False,indent=1)
+              text=text[:m.start(1)]+js+text[m.end(1):]
+          p.write_text(text,encoding='utf-8')
+
+          css=Path('styles.css'); s=css.read_text(encoding='utf-8')
+          if '.footer-trust{' not in s:
+              s+='''\n.footer-trust{margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,255,255,.18)}.footer-trust p{color:#d9e8ef}.official-note{max-width:900px}.trust-links{display:flex;flex-wrap:wrap;gap:8px 16px;margin:12px 0}.creator-credit{margin-bottom:0}.result-when{display:block;color:var(--muted);font-size:.9rem;margin:4px 0 10px}.result-reason{font-size:.92rem}.jubilee-link{white-space:nowrap}\n'''
+          s=s.replace('@media(max-width:960px){','@media(max-width:1120px){')
+          css.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit static finalization
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html foglalkozasok.html korosztalyok.html gyik.html styles.css
+          git commit -m "Make BMI trust and jubilee identity static"
+          git push origin HEAD:main
