@@ -14,7 +14,7 @@ env:
   PRODUCTION_URL: https://programvalaszto.magyariskola.at
 
 concurrency:
-  group: pages
+  group: bmi-production
   cancel-in-progress: true
 
 jobs:
@@ -39,6 +39,17 @@ jobs:
         run: node scripts/validate-schema-age.mjs
       - name: Exhaustive selector state space
         run: node scripts/validate-matching.mjs
+      - name: Release-critical finder contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -Fq "cfg.days=[" app.js
+          grep -Fq "{id:'hetfo',label:'Hétfő'}" app.js
+          grep -Fq "{id:'szombat',label:'Szombat'}" app.js
+          grep -Fq "(p.weekdays||[p.weekday]).indexOf(state.day)!==-1" app.js
+          grep -Fq "https://ungarischlernen.at" app.js
+          grep -Fq "https://amaped.at" app.js
+          grep -Fq "Expected 8400 combinations" scripts/validate-matching.mjs
 
   build:
     needs: validate
@@ -56,7 +67,8 @@ jobs:
             --exclude '.github/' \
             --exclude 'scripts/' \
             --exclude '_site/' \
-            --exclude 'release.txt'
+            --exclude 'release.txt' \
+            --exclude 'version.json'
           short_sha="${GITHUB_SHA::12}"
           built_at="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
           cat > _site/release.txt <<EOF
@@ -72,9 +84,14 @@ jobs:
           EOF
           test -f _site/index.html
           test -f _site/data.js
+          test -f _site/app.js
           test -f _site/CNAME
+          test -f _site/.nojekyll
           test "$(cat _site/CNAME)" = "programvalaszto.magyariskola.at"
-          grep -F "GIT_SHA=${GITHUB_SHA}" _site/release.txt
+          grep -Fq "GIT_SHA=${GITHUB_SHA}" _site/release.txt
+          grep -Fq 'PROGRAM_COUNT=22' _site/release.txt
+          grep -Fq 'https://ungarischlernen.at' _site/app.js
+          grep -Fq 'https://amaped.at' _site/app.js
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -87,6 +104,13 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Force GitHub Pages workflow build mode
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh api --method PUT "repos/${GITHUB_REPOSITORY}/pages" -f build_type=workflow >/dev/null
       - name: Configure Pages
         uses: actions/configure-pages@v5
         with:
@@ -123,12 +147,25 @@ jobs:
           grep -Fq "GIT_SHA=${expected_sha}" <<<"${release}"
           grep -Fq 'PROGRAM_COUNT=22' <<<"${release}"
           grep -Fq 'SOURCE_POLICY=canonical-current-2026-27-only' <<<"${release}"
+
           home="$(fetch /)"
           grep -Fq 'Foglalkozás-kereső 2026/27' <<<"${home}"
+          grep -Fq '22</b><span>foglalkozás' <<<"${home}"
+
           data="$(fetch /data.js)"
           grep -Fq 'schoolYear:"2026/2027"' <<<"${data}"
           grep -Fq 'excludePriorYearWix:true' <<<"${data}"
-          grep -Fq 'https://ungarischlernen.at' "app.js" 2>/dev/null || true
+
+          app="$(fetch /app.js)"
+          grep -Fq "{id:'hetfo',label:'Hétfő'}" <<<"${app}"
+          grep -Fq "{id:'szombat',label:'Szombat'}" <<<"${app}"
+          grep -Fq 'https://ungarischlernen.at' <<<"${app}"
+          grep -Fq 'https://amaped.at' <<<"${app}"
+
+          version="$(fetch /version.json)"
+          grep -Fq "\"gitSha\":\"${expected_sha}\"" <<<"${version}"
+          grep -Fq '"programCount":22' <<<"${version}"
+
           for path in / /foglalkozasok.html /korosztalyok.html /gyik.html /data.js /app.js /catalog.js /llms.txt /llms-full.txt /robots.txt /sitemap.xml /release.txt /version.json; do
             fetch "${path}" >/dev/null
           done
