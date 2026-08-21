@@ -19,8 +19,8 @@ assert(app.includes("if(p.provider==='BMI')score+=2"),'BMI exact/preference tie-
 assert(app.includes('A kompromisszum:'),'Alternative cards must explain the compromise.');
 assert(app.includes('Nézzetek körül a másik két bécsi magyar iskolánál is'),'External schools must remain visible beside recommendations.');
 
-assert(faq.includes('Az életkor kemény feltétel'),'FAQ must explain the hard age constraint.');
-assert(faq.includes('az érdeklődés kapja a legnagyobb súlyt'),'FAQ must explain ranked recommendation priorities.');
+assert(faq.includes('életkor kemény feltétel'),'FAQ must explain the hard age constraint.');
+assert(faq.includes('érdeklődés kapja a legnagyobb súlyt'),'FAQ must explain ranked recommendation priorities.');
 assert(faq.includes('legközelebbi BMI-alternatívákat'),'FAQ must explain non-exact BMI alternatives.');
 assert(faq.includes('nem igazolt 2026/27-es órarendet'),'FAQ must preserve partner-source caution.');
 assert(!faq.includes('Ezután általános alternatívaként megmutatja'),'FAQ must not describe the retired external-only fallback model.');
