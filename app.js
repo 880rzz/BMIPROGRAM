@@ -4,7 +4,7 @@ if(!root)return;
 root.setAttribute('aria-live','polite');
 root.setAttribute('aria-atomic','true');
 var cfg=window.BMI_FINDER;
-if(!cfg||!Array.isArray(cfg.programs)||cfg.programs.length!==22){
+if(!cfg||!Array.isArray(cfg.programs)||cfg.programs.length!==23){
   root.innerHTML='<div class="wizard-card"><h3>A kereső átmenetileg nem elérhető</h3><p>Az összes foglalkozást továbbra is meg tudod nézni.</p><a class="btn" href="foglalkozasok.html">Összes foglalkozás</a></div>';
   return;
 }
@@ -107,7 +107,7 @@ function showResults(){
   }else{
     html+='<h3>Ebben az életkorban nincs biztonsággal ajánlható programunk</h3><p>Az életkort nem lazítjuk fel, mert az szakmailag fontos feltétel. Ettől függetlenül a másik két bécsi magyar iskola aktuális kínálatát érdemes megnézni.</p>'+externalSchools();
   }
-  html+='<div class="wizard-nav result-actions"><button class="btn ghost" type="button" data-back-result>Vissza az utolsó kérdéshez</button><button class="btn ghost" type="button" data-restart>Újrakezdem</button><a class="btn ghost" href="foglalkozasok.html">Mind a 22 program</a></div></div>';
+  html+='<div class="wizard-nav result-actions"><button class="btn ghost" type="button" data-back-result>Vissza az utolsó kérdéshez</button><button class="btn ghost" type="button" data-restart>Újrakezdem</button><a class="btn ghost" href="foglalkozasok.html">Mind a 23 program</a></div></div>';
   root.innerHTML=html;
   root.querySelector('[data-back-result]').addEventListener('click',function(){idx=3;renderStep()});
   root.querySelector('[data-restart]').addEventListener('click',function(){state={};idx=0;renderAge()});
