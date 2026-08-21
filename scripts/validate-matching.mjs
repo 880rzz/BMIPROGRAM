@@ -57,7 +57,7 @@ for(let age=0;age<=99;age++){
           reachable.add(p.id);
           if(!ageEligible(p,age))throw new Error(`Age-invalid recommendation: ${p.id}`);
         }
-        if(r.exactMatches.length&&r.selected.length&& !exact(r.selected[0],age,interest,day,pace))throw new Error(`Exact match was not ranked first: ${age}/${interest}/${day}/${pace}`);
+        if(r.exactMatches.length&&r.selected.length&&!exact(r.selected[0],age,interest,day,pace))throw new Error(`Exact match was not ranked first: ${age}/${interest}/${day}/${pace}`);
         if(!r.exactMatches.length&&r.alternatives.length>1&&r.selected.length>1){
           const scores=r.selected.map(p=>score(p,age,interest,day,pace));
           for(let i=1;i<scores.length;i++)if(scores[i]>scores[i-1])throw new Error(`Alternative ranking order invalid: ${age}/${interest}/${day}/${pace}`);
@@ -77,7 +77,7 @@ if(!alapozo||!dayEligible(alapozo,'kedd')||!dayEligible(alapozo,'csutortok')||da
 const fokusz=cfg.programs.find(p=>p.id==='fokusz');
 for(const day of days)if(!dayEligible(fokusz,day))throw new Error(`Fókusz flexible schedule must be eligible for ${day}.`);
 const sakk=cfg.programs.find(p=>p.id==='sakk');
-if(!sakk||!interestEligible(sakk,'logika')||!dayEligible(sakk,'szombat')||ageEligible(sakk,5)||!ageEligible(sakk,6)||!ageEligible(sakk,99))throw new Error('Sakk recommendation semantics are incorrect.');
+if(!sakk||!interestEligible(sakk,'logika')||!dayEligible(sakk,'szombat')||sakk.pace!=='rugalmas'||ageEligible(sakk,5)||!ageEligible(sakk,6)||!ageEligible(sakk,99))throw new Error('Sakk és Gondolkodásfejlesztés recommendation semantics are incorrect.');
 
 if(combinations!==10500)throw new Error(`Expected 10500 combinations, got ${combinations}`);
 if(reachable.size!==23){
