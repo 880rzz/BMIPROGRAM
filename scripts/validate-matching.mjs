@@ -11,8 +11,9 @@ const days=['hetfo','kedd','szerda','csutortok','pentek','szombat','mindegy'];
 const paces=cfg.pace.map(x=>x.id);
 const reachable=new Set();
 let combinations=0;
-let zeroMatches=0;
-let nonZeroMatches=0;
+let exactStates=0;
+let alternativeStates=0;
+let noAgeEligibleStates=0;
 
 function ageEligible(p,age){
   if(p.ageRangeComposite&&p.id==='vilagfa')return(age>=6&&age<=14)||age>=18;
@@ -22,8 +23,25 @@ function dayEligible(p,day){
   if(day==='mindegy'||p.weekday==='rugalmas')return true;
   return(p.weekdays||[p.weekday]).includes(day);
 }
-function matches(p,age,interest,day,pace){
-  return ageEligible(p,age)&&p.interests.includes(interest)&&dayEligible(p,day)&&(pace==='mindegy'||p.pace===pace);
+function paceEligible(p,pace){return pace==='mindegy'||p.pace===pace;}
+function interestEligible(p,interest){return p.interests.includes(interest);}
+function exact(p,age,interest,day,pace){return ageEligible(p,age)&&interestEligible(p,interest)&&dayEligible(p,day)&&paceEligible(p,pace);}
+function score(p,age,interest,day,pace){
+  if(!ageEligible(p,age))return-1;
+  let value=0;
+  if(interestEligible(p,interest))value+=60;
+  if(dayEligible(p,day))value+=25;
+  if(paceEligible(p,pace))value+=15;
+  if(p.provider==='BMI')value+=2;
+  return value;
+}
+function ranked(age,interest,day,pace){
+  const eligible=cfg.programs.filter(p=>ageEligible(p,age));
+  const exactMatches=eligible.filter(p=>exact(p,age,interest,day,pace)).sort((a,b)=>score(b,age,interest,day,pace)-score(a,age,interest,day,pace)||a.name.localeCompare(b.name,'hu'));
+  const alternatives=eligible.filter(p=>!exact(p,age,interest,day,pace)).sort((a,b)=>score(b,age,interest,day,pace)-score(a,age,interest,day,pace)||a.name.localeCompare(b.name,'hu'));
+  const selected=exactMatches.length?exactMatches.slice(0,3):alternatives.slice(0,3);
+  if(exactMatches.length&&selected.length<3){for(const p of alternatives){if(selected.length>=3)break;if(!selected.includes(p))selected.push(p);}}
+  return {eligible,exactMatches,alternatives,selected};
 }
 
 for(let age=0;age<=99;age++){
@@ -31,14 +49,18 @@ for(let age=0;age<=99;age++){
     for(const day of days){
       for(const pace of paces){
         combinations++;
-        const result=cfg.programs.filter(p=>matches(p,age,interest,day,pace));
-        if(result.length===0)zeroMatches++; else nonZeroMatches++;
-        for(const p of result){
+        const r=ranked(age,interest,day,pace);
+        if(r.exactMatches.length)exactStates++; else if(r.eligible.length)alternativeStates++; else noAgeEligibleStates++;
+        if(r.eligible.length&&r.selected.length===0)throw new Error(`No recommendation despite age-eligible programs: ${age}/${interest}/${day}/${pace}`);
+        if(r.selected.length>3)throw new Error('Recommendation list exceeded 3 items.');
+        for(const p of r.selected){
           reachable.add(p.id);
-          if(!ageEligible(p,age))throw new Error(`Age-invalid match: ${p.id}`);
-          if(!p.interests.includes(interest))throw new Error(`Interest-invalid match: ${p.id}`);
-          if(!dayEligible(p,day))throw new Error(`Day-invalid match: ${p.id}`);
-          if(!(pace==='mindegy'||p.pace===pace))throw new Error(`Pace-invalid match: ${p.id}`);
+          if(!ageEligible(p,age))throw new Error(`Age-invalid recommendation: ${p.id}`);
+        }
+        if(r.exactMatches.length&&r.selected.length&& !exact(r.selected[0],age,interest,day,pace))throw new Error(`Exact match was not ranked first: ${age}/${interest}/${day}/${pace}`);
+        if(!r.exactMatches.length&&r.alternatives.length>1&&r.selected.length>1){
+          const scores=r.selected.map(p=>score(p,age,interest,day,pace));
+          for(let i=1;i<scores.length;i++)if(scores[i]>scores[i-1])throw new Error(`Alternative ranking order invalid: ${age}/${interest}/${day}/${pace}`);
         }
       }
     }
@@ -58,9 +80,9 @@ for(const day of days)if(!dayEligible(fokusz,day))throw new Error(`Fókusz flexi
 if(combinations!==8400)throw new Error(`Expected 8400 combinations, got ${combinations}`);
 if(reachable.size!==22){
   const missing=cfg.programs.filter(p=>!reachable.has(p.id)).map(p=>p.id);
-  throw new Error(`Unreachable programs: ${missing.join(', ')}`);
+  throw new Error(`Unreachable recommended programs: ${missing.join(', ')}`);
 }
-if(zeroMatches===0)throw new Error('No zero-match state exists; external-school fallback would be unreachable.');
-if(nonZeroMatches===0)throw new Error('Selector produces no BMI recommendations.');
+if(exactStates===0)throw new Error('No exact-match state exists.');
+if(alternativeStates===0)throw new Error('No alternative-recommendation state exists.');
 
-console.log(`PASS: ${combinations} exact-weekday selector states checked; all 22 programs reachable; ${zeroMatches} zero-match states exercise fallback; composite/flexible weekday rules enforced.`);
+console.log(`PASS: ${combinations} selector states checked; exact matches stay first; age remains hard; ranked BMI alternatives cover non-exact states; all 22 programs remain reachable; ${noAgeEligibleStates} states have no age-eligible canonical program.`);
