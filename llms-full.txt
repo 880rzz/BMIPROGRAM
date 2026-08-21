@@ -5,27 +5,28 @@ Ez a rendszer szándékosan egyetlen programadat-forrást használ.
 ## Canonical teljes programadat
 https://programvalaszto.magyariskola.at/data.js
 
-A `data.js` `window.BMI_FINDER.programs` tömbje tartalmazza a 2026/2027-es tanév pontosan 22 fix programjának canonical rekordját. Ezt kell elsődleges gépi programadat-forrásként olvasni. Az összes programoldal, a korosztályos nézet, a kereső és a strukturált Course/ItemList réteg ebből a registryből épül.
+A `data.js` `window.BMI_FINDER.programs` tömbje tartalmazza a 2026/2027-es tanév pontosan 23 fix programjának canonical rekordját. Ezt kell elsődleges gépi programadat-forrásként olvasni. Az összes programoldal, a korosztályos nézet, a kereső és a strukturált Course/ItemList réteg ebből a registryből épül.
 
 ## Kötelező forrásszabály
-- Pontosan 22 fix program van.
+- Pontosan 23 fix program van.
 - Korábbi tanévek Wix eseményoldalai teljesen kizártak.
 - BMI-programnál kizárólag a registryben rögzített aktuális 2026/27-es `magyariskola.at` programlink és az ahhoz tartozó aktuális Wix Events rekord használható.
+- A `sakk-2026` aktuális Wix Events rekord címe `Sakk és Gondolkodásfejlesztés | Schwedenplatz`; a 2026. augusztus 21-én publikált aktuális rekord adatai felülírják a korábbi, azonos slughoz kapcsolódó Sakkszakkör-információkat.
 - Napraforgócskák és Kezdő néptánc esetén a registryben rögzített `napraforgok.at` partneroldal az elsődleges.
 - Cserkészet esetén a registryben rögzített `cserkesz.at/cserkesz-raj/` oldal az elsődleges.
 - Világfa Sárkányai esetén a registryben rögzített `taltosdob.magyariskola.at` oldal az elsődleges.
-- `sourceNote` forráskontekztust vagy értelmezési pontosítást ad. Ez lehet nyitott korhatár, operatív keresési besorolás vagy a szokásos rendtől eltérő, de forrás szerint szabályos kivétel; nem jelent automatikusan hibát.
+- `sourceNote` forráskontextust vagy értelmezési pontosítást ad. Ez lehet nyitott korhatár, operatív keresési besorolás vagy a szokásos rendtől eltérő, de forrás szerint szabályos kivétel; nem jelent automatikusan hibát.
 - `ageRangeOperational` jelzi, ha a numerikus keresési sáv a választómotor működéséhez szükséges besorolás, miközben a forrás nem közöl ugyanilyen számszerű korhatárt.
 - `ageRangeComposite` jelzi, ha egyetlen program különböző részei eltérő életkori közönségnek szólnak.
 - A Világfa Sárkányai egyetlen, két részből álló program: gyermekfoglalkozás 6–14 éveseknek, utána felnőtt dzsemelés 18+ közönségnek. A választómotor 15–17 éves életkornál nem kezeli exact találatként.
-- A Napraforgók haladó csoport nem része a fix 22 programnak.
+- A Napraforgók haladó csoport nem része a fix 23 programnak.
 
 ## Programválasztó
 https://programvalaszto.magyariskola.at/
 
-A kereső pontos életkor, érdeklődés, konkrét kívánt nap és rendszeresség alapján keres. A napválasztás Hétfő, Kedd, Szerda, Csütörtök, Péntek, Szombat vagy Mindegy. Többnapos program a saját összes rögzített napján találat lehet; a rugalmasan egyeztethető program bármely napválasztásnál szóba jöhet. Minden BMI-találat közvetlenül az adott program canonical jelentkezési oldalára vezet.
+A kereső pontos életkor, érdeklődés, konkrét kívánt nap és rendszeresség alapján rangsorol. Az életkor kemény feltétel. Az életkorban megfelelő programok között az érdeklődés a legerősebb preferencia, majd a nap és a rendszeresség. A napválasztás Hétfő, Kedd, Szerda, Csütörtök, Péntek, Szombat vagy Mindegy. Többnapos program a saját összes rögzített napján találat lehet; a rugalmasan egyeztethető program bármely napválasztásnál szóba jöhet. A havi rendszerességű Sakk és Gondolkodásfejlesztés `pace=rugalmas` besorolást kap. Minden BMI-találat közvetlenül az adott program canonical oldalára vezet.
 
-Ha nincs pontos BMI-találat, a rendszer alternatív bécsi magyar lehetőségként az alábbi oldalakat ajánlja:
+Ha nincs minden feltételben pontos BMI-találat, a rendszer először a legközelebbi, életkorban megfelelő BMI-programokat rangsorolja és jelzi a kompromisszumot. Ezután külön további bécsi magyar lehetőségként az alábbi oldalakat ajánlja, anélkül hogy nem ellenőrzött 2026/27-es órarendet társítana hozzájuk:
 - https://ungarischlernen.at
 - https://amaped.at
 
