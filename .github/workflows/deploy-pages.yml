@@ -33,12 +33,15 @@ jobs:
           node --check scripts/validate.mjs
           node --check scripts/validate-schema-age.mjs
           node --check scripts/validate-matching.mjs
+          node --check scripts/validate-copy.mjs
       - name: Canonical integrity
         run: node scripts/validate.mjs
       - name: Schema age semantics
         run: node scripts/validate-schema-age.mjs
       - name: Exhaustive selector state space
         run: node scripts/validate-matching.mjs
+      - name: Recommender copy and UX consistency
+        run: node scripts/validate-copy.mjs
       - name: Release-critical finder contracts
         shell: bash
         run: |
@@ -47,6 +50,11 @@ jobs:
           grep -Fq "{id:'hetfo',label:'Hétfő'}" app.js
           grep -Fq "{id:'szombat',label:'Szombat'}" app.js
           grep -Fq "(p.weekdays||[p.weekday]).indexOf(state.day)!==-1" app.js
+          grep -Fq "if(!ageEligible(p))return-1" app.js
+          grep -Fq "if(interestEligible(p))score+=60" app.js
+          grep -Fq "if(dayEligible(p))score+=25" app.js
+          grep -Fq "if(paceEligible(p))score+=15" app.js
+          grep -Fq "A kompromisszum:" app.js
           grep -Fq "https://ungarischlernen.at" app.js
           grep -Fq "https://amaped.at" app.js
           grep -Fq "Expected 8400 combinations" scripts/validate-matching.mjs
@@ -70,26 +78,34 @@ jobs:
             --exclude 'release.txt' \
             --exclude 'version.json'
           short_sha="${GITHUB_SHA::12}"
+          release_date="$(date -u +'%Y-%m-%d')"
           built_at="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          release_id="${release_date}-${short_sha}"
           cat > _site/release.txt <<EOF
-          BMIPROGRAM_RELEASE=2026-08-20-${short_sha}
+          BMIPROGRAM_RELEASE=${release_id}
           GIT_SHA=${GITHUB_SHA}
           SCHOOL_YEAR=2026/2027
           PROGRAM_COUNT=22
           SOURCE_POLICY=canonical-current-2026-27-only
+          RECOMMENDER=ranked-exact-first-age-hard
           BUILT_AT=${built_at}
           EOF
           cat > _site/version.json <<EOF
-          {"release":"2026-08-20-${short_sha}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":22,"sourcePolicy":"canonical-current-2026-27-only","builtAt":"${built_at}"}
+          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":22,"sourcePolicy":"canonical-current-2026-27-only","recommender":"ranked-exact-first-age-hard","builtAt":"${built_at}"}
           EOF
           test -f _site/index.html
           test -f _site/data.js
           test -f _site/app.js
+          test -f _site/logo.png
+          test -f _site/favicon_.png
           test -f _site/CNAME
           test -f _site/.nojekyll
           test "$(cat _site/CNAME)" = "programvalaszto.magyariskola.at"
           grep -Fq "GIT_SHA=${GITHUB_SHA}" _site/release.txt
           grep -Fq 'PROGRAM_COUNT=22' _site/release.txt
+          grep -Fq 'RECOMMENDER=ranked-exact-first-age-hard' _site/release.txt
+          grep -Fq 'src="logo.png"' _site/index.html
+          grep -Fq 'href="favicon_.png"' _site/index.html
           grep -Fq 'https://ungarischlernen.at' _site/app.js
           grep -Fq 'https://amaped.at' _site/app.js
       - name: Upload Pages artifact
@@ -138,10 +154,14 @@ jobs:
           grep -Fq "GIT_SHA=${expected_sha}" <<<"${release}"
           grep -Fq 'PROGRAM_COUNT=22' <<<"${release}"
           grep -Fq 'SOURCE_POLICY=canonical-current-2026-27-only' <<<"${release}"
+          grep -Fq 'RECOMMENDER=ranked-exact-first-age-hard' <<<"${release}"
 
           home="$(fetch /)"
           grep -Fq 'Foglalkozás-kereső 2026/27' <<<"${home}"
           grep -Fq '22</b><span>foglalkozás' <<<"${home}"
+          grep -Fq 'legközelebbi, életkorban megfelelő BMI-ajánlatokat' <<<"${home}"
+          grep -Fq 'src="logo.png"' <<<"${home}"
+          grep -Fq 'href="favicon_.png"' <<<"${home}"
 
           data="$(fetch /data.js)"
           grep -Fq 'schoolYear:"2026/2027"' <<<"${data}"
@@ -150,14 +170,22 @@ jobs:
           app="$(fetch /app.js)"
           grep -Fq "{id:'hetfo',label:'Hétfő'}" <<<"${app}"
           grep -Fq "{id:'szombat',label:'Szombat'}" <<<"${app}"
+          grep -Fq "if(!ageEligible(p))return-1" <<<"${app}"
+          grep -Fq "if(interestEligible(p))score+=60" <<<"${app}"
+          grep -Fq 'A kompromisszum:' <<<"${app}"
           grep -Fq 'https://ungarischlernen.at' <<<"${app}"
           grep -Fq 'https://amaped.at' <<<"${app}"
+
+          faq="$(fetch /gyik.html)"
+          grep -Fq 'életkor kemény feltétel' <<<"${faq}"
+          grep -Fq 'legközelebbi BMI-alternatívákat' <<<"${faq}"
 
           version="$(fetch /version.json)"
           grep -Fq "\"gitSha\":\"${expected_sha}\"" <<<"${version}"
           grep -Fq '"programCount":22' <<<"${version}"
+          grep -Fq '"recommender":"ranked-exact-first-age-hard"' <<<"${version}"
 
-          for path in / /foglalkozasok.html /korosztalyok.html /gyik.html /data.js /app.js /catalog.js /llms.txt /llms-full.txt /robots.txt /sitemap.xml /release.txt /version.json; do
+          for path in / /foglalkozasok.html /korosztalyok.html /gyik.html /data.js /app.js /catalog.js /logo.png /favicon_.png /llms.txt /llms-full.txt /robots.txt /sitemap.xml /release.txt /version.json; do
             fetch "${path}" >/dev/null
           done
           echo "EXACT-LIVE: ${expected_sha} is serving on ${base}."
