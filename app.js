@@ -27,7 +27,6 @@ function renderAge(){
   progress(0);
   root.innerHTML='<div class="wizard-card"><div class="kicker">1 / 4</div><h3>Hány éves, akinek programot keresel?</h3><p>Írd be a pontos életkort. Ez az egyetlen kötelező kizáró feltétel.</p><form id="ageForm"><label for="ageInput"><strong>Életkor</strong></label><div class="wizard-nav" style="justify-content:flex-start"><input id="ageInput" name="age" type="number" min="0" max="99" step="1" inputmode="numeric" required value="'+(Number.isInteger(state.age)?state.age:'')+'" style="width:110px;padding:12px 14px;border:1px solid rgba(23,48,66,.22);border-radius:12px;font:inherit"><button class="btn" type="submit">Tovább</button></div><p id="ageError" class="desc" role="alert" style="display:none;margin-top:10px">Adj meg egy 0 és 99 közötti egész életkort.</p></form></div>';
   root.querySelector('#ageForm').addEventListener('submit',function(e){e.preventDefault();var v=Number(root.querySelector('#ageInput').value);if(!Number.isInteger(v)||v<0||v>99){root.querySelector('#ageError').style.display='block';return}state={age:v};idx=1;renderStep()});
-  setTimeout(function(){var input=root.querySelector('#ageInput');if(input)input.focus()},0);
 }
 function renderChoices(title,text,options,key){
   progress(idx);
