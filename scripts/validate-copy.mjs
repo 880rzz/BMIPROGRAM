@@ -9,6 +9,7 @@ const app=read('app.js');
 
 assert(home.includes('legközelebbi, életkorban megfelelő BMI-ajánlatokat'),'Homepage must explain ranked BMI alternatives.');
 assert(home.includes('a nap és a rendszeresség preferencia'),'Homepage must explain that day and cadence are preferences.');
+assert(home.includes('<b>23</b><span>foglalkozás</span>'),'Homepage must expose the current 23-program count.');
 assert(!home.includes('legfeljebb három pontos találatot kapsz'),'Homepage must not describe the retired exact-only result model.');
 
 assert(app.includes("if(interestEligible(p))score+=60"),'Interest must remain the strongest preference signal.');
@@ -18,11 +19,14 @@ assert(app.includes("if(!ageEligible(p))return-1"),'Age must remain a hard recom
 assert(app.includes("if(p.provider==='BMI')score+=2"),'BMI exact/preference tie-break contract missing.');
 assert(app.includes('A kompromisszum:'),'Alternative cards must explain the compromise.');
 assert(app.includes('Nézzetek körül a másik két bécsi magyar iskolánál is'),'External schools must remain visible beside recommendations.');
+assert(app.includes('Mind a 23 program'),'Finder result actions must expose all 23 programs.');
 
 assert(faq.includes('életkor kemény feltétel'),'FAQ must explain the hard age constraint.');
 assert(faq.includes('érdeklődés kapja a legnagyobb súlyt'),'FAQ must explain ranked recommendation priorities.');
 assert(faq.includes('legközelebbi BMI-alternatívákat'),'FAQ must explain non-exact BMI alternatives.');
 assert(faq.includes('nem igazolt 2026/27-es órarendet'),'FAQ must preserve partner-source caution.');
+assert(faq.includes('Sakk és Gondolkodásfejlesztés'),'FAQ must document the current new chess program.');
+assert(faq.includes('2026. szeptember 26.'),'FAQ must preserve the current chess first date.');
 assert(!faq.includes('Ezután általános alternatívaként megmutatja'),'FAQ must not describe the retired external-only fallback model.');
 
-console.log('PASS: ranked recommender copy, FAQ schema-facing copy and UI contracts are consistent.');
+console.log('PASS: ranked recommender copy, 23-program count, chess FAQ and UI contracts are consistent.');

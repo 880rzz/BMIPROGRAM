@@ -4,7 +4,7 @@ import vm from 'node:vm';
 const ctx={window:{}};
 vm.runInNewContext(fs.readFileSync('data.js','utf8'),ctx,{filename:'data.js'});
 const cfg=ctx.window.BMI_FINDER;
-if(!cfg||!Array.isArray(cfg.programs)||cfg.programs.length!==22)throw new Error('Expected canonical 22-program registry.');
+if(!cfg||!Array.isArray(cfg.programs)||cfg.programs.length!==23)throw new Error('Expected canonical 23-program registry.');
 
 const interests=cfg.interests.map(x=>x.id);
 const days=['hetfo','kedd','szerda','csutortok','pentek','szombat','mindegy'];
@@ -57,7 +57,7 @@ for(let age=0;age<=99;age++){
           reachable.add(p.id);
           if(!ageEligible(p,age))throw new Error(`Age-invalid recommendation: ${p.id}`);
         }
-        if(r.exactMatches.length&&r.selected.length&& !exact(r.selected[0],age,interest,day,pace))throw new Error(`Exact match was not ranked first: ${age}/${interest}/${day}/${pace}`);
+        if(r.exactMatches.length&&r.selected.length&&!exact(r.selected[0],age,interest,day,pace))throw new Error(`Exact match was not ranked first: ${age}/${interest}/${day}/${pace}`);
         if(!r.exactMatches.length&&r.alternatives.length>1&&r.selected.length>1){
           const scores=r.selected.map(p=>score(p,age,interest,day,pace));
           for(let i=1;i<scores.length;i++)if(scores[i]>scores[i-1])throw new Error(`Alternative ranking order invalid: ${age}/${interest}/${day}/${pace}`);
@@ -76,13 +76,15 @@ const alapozo=cfg.programs.find(p=>p.id==='alapozo');
 if(!alapozo||!dayEligible(alapozo,'kedd')||!dayEligible(alapozo,'csutortok')||dayEligible(alapozo,'hetfo'))throw new Error('Alapozó exact weekday semantics are incorrect.');
 const fokusz=cfg.programs.find(p=>p.id==='fokusz');
 for(const day of days)if(!dayEligible(fokusz,day))throw new Error(`Fókusz flexible schedule must be eligible for ${day}.`);
+const sakk=cfg.programs.find(p=>p.id==='sakk');
+if(!sakk||!interestEligible(sakk,'logika')||!dayEligible(sakk,'szombat')||sakk.pace!=='rugalmas'||ageEligible(sakk,5)||!ageEligible(sakk,6)||!ageEligible(sakk,99))throw new Error('Sakk és Gondolkodásfejlesztés recommendation semantics are incorrect.');
 
-if(combinations!==8400)throw new Error(`Expected 8400 combinations, got ${combinations}`);
-if(reachable.size!==22){
+if(combinations!==10500)throw new Error(`Expected 10500 combinations, got ${combinations}`);
+if(reachable.size!==23){
   const missing=cfg.programs.filter(p=>!reachable.has(p.id)).map(p=>p.id);
   throw new Error(`Unreachable recommended programs: ${missing.join(', ')}`);
 }
 if(exactStates===0)throw new Error('No exact-match state exists.');
 if(alternativeStates===0)throw new Error('No alternative-recommendation state exists.');
 
-console.log(`PASS: ${combinations} selector states checked; exact matches stay first; age remains hard; ranked BMI alternatives cover non-exact states; all 22 programs remain reachable; ${noAgeEligibleStates} states have no age-eligible canonical program.`);
+console.log(`PASS: ${combinations} selector states checked; exact matches stay first; age remains hard; ranked BMI alternatives cover non-exact states; all 23 programs remain reachable; ${noAgeEligibleStates} states have no age-eligible canonical program.`);
