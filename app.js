@@ -41,29 +41,34 @@ function recommendationTier(p){
 }
 function deviationText(p){
   var d=[];
-  if(!interestEligible(p))d.push('más témájú, mint amit elsőként választottál');
-  if(!dayEligible(p)&&state.day!=='mindegy')d.push('nem a választott napon van');
-  if(!paceEligible(p)&&state.pace!=='mindegy')d.push('más rendszerességű');
+  if(!interestEligible(p))d.push('a témája eltér az elsőként választott céltól');
+  if(!dayEligible(p)&&state.day!=='mindegy')d.push('másik napon van');
+  if(!paceEligible(p)&&state.pace!=='mindegy')d.push('más ritmusban működik');
   if(!d.length)return'Pontosan illeszkedik a megadott szempontokhoz.';
   return'A kompromisszum: '+d.join(', ')+'.';
 }
-function resultReason(p){
-  if(isExact(p))return'Életkorban, érdeklődésben, napban és ritmusban is passzol.';
+function resultReason(p,primary){
+  if(isExact(p))return primary?'Ezt nézném meg elsőként: életkorban, érdeklődésben, napban és ritmusban is passzol.':'Ez is pontosan illeszkedik a megadott szempontokhoz.';
   var good=['életkorban megfelelő'];
-  if(interestEligible(p))good.push('a választott célhoz/témához illik');
+  if(interestEligible(p))good.push('az érdeklődéshez jól illik');
   if(dayEligible(p))good.push(p.weekday==='rugalmas'?'rugalmasan egyeztethető':'a választott napon is elérhető');
   if(paceEligible(p))good.push('a kívánt ritmushoz illik');
-  return good.join(', ')+'. '+deviationText(p);
+  var lead=primary?'Ezt nézném meg elsőként, mert ':'Jó alternatíva, mert ';
+  return lead+good.join(', ')+'. '+deviationText(p);
 }
 function progress(n){document.querySelectorAll('#prog i').forEach(function(b,i){b.classList.toggle('on',i<=n)})}
+function stepTrail(){
+  var names=['1. Életkor','2. Cél','3. Nap','4. Ritmus'];
+  return'<div class="step-trail" aria-label="Kereső lépései">'+names.map(function(name,i){return'<span'+(idx===i?' class="current" aria-current="step"':'')+'>'+name+'</span>'}).join('')+'</div>';
+}
 function renderAge(){
   progress(0);
-  root.innerHTML='<div class="wizard-card"><div class="kicker">1 / 4</div><h3>Hány éves, akinek programot keresel?</h3><p>Írd be a pontos életkort. Ez az egyetlen kötelező kizáró feltétel.</p><form id="ageForm"><label for="ageInput"><strong>Életkor</strong></label><div class="wizard-nav" style="justify-content:flex-start"><input id="ageInput" name="age" type="number" min="0" max="99" step="1" inputmode="numeric" required value="'+(Number.isInteger(state.age)?state.age:'')+'" style="width:110px;padding:12px 14px;border:1px solid rgba(23,48,66,.22);border-radius:12px;font:inherit"><button class="btn" type="submit">Tovább</button></div><p id="ageError" class="desc" role="alert" style="display:none;margin-top:10px">Adj meg egy 0 és 99 közötti egész életkort.</p></form></div>';
+  root.innerHTML='<div class="wizard-card">'+stepTrail()+'<div class="kicker">1 / 4</div><h3>Hány éves, akinek programot keresel?</h3><p>Írd be a pontos életkort. Ez az egyetlen kötelező kizáró feltétel.</p><form id="ageForm"><label for="ageInput"><strong>Életkor</strong></label><div class="wizard-nav" style="justify-content:flex-start"><input id="ageInput" name="age" type="number" min="0" max="99" step="1" inputmode="numeric" required value="'+(Number.isInteger(state.age)?state.age:'')+'" style="width:110px;padding:12px 14px;border:1px solid rgba(23,48,66,.22);border-radius:12px;font:inherit"><button class="btn" type="submit">Tovább</button></div><p id="ageError" class="desc" role="alert" style="display:none;margin-top:10px">Adj meg egy 0 és 99 közötti egész életkort.</p></form></div>';
   root.querySelector('#ageForm').addEventListener('submit',function(e){e.preventDefault();var v=Number(root.querySelector('#ageInput').value);if(!Number.isInteger(v)||v<0||v>99){root.querySelector('#ageError').style.display='block';return}state={age:v};idx=1;renderStep()});
 }
 function renderChoices(title,text,options,key){
   progress(idx);
-  var html='<div class="wizard-card"><div class="kicker">'+(idx+1)+' / '+totalSteps+'</div><h3>'+esc(title)+'</h3><p>'+esc(text)+'</p><div class="choice-grid">';
+  var html='<div class="wizard-card">'+stepTrail()+'<div class="kicker">'+(idx+1)+' / '+totalSteps+'</div><h3>'+esc(title)+'</h3><p>'+esc(text)+'</p><div class="choice-grid">';
   options.forEach(function(o){html+='<button class="choice" type="button" data-value="'+esc(o.id)+'">'+esc(o.label)+'</button>'});
   html+='</div><div class="wizard-nav"><button class="btn ghost" type="button" data-back>Vissza</button></div></div>';
   root.innerHTML=html;
@@ -76,12 +81,12 @@ function renderStep(){
   if(idx===2){renderChoices('Melyik nap lenne a legjobb?','Ez preferencia, nem kizáró ok. Ha egy nagyon jó program másik napon van, alternatívaként megmutatjuk, és pontosan jelezzük az eltérést.',cfg.days,'day');return}
   renderChoices('Milyen ritmus fér bele?','Ezt is preferenciaként kezeljük. A cél az, hogy mindig a legjobb életkorban megfelelő BMI-lehetőséget kapd, ne egy üres találati oldalt.',cfg.pace,'pace');
 }
-function meta(label,value){return value?'<div style="margin:5px 0;color:#425b69;font-size:.92rem"><strong>'+esc(label)+':</strong> '+esc(value)+'</div>':''}
-function card(p,label){
-  return'<article class="result-card" data-recommendation="'+recommendationTier(p)+'"><span class="kicker">'+esc(label)+'</span><b style="margin-top:6px">'+esc(p.name)+'</b><span class="result-when">'+esc(p.when)+'</span><p>'+esc(p.why)+'</p>'+meta('Helyszín',p.location)+meta('Oktató',p.teacher)+meta('Hozzájárulási díj',feeForAge(p))+meta('Első alkalom',p.firstDate)+'<p class="result-reason"><strong>Miért ezt?</strong> '+esc(resultReason(p))+'</p><p><a class="btn" href="'+esc(p.url)+'" target="_blank" rel="noopener">Regisztráció / jelentkezés</a></p></article>';
+function meta(label,value){return value?'<div class="result-meta"><strong>'+esc(label)+':</strong> '+esc(value)+'</div>':''}
+function card(p,label,primary){
+  return'<article class="result-card'+(primary?' result-card-primary':'')+'" data-recommendation="'+recommendationTier(p)+'"><span class="kicker">'+esc(label)+'</span><b class="result-title">'+esc(p.name)+'</b><span class="result-when">'+esc(p.when)+'</span><p>'+esc(p.why)+'</p>'+meta('Helyszín',p.location)+meta('Oktató',p.teacher)+meta('Hozzájárulási díj',feeForAge(p))+meta('Első alkalom',p.firstDate)+'<p class="result-reason"><strong>Miért ezt?</strong> '+esc(resultReason(p,primary))+'</p><p><a class="btn" href="'+esc(p.url)+'" target="_blank" rel="noopener">Megnézem a programot</a></p></article>';
 }
 function externalSchools(){
-  return'<div class="result-card" style="margin-top:14px"><span class="kicker">Ha más nap vagy más forma kell</span><b style="margin-top:6px">Nézzetek körül a másik két bécsi magyar iskolánál is</b><p>Az AMAPED és az Ungarisch Lernen aktuális kínálata külön változhat. Itt ezért nem találunk ki programot vagy időpontot, hanem közvetlenül az intézmények saját oldalára mutatunk.</p><div class="wizard-nav" style="justify-content:flex-start"><a class="btn ghost" href="https://ungarischlernen.at" target="_blank" rel="noopener">Ungarisch Lernen</a><a class="btn ghost" href="https://amaped.at" target="_blank" rel="noopener">AMAPED</a></div></div>';
+  return'<aside class="external-schools"><span class="kicker">Ha egyik időpont sem fér bele</span><b>Nézzetek körül a másik két bécsi magyar iskolánál is</b><p>Az AMAPED és az Ungarisch Lernen aktuális kínálata külön változhat. Itt ezért nem találunk ki programot vagy időpontot, hanem közvetlenül az intézmények saját oldalára mutatunk.</p><div class="wizard-nav"><a class="btn ghost" href="https://ungarischlernen.at" target="_blank" rel="noopener">Ungarisch Lernen</a><a class="btn ghost" href="https://amaped.at" target="_blank" rel="noopener">AMAPED</a></div></aside>';
 }
 function showResults(){
   progress(4);
@@ -91,23 +96,18 @@ function showResults(){
   var selected=[];
   if(exact.length)selected=exact.slice(0,3);
   else selected=alternatives.slice(0,3);
-  if(exact.length&&selected.length<3){
-    alternatives.forEach(function(p){if(selected.length<3&&selected.indexOf(p)===-1)selected.push(p)});
-  }
+  if(exact.length&&selected.length<3){alternatives.forEach(function(p){if(selected.length<3&&selected.indexOf(p)===-1)selected.push(p)})}
   var html='<div class="wizard-card"><span class="kicker">Személyre szabott ajánlás</span>';
   if(selected.length){
-    if(exact.length){
-      html+='<h3 style="margin-top:8px">Találtunk jó BMI-programot</h3><p>Az első helyen a pontos egyezéseket mutatjuk. Ha van még értelmes, életkorban megfelelő alternatíva, azt is mellétesszük, és jelezzük, miben kell kompromisszumot kötni.</p>';
-    }else{
-      html+='<h3 style="margin-top:8px">A legközelebbi BMI-ajánlatok</h3><p>Nincs minden szempontban pontos egyezés, de nem állunk meg itt. Az életkorhoz illő programok közül azt rangsoroljuk előre, amely legjobban követi a választott célt, majd a napot és a ritmust.</p>';
-    }
+    if(exact.length){html+='<h3>Van olyan BMI-program, amit jó szívvel ajánlanánk</h3><p>Az első kártya a legerősebb találat. Utána csak olyan alternatívákat mutatunk, amelyek életkorban továbbra is megfelelőek.</p>'}
+    else{html+='<h3>Ezt a BMI-programot néznénk meg elsőként</h3><p>Nincs minden szempontban pontos egyezés, ezért a célhoz legközelebb álló, életkorban megfelelő lehetőségeket rangsoroltuk.</p>'}
     html+='<div class="result-grid">';
-    selected.forEach(function(p,i){var label=isExact(p)?(i===0?'Legjobb pontos találat':'Pontos találat'):(interestEligible(p)?(i===0&&!exact.length?'Legjobb alternatíva':'Közeli BMI-alternatíva'):'További lehetőség');html+=card(p,label)});
+    selected.forEach(function(p,i){var label=i===0?(isExact(p)?'Első választás · pontos találat':'Első választás · legjobb alternatíva'):(isExact(p)?'Pontos találat':'Még szóba jöhet');html+=card(p,label,i===0)});
     html+='</div>'+externalSchools();
   }else{
-    html+='<h3 style="margin-top:8px">Ebben az életkorban nincs biztonsággal ajánlható programunk</h3><p>Az életkort nem lazítjuk fel, mert az szakmailag fontos feltétel. Ettől függetlenül a másik két bécsi magyar iskola aktuális kínálatát érdemes megnézni.</p>'+externalSchools();
+    html+='<h3>Ebben az életkorban nincs biztonsággal ajánlható programunk</h3><p>Az életkort nem lazítjuk fel, mert az szakmailag fontos feltétel. Ettől függetlenül a másik két bécsi magyar iskola aktuális kínálatát érdemes megnézni.</p>'+externalSchools();
   }
-  html+='<div class="wizard-nav"><button class="btn ghost" type="button" data-back-result>Vissza az utolsó kérdéshez</button><button class="btn ghost" type="button" data-restart>Újrakezdem</button><a class="btn ghost" href="foglalkozasok.html">Mind a 22 program</a></div></div>';
+  html+='<div class="wizard-nav result-actions"><button class="btn ghost" type="button" data-back-result>Vissza az utolsó kérdéshez</button><button class="btn ghost" type="button" data-restart>Újrakezdem</button><a class="btn ghost" href="foglalkozasok.html">Mind a 22 program</a></div></div>';
   root.innerHTML=html;
   root.querySelector('[data-back-result]').addEventListener('click',function(){idx=3;renderStep()});
   root.querySelector('[data-restart]').addEventListener('click',function(){state={};idx=0;renderAge()});
