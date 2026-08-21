@@ -22,6 +22,39 @@ function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp
 function ageEligible(p){if(!Number.isInteger(state.age))return false;if(p.ageRangeComposite&&p.id==='vilagfa')return(state.age>=6&&state.age<=14)||state.age>=18;return state.age>=p.minAge&&state.age<=p.maxAge}
 function feeForAge(p){if(p.ageRangeComposite&&p.id==='vilagfa'&&state.age>=18)return'';return p.fee||''}
 function dayEligible(p){if(state.day==='mindegy'||p.weekday==='rugalmas')return true;return(p.weekdays||[p.weekday]).indexOf(state.day)!==-1}
+function paceEligible(p){return state.pace==='mindegy'||p.pace===state.pace}
+function interestEligible(p){return p.interests.indexOf(state.interest)!==-1}
+function isExact(p){return ageEligible(p)&&interestEligible(p)&&dayEligible(p)&&paceEligible(p)}
+function scoreProgram(p){
+  if(!ageEligible(p))return-1;
+  var score=0;
+  if(interestEligible(p))score+=60;
+  if(dayEligible(p))score+=25;
+  if(paceEligible(p))score+=15;
+  if(p.provider==='BMI')score+=2;
+  return score;
+}
+function recommendationTier(p){
+  if(isExact(p))return'exact';
+  if(interestEligible(p))return'goal';
+  return'nearby';
+}
+function deviationText(p){
+  var d=[];
+  if(!interestEligible(p))d.push('más témájú, mint amit elsőként választottál');
+  if(!dayEligible(p)&&state.day!=='mindegy')d.push('nem a választott napon van');
+  if(!paceEligible(p)&&state.pace!=='mindegy')d.push('más rendszerességű');
+  if(!d.length)return'Pontosan illeszkedik a megadott szempontokhoz.';
+  return'A kompromisszum: '+d.join(', ')+'.';
+}
+function resultReason(p){
+  if(isExact(p))return'Életkorban, érdeklődésben, napban és ritmusban is passzol.';
+  var good=['életkorban megfelelő'];
+  if(interestEligible(p))good.push('a választott célhoz/témához illik');
+  if(dayEligible(p))good.push(p.weekday==='rugalmas'?'rugalmasan egyeztethető':'a választott napon is elérhető');
+  if(paceEligible(p))good.push('a kívánt ritmushoz illik');
+  return good.join(', ')+'. '+deviationText(p);
+}
 function progress(n){document.querySelectorAll('#prog i').forEach(function(b,i){b.classList.toggle('on',i<=n)})}
 function renderAge(){
   progress(0);
@@ -39,24 +72,40 @@ function renderChoices(title,text,options,key){
 }
 function renderStep(){
   if(idx===0){renderAge();return}
-  if(idx===1){renderChoices('Mi érdekli leginkább?','Válaszd azt is nyugodtan, amire lehet, hogy most nincs BMI-program. Ha nincs pontos találat, mutatunk más bécsi magyar lehetőségeket.',cfg.interests,'interest');return}
-  if(idx===2){renderChoices('Melyik nap lenne a legjobb?','Válaszd ki a konkrét napot. A rugalmasan egyeztethető programok bármely napválasztásnál szóba jöhetnek.',cfg.days,'day');return}
-  renderChoices('Milyen ritmus fér bele?','A saját igényetek szerint válassz. A rendszer csak a végén dönti el, van-e pontos egyezés.',cfg.pace,'pace');
+  if(idx===1){renderChoices('Mi a legfontosabb cél vagy érdeklődés?','Ezt súlyozzuk a legerősebben. Ha nincs minden feltételben pontos egyezés, akkor is olyan BMI-programot keresünk, amely ehhez a célhoz a lehető legközelebb áll.',cfg.interests,'interest');return}
+  if(idx===2){renderChoices('Melyik nap lenne a legjobb?','Ez preferencia, nem kizáró ok. Ha egy nagyon jó program másik napon van, alternatívaként megmutatjuk, és pontosan jelezzük az eltérést.',cfg.days,'day');return}
+  renderChoices('Milyen ritmus fér bele?','Ezt is preferenciaként kezeljük. A cél az, hogy mindig a legjobb életkorban megfelelő BMI-lehetőséget kapd, ne egy üres találati oldalt.',cfg.pace,'pace');
 }
-function isExact(p){return ageEligible(p)&&p.interests.indexOf(state.interest)!==-1&&dayEligible(p)&&(state.pace==='mindegy'||p.pace===state.pace)}
-function resultReason(p){var parts=['életkorban megfelelő','a választott témához illik'];if(state.day!=='mindegy')parts.push(p.weekday==='rugalmas'?'rugalmasan egyeztethető':'a választott napon van');if(state.pace!=='mindegy')parts.push('a kívánt rendszerességű');return parts.join(', ')+'.'}
 function meta(label,value){return value?'<div style="margin:5px 0;color:#425b69;font-size:.92rem"><strong>'+esc(label)+':</strong> '+esc(value)+'</div>':''}
+function card(p,label){
+  return'<article class="result-card" data-recommendation="'+recommendationTier(p)+'"><span class="kicker">'+esc(label)+'</span><b style="margin-top:6px">'+esc(p.name)+'</b><span class="result-when">'+esc(p.when)+'</span><p>'+esc(p.why)+'</p>'+meta('Helyszín',p.location)+meta('Oktató',p.teacher)+meta('Hozzájárulási díj',feeForAge(p))+meta('Első alkalom',p.firstDate)+'<p class="result-reason"><strong>Miért ezt?</strong> '+esc(resultReason(p))+'</p><p><a class="btn" href="'+esc(p.url)+'" target="_blank" rel="noopener">Regisztráció / jelentkezés</a></p></article>';
+}
+function externalSchools(){
+  return'<div class="result-card" style="margin-top:14px"><span class="kicker">Ha más nap vagy más forma kell</span><b style="margin-top:6px">Nézzetek körül a másik két bécsi magyar iskolánál is</b><p>Az AMAPED és az Ungarisch Lernen aktuális kínálata külön változhat. Itt ezért nem találunk ki programot vagy időpontot, hanem közvetlenül az intézmények saját oldalára mutatunk.</p><div class="wizard-nav" style="justify-content:flex-start"><a class="btn ghost" href="https://ungarischlernen.at" target="_blank" rel="noopener">Ungarisch Lernen</a><a class="btn ghost" href="https://amaped.at" target="_blank" rel="noopener">AMAPED</a></div></div>';
+}
 function showResults(){
   progress(4);
-  var exact=cfg.programs.filter(isExact),top=exact.slice(0,3);
+  var eligible=cfg.programs.filter(ageEligible);
+  var exact=eligible.filter(isExact).sort(function(a,b){return scoreProgram(b)-scoreProgram(a)||a.name.localeCompare(b.name,'hu')});
+  var alternatives=eligible.filter(function(p){return!isExact(p)}).sort(function(a,b){return scoreProgram(b)-scoreProgram(a)||a.name.localeCompare(b.name,'hu')});
+  var selected=[];
+  if(exact.length)selected=exact.slice(0,3);
+  else selected=alternatives.slice(0,3);
+  if(exact.length&&selected.length<3){
+    alternatives.forEach(function(p){if(selected.length<3&&selected.indexOf(p)===-1)selected.push(p)});
+  }
   var html='<div class="wizard-card"><span class="kicker">Személyre szabott ajánlás</span>';
-  if(top.length){
-    var heading=exact.length===1?'1 pontos találat':exact.length<=3?exact.length+' pontos találat':exact.length+' pontos találat – a legjobb 3 ajánlás';
-    html+='<h3 style="margin-top:8px">'+heading+'</h3><p>A rendszer a <strong>'+esc(state.age)+' éves</strong> életkort, az érdeklődést, a napot és a rendszerességet együtt vette figyelembe.</p><div class="result-grid">';
-    top.forEach(function(p){html+='<article class="result-card"><b>'+esc(p.name)+'</b><span class="result-when">'+esc(p.when)+'</span><p>'+esc(p.why)+'</p>'+meta('Helyszín',p.location)+meta('Oktató',p.teacher)+meta('Hozzájárulási díj',feeForAge(p))+meta('Első alkalom',p.firstDate)+'<p class="result-reason"><strong>Miért ezt?</strong> '+esc(resultReason(p))+'</p><p><a class="btn" href="'+esc(p.url)+'" target="_blank" rel="noopener">Regisztráció / jelentkezés</a></p></article>'});
-    html+='</div>';
+  if(selected.length){
+    if(exact.length){
+      html+='<h3 style="margin-top:8px">Találtunk jó BMI-programot</h3><p>Az első helyen a pontos egyezéseket mutatjuk. Ha van még értelmes, életkorban megfelelő alternatíva, azt is mellétesszük, és jelezzük, miben kell kompromisszumot kötni.</p>';
+    }else{
+      html+='<h3 style="margin-top:8px">A legközelebbi BMI-ajánlatok</h3><p>Nincs minden szempontban pontos egyezés, de nem állunk meg itt. Az életkorhoz illő programok közül azt rangsoroljuk előre, amely legjobban követi a választott célt, majd a napot és a ritmust.</p>';
+    }
+    html+='<div class="result-grid">';
+    selected.forEach(function(p,i){var label=isExact(p)?(i===0?'Legjobb pontos találat':'Pontos találat'):(interestEligible(p)?(i===0&&!exact.length?'Legjobb alternatíva':'Közeli BMI-alternatíva'):'További lehetőség');html+=card(p,label)});
+    html+='</div>'+externalSchools();
   }else{
-    html+='<h3 style="margin-top:8px">Nincs pontos BMI-találat</h3><p>A megadott életkorhoz, érdeklődéshez, időponthoz és rendszerességhez jelenleg nincs olyan fix 2026/27-es BMI-program, amely mind a négy feltételnek megfelel.</p><div class="result-card"><b>Más bécsi magyar lehetőségek</b><p>Érdemes megnézni a másik két bécsi hétvégi magyar iskola aktuális kínálatát is.</p><div class="wizard-nav" style="justify-content:flex-start"><a class="btn" href="https://ungarischlernen.at" target="_blank" rel="noopener">Ungarisch Lernen</a><a class="btn ghost" href="https://amaped.at" target="_blank" rel="noopener">AMAPED</a></div></div>';
+    html+='<h3 style="margin-top:8px">Ebben az életkorban nincs biztonsággal ajánlható programunk</h3><p>Az életkort nem lazítjuk fel, mert az szakmailag fontos feltétel. Ettől függetlenül a másik két bécsi magyar iskola aktuális kínálatát érdemes megnézni.</p>'+externalSchools();
   }
   html+='<div class="wizard-nav"><button class="btn ghost" type="button" data-back-result>Vissza az utolsó kérdéshez</button><button class="btn ghost" type="button" data-restart>Újrakezdem</button><a class="btn ghost" href="foglalkozasok.html">Mind a 22 program</a></div></div>';
   root.innerHTML=html;
