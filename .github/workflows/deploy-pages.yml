@@ -177,7 +177,7 @@ jobs:
           grep -Fq 'https://amaped.at' <<<"${app}"
 
           faq="$(fetch /gyik.html)"
-          grep -Fq 'Az életkor kemény feltétel' <<<"${faq}"
+          grep -Fq 'életkor kemény feltétel' <<<"${faq}"
           grep -Fq 'legközelebbi BMI-alternatívákat' <<<"${faq}"
 
           version="$(fetch /version.json)"
