@@ -57,7 +57,9 @@ jobs:
           grep -Fq "A kompromisszum:" app.js
           grep -Fq "https://ungarischlernen.at" app.js
           grep -Fq "https://amaped.at" app.js
-          grep -Fq "Expected 8400 combinations" scripts/validate-matching.mjs
+          grep -Fq "Expected 10500 combinations" scripts/validate-matching.mjs
+          grep -Fq 'name:"Sakk és Gondolkodásfejlesztés | Schwedenplatz"' data.js
+          grep -Fq 'when:"Havonta 1 alkalommal, szombatonként 13:00–15:00"' data.js
 
   build:
     needs: validate
@@ -85,13 +87,13 @@ jobs:
           BMIPROGRAM_RELEASE=${release_id}
           GIT_SHA=${GITHUB_SHA}
           SCHOOL_YEAR=2026/2027
-          PROGRAM_COUNT=22
+          PROGRAM_COUNT=23
           SOURCE_POLICY=canonical-current-2026-27-only
           RECOMMENDER=ranked-exact-first-age-hard
           BUILT_AT=${built_at}
           EOF
           cat > _site/version.json <<EOF
-          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":22,"sourcePolicy":"canonical-current-2026-27-only","recommender":"ranked-exact-first-age-hard","builtAt":"${built_at}"}
+          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":23,"sourcePolicy":"canonical-current-2026-27-only","recommender":"ranked-exact-first-age-hard","builtAt":"${built_at}"}
           EOF
           test -f _site/index.html
           test -f _site/data.js
@@ -102,10 +104,12 @@ jobs:
           test -f _site/.nojekyll
           test "$(cat _site/CNAME)" = "programvalaszto.magyariskola.at"
           grep -Fq "GIT_SHA=${GITHUB_SHA}" _site/release.txt
-          grep -Fq 'PROGRAM_COUNT=22' _site/release.txt
+          grep -Fq 'PROGRAM_COUNT=23' _site/release.txt
           grep -Fq 'RECOMMENDER=ranked-exact-first-age-hard' _site/release.txt
           grep -Fq 'src="logo.png"' _site/index.html
           grep -Fq 'href="favicon_.png"' _site/index.html
+          grep -Fq 'Sakk és Gondolkodásfejlesztés | Schwedenplatz' _site/data.js
+          grep -Fq 'https://www.magyariskola.at/event-details/sakk-2026' _site/data.js
           grep -Fq 'https://ungarischlernen.at' _site/app.js
           grep -Fq 'https://amaped.at' _site/app.js
       - name: Upload Pages artifact
@@ -152,13 +156,13 @@ jobs:
             sleep 10
           done
           grep -Fq "GIT_SHA=${expected_sha}" <<<"${release}"
-          grep -Fq 'PROGRAM_COUNT=22' <<<"${release}"
+          grep -Fq 'PROGRAM_COUNT=23' <<<"${release}"
           grep -Fq 'SOURCE_POLICY=canonical-current-2026-27-only' <<<"${release}"
           grep -Fq 'RECOMMENDER=ranked-exact-first-age-hard' <<<"${release}"
 
           home="$(fetch /)"
           grep -Fq 'Foglalkozás-kereső 2026/27' <<<"${home}"
-          grep -Fq '22</b><span>foglalkozás' <<<"${home}"
+          grep -Fq '23</b><span>foglalkozás' <<<"${home}"
           grep -Fq 'legközelebbi, életkorban megfelelő BMI-ajánlatokat' <<<"${home}"
           grep -Fq 'src="logo.png"' <<<"${home}"
           grep -Fq 'href="favicon_.png"' <<<"${home}"
@@ -166,6 +170,9 @@ jobs:
           data="$(fetch /data.js)"
           grep -Fq 'schoolYear:"2026/2027"' <<<"${data}"
           grep -Fq 'excludePriorYearWix:true' <<<"${data}"
+          grep -Fq 'name:"Sakk és Gondolkodásfejlesztés | Schwedenplatz"' <<<"${data}"
+          grep -Fq 'firstDate:"2026. szeptember 26."' <<<"${data}"
+          grep -Fq 'registrationDeadline:"2026. szeptember 25."' <<<"${data}"
 
           app="$(fetch /app.js)"
           grep -Fq "{id:'hetfo',label:'Hétfő'}" <<<"${app}"
@@ -173,16 +180,18 @@ jobs:
           grep -Fq "if(!ageEligible(p))return-1" <<<"${app}"
           grep -Fq "if(interestEligible(p))score+=60" <<<"${app}"
           grep -Fq 'A kompromisszum:' <<<"${app}"
+          grep -Fq 'Mind a 23 program' <<<"${app}"
           grep -Fq 'https://ungarischlernen.at' <<<"${app}"
           grep -Fq 'https://amaped.at' <<<"${app}"
 
           faq="$(fetch /gyik.html)"
           grep -Fq 'életkor kemény feltétel' <<<"${faq}"
           grep -Fq 'legközelebbi BMI-alternatívákat' <<<"${faq}"
+          grep -Fq 'Sakk és Gondolkodásfejlesztés' <<<"${faq}"
 
           version="$(fetch /version.json)"
           grep -Fq "\"gitSha\":\"${expected_sha}\"" <<<"${version}"
-          grep -Fq '"programCount":22' <<<"${version}"
+          grep -Fq '"programCount":23' <<<"${version}"
           grep -Fq '"recommender":"ranked-exact-first-age-hard"' <<<"${version}"
 
           for path in / /foglalkozasok.html /korosztalyok.html /gyik.html /data.js /app.js /catalog.js /logo.png /favicon_.png /llms.txt /llms-full.txt /robots.txt /sitemap.xml /release.txt /version.json; do
