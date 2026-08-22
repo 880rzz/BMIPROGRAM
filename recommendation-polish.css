@@ -1,4 +1,8 @@
 /* BMIPROGRAM — finder-only monochrome refinements. Global design lives in ui-20260821.css. */
+/* Editorial emphasis: one tonal accent per headline, selective bold in supporting copy. */
+.hero h1 .headline-accent,.section-head h2 .headline-accent{color:#6e6e73!important;font-weight:520!important}
+main p strong{color:#1d1d1f!important;font-weight:650!important}
+.hero .lead strong,.section-head p strong{letter-spacing:-.01em}
 .step-trail{display:flex;flex-wrap:wrap;gap:7px 14px;margin:0 0 24px;padding-bottom:15px;border-bottom:1px solid #e8e8ed;color:#86868b;font-size:.76rem;letter-spacing:0}
 .step-trail span{position:relative;white-space:nowrap;padding:4px 0;background:transparent;border:0;border-radius:0}
 .step-trail span:not(:last-child)::after{content:'→';position:absolute;left:calc(100% + 5px);color:#b8b8bd}
