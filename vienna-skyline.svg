@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="t d">
+<title id="t">Bécs nevezetességeinek stilizált vektoros panorámája</title>
+<desc id="d">Schönbrunn, Riesenrad, Karlskirche, Stephansdom, Rathaus és Donauturm stilizált vonalrajza.</desc>
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b1f66"/><stop offset=".55" stop-color="#173f93"/><stop offset="1" stop-color="#6126a8"/></linearGradient>
+  <linearGradient id="glow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9ad8ff" stop-opacity=".9"/><stop offset="1" stop-color="#d9b3ff" stop-opacity=".25"/></linearGradient>
+  <filter id="soft"><feGaussianBlur stdDeviation="18"/></filter>
+</defs>
+<rect width="1600" height="900" fill="url(#sky)"/>
+<circle cx="1370" cy="320" r="220" fill="#b153ff" opacity=".13" filter="url(#soft)"/>
+<g fill="#fff" opacity=".65">
+  <circle cx="118" cy="118" r="2"/><circle cx="288" cy="180" r="2"/><circle cx="472" cy="90" r="2"/><circle cx="745" cy="160" r="2"/><circle cx="1010" cy="110" r="2"/><circle cx="1255" cy="150" r="2"/><circle cx="1490" cy="102" r="2"/>
+</g>
+<g fill="none" stroke="url(#glow)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity=".88">
+  <!-- Schönbrunn -->
+  <path d="M30 738H390M62 738V657H358V738M92 657V624H328V657M124 624V602H296V624M48 690h326M92 682h26m18 0h26m18 0h26m18 0h26m18 0h26m18 0h26"/>
+  <!-- Riesenrad -->
+  <circle cx="540" cy="630" r="112"/><circle cx="540" cy="630" r="9"/>
+  <path d="M540 518V742M428 630H652M462 552l156 156M618 552L462 708M500 525l80 210M580 525l-80 210M456 576l168 108M624 576L456 684"/>
+  <path d="M468 734l72-104 72 104M490 734h100"/>
+  <!-- Karlskirche -->
+  <path d="M690 738h260M730 738V614h50v124M860 738V614h50v124M785 738V610c0-70 70-70 70 0v128M765 610h110M792 564c22-52 56-52 78 0M817 516v-54M802 462h30"/>
+  <!-- Stephansdom -->
+  <path d="M960 738h250M1005 738V520h160v218M1068 520V285l18-72 18 72v235M1040 520l46-88 46 88M1005 590h160M1018 560l18-28 18 28 18-28 18 28 18-28 18 28 18-28 18 28"/>
+  <path d="M1086 213v-72m-12 24h24"/>
+  <!-- Rathaus -->
+  <path d="M1218 738h230M1242 738V570h182v168M1302 570V404h62v166M1320 404V300l13-56 13 56v104M1268 570V518h28v52M1370 570V518h28v52M1322 466h22M1322 498h22M1322 530h22"/>
+  <!-- Donauturm -->
+  <path d="M1505 738V366M1487 366h36M1494 350h22M1497 334h16M1505 334V190M1500 190h10M1505 190V118"/>
+</g>
+<path d="M0 760C220 720 390 790 590 748s370 20 560-8 300 18 450-18v178H0Z" fill="#08194d" opacity=".88"/>
+<g fill="#63d7ff" opacity=".9"><path d="M190 230c22-30 55-16 52 8-3 21-26 31-43 20-14-9-17-18-9-28Z"/><path d="M202 260c-14 12-24 31-18 45m18-45c17 10 28 25 28 43"/></g>
+<g fill="#ff78d4" opacity=".88"><path d="M1330 680c22-30 55-16 52 8-3 21-26 31-43 20-14-9-17-18-9-28Z"/></g>
+</svg>
