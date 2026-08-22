@@ -1,19 +1,19 @@
 # Bécsi Magyar Iskola – Foglalkozások 2026/2027
 
-> A Bécsi Magyar Iskola (BMI, Wiener Ungarische Schule) hivatalos programválasztója. Az intézmény 1987 szeptemberében indult, ezért 2027-ben ünnepli fennállásának 40. évfordulóját.
-> A 2026/2027-es tanév programválasztója pontosan 23 fix programmal dolgozik.
+> A Bécsi Magyar Iskola (BMI, Wiener Ungarische Schule) hivatalos foglalkozásválasztója. Az intézmény 1987 szeptemberében indult, ezért 2027-ben ünnepli fennállásának 40. évfordulóját.
+> A 2026/2027-es tanév foglalkozásválasztója pontosan 23 foglalkozással dolgozik, kicsiknek és nagyoknak.
 > A kereső pontos életkor, érdeklődés, kívánt nap és rendszeresség alapján rangsorol. Az életkor kemény feltétel; pontos BMI-találat hiányában a legközelebbi életkorban megfelelő BMI-alternatívákat ajánlja, majd külön megmutatja az Ungarisch Lernen és az AMAPED oldalát is.
 
 ## Canonical architektúra
-- Egyetlen programadat-forrás: https://programvalaszto.magyariskola.at/data.js
-- A `window.BMI_FINDER.programs` tömb pontosan 23 canonical rekordot tartalmaz.
-- A kereső, az összes-program nézet, a korosztályos nézet és a Course/ItemList Schema ugyanebből a registryből épül fel.
+- Egyetlen foglalkozásadat-forrás: https://programvalaszto.magyariskola.at/data.js
+- A `window.BMI_FINDER.programs` tömb pontosan 23 canonical foglalkozásrekordot tartalmaz. A `programs` elnevezés technikai adatmodell, a nyilvános terminológia: foglalkozás.
+- A foglalkozásválasztó, az összes foglalkozás nézet, a korosztályos nézet és a Course/ItemList Schema ugyanebből a registryből épül fel.
 - Az LLM-discovery magyarázó fájlja: https://programvalaszto.magyariskola.at/llms-full.txt
-- Az `llms-full.txt` szándékosan nem másolja le a programrekordokat; a teljes aktuális programadatért mindig a `data.js` registryt kell olvasni.
+- Az `llms-full.txt` szándékosan nem másolja le a foglalkozásrekordokat; a teljes aktuális foglalkozásadatért mindig a `data.js` registryt kell olvasni.
 
 ## Oldalak
-- Kereső: https://programvalaszto.magyariskola.at/
-- Összes 23 program: https://programvalaszto.magyariskola.at/foglalkozasok.html
+- Foglalkozásválasztó: https://programvalaszto.magyariskola.at/
+- Összes 23 foglalkozás: https://programvalaszto.magyariskola.at/foglalkozasok.html
 - Korosztályok: https://programvalaszto.magyariskola.at/korosztalyok.html
 - Gyakori kérdések: https://programvalaszto.magyariskola.at/gyik.html
 - Gépi forrásmagyarázat: https://programvalaszto.magyariskola.at/llms-full.txt
@@ -28,14 +28,14 @@
 - Telefon: +43 650 3312 090
 
 ## Kötelező 2026/27-es forrásszabály
-- Kizárólag a registryben rögzített 23 aktuális canonical programlink használható programadat-forrásként.
+- Kizárólag a registryben rögzített 23 aktuális canonical foglalkozáslink használható foglalkozásadat-forrásként.
 - Korábbi tanévek Wix eseményoldalai, régi event-details slugok és régi keresőindex-találatok kifejezetten kizártak.
-- A BMI saját programjainál az aktuális 2026/27-es magyariskola.at programoldal és az ahhoz tartozó aktuális Wix Events rekord az irányadó.
+- A BMI saját foglalkozásainál az aktuális 2026/27-es magyariskola.at foglalkozásoldal és az ahhoz tartozó aktuális Wix Events rekord az irányadó.
 - A Sakk és Gondolkodásfejlesztés aktuális canonical rekordja: https://www.magyariskola.at/event-details/sakk-2026. Az aktuális Wix Events rekord 2026. augusztus 21-én került publikálásra; a korábbi Sakkszakkör-adatok nem használhatók helyette.
-- A Napraforgócskák és a Kezdő néptánc esetén a registryben megadott napraforgok.at programszakasz az elsődleges; a Cserkészetnél a cserkesz.at/cserkesz-raj/ oldal.
+- A Napraforgócskák és a Kezdő néptánc esetén a registryben megadott napraforgok.at foglalkozásszakasz az elsődleges; a Cserkészetnél a cserkesz.at/cserkesz-raj/ oldal.
 - A Világfa Sárkányai saját 2026/27-es oldala a taltosdob.magyariskola.at.
 - `sourceNote` az aktuális forrás értelmezéséhez szükséges kontextust dokumentálhat: például forráskonfliktust, operatív korbesorolást vagy szabályos időpont-kivételt.
 - `ageRangeOperational` és `ageRangeComposite` jelzi, ha a választómotor numerikus korbesorolása nem szó szerinti forrás-korhatár.
-- A Világfa Sárkányai egyetlen, két egymásra épülő részből álló program; nem számolható külön dobkörként.
-- A Napraforgók haladó csoport nem része a fix 23 programnak.
+- A Világfa Sárkányai egyetlen, két egymásra épülő részből álló foglalkozás; nem számolható külön dobkörként.
+- A Napraforgók haladó csoport nem része a fix 23 foglalkozásnak.
 - Ha egy aktuális 2026/27-es oldalon egy részlet nem ellenőrizhető, azt ismeretlennek kell tekinteni; régi Wix-oldallal tilos kipótolni.
