@@ -34,6 +34,11 @@ assert(ui.includes('white-space:nowrap!important'),'Mobile hero phrase orphan pr
 assert(ui.includes('@media(prefers-reduced-motion:reduce)'),'Reduced-motion accessibility contract is missing.');
 assert(ui.includes(':focus-visible'),'Visible keyboard focus contract is missing.');
 
+// Finder editorial spacing: desktop recommendation columns need real whitespace, not touching text columns.
+assert(finder.includes('gap:0 clamp(40px,4vw,68px)!important'),'Desktop recommendation columns must retain responsive editorial spacing.');
+assert(finder.includes('min-width:0'),'Recommendation cards must prevent content overflow into adjacent columns.');
+assert(finder.includes('@media(max-width:1120px){.result-grid{gap:0!important}}'),'Single-column/tablet layout must remove unnecessary column gap.');
+
 // Explicit anti-AI-look bans across active visual layers.
 for(const bad of ['--summer-','--game-','summerButterfly','linear-gradient(','radial-gradient(','blur(20px)','border-radius:999px','translateY(-2px)','translateY(-1px)','#f59d8b','#f7c27b','#8fbfa8','#e2b84a']){
   assert(!ui.includes(bad),`Generic AI/retired pattern found in global UI: ${bad}`);
