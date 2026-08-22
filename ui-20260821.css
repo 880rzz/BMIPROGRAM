@@ -70,10 +70,10 @@ body{font-size:17px;line-height:1.52;letter-spacing:-.018em;background:linear-gr
   .drawer{background:#27376f!important}
   .drawer a,.drawer a[aria-current="page"]{background:transparent!important;color:#fff!important}
   .drawer a[aria-current="page"]{color:#ffd84d!important}
-  .hero{padding:54px 0 50px!important;background-image:linear-gradient(180deg,rgba(8,23,72,.88) 0%,rgba(10,28,86,.80) 42%,rgba(24,32,101,.58) 100%),url('vienna-hero.webp')!important;background-size:auto 100%!important;background-position:88% center!important}
+  .hero{padding:54px 0 50px!important;background-color:#10235d!important;background-image:linear-gradient(180deg,rgba(8,23,72,.60) 0%,rgba(10,28,86,.48) 44%,rgba(24,32,101,.26) 100%),url('vienna-hero.webp')!important;background-size:auto 82%!important;background-repeat:no-repeat!important;background-position:100% 76%!important}
   .eyebrow{font-size:.85rem!important}
-  .hero h1{font-size:clamp(2.05rem,9.6vw,3rem)!important;line-height:1.04!important;letter-spacing:-.05em!important;margin:26px 0 38px!important}
-  .hero .lead{font-size:1rem!important;line-height:1.75!important;max-width:none!important}
+  .hero h1{font-size:clamp(2.05rem,9.6vw,3rem)!important;line-height:1.04!important;letter-spacing:-.05em!important;margin:26px 0 38px!important;text-shadow:0 5px 24px rgba(5,12,42,.34)!important}
+  .hero .lead{font-size:1rem!important;line-height:1.75!important;max-width:none!important;text-shadow:0 2px 12px rgba(5,12,42,.42)!important}
   .hero-actions{margin-top:32px!important;gap:12px!important}.hero-actions .btn{width:100%!important}
   .stats{grid-template-columns:1fr!important;margin-top:42px!important;gap:8px!important}
   .stat{padding:6px 0!important}
