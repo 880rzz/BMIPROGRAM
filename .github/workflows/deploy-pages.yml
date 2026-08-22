@@ -80,6 +80,7 @@ jobs:
           grep -Fq 'when:"Havonta 1 alkalommal, szombatonként 13:00–15:00"' data.js
           grep -Fq 'schoolYear:"2026/2027"' data.js
           grep -Fq 'excludePriorYearWix:true' data.js
+
           grep -Fq 'BMIPROGRAM — neutral structural foundation' styles.css
           grep -Fq 'BMIPROGRAM — human editorial monochrome design system' ui-20260821.css
           grep -Fq 'finder-only monochrome refinements' recommendation-polish.css
@@ -88,7 +89,23 @@ jobs:
           ! grep -Fq 'linear-gradient(' ui-20260821.css
           ! grep -Fq 'radial-gradient(' ui-20260821.css
           ! grep -Fq 'border-radius:999px' ui-20260821.css
+          ! grep -Fq 'border-radius:999px' styles.css
           ! grep -Fq 'blur(20px)' ui-20260821.css
+
+          for html in index.html foglalkozasok.html korosztalyok.html gyik.html; do
+            grep -Fq '<meta name="theme-color" content="#ffffff">' "$html"
+            grep -Fq 'styles.css?v=human-editorial-v2' "$html"
+            grep -Fq 'ui-20260821.css?v=human-editorial-v2' "$html"
+            ! grep -Eq '[[:space:]]style=["'"']' "$html"
+          done
+          grep -Fq 'recommendation-polish.css?v=human-editorial-v2' index.html
+          ! grep -Fq 'vienna-skyline' index.html
+          ! grep -Fq '🦋' index.html
+          ! grep -Fq 'stroke="#ffcf5c"' index.html
+          ! grep -Fq 'class="em"' index.html
+          grep -Fq 'class="faq-contact"' gyik.html
+          grep -Fq 'catalog.js?v=20260822-2' foglalkozasok.html
+          grep -Fq 'catalog.js?v=20260822-2' korosztalyok.html
           echo 'PASS: release-critical hard contracts are intact.'
 
   build:
@@ -119,9 +136,7 @@ jobs:
             sed -E -i "s#styles\.css\?v=[^\"']+#styles.css?v=${short_sha}#g" "$html"
             sed -E -i "s#ui-20260821\.css\?v=[^\"']+#ui-20260821.css?v=${short_sha}#g" "$html"
             sed -E -i "s#recommendation-polish\.css\?v=[^\"']+#recommendation-polish.css?v=${short_sha}#g" "$html"
-            sed -E -i 's|<meta name="theme-color" content="#[0-9A-Fa-f]{6}">|<meta name="theme-color" content="#ffffff">|g' "$html"
           done
-          sed -i '/preload.*vienna-skyline/d' _site/index.html
 
           cat > _site/release.txt <<EOF
           BMIPROGRAM_RELEASE=${release_id}
@@ -163,6 +178,12 @@ jobs:
           ! grep -Fq -- '--blue' _site/styles.css
           ! grep -Fq 'linear-gradient(' _site/ui-20260821.css
           ! grep -Fq 'border-radius:999px' _site/ui-20260821.css
+          ! grep -Fq 'border-radius:999px' _site/styles.css
+          ! grep -Fq 'vienna-skyline' _site/index.html
+          ! grep -Fq '🦋' _site/index.html
+          ! grep -Fq 'stroke="#ffcf5c"' _site/index.html
+          ! grep -Eq '[[:space:]]style=["'"']' _site/index.html
+          ! grep -Eq '[[:space:]]style=["'"']' _site/gyik.html
           grep -Fq 'Sakk és Gondolkodásfejlesztés | Schwedenplatz' _site/data.js
           grep -Fq 'https://www.magyariskola.at/event-details/sakk-2026' _site/data.js
           grep -Fq 'https://ungarischlernen.at' _site/app.js
@@ -228,15 +249,18 @@ jobs:
           grep -Fq "ui-20260821.css?v=${short_sha}" <<<"${home}"
           grep -Fq "recommendation-polish.css?v=${short_sha}" <<<"${home}"
           grep -Fq 'content="#ffffff"' <<<"${home}"
+          ! grep -Fq 'vienna-skyline' <<<"${home}"
+          ! grep -Fq '🦋' <<<"${home}"
+          ! grep -Fq 'stroke="#ffcf5c"' <<<"${home}"
 
           basecss="$(fetch /styles.css)"
           grep -Fq 'BMIPROGRAM — neutral structural foundation' <<<"${basecss}"
           ! grep -Fq -- '--blue' <<<"${basecss}"
+          ! grep -Fq 'border-radius:999px' <<<"${basecss}"
 
           ui="$(fetch /ui-20260821.css)"
           grep -Fq 'BMIPROGRAM — human editorial monochrome design system' <<<"${ui}"
           grep -Fq 'backdrop-filter:none!important' <<<"${ui}"
-          grep -Fq '.hero .vienna-skyline{display:none!important}' <<<"${ui}"
           ! grep -Fq -- '--summer-' <<<"${ui}"
           ! grep -Fq 'linear-gradient(' <<<"${ui}"
           ! grep -Fq 'border-radius:999px' <<<"${ui}"
