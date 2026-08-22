@@ -3,8 +3,8 @@
 .step-trail span{position:relative;white-space:nowrap;padding:4px 0;background:transparent;border:0;border-radius:0}
 .step-trail span:not(:last-child)::after{content:'→';position:absolute;left:calc(100% + 5px);color:#b8b8bd}
 .step-trail .current{color:#000;font-weight:600;border-bottom:2px solid #000}
-.result-grid{align-items:start;gap:0!important;border-top:1px solid #e8e8ed}
-.result-card{position:relative;padding:25px 0!important;border-radius:0!important;background:transparent!important;border:0!important;border-bottom:1px solid #e8e8ed!important;box-shadow:none!important}
+.result-grid{align-items:start;gap:0 clamp(40px,4vw,68px)!important;border-top:1px solid #e8e8ed}
+.result-card{position:relative;min-width:0;padding:25px 0!important;border-radius:0!important;background:transparent!important;border:0!important;border-bottom:1px solid #e8e8ed!important;box-shadow:none!important}
 .result-card-primary{border-color:#000!important;box-shadow:none!important;transform:none!important}
 .result-card-primary::before{display:none!important;content:none!important}
 .result-title{display:block;margin-top:7px;color:#000!important;font-size:1.16rem;font-weight:600;letter-spacing:-.02em}
@@ -27,5 +27,6 @@
 .footer-trust p{max-width:900px;margin:0 0 9px;font-size:.82rem;line-height:1.52;opacity:1}
 .footer-trust .official-note{font-size:.86rem}
 .footer-trust .creator-credit{margin-top:13px}
+@media(max-width:1120px){.result-grid{gap:0!important}}
 @media(max-width:720px){.step-trail{gap:5px 11px;margin-bottom:20px;font-size:.72rem;overflow:hidden}.step-trail span:not(:last-child)::after{left:calc(100% + 3px)}.result-card{padding:21px 0!important;border-radius:0!important}.result-reason{margin-top:14px;padding-top:13px;font-size:.94rem}.external-schools{margin-top:26px;padding:21px 0;border-radius:0}.external-schools .wizard-nav .btn,.result-actions .btn{flex:1 1 100%}.site-foot{padding-top:44px!important}.site-foot .foot-cols{gap:22px}.footer-trust{margin-top:28px;padding-top:18px}.footer-trust p{font-size:.78rem}}
 @media(prefers-reduced-motion:reduce){.result-card{transform:none!important}}
