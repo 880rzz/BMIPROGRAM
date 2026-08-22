@@ -2,16 +2,16 @@ import fs from 'node:fs';
 
 function read(path){return fs.readFileSync(path,'utf8')}
 function assert(ok,msg){if(!ok)throw new Error(msg)}
-function rule(css,selector){
+function ruleBodies(css,selector){
   const escaped=selector.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
-  const m=css.match(new RegExp(escaped+'\\s*\\{([^}]*)\\}','m'));
-  return m?m[1]:'';
+  const re=new RegExp(escaped+'\\s*\\{([^}]*)\\}','gm');
+  const bodies=[];
+  for(const m of css.matchAll(re))bodies.push(m[1]);
+  return bodies;
 }
 function hasProp(css,selector,prop,value){
-  const body=rule(css,selector);
-  if(!body)return false;
-  const compact=body.replace(/\s+/g,'');
-  return compact.includes(`${prop}:${value}`.replace(/\s+/g,''));
+  const expected=`${prop}:${value}`.replace(/\s+/g,'');
+  return ruleBodies(css,selector).some(body=>body.replace(/\s+/g,'').includes(expected));
 }
 
 const base=read('styles.css');
@@ -63,4 +63,4 @@ for(const {path,html} of pages){
 }
 assert(pages.find(x=>x.path==='index.html').html.includes('recommendation-polish.css'),'Homepage must load finder refinements.');
 
-console.log('PASS: human-editorial monochrome design, anti-AI-look constraints, native typography and accessibility contracts are consistent.');
+console.log('PASS: cascade-aware human-editorial design audit, anti-AI-look constraints, native typography and accessibility contracts are consistent.');
