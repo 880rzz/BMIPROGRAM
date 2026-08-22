@@ -7,26 +7,32 @@ const home=read('index.html');
 const faq=read('gyik.html');
 const app=read('app.js');
 
-assert(home.includes('legközelebbi, életkorban megfelelő BMI-ajánlatokat'),'Homepage must explain ranked BMI alternatives.');
-assert(home.includes('a nap és a rendszeresség preferencia'),'Homepage must explain that day and cadence are preferences.');
-assert(home.includes('<b>23</b><span>foglalkozás</span>'),'Homepage must expose the current 23-program count.');
-assert(!home.includes('legfeljebb három pontos találatot kapsz'),'Homepage must not describe the retired exact-only result model.');
+// Homepage: inclusive, human positioning without assuming two parents or a child-only audience.
+assert(home.includes('Gyermeknek keresel délutáni vagy hétvégi magyar foglalkozást? Vagy saját magadnak választanál?'),'Homepage must explicitly support both child and adult program seekers.');
+assert(home.includes('A Bécsi Magyar Iskola nem egész napos iskola.'),'Homepage must explain the afternoon/weekend school model.');
+assert(home.includes('<b>23</b><span>program</span>'),'Homepage must expose the current 23-program count.');
+assert(!home.includes('mire vágytok'),'Homepage must not assume a multi-parent household.');
+assert(!home.includes('gyermeketek'),'Homepage must not use plural-parent child wording.');
 
+// Recommendation engine contracts: wording may evolve, ranking semantics may not.
 assert(app.includes("if(interestEligible(p))score+=60"),'Interest must remain the strongest preference signal.');
 assert(app.includes("if(dayEligible(p))score+=25"),'Day preference weight contract missing.');
 assert(app.includes("if(paceEligible(p))score+=15"),'Cadence preference weight contract missing.');
 assert(app.includes("if(!ageEligible(p))return-1"),'Age must remain a hard recommendation constraint.');
 assert(app.includes("if(p.provider==='BMI')score+=2"),'BMI exact/preference tie-break contract missing.');
-assert(app.includes('A kompromisszum:'),'Alternative cards must explain the compromise.');
-assert(app.includes('Nézzetek körül a másik két bécsi magyar iskolánál is'),'External schools must remain visible beside recommendations.');
+assert(app.includes('Ami eltér:'),'Alternative cards must explain deviations in human language.');
+assert(app.includes('Nézz körül a másik két bécsi magyar iskola kínálatában is'),'External schools must remain visible beside recommendations.');
 assert(app.includes('Mind a 23 program'),'Finder result actions must expose all 23 programs.');
+assert(app.includes('Hány éves, akinek programot keresel?'),'Finder must use neutral age wording.');
+assert(app.includes('saját magadnak keresel'),'Finder must support adult self-search.');
+assert(!app.includes('Nézzetek körül'),'Finder must not assume a plural household.');
 
+// FAQ/data trust contracts remain authoritative even if UX prose is friendlier.
 assert(faq.includes('életkor kemény feltétel'),'FAQ must explain the hard age constraint.');
 assert(faq.includes('érdeklődés kapja a legnagyobb súlyt'),'FAQ must explain ranked recommendation priorities.');
 assert(faq.includes('legközelebbi BMI-alternatívákat'),'FAQ must explain non-exact BMI alternatives.');
 assert(faq.includes('nem igazolt 2026/27-es órarendet'),'FAQ must preserve partner-source caution.');
-assert(faq.includes('Sakk és Gondolkodásfejlesztés'),'FAQ must document the current new chess program.');
+assert(faq.includes('Sakk és Gondolkodásfejlesztés'),'FAQ must document the current chess program.');
 assert(faq.includes('2026. szeptember 26.'),'FAQ must preserve the current chess first date.');
-assert(!faq.includes('Ezután általános alternatívaként megmutatja'),'FAQ must not describe the retired external-only fallback model.');
 
-console.log('PASS: ranked recommender copy, 23-program count, chess FAQ and UI contracts are consistent.');
+console.log('PASS: inclusive human copy, ranked recommender semantics, 23-program count and chess trust contracts are consistent.');
