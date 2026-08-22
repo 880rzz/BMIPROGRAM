@@ -163,7 +163,9 @@ jobs:
 
           home="$(fetch /)"
           grep -Fq 'Programválasztó 2026/27' <<<"${home}"
-          grep -Fq '23</b><span>program' <<<"${home}"
+          grep -Fq 'Magyar foglalkozások' <<<"${home}"
+          grep -Fq 'kicsiknek és nagyoknak.' <<<"${home}"
+          grep -Fq '23</b><span>foglalkozás' <<<"${home}"
           grep -Fq 'Gyermeknek keresel délutáni vagy hétvégi magyar foglalkozást? Vagy saját magadnak választanál?' <<<"${home}"
           grep -Fq 'A Bécsi Magyar Iskola nem egész napos iskola.' <<<"${home}"
           grep -Fq 'src="logo.png"' <<<"${home}"
