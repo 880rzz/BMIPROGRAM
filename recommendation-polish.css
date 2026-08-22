@@ -47,5 +47,15 @@
   .site-foot .foot-cols{gap:22px}
   .footer-trust{margin-top:28px;padding-top:18px}
   .footer-trust p{font-size:.78rem}
+
+  /* Mobile hero continuity: keep the highlighted phrase together and let one background flow through the facts. */
+  .hero h1 .hl{display:inline-block;white-space:nowrap;font-size:.74em;letter-spacing:-.045em}
+  .hero h1 .hl svg{width:100%;height:auto}
+  .hero::after{display:none!important}
+  .stats{background:transparent!important}
+  .stat{background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;border-left:2px solid rgba(85,118,107,.34)!important}
+}
+@media(max-width:390px){
+  .hero h1 .hl{font-size:.70em}
 }
 @media(prefers-reduced-motion:reduce){.result-card-primary{transform:none}.result-reason::before{transition:none}}
