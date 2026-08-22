@@ -8,22 +8,22 @@ const base=read('styles.css');
 const ui=read('ui-20260821.css');
 const finder=read('recommendation-polish.css');
 const pages=['index.html','foglalkozasok.html','korosztalyok.html','gyik.html'].map(path=>({path,html:read(path)}));
+const home=pages.find(x=>x.path==='index.html').html;
 
-// Structural foundation must stay neutral and system-native.
+// Structural foundation must stay neutral, restrained and system-native.
 assert(base.includes('BMIPROGRAM — neutral structural foundation'),'Missing neutral structural foundation marker.');
 assert(base.includes('-apple-system')&&base.includes('BlinkMacSystemFont')&&base.includes('Helvetica Neue'),'Base typography stack is not system-native.');
-for(const bad of ['--blue','--sun','--summer-','--game-','linear-gradient(','radial-gradient(','#25607f','#173f56','#ffcf5c','#f59d8b','#8fbfa8']){
-  assert(!base.includes(bad),`Legacy/color token found in base CSS: ${bad}`);
+assert(base.includes('--radius:8px')&&base.includes('--radius-sm:6px'),'Base radius tokens must remain restrained.');
+for(const bad of ['--blue','--sun','--summer-','--game-','linear-gradient(','radial-gradient(','border-radius:999px','#25607f','#173f56','#ffcf5c','#f59d8b','#8fbfa8']){
+  assert(!base.includes(bad),`Legacy/AI-template token found in base CSS: ${bad}`);
 }
 
-// Human-editorial visual contract. Advisory only; release-critical visual rules are enforced again in build/smoke.
+// Human-editorial active visual layer.
 assert(ui.includes('BMIPROGRAM — human editorial monochrome design system'),'Missing human editorial design-system marker.');
 assert(ui.includes('-apple-system')&&ui.includes('BlinkMacSystemFont')&&ui.includes('SF Pro Display'),'Global typography stack is not system-native.');
-assert(ui.includes('--radius:8px')&&ui.includes('--radius-sm:6px'),'Restrained radius tokens are missing.');
+assert(ui.includes('--radius:8px')&&ui.includes('--radius-sm:6px'),'Restrained UI radius tokens are missing.');
 assert(/\.site-head\{[^}]*background:var\(--paper\)!important[^}]*backdrop-filter:none!important/s.test(ui),'Header must stay opaque and free of glassmorphism.');
 assert(/\.hero\{[^}]*background:var\(--paper\)!important/s.test(ui),'Hero must remain white.');
-assert(ui.includes('.hero .vienna-skyline{display:none!important}'),'Decorative skyline must remain disabled.');
-assert(ui.includes('.hero h1 .hl svg{display:none!important}'),'Legacy hero underline must remain disabled.');
 assert(/\.btn\{[^}]*border-radius:var\(--radius\)!important[^}]*background:var\(--black\)!important/s.test(ui),'Primary CTA must remain a restrained black rectangular control.');
 assert(/\.fchip\{[^}]*border-radius:var\(--radius-sm\)!important/s.test(ui),'Filter controls must avoid pill styling.');
 assert(ui.includes('.tiles>.tile{')&&ui.includes('border-radius:0!important'),'Content tiles must remain editorial rows.');
@@ -34,7 +34,7 @@ assert(ui.includes('white-space:nowrap!important'),'Mobile hero phrase orphan pr
 assert(ui.includes('@media(prefers-reduced-motion:reduce)'),'Reduced-motion accessibility contract is missing.');
 assert(ui.includes(':focus-visible'),'Visible keyboard focus contract is missing.');
 
-// Explicit anti-AI-look checks across active visual layers.
+// Explicit anti-AI-look bans across active visual layers.
 for(const bad of ['--summer-','--game-','summerButterfly','linear-gradient(','radial-gradient(','blur(20px)','border-radius:999px','translateY(-2px)','translateY(-1px)','#f59d8b','#f7c27b','#8fbfa8','#e2b84a']){
   assert(!ui.includes(bad),`Generic AI/retired pattern found in global UI: ${bad}`);
 }
@@ -43,16 +43,23 @@ for(const bad of ['linear-gradient(','radial-gradient(','blur(20px)','border-rad
 }
 assert(finder.includes('finder-only monochrome refinements'),'Missing finder refinement marker.');
 
-// Every public page must load the same versioned visual system.
+// Source markup must itself be editorial; retired playful elements may not merely be hidden by CSS.
+assert(!home.includes('vienna-skyline'),'Homepage must not contain retired Vienna skyline markup or preload.');
+assert(!home.includes('🦋'),'Homepage must not contain the retired butterfly decoration.');
+assert(!home.includes('stroke="#ffcf5c"'),'Homepage must not contain the retired yellow hero underline SVG.');
+assert(!home.includes('class="em"'),'Homepage content rows must not carry retired emoji decoration nodes.');
+
+// Every public page must load the same versioned system and avoid inline visual overrides.
 for(const {path,html} of pages){
+  assert(html.includes('<meta name="theme-color" content="#ffffff">'),`${path} must declare white browser chrome at source.`);
   assert(/href=["']styles\.css\?v=[^"']+["']/.test(html),`${path} must load versioned structural CSS.`);
   assert(/href=["']ui-20260821\.css\?v=[^"']+["']/.test(html),`${path} must load versioned human-editorial UI CSS.`);
-  assert(!html.includes('theme-color" content="#000000"'),`${path} must keep light browser chrome.`);
+  assert(!/\sstyle=["']/.test(html),`${path} must not use inline visual styling.`);
 }
-assert(pages.find(x=>x.path==='index.html').html.includes('recommendation-polish.css'),'Homepage must load finder refinements.');
+assert(home.includes('recommendation-polish.css'),'Homepage must load finder refinements.');
 
 if(warnings){
   console.warn(`DESIGN-AUDIT: ${warnings} advisory warning(s). Release-critical visual contracts remain enforced by build/smoke.`);
 }else{
-  console.log('PASS: human-editorial design advisory audit is clean.');
+  console.log('PASS: human-editorial source markup, design system and anti-AI-look advisory audit are clean.');
 }
