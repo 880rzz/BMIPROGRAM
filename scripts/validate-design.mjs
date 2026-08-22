@@ -3,9 +3,19 @@ import fs from 'node:fs';
 function read(path){return fs.readFileSync(path,'utf8')}
 function assert(ok,msg){if(!ok)throw new Error(msg)}
 
+const base=read('styles.css');
 const ui=read('ui-20260821.css');
 const finder=read('recommendation-polish.css');
 const pages=['index.html','foglalkozasok.html','korosztalyok.html','gyik.html'].map(path=>({path,html:read(path)}));
+const appleStack='font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue",Helvetica,Arial,sans-serif';
+
+// The base layer must be structural and neutral. It may never become a second visual theme.
+assert(base.includes('BMIPROGRAM — neutral structural foundation'),'Base stylesheet must declare its neutral structural role.');
+assert(base.includes(appleStack),'Base stylesheet must use the same Apple-like system typography stack.');
+assert(base.includes('--ink:#1d1d1f')&&base.includes('--paper:#ffffff')&&base.includes('--soft:#f5f5f7'),'Neutral base tokens are missing.');
+for(const bad of ['--blue','--sun','--summer-','--game-','linear-gradient(','radial-gradient(','#25607f','#173f56','#ffcf5c','#f59d8b','#8fbfa8']){
+  assert(!base.includes(bad),`Legacy/color visual token must not occur in structural base CSS: ${bad}`);
+}
 
 // One global visual language: monochrome, typographic, quiet.
 assert(ui.includes('BMIPROGRAM — monochrome editorial design system'),'Global stylesheet must declare the monochrome design-system marker.');
@@ -21,20 +31,21 @@ assert(ui.includes('@media(max-width:720px)')&&ui.includes('white-space:nowrap!i
 assert(ui.includes('@media(prefers-reduced-motion:reduce)'),'Reduced-motion accessibility contract is required.');
 assert(ui.includes(':focus-visible{outline:3px solid var(--focus)!important'),'Visible keyboard focus contract is required.');
 
-// Ban the retired visual systems from the active design layers.
+// Ban retired visual systems from every active design layer.
 for(const bad of ['--summer-','--game-','summerButterfly','linear-gradient(','radial-gradient(','#f59d8b','#f7c27b','#8fbfa8','#e2b84a']){
   assert(!ui.includes(bad),`Retired/color design token must not occur in global UI: ${bad}`);
 }
-for(const bad of ['linear-gradient(','#8fbfa8','#efc978','#eaa0a2','#e2b84a']){
+for(const bad of ['linear-gradient(','radial-gradient(','#8fbfa8','#efc978','#eaa0a2','#e2b84a','#55766b']){
   assert(!finder.includes(bad),`Finder refinements must remain monochrome: ${bad}`);
 }
 assert(finder.includes('finder-only monochrome refinements'),'Finder stylesheet must declare its scoped monochrome role.');
 
-// All human-facing pages must load the same global skin. The build rewrites query strings to the exact commit SHA.
+// All human-facing pages must load the same global skin. Build replaces query strings with the exact commit SHA.
 for(const {path,html} of pages){
+  assert(/href=["']styles\.css\?v=[^"']+["']/.test(html),`${path} must load the neutral structural stylesheet with a version query.`);
   assert(/href=["']ui-20260821\.css\?v=[^"']+["']/.test(html),`${path} must load the global UI stylesheet with a version query.`);
   assert(!html.includes('theme-color" content="#000000"'),`${path} should keep a light browser chrome theme, not force black.`);
 }
 assert(pages.find(x=>x.path==='index.html').html.includes('recommendation-polish.css'),'Homepage must load finder-only refinements.');
 
-console.log('PASS: monochrome editorial design system, Apple-like system typography, mobile hero, focus/motion and no-retired-color contracts are consistent.');
+console.log('PASS: neutral base + monochrome editorial design system, Apple-like system typography, mobile hero, focus/motion and no-retired-color contracts are consistent.');
