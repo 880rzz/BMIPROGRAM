@@ -34,6 +34,7 @@ jobs:
           node --check scripts/validate-schema-age.mjs
           node --check scripts/validate-matching.mjs
           node --check scripts/validate-copy.mjs
+          node --check scripts/validate-design.mjs
       - name: Canonical integrity
         run: node scripts/validate.mjs
       - name: Schema age semantics
@@ -42,6 +43,8 @@ jobs:
         run: node scripts/validate-matching.mjs
       - name: Recommender copy and UX consistency
         run: node scripts/validate-copy.mjs
+      - name: Monochrome design-system integrity
+        run: node scripts/validate-design.mjs
       - name: Release-critical finder contracts
         shell: bash
         run: |
@@ -85,6 +88,15 @@ jobs:
           release_date="$(date -u +'%Y-%m-%d')"
           built_at="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
           release_id="${release_date}-${short_sha}"
+
+          # Every release gets immutable asset URLs. This prevents mobile Safari from serving an older design.
+          for html in _site/*.html; do
+            sed -E -i "s#ui-20260821\.css\?v=[^\"']+#ui-20260821.css?v=${short_sha}#g" "$html"
+            sed -E -i "s#recommendation-polish\.css\?v=[^\"']+#recommendation-polish.css?v=${short_sha}#g" "$html"
+            sed -E -i 's#<meta name="theme-color" content="#[0-9A-Fa-f]{6}">#<meta name="theme-color" content="#ffffff">#g' "$html"
+          done
+          sed -i '/preload.*vienna-skyline/d' _site/index.html
+
           cat > _site/release.txt <<EOF
           BMIPROGRAM_RELEASE=${release_id}
           GIT_SHA=${GITHUB_SHA}
@@ -92,10 +104,11 @@ jobs:
           PROGRAM_COUNT=23
           SOURCE_POLICY=canonical-current-2026-27-only
           RECOMMENDER=ranked-exact-first-age-hard
+          DESIGN_SYSTEM=monochrome-editorial-v1
           BUILT_AT=${built_at}
           EOF
           cat > _site/version.json <<EOF
-          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":23,"sourcePolicy":"canonical-current-2026-27-only","recommender":"ranked-exact-first-age-hard","builtAt":"${built_at}"}
+          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":23,"sourcePolicy":"canonical-current-2026-27-only","recommender":"ranked-exact-first-age-hard","designSystem":"monochrome-editorial-v1","builtAt":"${built_at}"}
           EOF
           test -f _site/index.html
           test -f _site/data.js
@@ -107,9 +120,15 @@ jobs:
           test "$(cat _site/CNAME)" = "programvalaszto.magyariskola.at"
           grep -Fq "GIT_SHA=${GITHUB_SHA}" _site/release.txt
           grep -Fq 'PROGRAM_COUNT=23' _site/release.txt
-          grep -Fq 'RECOMMENDER=ranked-exact-first-age-hard' _site/release.txt
+          grep -Fq 'DESIGN_SYSTEM=monochrome-editorial-v1' _site/release.txt
+          grep -Fq "ui-20260821.css?v=${short_sha}" _site/index.html
+          grep -Fq "recommendation-polish.css?v=${short_sha}" _site/index.html
+          grep -Fq 'content="#ffffff"' _site/index.html
           grep -Fq 'src="logo.png"' _site/index.html
           grep -Fq 'href="favicon_.png"' _site/index.html
+          grep -Fq 'BMIPROGRAM — monochrome editorial design system' _site/ui-20260821.css
+          ! grep -Fq -- '--summer-' _site/ui-20260821.css
+          ! grep -Fq 'linear-gradient(' _site/ui-20260821.css
           grep -Fq 'Sakk és Gondolkodásfejlesztés | Schwedenplatz' _site/data.js
           grep -Fq 'https://www.magyariskola.at/event-details/sakk-2026' _site/data.js
           grep -Fq 'https://ungarischlernen.at' _site/app.js
@@ -141,6 +160,7 @@ jobs:
         run: |
           set -euo pipefail
           expected_sha="${GITHUB_SHA}"
+          short_sha="${GITHUB_SHA::12}"
           base="${PRODUCTION_URL%/}"
           fetch() {
             local path="$1"
@@ -161,6 +181,7 @@ jobs:
           grep -Fq 'PROGRAM_COUNT=23' <<<"${release}"
           grep -Fq 'SOURCE_POLICY=canonical-current-2026-27-only' <<<"${release}"
           grep -Fq 'RECOMMENDER=ranked-exact-first-age-hard' <<<"${release}"
+          grep -Fq 'DESIGN_SYSTEM=monochrome-editorial-v1' <<<"${release}"
 
           home="$(fetch /)"
           grep -Fq 'Foglalkozásválasztó 2026/27' <<<"${home}"
@@ -169,8 +190,19 @@ jobs:
           grep -Fq '23</b><span>foglalkozás' <<<"${home}"
           grep -Fq 'Gyermeknek keresel délutáni vagy hétvégi magyar foglalkozást? Vagy saját magadnak választanál?' <<<"${home}"
           grep -Fq 'A Bécsi Magyar Iskola nem egész napos iskola.' <<<"${home}"
+          grep -Fq "ui-20260821.css?v=${short_sha}" <<<"${home}"
+          grep -Fq "recommendation-polish.css?v=${short_sha}" <<<"${home}"
+          grep -Fq 'content="#ffffff"' <<<"${home}"
           grep -Fq 'src="logo.png"' <<<"${home}"
           grep -Fq 'href="favicon_.png"' <<<"${home}"
+
+          ui="$(fetch /ui-20260821.css)"
+          grep -Fq 'BMIPROGRAM — monochrome editorial design system' <<<"${ui}"
+          grep -Fq 'font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue",Helvetica,Arial,sans-serif' <<<"${ui}"
+          grep -Fq '.hero .vienna-skyline{display:none!important}' <<<"${ui}"
+          grep -Fq 'background:var(--black)!important' <<<"${ui}"
+          ! grep -Fq -- '--summer-' <<<"${ui}"
+          ! grep -Fq 'linear-gradient(' <<<"${ui}"
 
           data="$(fetch /data.js)"
           grep -Fq 'schoolYear:"2026/2027"' <<<"${data}"
@@ -198,9 +230,9 @@ jobs:
           version="$(fetch /version.json)"
           grep -Fq "\"gitSha\":\"${expected_sha}\"" <<<"${version}"
           grep -Fq '"programCount":23' <<<"${version}"
-          grep -Fq '"recommender":"ranked-exact-first-age-hard"' <<<"${version}"
+          grep -Fq '"designSystem":"monochrome-editorial-v1"' <<<"${version}"
 
-          for path in / /foglalkozasok.html /korosztalyok.html /gyik.html /data.js /app.js /catalog.js /logo.png /favicon_.png /llms.txt /llms-full.txt /robots.txt /sitemap.xml /release.txt /version.json; do
+          for path in / /foglalkozasok.html /korosztalyok.html /gyik.html /data.js /app.js /catalog.js /ui-20260821.css /recommendation-polish.css /logo.png /favicon_.png /llms.txt /llms-full.txt /robots.txt /sitemap.xml /release.txt /version.json; do
             fetch "${path}" >/dev/null
           done
           echo "EXACT-LIVE: ${expected_sha} is serving on ${base}."
