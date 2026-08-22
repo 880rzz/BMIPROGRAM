@@ -63,7 +63,7 @@ function stepTrail(){
 }
 function renderAge(){
   progress(0);
-  root.innerHTML='<div class="wizard-card">'+stepTrail()+'<div class="kicker">1 / 4</div><h3>Hány éves, akinek programot keresel?</h3><p>Lehet, hogy a gyermekednek, egy családtagnak vagy saját magadnak keresel. Add meg annak az életkorát, aki részt venne a foglalkozáson.</p><form id="ageForm"><label for="ageInput"><strong>Életkor</strong></label><div class="wizard-nav" style="justify-content:flex-start"><input id="ageInput" name="age" type="number" min="0" max="99" step="1" inputmode="numeric" required value="'+(Number.isInteger(state.age)?state.age:'')+'" style="width:110px;padding:12px 14px;border:1px solid rgba(23,48,66,.22);border-radius:12px;font:inherit"><button class="btn" type="submit">Tovább</button></div><p id="ageError" class="desc" role="alert" style="display:none;margin-top:10px">Adj meg egy 0 és 99 közötti egész életkort.</p></form></div>';
+  root.innerHTML='<div class="wizard-card">'+stepTrail()+'<div class="kicker">1 / 4</div><h3>Hány éves, akinek foglalkozást keresel?</h3><p>Lehet, hogy a gyermekednek, egy családtagnak vagy saját magadnak keresel. Add meg annak az életkorát, aki részt venne a foglalkozáson.</p><form id="ageForm"><label for="ageInput"><strong>Életkor</strong></label><div class="wizard-nav" style="justify-content:flex-start"><input id="ageInput" name="age" type="number" min="0" max="99" step="1" inputmode="numeric" required value="'+(Number.isInteger(state.age)?state.age:'')+'" style="width:110px;padding:12px 14px;border:1px solid rgba(23,48,66,.22);border-radius:12px;font:inherit"><button class="btn" type="submit">Tovább</button></div><p id="ageError" class="desc" role="alert" style="display:none;margin-top:10px">Adj meg egy 0 és 99 közötti egész életkort.</p></form></div>';
   root.querySelector('#ageForm').addEventListener('submit',function(e){e.preventDefault();var v=Number(root.querySelector('#ageInput').value);if(!Number.isInteger(v)||v<0||v>99){root.querySelector('#ageError').style.display='block';return}state={age:v};idx=1;renderStep()});
 }
 function renderChoices(title,text,options,key){
@@ -77,16 +77,16 @@ function renderChoices(title,text,options,key){
 }
 function renderStep(){
   if(idx===0){renderAge();return}
-  if(idx===1){renderChoices('Mi érdekel a leginkább?','Ezt vesszük a leginkább figyelembe. Ha nincs mindenben pontos egyezés, olyan lehetőséget is mutatunk, amely a választott érdeklődéshez a lehető legközelebb áll.',cfg.interests,'interest');return}
+  if(idx===1){renderChoices('Mi érdekel a leginkább?','Ezt vesszük a leginkább figyelembe. Ha nincs mindenben pontos egyezés, olyan foglalkozást is mutatunk, amely a választott érdeklődéshez a lehető legközelebb áll.',cfg.interests,'interest');return}
   if(idx===2){renderChoices('Melyik nap lenne a legjobb?','Ha egy hozzád illő foglalkozás másik napon van, azt sem rejtjük el. Alternatívaként megmutatjuk, és jelezzük az eltérést.',cfg.days,'day');return}
   renderChoices('Milyen gyakran fér bele?','Válaszd ki, hogy rendszeres vagy ritkább foglalkozást keresel. Ha mindegy, ezt is megadhatod.',cfg.pace,'pace');
 }
 function meta(label,value){return value?'<div class="result-meta"><strong>'+esc(label)+':</strong> '+esc(value)+'</div>':''}
 function card(p,label,primary){
-  return'<article class="result-card'+(primary?' result-card-primary':'')+'" data-recommendation="'+recommendationTier(p)+'"><span class="kicker">'+esc(label)+'</span><b class="result-title">'+esc(p.name)+'</b><span class="result-when">'+esc(p.when)+'</span><p>'+esc(p.why)+'</p>'+meta('Helyszín',p.location)+meta('Oktató',p.teacher)+meta('Oktatói elérhetőség',p.teacherContact)+meta('Hozzájárulási díj',feeForAge(p))+meta('Első alkalom',p.firstDate)+meta('Jelentkezési határidő',p.registrationDeadline)+meta('Létszámkorlát',p.capacity)+'<p class="result-reason"><strong>Miért ezt?</strong> '+esc(resultReason(p,primary))+'</p><p><a class="btn" href="'+esc(p.url)+'" target="_blank" rel="noopener">Megnézem a programot</a></p></article>';
+  return'<article class="result-card'+(primary?' result-card-primary':'')+'" data-recommendation="'+recommendationTier(p)+'"><span class="kicker">'+esc(label)+'</span><b class="result-title">'+esc(p.name)+'</b><span class="result-when">'+esc(p.when)+'</span><p>'+esc(p.why)+'</p>'+meta('Helyszín',p.location)+meta('Oktató',p.teacher)+meta('Oktatói elérhetőség',p.teacherContact)+meta('Hozzájárulási díj',feeForAge(p))+meta('Első alkalom',p.firstDate)+meta('Jelentkezési határidő',p.registrationDeadline)+meta('Létszámkorlát',p.capacity)+'<p class="result-reason"><strong>Miért ezt?</strong> '+esc(resultReason(p,primary))+'</p><p><a class="btn" href="'+esc(p.url)+'" target="_blank" rel="noopener">Megnézem a foglalkozást</a></p></article>';
 }
 function externalSchools(){
-  return'<aside class="external-schools"><span class="kicker">Ha egyik időpont sem jó</span><b>Nézz körül a másik két bécsi magyar iskola kínálatában is</b><p>Az AMAPED és az Ungarisch Lernen programjai változhatnak, ezért itt nem írunk helyettük időpontokat vagy részleteket. Közvetlenül a saját oldalukra viszünk, ahol az aktuális lehetőségeket találod.</p><div class="wizard-nav"><a class="btn ghost" href="https://ungarischlernen.at" target="_blank" rel="noopener">Ungarisch Lernen</a><a class="btn ghost" href="https://amaped.at" target="_blank" rel="noopener">AMAPED</a></div></aside>';
+  return'<aside class="external-schools"><span class="kicker">Ha egyik időpont sem jó</span><b>Nézz körül a másik két bécsi magyar iskola kínálatában is</b><p>Az AMAPED és az Ungarisch Lernen foglalkozásai változhatnak, ezért itt nem írunk helyettük időpontokat vagy részleteket. Közvetlenül a saját oldalukra viszünk, ahol az aktuális lehetőségeket találod.</p><div class="wizard-nav"><a class="btn ghost" href="https://ungarischlernen.at" target="_blank" rel="noopener">Ungarisch Lernen</a><a class="btn ghost" href="https://amaped.at" target="_blank" rel="noopener">AMAPED</a></div></aside>';
 }
 function showResults(){
   progress(4);
@@ -99,15 +99,15 @@ function showResults(){
   if(exact.length&&selected.length<3){alternatives.forEach(function(p){if(selected.length<3&&selected.indexOf(p)===-1)selected.push(p)})}
   var html='<div class="wizard-card"><span class="kicker">Neked válogattuk</span>';
   if(selected.length){
-    if(exact.length){html+='<h3>Van olyan program, ami jól illik ahhoz, amit keresel</h3><p>Az első kártyán a legerősebb találatot látod. Utána további, életkorban megfelelő lehetőségeket mutatunk.</p>'}
-    else{html+='<h3>Ezek állnak a legközelebb ahhoz, amit keresel</h3><p>Nincs minden szempontban pontos egyezés, ezért olyan életkorban megfelelő lehetőségeket mutatunk, amelyek a lehető legjobban közelítenek a választásaidhoz.</p>'}
+    if(exact.length){html+='<h3>Van olyan foglalkozás, ami jól illik ahhoz, amit keresel</h3><p>Az első kártyán a legerősebb találatot látod. Utána további, életkorban megfelelő foglalkozásokat mutatunk.</p>'}
+    else{html+='<h3>Ezek állnak a legközelebb ahhoz, amit keresel</h3><p>Nincs minden szempontban pontos egyezés, ezért olyan életkorban megfelelő foglalkozásokat mutatunk, amelyek a lehető legjobban közelítenek a választásaidhoz.</p>'}
     html+='<div class="result-grid">';
     selected.forEach(function(p,i){var label=i===0?(isExact(p)?'Első választás · pontos találat':'Első választás · legjobb alternatíva'):(isExact(p)?'Pontos találat':'Ezt is érdemes megnézni');html+=card(p,label,i===0)});
     html+='</div>'+externalSchools();
   }else{
-    html+='<h3>Ehhez az életkorhoz most nem találtunk megfelelő programot</h3><p>Az életkori ajánlást nem szeretnénk felülírni. Ettől még érdemes megnézned a másik két bécsi magyar iskola aktuális kínálatát is.</p>'+externalSchools();
+    html+='<h3>Ehhez az életkorhoz most nem találtunk megfelelő foglalkozást</h3><p>Az életkori ajánlást nem szeretnénk felülírni. Ettől még érdemes megnézned a másik két bécsi magyar iskola aktuális kínálatát is.</p>'+externalSchools();
   }
-  html+='<div class="wizard-nav result-actions"><button class="btn ghost" type="button" data-back-result>Vissza az utolsó kérdéshez</button><button class="btn ghost" type="button" data-restart>Újrakezdem</button><a class="btn ghost" href="foglalkozasok.html">Mind a 23 program</a></div></div>';
+  html+='<div class="wizard-nav result-actions"><button class="btn ghost" type="button" data-back-result>Vissza az utolsó kérdéshez</button><button class="btn ghost" type="button" data-restart>Újrakezdem</button><a class="btn ghost" href="foglalkozasok.html">Mind a 23 foglalkozás</a></div></div>';
   root.innerHTML=html;
   root.querySelector('[data-back-result]').addEventListener('click',function(){idx=3;renderStep()});
   root.querySelector('[data-restart]').addEventListener('click',function(){state={};idx=0;renderAge()});
