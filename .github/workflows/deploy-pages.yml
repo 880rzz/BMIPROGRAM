@@ -96,7 +96,7 @@ jobs:
             grep -Fq '<meta name="theme-color" content="#ffffff">' "$html"
             grep -Fq 'styles.css?v=human-editorial-v2' "$html"
             grep -Fq 'ui-20260821.css?v=human-editorial-v2' "$html"
-            ! grep -Eq '[[:space:]]style=["'"']' "$html"
+            ! grep -Fq ' style=' "$html"
           done
           grep -Fq 'recommendation-polish.css?v=human-editorial-v2' index.html
           ! grep -Fq 'vienna-skyline' index.html
@@ -182,8 +182,8 @@ jobs:
           ! grep -Fq 'vienna-skyline' _site/index.html
           ! grep -Fq '🦋' _site/index.html
           ! grep -Fq 'stroke="#ffcf5c"' _site/index.html
-          ! grep -Eq '[[:space:]]style=["'"']' _site/index.html
-          ! grep -Eq '[[:space:]]style=["'"']' _site/gyik.html
+          ! grep -Fq ' style=' _site/index.html
+          ! grep -Fq ' style=' _site/gyik.html
           grep -Fq 'Sakk és Gondolkodásfejlesztés | Schwedenplatz' _site/data.js
           grep -Fq 'https://www.magyariskola.at/event-details/sakk-2026' _site/data.js
           grep -Fq 'https://ungarischlernen.at' _site/app.js
