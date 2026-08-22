@@ -54,7 +54,8 @@ jobs:
           grep -Fq "if(interestEligible(p))score+=60" app.js
           grep -Fq "if(dayEligible(p))score+=25" app.js
           grep -Fq "if(paceEligible(p))score+=15" app.js
-          grep -Fq "A kompromisszum:" app.js
+          grep -Fq "Ami eltér:" app.js
+          grep -Fq "Hány éves, akinek programot keresel?" app.js
           grep -Fq "https://ungarischlernen.at" app.js
           grep -Fq "https://amaped.at" app.js
           grep -Fq "Expected 10500 combinations" scripts/validate-matching.mjs
@@ -161,9 +162,10 @@ jobs:
           grep -Fq 'RECOMMENDER=ranked-exact-first-age-hard' <<<"${release}"
 
           home="$(fetch /)"
-          grep -Fq 'Foglalkozás-kereső 2026/27' <<<"${home}"
-          grep -Fq '23</b><span>foglalkozás' <<<"${home}"
-          grep -Fq 'legközelebbi, életkorban megfelelő BMI-ajánlatokat' <<<"${home}"
+          grep -Fq 'Programválasztó 2026/27' <<<"${home}"
+          grep -Fq '23</b><span>program' <<<"${home}"
+          grep -Fq 'Gyermeknek keresel délutáni vagy hétvégi magyar foglalkozást? Vagy saját magadnak választanál?' <<<"${home}"
+          grep -Fq 'A Bécsi Magyar Iskola nem egész napos iskola.' <<<"${home}"
           grep -Fq 'src="logo.png"' <<<"${home}"
           grep -Fq 'href="favicon_.png"' <<<"${home}"
 
@@ -179,7 +181,8 @@ jobs:
           grep -Fq "{id:'szombat',label:'Szombat'}" <<<"${app}"
           grep -Fq "if(!ageEligible(p))return-1" <<<"${app}"
           grep -Fq "if(interestEligible(p))score+=60" <<<"${app}"
-          grep -Fq 'A kompromisszum:' <<<"${app}"
+          grep -Fq 'Ami eltér:' <<<"${app}"
+          grep -Fq 'Hány éves, akinek programot keresel?' <<<"${app}"
           grep -Fq 'Mind a 23 program' <<<"${app}"
           grep -Fq 'https://ungarischlernen.at' <<<"${app}"
           grep -Fq 'https://amaped.at' <<<"${app}"
