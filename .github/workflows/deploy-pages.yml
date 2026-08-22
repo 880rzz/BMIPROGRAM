@@ -93,7 +93,7 @@ jobs:
           for html in _site/*.html; do
             sed -E -i "s#ui-20260821\.css\?v=[^\"']+#ui-20260821.css?v=${short_sha}#g" "$html"
             sed -E -i "s#recommendation-polish\.css\?v=[^\"']+#recommendation-polish.css?v=${short_sha}#g" "$html"
-            sed -E -i 's#<meta name="theme-color" content="#[0-9A-Fa-f]{6}">#<meta name="theme-color" content="#ffffff">#g' "$html"
+            sed -E -i 's|<meta name="theme-color" content="#[0-9A-Fa-f]{6}">|<meta name="theme-color" content="#ffffff">|g' "$html"
           done
           sed -i '/preload.*vienna-skyline/d' _site/index.html
 
