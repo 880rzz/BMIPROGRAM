@@ -20,8 +20,8 @@ body{font-size:17px;line-height:1.52;letter-spacing:-.018em;background:linear-gr
 .nav .item{color:#fff!important;background:transparent!important}
 .nav .item:hover,.nav .item[aria-current="page"]{background:rgba(255,255,255,.10)!important;color:#fff!important}
 
-/* Game-world hero */
-.hero{position:relative;isolation:isolate;overflow:hidden;min-height:560px;padding:82px 0 72px!important;color:#fff;background:radial-gradient(circle at 78% 28%,rgba(255,203,86,.26),transparent 14%),radial-gradient(circle at 90% 12%,rgba(217,70,239,.22),transparent 26%),radial-gradient(circle at 16% 82%,rgba(56,189,248,.18),transparent 28%),linear-gradient(135deg,#0d1b4f 0%,#173c82 48%,#4c1d95 100%)!important}
+/* Vienna hero artwork */
+.hero{position:relative;isolation:isolate;overflow:hidden;min-height:560px;padding:82px 0 72px!important;color:#fff;background-color:#10235d!important;background-image:linear-gradient(90deg,rgba(8,22,70,.94) 0%,rgba(10,29,86,.86) 36%,rgba(17,34,94,.54) 62%,rgba(54,32,122,.24) 100%),linear-gradient(180deg,rgba(11,24,73,.16) 0%,rgba(13,28,80,.34) 100%),url('vienna-hero.webp')!important;background-size:cover!important;background-repeat:no-repeat!important;background-position:center center!important}
 .hero:before,.hero:after{position:absolute;z-index:-1;pointer-events:none;filter:drop-shadow(0 8px 14px rgba(0,0,0,.18));will-change:transform}
 .hero:before{content:"🦋";font-size:52px;left:-70px;top:22%;animation:butterflyOne 15s ease-in-out infinite}
 .hero:after{content:"🦋";font-size:36px;left:-90px;top:64%;animation:butterflyTwo 19s ease-in-out 2s infinite}
@@ -31,7 +31,7 @@ body{font-size:17px;line-height:1.52;letter-spacing:-.018em;background:linear-gr
 .eyebrow{display:inline-block!important;color:#fff!important;background:transparent!important;border:0!important;padding:0!important;border-radius:0!important;box-shadow:none!important;letter-spacing:.035em!important}
 .hero h1{max-width:840px!important;margin:26px 0 34px!important;font-size:clamp(2.45rem,5.3vw,4.45rem)!important;line-height:1.02!important;letter-spacing:-.055em!important;text-wrap:balance;text-shadow:0 8px 28px rgba(0,0,0,.16)}
 .hero h1 .hl{color:#ffd84d!important;text-shadow:none!important}
-.hero .lead{max-width:760px!important;margin-top:0!important;color:rgba(255,255,255,.88)!important;font-size:clamp(1.02rem,1.35vw,1.18rem)!important;line-height:1.72!important}
+.hero .lead{max-width:760px!important;margin-top:0!important;color:rgba(255,255,255,.9)!important;font-size:clamp(1.02rem,1.35vw,1.18rem)!important;line-height:1.72!important;text-shadow:0 2px 14px rgba(0,0,0,.24)}
 .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px!important}
 .btn{min-height:48px;padding:11px 20px;border:0!important;border-radius:999px!important;background:linear-gradient(135deg,var(--game-violet),var(--game-pink))!important;color:#fff!important;box-shadow:0 10px 28px rgba(124,58,237,.22);font-weight:850}
 .btn.ghost{background:rgba(255,255,255,.10)!important;color:#fff!important;border:1px solid rgba(255,255,255,.22)!important;box-shadow:none!important}
@@ -70,7 +70,7 @@ body{font-size:17px;line-height:1.52;letter-spacing:-.018em;background:linear-gr
   .drawer{background:#27376f!important}
   .drawer a,.drawer a[aria-current="page"]{background:transparent!important;color:#fff!important}
   .drawer a[aria-current="page"]{color:#ffd84d!important}
-  .hero{padding:54px 0 50px!important}
+  .hero{padding:54px 0 50px!important;background-image:linear-gradient(180deg,rgba(8,23,72,.88) 0%,rgba(10,28,86,.80) 42%,rgba(24,32,101,.58) 100%),url('vienna-hero.webp')!important;background-size:auto 100%!important;background-position:68% center!important}
   .eyebrow{font-size:.85rem!important}
   .hero h1{font-size:clamp(2.05rem,9.6vw,3rem)!important;line-height:1.04!important;letter-spacing:-.05em!important;margin:26px 0 38px!important}
   .hero .lead{font-size:1rem!important;line-height:1.75!important;max-width:none!important}
