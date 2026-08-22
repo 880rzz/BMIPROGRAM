@@ -96,6 +96,12 @@ body{background:linear-gradient(180deg,#f6fbf7 0%,#fffdf7 52%,#f9f1f5 100%)!impo
 .tile b,.item h3 a,.result-title{color:#304a43!important}
 .tile>span:last-child{color:#6a7972!important}
 
+/* Restore comfortable card insets: an earlier non-link tile rule removed padding. */
+.tiles>div.tile,.tiles>a.tile{padding:26px!important}
+.tiles .tile .em{margin-bottom:16px!important}
+.tiles .tile b{display:block;margin-bottom:10px!important;line-height:1.18}
+.tiles .tile>span:last-child{display:block;line-height:1.55}
+
 .wizard-card{background:rgba(255,253,248,.95)!important;border-color:rgba(123,151,139,.17)!important;box-shadow:0 20px 50px rgba(81,108,96,.09)!important}
 .choice{border-color:rgba(123,151,139,.2)!important;color:#345047!important;background:#fffef9!important}
 .choice:hover,.choice:focus-visible{border-color:#a7c8b8!important;background:#f0f8f2!important}
@@ -111,6 +117,9 @@ body{background:linear-gradient(180deg,#f6fbf7 0%,#fffdf7 52%,#f9f1f5 100%)!impo
   .result-reason{margin-top:15px;padding-top:14px;padding-left:15px;font-size:.94rem}.result-reason::before{top:15px;height:calc(100% - 15px)}.site-foot{padding-top:42px}.site-foot .foot-cols{gap:22px}.footer-trust{margin-top:28px;padding-top:18px}.footer-trust p{font-size:.78rem}
   .hero .vienna-skyline{right:-64%;bottom:2%;width:182%;height:58%;background-position:right bottom;background-size:contain;opacity:.34!important;filter:saturate(.7) brightness(1.42)!important}
   .drawer a::before{font-size:1em;width:1.4em;flex-basis:1.4em}
+  .tiles>div.tile,.tiles>a.tile{padding:22px!important}
+  .tiles .tile .em{margin-bottom:15px!important}
+  .tiles .tile b{margin-bottom:9px!important}
 }
-@media(max-width:390px){.hero{padding-top:28px;padding-bottom:34px!important}.hero h1{font-size:clamp(1.9rem,10.2vw,2.35rem)}.hero .lead{font-size:.93rem;line-height:1.48}.stats{margin-top:24px}.stat b{font-size:1.42rem!important}.stat span{font-size:.74rem!important}.hero .vienna-skyline{right:-72%;width:194%;height:56%}}
+@media(max-width:390px){.hero{padding-top:28px;padding-bottom:34px!important}.hero h1{font-size:clamp(1.9rem,10.2vw,2.35rem)}.hero .lead{font-size:.93rem;line-height:1.48}.stats{margin-top:24px}.stat b{font-size:1.42rem!important}.stat span{font-size:.74rem!important}.hero .vienna-skyline{right:-72%;width:194%;height:56%}.tiles>div.tile,.tiles>a.tile{padding:20px!important}}
 @media(prefers-reduced-motion:reduce){.result-card-primary{transform:none}.result-reason::before{transition:none}}
