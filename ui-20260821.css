@@ -70,7 +70,7 @@ body{font-size:17px;line-height:1.52;letter-spacing:-.018em;background:linear-gr
   .drawer{background:#27376f!important}
   .drawer a,.drawer a[aria-current="page"]{background:transparent!important;color:#fff!important}
   .drawer a[aria-current="page"]{color:#ffd84d!important}
-  .hero{padding:54px 0 50px!important;background-image:linear-gradient(180deg,rgba(8,23,72,.88) 0%,rgba(10,28,86,.80) 42%,rgba(24,32,101,.58) 100%),url('vienna-hero.webp')!important;background-size:auto 100%!important;background-position:68% center!important}
+  .hero{padding:54px 0 50px!important;background-image:linear-gradient(180deg,rgba(8,23,72,.88) 0%,rgba(10,28,86,.80) 42%,rgba(24,32,101,.58) 100%),url('vienna-hero.webp')!important;background-size:auto 100%!important;background-position:88% center!important}
   .eyebrow{font-size:.85rem!important}
   .hero h1{font-size:clamp(2.05rem,9.6vw,3rem)!important;line-height:1.04!important;letter-spacing:-.05em!important;margin:26px 0 38px!important}
   .hero .lead{font-size:1rem!important;line-height:1.75!important;max-width:none!important}
