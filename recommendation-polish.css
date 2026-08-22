@@ -22,6 +22,10 @@
 .external-schools .btn.ghost{background:#fff!important}
 .result-actions{margin-top:30px;padding-top:20px;border-top:1px solid rgba(83,111,101,.16)}
 
+/* Primary hero CTA keeps the summer gradient, but uses black text for stronger readability. */
+.hero-actions .btn:not(.ghost){color:#111!important}
+.hero-actions .btn:not(.ghost):hover,.hero-actions .btn:not(.ghost):focus-visible{color:#111!important}
+
 .site-foot .foot-cols{gap:34px}
 .site-foot h4{margin-bottom:10px;font-size:.93rem;letter-spacing:-.015em}
 .site-foot,.site-foot a{font-size:.91rem;line-height:1.58}
