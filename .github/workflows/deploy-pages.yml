@@ -84,6 +84,17 @@ jobs:
           grep -Fq 'BMIPROGRAM — neutral structural foundation' styles.css
           grep -Fq 'BMIPROGRAM — human editorial monochrome design system' ui-20260821.css
           grep -Fq 'finder-only monochrome refinements' recommendation-polish.css
+          grep -Fq 'Contextual vector icon system' styles.css
+          grep -Fq '.site-head a[href="index.html"]::after' styles.css
+          grep -Fq '.site-head a[href="foglalkozasok.html"]::after' styles.css
+          grep -Fq '.site-head a[href="korosztalyok.html"]::after' styles.css
+          grep -Fq '.site-head a[href="gyik.html"]::after' styles.css
+          grep -Fq '.hero-actions a[href="#kereso"]::before' styles.css
+          grep -Fq 'stroke="currentColor"' icons.svg
+          grep -Fq 'stroke-width="1.7"' icons.svg
+          grep -Fq 'id="location"' icons.svg
+          ! grep -Fq '.nav .item:nth-child(' styles.css
+          ! grep -Fq '.drawer a:nth-child(' styles.css
           ! grep -Fq -- '--summer-' ui-20260821.css
           ! grep -Fq -- '--game-' ui-20260821.css
           ! grep -Fq 'linear-gradient(' ui-20260821.css
@@ -164,6 +175,7 @@ jobs:
           test -f _site/styles.css
           test -f _site/ui-20260821.css
           test -f _site/recommendation-polish.css
+          test -f _site/icons.svg
           test -f _site/logo.png
           test -f _site/favicon_.png
           test -f _site/CNAME
@@ -179,6 +191,10 @@ jobs:
           grep -Fq 'content="#ffffff"' _site/index.html
           grep -Fq 'BMIPROGRAM — human editorial monochrome design system' _site/ui-20260821.css
           grep -Fq 'BMIPROGRAM — neutral structural foundation' _site/styles.css
+          grep -Fq 'Contextual vector icon system' _site/styles.css
+          grep -Fq '.site-head a[href="index.html"]::after' _site/styles.css
+          grep -Fq 'stroke="currentColor"' _site/icons.svg
+          grep -Fq 'id="grid"' _site/icons.svg
           grep -Fq '<div class="hero-mark"><img src="logo.png" alt="Bécsi Magyar Iskola"' _site/index.html
           grep -Fq '.hero-mark{width:clamp(156px,18vw,218px)!important' _site/ui-20260821.css
           grep -Fq '.hero-mark{width:138px!important;margin-bottom:24px!important}' _site/ui-20260821.css
@@ -265,8 +281,17 @@ jobs:
 
           basecss="$(fetch /styles.css)"
           grep -Fq 'BMIPROGRAM — neutral structural foundation' <<<"${basecss}"
+          grep -Fq 'Contextual vector icon system' <<<"${basecss}"
+          grep -Fq '.site-head a[href="index.html"]::after' <<<"${basecss}"
+          grep -Fq '.hero-actions a[href="#kereso"]::before' <<<"${basecss}"
           ! grep -Fq -- '--blue' <<<"${basecss}"
           ! grep -Fq 'border-radius:999px' <<<"${basecss}"
+
+          iconset="$(fetch /icons.svg)"
+          grep -Fq 'stroke="currentColor"' <<<"${iconset}"
+          grep -Fq 'stroke-width="1.7"' <<<"${iconset}"
+          grep -Fq 'id="grid"' <<<"${iconset}"
+          grep -Fq 'id="location"' <<<"${iconset}"
 
           ui="$(fetch /ui-20260821.css)"
           grep -Fq 'BMIPROGRAM — human editorial monochrome design system' <<<"${ui}"
@@ -297,7 +322,7 @@ jobs:
           grep -Fq '"programCount":23' <<<"${version}"
           grep -Fq '"designSystem":"human-editorial-v2"' <<<"${version}"
 
-          for path in / /foglalkozasok.html /korosztalyok.html /gyik.html /data.js /app.js /catalog.js /styles.css /ui-20260821.css /recommendation-polish.css /logo.png /favicon_.png /llms.txt /llms-full.txt /robots.txt /sitemap.xml /release.txt /version.json; do
+          for path in / /foglalkozasok.html /korosztalyok.html /gyik.html /data.js /app.js /catalog.js /styles.css /ui-20260821.css /recommendation-polish.css /icons.svg /logo.png /favicon_.png /llms.txt /llms-full.txt /robots.txt /sitemap.xml /release.txt /version.json; do
             fetch "${path}" >/dev/null
           done
 
