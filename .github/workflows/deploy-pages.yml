@@ -99,6 +99,11 @@ jobs:
             ! grep -Fq ' style=' "$html"
           done
           grep -Fq 'recommendation-polish.css?v=human-editorial-v2' index.html
+          grep -Fq '<div class="hero-mark"><img src="logo.png" alt="Bécsi Magyar Iskola"' index.html
+          grep -Fq 'Magyar <span class="headline-accent">foglalkozások</span>' index.html
+          grep -Fq '.hero-mark{width:clamp(156px,18vw,218px)!important' ui-20260821.css
+          grep -Fq '.hero-mark{width:138px!important;margin-bottom:24px!important}' ui-20260821.css
+          grep -Fq '.hero-mark{width:126px!important;margin-bottom:22px!important}' ui-20260821.css
           ! grep -Fq 'vienna-skyline' index.html
           ! grep -Fq '🦋' index.html
           ! grep -Fq 'stroke="#ffcf5c"' index.html
@@ -174,6 +179,10 @@ jobs:
           grep -Fq 'content="#ffffff"' _site/index.html
           grep -Fq 'BMIPROGRAM — human editorial monochrome design system' _site/ui-20260821.css
           grep -Fq 'BMIPROGRAM — neutral structural foundation' _site/styles.css
+          grep -Fq '<div class="hero-mark"><img src="logo.png" alt="Bécsi Magyar Iskola"' _site/index.html
+          grep -Fq '.hero-mark{width:clamp(156px,18vw,218px)!important' _site/ui-20260821.css
+          grep -Fq '.hero-mark{width:138px!important;margin-bottom:24px!important}' _site/ui-20260821.css
+          grep -Fq '.hero-mark{width:126px!important;margin-bottom:22px!important}' _site/ui-20260821.css
           ! grep -Fq -- '--summer-' _site/ui-20260821.css
           ! grep -Fq -- '--blue' _site/styles.css
           ! grep -Fq 'linear-gradient(' _site/ui-20260821.css
@@ -242,8 +251,9 @@ jobs:
 
           home="$(fetch /)"
           grep -Fq 'Foglalkozásválasztó 2026/27' <<<"${home}"
-          grep -Fq 'Magyar foglalkozások' <<<"${home}"
+          grep -Fq 'Magyar <span class="headline-accent">foglalkozások</span>' <<<"${home}"
           grep -Fq 'kicsiknek és nagyoknak.' <<<"${home}"
+          grep -Fq '<div class="hero-mark"><img src="logo.png" alt="Bécsi Magyar Iskola"' <<<"${home}"
           grep -Fq '23</b><span>foglalkozás' <<<"${home}"
           grep -Fq "styles.css?v=${short_sha}" <<<"${home}"
           grep -Fq "ui-20260821.css?v=${short_sha}" <<<"${home}"
@@ -261,6 +271,10 @@ jobs:
           ui="$(fetch /ui-20260821.css)"
           grep -Fq 'BMIPROGRAM — human editorial monochrome design system' <<<"${ui}"
           grep -Fq 'backdrop-filter:none!important' <<<"${ui}"
+          grep -Fq '.hero-mark{width:clamp(156px,18vw,218px)!important' <<<"${ui}"
+          grep -Fq '.hero-mark{width:138px!important;margin-bottom:24px!important}' <<<"${ui}"
+          grep -Fq '.hero-mark{width:126px!important;margin-bottom:22px!important}' <<<"${ui}"
+          grep -Fq 'filter:grayscale(1) contrast(1.05)!important' <<<"${ui}"
           ! grep -Fq -- '--summer-' <<<"${ui}"
           ! grep -Fq 'linear-gradient(' <<<"${ui}"
           ! grep -Fq 'border-radius:999px' <<<"${ui}"
