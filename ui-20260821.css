@@ -58,7 +58,7 @@ a{color:inherit}.wrap{width:min(calc(100% - 48px),var(--max))!important;margin-i
 /* Brand identity + hamburger-first navigation, 2026-08-23 */
 .site-head .nav{display:none!important}
 .site-head .menu-btn{display:inline-flex!important;align-items:center!important;gap:8px!important}
-.site-head .menu-btn::before{content:"";width:15px;height:12px;display:block;background:linear-gradient(to bottom,currentColor 0 1.5px,transparent 1.5px 5.25px,currentColor 5.25px 6.75px,transparent 6.75px 10.5px,currentColor 10.5px 12px)}
+.site-head .menu-btn::before{content:"";width:15px;height:1.5px;display:block;background:currentColor;box-shadow:0 5px 0 currentColor,0 10px 0 currentColor;margin-top:-10px;transform:translateY(5px)}
 .hero-identity{display:flex!important;align-items:flex-end!important;gap:24px!important;margin:0 0 34px!important;text-align:left!important}
 .hero-identity .hero-mark{flex:0 0 auto!important;margin:0!important;width:clamp(156px,18vw,218px)!important}
 .hero-identity .hero-mark img{filter:none!important;opacity:1!important;object-position:left center!important}
