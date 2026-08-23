@@ -8,6 +8,7 @@ const base=read('styles.css');
 const ui=read('ui-20260821.css');
 const finder=read('recommendation-polish.css');
 const catalog=read('catalog.js');
+const icons=read('icons.svg');
 const pages=['index.html','foglalkozasok.html','korosztalyok.html','gyik.html'].map(path=>({path,html:read(path)}));
 const home=pages.find(x=>x.path==='index.html').html;
 
@@ -24,6 +25,21 @@ assert(base.includes('main p strong{color:var(--ink);font-weight:650}'),'Selecti
 for(const bad of ['--blue','--sun','--summer-','--game-','radial-gradient(','border-radius:999px','#25607f','#173f56','#ffcf5c','#f59d8b','#8fbfa8']){
   assert(!base.includes(bad),`Legacy/AI-template token found in base CSS: ${bad}`);
 }
+
+// Semantic vector icon system: SVG/stroke based, no emoji or brittle menu ordering.
+assert(icons.includes('stroke="currentColor"')&&icons.includes('stroke-width="1.7"'),'Vector sprite must use the restrained currentColor stroke system.');
+for(const id of ['spark','grid','users','help','anniversary','report','arrow','list','calendar','location','age','clock','book','community','check']){
+  assert(icons.includes(`id="${id}"`),`Missing vector icon symbol: ${id}`);
+}
+assert(base.includes('Contextual vector icon system'),'Missing contextual vector icon CSS contract.');
+assert(base.includes('.site-head a[href="index.html"]::after'),'Menu icons must be bound semantically by href.');
+assert(base.includes('.site-head a[href="foglalkozasok.html"]::after'),'Activity-list navigation icon contract is missing.');
+assert(base.includes('.site-head a[href="korosztalyok.html"]::after'),'Age-group navigation icon contract is missing.');
+assert(base.includes('.site-head a[href="gyik.html"]::after'),'FAQ navigation icon contract is missing.');
+assert(base.includes('.hero-actions a[href="#kereso"]::before'),'Primary finder CTA vector icon is missing.');
+assert(base.includes('.stat:nth-child(4)::before'),'Hero fact vector icon set is incomplete.');
+assert(base.includes('a.tile::after'),'Linked editorial rows must retain the subtle vector arrow affordance.');
+assert(!base.includes('.nav .item:nth-child(')&&!base.includes('.drawer a:nth-child('),'Navigation icons must not use brittle nth-child mapping.');
 
 // Human-editorial active visual layer.
 assert(ui.includes('BMIPROGRAM — human editorial monochrome design system'),'Missing human editorial design-system marker.');
@@ -90,5 +106,5 @@ assert(home.includes('recommendation-polish.css'),'Homepage must load finder ref
 if(warnings){
   console.warn(`DESIGN-AUDIT: ${warnings} advisory warning(s). Release-critical visual contracts remain enforced by build/smoke.`);
 }else{
-  console.log('PASS: human-editorial source markup, responsive hero logo, readable blue-gold headline hierarchy and anti-AI-look advisory audit are clean.');
+  console.log('PASS: human-editorial source markup, responsive hero logo, blue-gold headline hierarchy and semantic vector icon system are clean.');
 }
