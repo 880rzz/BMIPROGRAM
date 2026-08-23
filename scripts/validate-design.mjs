@@ -37,6 +37,13 @@ assert(ui.includes('white-space:nowrap!important'),'Mobile hero phrase orphan pr
 assert(ui.includes('@media(prefers-reduced-motion:reduce)'),'Reduced-motion accessibility contract is missing.');
 assert(ui.includes(':focus-visible'),'Visible keyboard focus contract is missing.');
 
+// Official hero mark: one real brand asset, responsive and visually restrained.
+assert(home.includes('<div class="hero-mark"><img src="logo.png" alt="Bécsi Magyar Iskola"'),'Homepage hero must contain the official BMI logo asset.');
+assert(ui.includes('.hero-mark{width:clamp(156px,18vw,218px)!important'),'Desktop hero logo sizing contract is missing.');
+assert(ui.includes('.hero-mark img{')&&ui.includes('filter:grayscale(1) contrast(1.05)!important'),'Hero logo must remain visually integrated with the monochrome system.');
+assert(ui.includes('.hero-mark{width:138px!important;margin-bottom:24px!important}'),'Mobile hero logo sizing contract is missing.');
+assert(ui.includes('.hero-mark{width:126px!important;margin-bottom:22px!important}'),'Small-phone hero logo sizing contract is missing.');
+
 // Finder editorial spacing: desktop recommendation columns need real whitespace, not touching text columns.
 assert(finder.includes('gap:0 clamp(40px,4vw,68px)!important'),'Desktop recommendation columns must retain responsive editorial spacing.');
 assert(finder.includes('min-width:0'),'Recommendation cards must prevent content overflow into adjacent columns.');
@@ -79,5 +86,5 @@ assert(home.includes('recommendation-polish.css'),'Homepage must load finder ref
 if(warnings){
   console.warn(`DESIGN-AUDIT: ${warnings} advisory warning(s). Release-critical visual contracts remain enforced by build/smoke.`);
 }else{
-  console.log('PASS: human-editorial source markup, typographic hierarchy and anti-AI-look advisory audit are clean.');
+  console.log('PASS: human-editorial source markup, responsive hero logo, typographic hierarchy and anti-AI-look advisory audit are clean.');
 }
