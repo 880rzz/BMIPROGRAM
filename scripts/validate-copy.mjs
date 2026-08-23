@@ -20,7 +20,8 @@ const app=read('app.js');
 
 // Homepage: validate human-visible meaning, not presentation markup.
 assert(homeText.includes('Gyermeknek keresel délutáni vagy hétvégi magyar foglalkozást? Vagy saját magadnak választanál?'),'Homepage must explicitly support both child and adult activity seekers.');
-assert(homeText.includes('Magyar foglalkozások kicsiknek és nagyoknak.'),'Homepage hero must clearly position the offer as activities for all ages.');
+assert(homeText.includes('Magyar nyelvű foglalkozások kicsiknek és nagyoknak.'),'Homepage hero must clearly position the offer as Hungarian-language activities for all ages.');
+assert(homeText.includes('Bécsi Magyar Iskola alapítva 1987 2026 / 2027-es tanév'),'Homepage hero identity must show school, founding year and current school year together.');
 assert(homeText.includes('Foglalkozásválasztó'),'Homepage must use the public foglalkozás terminology.');
 assert(homeText.includes('A Bécsi Magyar Iskola nem egész napos iskola.'),'Homepage must explain the afternoon/weekend school model.');
 assert(home.includes('<b>23</b><span>foglalkozás</span>'),'Homepage must expose the current 23-activity count.');
@@ -49,4 +50,4 @@ assert(faqText.includes('nem igazolt 2026/27-es órarendet'),'FAQ must preserve 
 assert(faqText.includes('Sakk és Gondolkodásfejlesztés'),'FAQ must document the current chess activity.');
 assert(faqText.includes('2026. szeptember 26.'),'FAQ must preserve the current chess first date.');
 
-console.log('PASS: visible human copy, foglalkozás terminology, ranked recommender semantics, 23-activity count and chess trust contracts are consistent.');
+console.log('PASS: visible human copy, Hungarian-language positioning, founding identity, ranked recommender semantics and trust contracts are consistent.');
