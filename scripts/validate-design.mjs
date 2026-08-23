@@ -15,9 +15,13 @@ const home=pages.find(x=>x.path==='index.html').html;
 assert(base.includes('BMIPROGRAM — neutral structural foundation'),'Missing neutral structural foundation marker.');
 assert(base.includes('-apple-system')&&base.includes('BlinkMacSystemFont')&&base.includes('Helvetica Neue'),'Base typography stack is not system-native.');
 assert(base.includes('--radius:8px')&&base.includes('--radius-sm:6px'),'Base radius tokens must remain restrained.');
-assert(base.includes('.headline-accent{color:var(--muted);font-weight:520}'),'Global editorial headline accent contract is missing.');
+assert(base.includes('.headline-accent{color:#0B57D0;font-weight:560}'),'Readable blue fallback for editorial headline accent is missing.');
+assert(base.includes('background:linear-gradient(105deg,#0B57D0 0%,#245FB5 38%,#78642D 70%,#9A6400 100%)'),'Controlled blue-gold editorial gradient is missing.');
+assert((base.match(/linear-gradient\(/g)||[]).length===1,'Only one controlled text gradient may exist in the structural CSS.');
+assert(base.includes('-webkit-background-clip:text')&&base.includes('background-clip:text'),'Headline gradient must be clipped to text.');
+assert(base.includes('@media(forced-colors:active)'),'Headline accent must preserve forced-colors accessibility.');
 assert(base.includes('main p strong{color:var(--ink);font-weight:650}'),'Selective bold-copy hierarchy contract is missing.');
-for(const bad of ['--blue','--sun','--summer-','--game-','linear-gradient(','radial-gradient(','border-radius:999px','#25607f','#173f56','#ffcf5c','#f59d8b','#8fbfa8']){
+for(const bad of ['--blue','--sun','--summer-','--game-','radial-gradient(','border-radius:999px','#25607f','#173f56','#ffcf5c','#f59d8b','#8fbfa8']){
   assert(!base.includes(bad),`Legacy/AI-template token found in base CSS: ${bad}`);
 }
 
@@ -49,7 +53,7 @@ assert(finder.includes('gap:0 clamp(40px,4vw,68px)!important'),'Desktop recommen
 assert(finder.includes('min-width:0'),'Recommendation cards must prevent content overflow into adjacent columns.');
 assert(finder.includes('@media(max-width:1120px){.result-grid{gap:0!important}}'),'Single-column/tablet layout must remove unnecessary column gap.');
 
-// Editorial emphasis: one tonal accent per headline family, selective bold in prose.
+// Editorial emphasis: one controlled blue-gold accent per headline family, selective bold in prose.
 for(const {path,html} of pages){
   assert(html.includes('class="headline-accent"'),`${path} must include editorial headline emphasis.`);
 }
@@ -59,7 +63,7 @@ assert(home.includes('Négy kérdés. <span class="headline-accent">Kevesebb min
 assert(catalog.includes('<span class="headline-accent">foglalkozás</span>'),'Generated catalog H2 headings must use the same editorial hierarchy.');
 assert(!catalog.includes("'🍼 0–3 év'")&&!catalog.includes("'🧸 3–6 év'")&&!catalog.includes("'🎒 6–14 év'")&&!catalog.includes("'🎧 14–21 év'")&&!catalog.includes("'☕ Felnőtt'"),'Generated age-group kickers must remain free of decorative emoji.');
 
-// Explicit anti-AI-look bans across active visual layers.
+// Explicit anti-AI-look bans across active visual layers. Gradients remain forbidden outside the single headline accent in styles.css.
 for(const bad of ['--summer-','--game-','summerButterfly','linear-gradient(','radial-gradient(','blur(20px)','border-radius:999px','translateY(-2px)','translateY(-1px)','#f59d8b','#f7c27b','#8fbfa8','#e2b84a']){
   assert(!ui.includes(bad),`Generic AI/retired pattern found in global UI: ${bad}`);
 }
@@ -86,5 +90,5 @@ assert(home.includes('recommendation-polish.css'),'Homepage must load finder ref
 if(warnings){
   console.warn(`DESIGN-AUDIT: ${warnings} advisory warning(s). Release-critical visual contracts remain enforced by build/smoke.`);
 }else{
-  console.log('PASS: human-editorial source markup, responsive hero logo, typographic hierarchy and anti-AI-look advisory audit are clean.');
+  console.log('PASS: human-editorial source markup, responsive hero logo, readable blue-gold headline hierarchy and anti-AI-look advisory audit are clean.');
 }
