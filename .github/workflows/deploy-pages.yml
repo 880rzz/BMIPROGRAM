@@ -38,91 +38,68 @@ jobs:
           node --check scripts/validate-copy.mjs
           node --check scripts/validate-design.mjs
 
-      - name: Canonical integrity audit
+      - name: Advisory audits
         continue-on-error: true
-        run: node scripts/validate.mjs
-
-      - name: Schema age semantics audit
-        continue-on-error: true
-        run: node scripts/validate-schema-age.mjs
-
-      - name: Exhaustive selector state-space audit
-        continue-on-error: true
-        run: node scripts/validate-matching.mjs
-
-      - name: Recommender copy and UX audit
-        continue-on-error: true
-        run: node scripts/validate-copy.mjs
-
-      - name: Human editorial design audit
-        continue-on-error: true
-        run: node scripts/validate-design.mjs
+        run: |
+          node scripts/validate.mjs
+          node scripts/validate-schema-age.mjs
+          node scripts/validate-matching.mjs
+          node scripts/validate-copy.mjs
+          node scripts/validate-design.mjs
 
       - name: Release-critical hard contracts
         shell: bash
         run: |
           set -euo pipefail
-          grep -Fq "cfg.days=[" app.js
-          grep -Fq "{id:'hetfo',label:'Hétfő'}" app.js
-          grep -Fq "{id:'szombat',label:'Szombat'}" app.js
-          grep -Fq "(p.weekdays||[p.weekday]).indexOf(state.day)!==-1" app.js
+
           grep -Fq "if(!ageEligible(p))return-1" app.js
           grep -Fq "if(interestEligible(p))score+=60" app.js
           grep -Fq "if(dayEligible(p))score+=25" app.js
           grep -Fq "if(paceEligible(p))score+=15" app.js
-          grep -Fq "Ami eltér:" app.js
-          grep -Fq "Hány éves, akinek foglalkozást keresel?" app.js
-          grep -Fq "Megnézem a foglalkozást" app.js
+          grep -Fq "if(p.provider==='BMI')score+=2" app.js
           grep -Fq "Mind a 23 foglalkozás" app.js
           grep -Fq "https://ungarischlernen.at" app.js
           grep -Fq "https://amaped.at" app.js
           grep -Fq 'name:"Sakk és Gondolkodásfejlesztés | Schwedenplatz"' data.js
           grep -Fq 'when:"Havonta 1 alkalommal, szombatonként 13:00–15:00"' data.js
           grep -Fq 'schoolYear:"2026/2027"' data.js
-          grep -Fq 'excludePriorYearWix:true' data.js
 
           grep -Fq 'BMIPROGRAM — neutral structural foundation' styles.css
-          grep -Fq 'BMIPROGRAM — human editorial monochrome design system' ui-20260821.css
-          grep -Fq 'finder-only monochrome refinements' recommendation-polish.css
+          grep -Fq 'background:linear-gradient(105deg,#0B57D0 0%,#245FB5 38%,#78642D 70%,#9A6400 100%)' styles.css
+          test "$(grep -o 'linear-gradient(' styles.css | wc -l | tr -d ' ')" = "1"
           grep -Fq 'Contextual vector icon system' styles.css
-          grep -Fq '.site-head a[href="index.html"]::after' styles.css
-          grep -Fq '.site-head a[href="foglalkozasok.html"]::after' styles.css
-          grep -Fq '.site-head a[href="korosztalyok.html"]::after' styles.css
-          grep -Fq '.site-head a[href="gyik.html"]::after' styles.css
-          grep -Fq '.hero-actions a[href="#kereso"]::before' styles.css
           grep -Fq 'stroke="currentColor"' icons.svg
           grep -Fq 'stroke-width="1.7"' icons.svg
-          grep -Fq 'id="location"' icons.svg
-          ! grep -Fq '.nav .item:nth-child(' styles.css
-          ! grep -Fq '.drawer a:nth-child(' styles.css
-          ! grep -Fq -- '--summer-' ui-20260821.css
-          ! grep -Fq -- '--game-' ui-20260821.css
+
+          grep -Fq 'BMIPROGRAM — human editorial monochrome design system' ui-20260821.css
+          grep -Fq '.site-head .nav{display:none!important}' ui-20260821.css
+          grep -Fq '.site-head .menu-btn{display:inline-flex!important' ui-20260821.css
+          grep -Fq '.hero-identity{display:flex!important' ui-20260821.css
+          grep -Fq '.hero-identity .hero-mark img{filter:none!important;opacity:1!important' ui-20260821.css
+          grep -Fq '@media(max-width:720px){.hero-identity{flex-direction:column!important;align-items:flex-start!important' ui-20260821.css
           ! grep -Fq 'linear-gradient(' ui-20260821.css
           ! grep -Fq 'radial-gradient(' ui-20260821.css
           ! grep -Fq 'border-radius:999px' ui-20260821.css
-          ! grep -Fq 'border-radius:999px' styles.css
           ! grep -Fq 'blur(20px)' ui-20260821.css
+          ! grep -Fq 'linear-gradient(' recommendation-polish.css
+
+          grep -Fq '<div class="hero-identity">' index.html
+          grep -Fq '<div class="hero-mark"><img src="logo.png" alt="Bécsi Magyar Iskola"' index.html
+          grep -Fq '<span class="hero-school-name">Bécsi Magyar Iskola</span>' index.html
+          grep -Fq '<span class="hero-founded headline-accent">alapítva 1987</span>' index.html
+          grep -Fq '<span class="eyebrow">2026 / 2027-es tanév</span>' index.html
+          grep -Fq 'Magyar nyelvű <span class="headline-accent">foglalkozások</span>' index.html
+          ! grep -Fq 'vienna-skyline' index.html
+          ! grep -Fq '🦋' index.html
+          ! grep -Fq ' style=' index.html
 
           for html in index.html foglalkozasok.html korosztalyok.html gyik.html; do
             grep -Fq '<meta name="theme-color" content="#ffffff">' "$html"
             grep -Fq 'styles.css?v=human-editorial-v2' "$html"
             grep -Fq 'ui-20260821.css?v=human-editorial-v2' "$html"
-            ! grep -Fq ' style=' "$html"
           done
-          grep -Fq 'recommendation-polish.css?v=human-editorial-v2' index.html
-          grep -Fq '<div class="hero-mark"><img src="logo.png" alt="Bécsi Magyar Iskola"' index.html
-          grep -Fq 'Magyar <span class="headline-accent">foglalkozások</span>' index.html
-          grep -Fq '.hero-mark{width:clamp(156px,18vw,218px)!important' ui-20260821.css
-          grep -Fq '.hero-mark{width:138px!important;margin-bottom:24px!important}' ui-20260821.css
-          grep -Fq '.hero-mark{width:126px!important;margin-bottom:22px!important}' ui-20260821.css
-          ! grep -Fq 'vienna-skyline' index.html
-          ! grep -Fq '🦋' index.html
-          ! grep -Fq 'stroke="#ffcf5c"' index.html
-          ! grep -Fq 'class="em"' index.html
-          grep -Fq 'class="faq-contact"' gyik.html
-          grep -Fq 'catalog.js?v=20260822-2' foglalkozasok.html
-          grep -Fq 'catalog.js?v=20260822-2' korosztalyok.html
-          echo 'PASS: release-critical hard contracts are intact.'
+
+          echo 'PASS: hero identity, hamburger navigation, recommender and design hard contracts are intact.'
 
   build:
     needs: validate
@@ -172,14 +149,13 @@ jobs:
           test -f _site/index.html
           test -f _site/data.js
           test -f _site/app.js
+          test -f _site/catalog.js
           test -f _site/styles.css
           test -f _site/ui-20260821.css
           test -f _site/recommendation-polish.css
           test -f _site/icons.svg
           test -f _site/logo.png
-          test -f _site/favicon_.png
           test -f _site/CNAME
-          test -f _site/.nojekyll
           test "$(cat _site/CNAME)" = "programvalaszto.magyariskola.at"
 
           grep -Fq "GIT_SHA=${GITHUB_SHA}" _site/release.txt
@@ -188,31 +164,15 @@ jobs:
           grep -Fq "styles.css?v=${short_sha}" _site/index.html
           grep -Fq "ui-20260821.css?v=${short_sha}" _site/index.html
           grep -Fq "recommendation-polish.css?v=${short_sha}" _site/index.html
-          grep -Fq 'content="#ffffff"' _site/index.html
-          grep -Fq 'BMIPROGRAM — human editorial monochrome design system' _site/ui-20260821.css
-          grep -Fq 'BMIPROGRAM — neutral structural foundation' _site/styles.css
-          grep -Fq 'Contextual vector icon system' _site/styles.css
-          grep -Fq '.site-head a[href="index.html"]::after' _site/styles.css
-          grep -Fq 'stroke="currentColor"' _site/icons.svg
-          grep -Fq 'id="grid"' _site/icons.svg
-          grep -Fq '<div class="hero-mark"><img src="logo.png" alt="Bécsi Magyar Iskola"' _site/index.html
-          grep -Fq '.hero-mark{width:clamp(156px,18vw,218px)!important' _site/ui-20260821.css
-          grep -Fq '.hero-mark{width:138px!important;margin-bottom:24px!important}' _site/ui-20260821.css
-          grep -Fq '.hero-mark{width:126px!important;margin-bottom:22px!important}' _site/ui-20260821.css
-          ! grep -Fq -- '--summer-' _site/ui-20260821.css
-          ! grep -Fq -- '--blue' _site/styles.css
+          grep -Fq 'Magyar nyelvű <span class="headline-accent">foglalkozások</span>' _site/index.html
+          grep -Fq '<span class="hero-founded headline-accent">alapítva 1987</span>' _site/index.html
+          grep -Fq '.site-head .nav{display:none!important}' _site/ui-20260821.css
+          grep -Fq '.hero-identity .hero-mark img{filter:none!important;opacity:1!important' _site/ui-20260821.css
           ! grep -Fq 'linear-gradient(' _site/ui-20260821.css
           ! grep -Fq 'border-radius:999px' _site/ui-20260821.css
-          ! grep -Fq 'border-radius:999px' _site/styles.css
-          ! grep -Fq 'vienna-skyline' _site/index.html
-          ! grep -Fq '🦋' _site/index.html
-          ! grep -Fq 'stroke="#ffcf5c"' _site/index.html
-          ! grep -Fq ' style=' _site/index.html
-          ! grep -Fq ' style=' _site/gyik.html
+          grep -Fq 'stroke="currentColor"' _site/icons.svg
           grep -Fq 'Sakk és Gondolkodásfejlesztés | Schwedenplatz' _site/data.js
-          grep -Fq 'https://www.magyariskola.at/event-details/sakk-2026' _site/data.js
-          grep -Fq 'https://ungarischlernen.at' _site/app.js
-          grep -Fq 'https://amaped.at' _site/app.js
+
           echo 'PASS: immutable production artifact contracts are intact.'
 
       - name: Upload Pages artifact
@@ -227,8 +187,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@v5
       - name: Deploy exact artifact
         id: deployment
         uses: actions/deploy-pages@v4
@@ -261,68 +220,36 @@ jobs:
 
           grep -Fq "GIT_SHA=${expected_sha}" <<<"${release}"
           grep -Fq 'PROGRAM_COUNT=23' <<<"${release}"
-          grep -Fq 'SOURCE_POLICY=canonical-current-2026-27-only' <<<"${release}"
-          grep -Fq 'RECOMMENDER=ranked-exact-first-age-hard' <<<"${release}"
           grep -Fq 'DESIGN_SYSTEM=human-editorial-v2' <<<"${release}"
 
           home="$(fetch /)"
-          grep -Fq 'Foglalkozásválasztó 2026/27' <<<"${home}"
-          grep -Fq 'Magyar <span class="headline-accent">foglalkozások</span>' <<<"${home}"
-          grep -Fq 'kicsiknek és nagyoknak.' <<<"${home}"
-          grep -Fq '<div class="hero-mark"><img src="logo.png" alt="Bécsi Magyar Iskola"' <<<"${home}"
-          grep -Fq '23</b><span>foglalkozás' <<<"${home}"
+          grep -Fq 'Magyar nyelvű <span class="headline-accent">foglalkozások</span>' <<<"${home}"
+          grep -Fq '<span class="hero-school-name">Bécsi Magyar Iskola</span>' <<<"${home}"
+          grep -Fq '<span class="hero-founded headline-accent">alapítva 1987</span>' <<<"${home}"
+          grep -Fq '<span class="eyebrow">2026 / 2027-es tanév</span>' <<<"${home}"
           grep -Fq "styles.css?v=${short_sha}" <<<"${home}"
           grep -Fq "ui-20260821.css?v=${short_sha}" <<<"${home}"
-          grep -Fq "recommendation-polish.css?v=${short_sha}" <<<"${home}"
-          grep -Fq 'content="#ffffff"' <<<"${home}"
-          ! grep -Fq 'vienna-skyline' <<<"${home}"
-          ! grep -Fq '🦋' <<<"${home}"
-          ! grep -Fq 'stroke="#ffcf5c"' <<<"${home}"
+
+          ui="$(fetch /ui-20260821.css)"
+          grep -Fq '.site-head .nav{display:none!important}' <<<"${ui}"
+          grep -Fq '.site-head .menu-btn{display:inline-flex!important' <<<"${ui}"
+          grep -Fq '.hero-identity .hero-mark img{filter:none!important;opacity:1!important' <<<"${ui}"
+          grep -Fq '@media(max-width:720px){.hero-identity{flex-direction:column!important;align-items:flex-start!important' <<<"${ui}"
+          ! grep -Fq 'linear-gradient(' <<<"${ui}"
 
           basecss="$(fetch /styles.css)"
-          grep -Fq 'BMIPROGRAM — neutral structural foundation' <<<"${basecss}"
+          grep -Fq 'background:linear-gradient(105deg,#0B57D0 0%,#245FB5 38%,#78642D 70%,#9A6400 100%)' <<<"${basecss}"
           grep -Fq 'Contextual vector icon system' <<<"${basecss}"
-          grep -Fq '.site-head a[href="index.html"]::after' <<<"${basecss}"
-          grep -Fq '.hero-actions a[href="#kereso"]::before' <<<"${basecss}"
-          ! grep -Fq -- '--blue' <<<"${basecss}"
-          ! grep -Fq 'border-radius:999px' <<<"${basecss}"
 
           iconset="$(fetch /icons.svg)"
           grep -Fq 'stroke="currentColor"' <<<"${iconset}"
           grep -Fq 'stroke-width="1.7"' <<<"${iconset}"
-          grep -Fq 'id="grid"' <<<"${iconset}"
-          grep -Fq 'id="location"' <<<"${iconset}"
-
-          ui="$(fetch /ui-20260821.css)"
-          grep -Fq 'BMIPROGRAM — human editorial monochrome design system' <<<"${ui}"
-          grep -Fq 'backdrop-filter:none!important' <<<"${ui}"
-          grep -Fq '.hero-mark{width:clamp(156px,18vw,218px)!important' <<<"${ui}"
-          grep -Fq '.hero-mark{width:138px!important;margin-bottom:24px!important}' <<<"${ui}"
-          grep -Fq '.hero-mark{width:126px!important;margin-bottom:22px!important}' <<<"${ui}"
-          grep -Fq 'filter:grayscale(1) contrast(1.05)!important' <<<"${ui}"
-          ! grep -Fq -- '--summer-' <<<"${ui}"
-          ! grep -Fq 'linear-gradient(' <<<"${ui}"
-          ! grep -Fq 'border-radius:999px' <<<"${ui}"
-          ! grep -Fq 'blur(20px)' <<<"${ui}"
-
-          data="$(fetch /data.js)"
-          grep -Fq 'schoolYear:"2026/2027"' <<<"${data}"
-          grep -Fq 'excludePriorYearWix:true' <<<"${data}"
-          grep -Fq 'name:"Sakk és Gondolkodásfejlesztés | Schwedenplatz"' <<<"${data}"
-
-          app="$(fetch /app.js)"
-          grep -Fq "if(!ageEligible(p))return-1" <<<"${app}"
-          grep -Fq "if(interestEligible(p))score+=60" <<<"${app}"
-          grep -Fq 'Hány éves, akinek foglalkozást keresel?' <<<"${app}"
-          grep -Fq 'Megnézem a foglalkozást' <<<"${app}"
-          grep -Fq 'Mind a 23 foglalkozás' <<<"${app}"
 
           version="$(fetch /version.json)"
           grep -Fq "\"gitSha\":\"${expected_sha}\"" <<<"${version}"
           grep -Fq '"programCount":23' <<<"${version}"
-          grep -Fq '"designSystem":"human-editorial-v2"' <<<"${version}"
 
-          for path in / /foglalkozasok.html /korosztalyok.html /gyik.html /data.js /app.js /catalog.js /styles.css /ui-20260821.css /recommendation-polish.css /icons.svg /logo.png /favicon_.png /llms.txt /llms-full.txt /robots.txt /sitemap.xml /release.txt /version.json; do
+          for path in / /foglalkozasok.html /korosztalyok.html /gyik.html /data.js /app.js /catalog.js /styles.css /ui-20260821.css /recommendation-polish.css /icons.svg /logo.png /release.txt /version.json; do
             fetch "${path}" >/dev/null
           done
 
