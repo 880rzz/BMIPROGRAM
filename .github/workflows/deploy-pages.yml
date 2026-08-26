@@ -221,7 +221,7 @@ jobs:
           done
 
           grep -Fq "GIT_SHA=${expected_sha}" <<<"${release}"
-          grep -Fq 'PROGRAM_COUNT=23' <<<"${release}"
+          grep -Fq 'PROGRAM_COUNT=24' <<<"${release}"
           grep -Fq 'DESIGN_SYSTEM=human-editorial-v2' <<<"${release}"
 
           home="$(fetch /)"
@@ -249,7 +249,7 @@ jobs:
 
           version="$(fetch /version.json)"
           grep -Fq "\"gitSha\":\"${expected_sha}\"" <<<"${version}"
-          grep -Fq '"programCount":23' <<<"${version}"
+          grep -Fq '"programCount":24' <<<"${version}"
 
           for path in / /foglalkozasok.html /korosztalyok.html /gyik.html /data.js /app.js /catalog.js /styles.css /ui-20260821.css /recommendation-polish.css /icons.svg /logo.png /release.txt /version.json; do
             fetch "${path}" >/dev/null
