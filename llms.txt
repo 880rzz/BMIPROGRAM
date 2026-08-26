@@ -34,7 +34,7 @@
 - A Microsoft Office Specialist felkészítő képzés kanonikus forrása a https://mos.magyariskola.at oldal; a nem megerősített vizsganyelv, vizsgahelyszín, óraszám és támogatási jogosultság nem állítható biztos tényként.
 - A Sakk és Gondolkodásfejlesztés aktuális canonical rekordja: https://www.magyariskola.at/event-details/sakk-2026. Az aktuális Wix Events rekord 2026. augusztus 21-én került publikálásra; a korábbi Sakkszakkör-adatok nem használhatók helyette.
 - A Napraforgócskák és a Kezdő néptánc esetén a registryben megadott napraforgok.at foglalkozásszakasz az elsődleges; a Cserkészetnél a cserkesz.at/cserkesz-raj/ oldal.
-- A Világfa Sárkányai saját 2026/27-es oldala a taltosdob.magyariskola.at.
+- A Világfa Sárkányai saját 2026/27-es oldala a taltosdob.magyariskola.at. Hozzájárulási díja 70 € / fő / félév; az első félév szeptembertől februárig tart, a második félév szintén 70 € / fő, és bármikor be lehet csatlakozni.
 - `sourceNote` az aktuális forrás értelmezéséhez szükséges kontextust dokumentálhat: például forráskonfliktust, operatív korbesorolást vagy szabályos időpont-kivételt.
 - `ageRangeOperational` és `ageRangeComposite` jelzi, ha a választómotor numerikus korbesorolása nem szó szerinti forrás-korhatár.
 - A Világfa Sárkányai egyetlen, két egymásra épülő részből álló foglalkozás; nem számolható külön dobkörként.

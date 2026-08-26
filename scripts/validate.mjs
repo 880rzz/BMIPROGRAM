@@ -58,7 +58,8 @@ assert(byId('iskola-baden')?.minAge===7&&byId('iskola-baden')?.maxAge===8&&/Makf
 assert(byId('filmes')?.minAge===13&&byId('filmes')?.maxAge===17&&byId('filmes')?.when==='Minden szerdán 15:30–17:00','Filmes Műhely must stay 13–17, Wednesday 15:30–17:00');
 assert(!byId('aspern')?.sourceNote&&byId('aspern')?.when==='Keddenként 15:30–17:00','Aspern resolved Wix time must stay 15:30–17:00 without conflict flag');
 assert(byId('gimi-svung')?.ageRangeOperational===true&&byId('gimi-svung')?.sourceNote,'Gimi operational numeric age range must remain explicitly documented');
-assert(byId('vilagfa')?.ageRangeComposite===true&&/6–14/.test(byId('vilagfa')?.ageText||'')&&byId('vilagfa')?.fee==='20 € / gyermek / alkalom'&&byId('vilagfa')?.teacher==='Hupczik Andrea','Világfa composite child/adult semantics must remain explicit');
+assert(byId('vilagfa')?.ageRangeComposite===true&&/6–14/.test(byId('vilagfa')?.ageText||'')&&byId('vilagfa')?.fee==='70 € / fő / félév; a második félév szintén 70 € / fő'&&byId('vilagfa')?.teacher==='Hupczik Andrea','Világfa composite child/adult semantics and current semester pricing must remain explicit');
+assert(byId('vilagfa')?.enrollment==='Bármikor be lehet csatlakozni.'&&/szeptembertől februárig/.test(byId('vilagfa')?.when||'')&&/második félév/.test(byId('vilagfa')?.sourceNote||''),'Világfa must expose both semester pricing and continuous enrollment');
 assert(byId('vilagfa')?.firstDate==='2026. szeptember 27. (vasárnap)'&&/kivételesen vasárnap/.test(byId('vilagfa')?.sourceNote||'')&&/jellemzően szombatonként/.test(byId('vilagfa')?.when||''),'Világfa must preserve the Sep 27 Sunday exception and usual Saturday rhythm');
 assert(byId('napraforgocskak')?.provider==='Napraforgók'&&byId('napraforgocskak')?.ageRangeOperational===true&&byId('napraforgocskak')?.sourceNote&&/Varga Bernadette/.test(byId('napraforgocskak')?.teacher||''),'Napraforgócskák must preserve partner-source semantics and operational age range');
 assert(byId('kezdo-neptanc')?.provider==='Napraforgók'&&byId('kezdo-neptanc')?.minAge===18&&byId('kezdo-neptanc')?.ageRangeOperational===true&&byId('kezdo-neptanc')?.sourceNote,'Adult beginner folk dance must use explicit operational adult classification');
@@ -103,6 +104,7 @@ assert(app.includes('Megnézem a foglalkozást'),'finder results must render the
 assert(app.includes('Mind a 24 foglalkozás'),'finder results must expose all 24 activities');
 assert(app.includes("meta('Helyszín'"),'finder results must expose verified location metadata when available');
 assert(app.includes("meta('Hozzájárulási díj'"),'finder results must expose verified contribution fee when available');
+assert(app.includes("meta('Csatlakozás',p.enrollment)"),'finder results must expose continuous enrollment when available');
 
 const catalog=read('catalog.js');
 assert(catalog.includes("'numberOfItems':programs.length"),'catalog Schema item count must derive from the canonical registry');
@@ -111,6 +113,7 @@ assert(catalog.includes('providerSchema'),'catalog Schema must derive provider f
 assert(catalog.includes('data-weekdays'),'catalog cards must derive multi-day filters from registry metadata');
 assert(catalog.includes('Jelentkezési határidő')&&catalog.includes('Létszámkorlát'),'catalog cards must expose operational details when known');
 assert(catalog.includes("detail('Foglalkozásgazda'"),'catalog must use the public Foglalkozásgazda label');
+assert(catalog.includes("detail('Csatlakozás',p.enrollment)"),'catalog must expose continuous enrollment when available');
 
 const listPage=read('foglalkozasok.html');
 assert(hasScript(listPage,'data.js')&&hasScript(listPage,'catalog.js'),'activity catalog must render from canonical registry');
