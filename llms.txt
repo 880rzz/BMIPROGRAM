@@ -1,19 +1,19 @@
 # Bécsi Magyar Iskola – Foglalkozások 2026/2027
 
 > A Bécsi Magyar Iskola (BMI, Wiener Ungarische Schule) hivatalos foglalkozásválasztója. Az intézmény 1987 szeptemberében indult, ezért 2027-ben ünnepli fennállásának 40. évfordulóját.
-> A 2026/2027-es programválasztó pontosan 24 magyar nyelvű foglalkozással és képzéssel dolgozik, kicsiknek és nagyoknak.
+> A 2026/2027-es programválasztó pontosan 25 magyar nyelvű foglalkozással és képzéssel dolgozik, kicsiknek és nagyoknak.
 > A kereső pontos életkor, érdeklődés, kívánt nap és rendszeresség alapján rangsorol. Az életkor kemény feltétel; pontos BMI-találat hiányában a legközelebbi életkorban megfelelő BMI-alternatívákat ajánlja, majd külön megmutatja az Ungarisch Lernen és az AMAPED oldalát is.
 
 ## Canonical architektúra
 - Egyetlen foglalkozásadat-forrás: https://programvalaszto.magyariskola.at/data.js
-- A `window.BMI_FINDER.programs` tömb pontosan 24 canonical foglalkozásrekordot tartalmaz. A `programs` elnevezés technikai adatmodell, a nyilvános terminológia: foglalkozás.
+- A `window.BMI_FINDER.programs` tömb pontosan 25 canonical foglalkozásrekordot tartalmaz. A `programs` elnevezés technikai adatmodell, a nyilvános terminológia: foglalkozás.
 - A foglalkozásválasztó, az összes foglalkozás nézet, a korosztályos nézet és a Course/ItemList Schema ugyanebből a registryből épül fel.
 - Az LLM-discovery magyarázó fájlja: https://programvalaszto.magyariskola.at/llms-full.txt
 - Az `llms-full.txt` szándékosan nem másolja le a foglalkozásrekordokat; a teljes aktuális foglalkozásadatért mindig a `data.js` registryt kell olvasni.
 
 ## Oldalak
 - Foglalkozásválasztó: https://programvalaszto.magyariskola.at/
-- Összes 24 foglalkozás: https://programvalaszto.magyariskola.at/foglalkozasok.html
+- Összes 25 foglalkozás: https://programvalaszto.magyariskola.at/foglalkozasok.html
 - Korosztályok: https://programvalaszto.magyariskola.at/korosztalyok.html
 - Gyakori kérdések: https://programvalaszto.magyariskola.at/gyik.html
 - Gépi forrásmagyarázat: https://programvalaszto.magyariskola.at/llms-full.txt
@@ -28,7 +28,7 @@
 - Telefon: +43 650 3312 090
 
 ## Kötelező 2026/27-es forrásszabály
-- Kizárólag a registryben rögzített 24 aktuális canonical foglalkozáslink használható foglalkozásadat-forrásként.
+- Kizárólag a registryben rögzített 25 aktuális canonical foglalkozáslink használható foglalkozásadat-forrásként.
 - Korábbi tanévek Wix eseményoldalai, régi event-details slugok és régi keresőindex-találatok kifejezetten kizártak.
 - A BMI saját foglalkozásainál az aktuális 2026/27-es magyariskola.at foglalkozásoldal és az ahhoz tartozó aktuális Wix Events rekord az irányadó.
 - A Microsoft Office Specialist felkészítő képzés kanonikus forrása a https://mos.magyariskola.at oldal; a nem megerősített vizsganyelv, vizsgahelyszín, óraszám és támogatási jogosultság nem állítható biztos tényként.
@@ -38,5 +38,5 @@
 - `sourceNote` az aktuális forrás értelmezéséhez szükséges kontextust dokumentálhat: például forráskonfliktust, operatív korbesorolást vagy szabályos időpont-kivételt.
 - `ageRangeOperational` és `ageRangeComposite` jelzi, ha a választómotor numerikus korbesorolása nem szó szerinti forrás-korhatár.
 - A Világfa Sárkányai egyetlen, két egymásra épülő részből álló foglalkozás; nem számolható külön dobkörként.
-- A Napraforgók haladó csoport nem része a fix 24 foglalkozásnak.
+- A Napraforgók haladó csoport nem része a fix 25 foglalkozásnak.
 - Ha egy aktuális 2026/27-es oldalon egy részlet nem ellenőrizhető, azt ismeretlennek kell tekinteni; régi Wix-oldallal tilos kipótolni.

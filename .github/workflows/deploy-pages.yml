@@ -57,7 +57,7 @@ jobs:
           grep -Fq "if(dayEligible(p))score+=25" app.js
           grep -Fq "if(paceEligible(p))score+=15" app.js
           grep -Fq "if(p.provider==='BMI')score+=2" app.js
-          grep -Fq "Mind a 24 foglalkozás és képzés" app.js
+          grep -Fq "Mind a 25 foglalkozás és képzés" app.js
           grep -Fq "https://ungarischlernen.at" app.js
           grep -Fq "https://amaped.at" app.js
           grep -Fq 'name:"Sakk és Gondolkodásfejlesztés | Schwedenplatz"' data.js
@@ -65,6 +65,8 @@ jobs:
           grep -Fq 'schoolYear:"2026/2027"' data.js
           grep -Fq 'id:"mos"' data.js
           grep -Fq 'url:"https://mos.magyariskola.at"' data.js
+          grep -Fq 'id:"fecskeklub"' data.js
+          grep -Fq 'url:"https://www.magyariskola.at/event-details/fecskeklub-2026"' data.js
 
           grep -Fq 'BMIPROGRAM — neutral structural foundation' styles.css
           grep -Fq 'background:linear-gradient(105deg,#0B57D0 0%,#245FB5 38%,#78642D 70%,#9A6400 100%)' styles.css
@@ -137,7 +139,7 @@ jobs:
           BMIPROGRAM_RELEASE=${release_id}
           GIT_SHA=${GITHUB_SHA}
           SCHOOL_YEAR=2026/2027
-          PROGRAM_COUNT=24
+          PROGRAM_COUNT=25
           SOURCE_POLICY=canonical-current-2026-27-only
           RECOMMENDER=ranked-exact-first-age-hard
           DESIGN_SYSTEM=human-editorial-v2
@@ -145,7 +147,7 @@ jobs:
           EOF
 
           cat > _site/version.json <<EOF
-          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":24,"sourcePolicy":"canonical-current-2026-27-only","recommender":"ranked-exact-first-age-hard","designSystem":"human-editorial-v2","builtAt":"${built_at}"}
+          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":25,"sourcePolicy":"canonical-current-2026-27-only","recommender":"ranked-exact-first-age-hard","designSystem":"human-editorial-v2","builtAt":"${built_at}"}
           EOF
 
           test -f _site/index.html
@@ -161,7 +163,7 @@ jobs:
           test "$(cat _site/CNAME)" = "programvalaszto.magyariskola.at"
 
           grep -Fq "GIT_SHA=${GITHUB_SHA}" _site/release.txt
-          grep -Fq 'PROGRAM_COUNT=24' _site/release.txt
+          grep -Fq 'PROGRAM_COUNT=25' _site/release.txt
           grep -Fq 'DESIGN_SYSTEM=human-editorial-v2' _site/release.txt
           grep -Fq "styles.css?v=${short_sha}" _site/index.html
           grep -Fq "ui-20260821.css?v=${short_sha}" _site/index.html
@@ -174,6 +176,7 @@ jobs:
           ! grep -Fq 'border-radius:999px' _site/ui-20260821.css
           grep -Fq 'stroke="currentColor"' _site/icons.svg
           grep -Fq 'Sakk és Gondolkodásfejlesztés | Schwedenplatz' _site/data.js
+          grep -Fq 'Fecske Klub | Schwedenplatz' _site/data.js
 
           echo 'PASS: immutable production artifact contracts are intact.'
 
@@ -221,7 +224,7 @@ jobs:
           done
 
           grep -Fq "GIT_SHA=${expected_sha}" <<<"${release}"
-          grep -Fq 'PROGRAM_COUNT=24' <<<"${release}"
+          grep -Fq 'PROGRAM_COUNT=25' <<<"${release}"
           grep -Fq 'DESIGN_SYSTEM=human-editorial-v2' <<<"${release}"
 
           home="$(fetch /)"
@@ -231,6 +234,10 @@ jobs:
           grep -Fq '<span class="eyebrow">2026 / 2027-es tanév</span>' <<<"${home}"
           grep -Fq "styles.css?v=${short_sha}" <<<"${home}"
           grep -Fq "ui-20260821.css?v=${short_sha}" <<<"${home}"
+
+          data="$(fetch /data.js)"
+          grep -Fq 'id:"fecskeklub"' <<<"${data}"
+          grep -Fq 'period:"2026. október 20. – 2027. január 26."' <<<"${data}"
 
           ui="$(fetch /ui-20260821.css)"
           grep -Fq '.site-head .nav{display:none!important}' <<<"${ui}"
@@ -249,7 +256,7 @@ jobs:
 
           version="$(fetch /version.json)"
           grep -Fq "\"gitSha\":\"${expected_sha}\"" <<<"${version}"
-          grep -Fq '"programCount":24' <<<"${version}"
+          grep -Fq '"programCount":25' <<<"${version}"
 
           for path in / /foglalkozasok.html /korosztalyok.html /gyik.html /data.js /app.js /catalog.js /styles.css /ui-20260821.css /recommendation-polish.css /icons.svg /logo.png /release.txt /version.json; do
             fetch "${path}" >/dev/null

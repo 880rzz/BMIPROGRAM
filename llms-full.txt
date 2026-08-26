@@ -5,10 +5,10 @@ Ez a rendszer szándékosan egyetlen foglalkozásadat-forrást használ.
 ## Canonical teljes foglalkozásadat
 https://programvalaszto.magyariskola.at/data.js
 
-A `data.js` `window.BMI_FINDER.programs` tömbje tartalmazza a 2026/2027-es tanév pontosan 24 foglalkozásának canonical rekordját. A `programs` mezőnév technikai adatmodell; a nyilvános és szemantikai terminológia: foglalkozás. Ezt kell elsődleges gépi foglalkozásadat-forrásként olvasni. Az összes foglalkozás oldal, a korosztályos nézet, a foglalkozásválasztó és a strukturált Course/ItemList réteg ebből a registryből épül.
+A `data.js` `window.BMI_FINDER.programs` tömbje tartalmazza a 2026/2027-es tanév pontosan 25 foglalkozásának canonical rekordját. A `programs` mezőnév technikai adatmodell; a nyilvános és szemantikai terminológia: foglalkozás. Ezt kell elsődleges gépi foglalkozásadat-forrásként olvasni. Az összes foglalkozás oldal, a korosztályos nézet, a foglalkozásválasztó és a strukturált Course/ItemList réteg ebből a registryből épül.
 
 ## Kötelező forrásszabály
-- Pontosan 24 foglalkozás van.
+- Pontosan 25 foglalkozás van.
 - Korábbi tanévek Wix eseményoldalai teljesen kizártak.
 - BMI-foglalkozásnál kizárólag a registryben rögzített aktuális 2026/27-es `magyariskola.at` foglalkozáslink és az ahhoz tartozó aktuális Wix Events rekord használható.
 - A Microsoft Office Specialist felkészítő képzés kivétel a Wix Events-forrásszabály alól: kanonikus forrása a `https://mos.magyariskola.at` saját képzési oldal. A vizsganyelv, vizsgahelyszín, óraszám és támogatási jogosultság csak akkor állítható biztos tényként, ha az oldal később egyértelműen megerősíti.
@@ -20,7 +20,7 @@ A `data.js` `window.BMI_FINDER.programs` tömbje tartalmazza a 2026/2027-es tan�
 - `ageRangeOperational` jelzi, ha a numerikus keresési sáv a választómotor működéséhez szükséges besorolás, miközben a forrás nem közöl ugyanilyen számszerű korhatárt.
 - `ageRangeComposite` jelzi, ha egyetlen foglalkozás különböző részei eltérő életkori közönségnek szólnak.
 - A Világfa Sárkányai egyetlen, két részből álló foglalkozás: gyermekfoglalkozás 6–14 éveseknek, utána felnőtt dzsemelés 18+ közönségnek. A választómotor 15–17 éves életkornál nem kezeli exact találatként.
-- A Napraforgók haladó csoport nem része a fix 24 foglalkozásnak.
+- A Napraforgók haladó csoport nem része a fix 25 foglalkozásnak.
 
 ## Foglalkozásválasztó
 https://programvalaszto.magyariskola.at/

@@ -4,7 +4,7 @@ if(!root)return;
 root.setAttribute('aria-live','polite');
 root.setAttribute('aria-atomic','true');
 var cfg=window.BMI_FINDER;
-if(!cfg||!Array.isArray(cfg.programs)||cfg.programs.length!==24){
+if(!cfg||!Array.isArray(cfg.programs)||cfg.programs.length!==25){
   root.innerHTML='<div class="wizard-card"><h3>A kereső most átmenetileg nem elérhető</h3><p>Addig is végignézheted az összes foglalkozást.</p><a class="btn" href="foglalkozasok.html">Összes foglalkozás</a></div>';
   return;
 }
@@ -83,7 +83,7 @@ function renderStep(){
 }
 function meta(label,value){return value?'<div class="result-meta"><strong>'+esc(label)+':</strong> '+esc(value)+'</div>':''}
 function card(p,label,primary){
-  return'<article class="result-card'+(primary?' result-card-primary':'')+'" data-recommendation="'+recommendationTier(p)+'"><span class="kicker">'+esc(label)+'</span><b class="result-title">'+esc(p.name)+'</b><span class="result-when">'+esc(p.when)+'</span><p>'+esc(p.why)+'</p>'+meta('Helyszín',p.location)+meta('Oktató',p.teacher)+meta('Oktatói elérhetőség',p.teacherContact)+meta('Hozzájárulási díj',feeForAge(p))+meta('Csatlakozás',p.enrollment)+meta('Első alkalom',p.firstDate)+meta('Jelentkezési határidő',p.registrationDeadline)+meta('Létszámkorlát',p.capacity)+'<p class="result-reason"><strong>Miért ezt?</strong> '+esc(resultReason(p,primary))+'</p><p><a class="btn" href="'+esc(p.url)+'" target="_blank" rel="noopener">Megnézem a foglalkozást</a></p></article>';
+  return'<article class="result-card'+(primary?' result-card-primary':'')+'" data-recommendation="'+recommendationTier(p)+'"><span class="kicker">'+esc(label)+'</span><b class="result-title">'+esc(p.name)+'</b><span class="result-when">'+esc(p.when)+'</span><p>'+esc(p.why)+'</p>'+meta('Időszak',p.period)+meta('Helyszín',p.location)+meta('Oktató',p.teacher)+meta('Oktatói elérhetőség',p.teacherContact)+meta('Hozzájárulási díj',feeForAge(p))+meta('Csatlakozás',p.enrollment)+meta('Első alkalom',p.firstDate)+meta('Próbaalkalom',p.trial)+meta('Jelentkezési határidő',p.registrationDeadline)+meta('Létszámkorlát',p.capacity)+'<p class="result-reason"><strong>Miért ezt?</strong> '+esc(resultReason(p,primary))+'</p><p><a class="btn" href="'+esc(p.url)+'" target="_blank" rel="noopener">Megnézem a foglalkozást</a></p></article>';
 }
 function externalSchools(){
   return'<aside class="external-schools"><span class="kicker">Ha egyik időpont sem jó</span><b>Nézz körül a másik két bécsi magyar iskola kínálatában is</b><p>Az AMAPED és az Ungarisch Lernen foglalkozásai változhatnak, ezért itt nem írunk helyettük időpontokat vagy részleteket. Közvetlenül a saját oldalukra viszünk, ahol az aktuális lehetőségeket találod.</p><div class="wizard-nav"><a class="btn ghost" href="https://ungarischlernen.at" target="_blank" rel="noopener">Ungarisch Lernen</a><a class="btn ghost" href="https://amaped.at" target="_blank" rel="noopener">AMAPED</a></div></aside>';
@@ -107,7 +107,7 @@ function showResults(){
   }else{
     html+='<h3>Ehhez az életkorhoz most nem találtunk megfelelő foglalkozást</h3><p>Az életkori ajánlást nem szeretnénk felülírni. Ettől még érdemes megnézned a másik két bécsi magyar iskola aktuális kínálatát is.</p>'+externalSchools();
   }
-  html+='<div class="wizard-nav result-actions"><button class="btn ghost" type="button" data-back-result>Vissza az utolsó kérdéshez</button><button class="btn ghost" type="button" data-restart>Újrakezdem</button><a class="btn ghost" href="foglalkozasok.html">Mind a 24 foglalkozás és képzés</a></div></div>';
+  html+='<div class="wizard-nav result-actions"><button class="btn ghost" type="button" data-back-result>Vissza az utolsó kérdéshez</button><button class="btn ghost" type="button" data-restart>Újrakezdem</button><a class="btn ghost" href="foglalkozasok.html">Mind a 25 foglalkozás és képzés</a></div></div>';
   root.innerHTML=html;
   root.querySelector('[data-back-result]').addEventListener('click',function(){idx=3;renderStep()});
   root.querySelector('[data-restart]').addEventListener('click',function(){state={};idx=0;renderAge()});
