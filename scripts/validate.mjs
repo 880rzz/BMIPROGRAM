@@ -119,6 +119,15 @@ const agePage=read('korosztalyok.html');
 assert(hasScript(agePage,'data.js')&&hasScript(agePage,'catalog.js'),'age catalog must render from canonical registry');
 const home=read('index.html');
 assert(hasScript(home,'data.js')&&hasScript(home,'app.js'),'homepage finder must render from canonical registry');
+const ogImage='og-programvalaszto-20260826.png';
+assert(fs.existsSync(ogImage),'versioned Programválasztó social image must exist');
+assert(fs.statSync(ogImage).size<2*1024*1024,'social image must remain below 2 MB');
+for(const page of ['index.html','foglalkozasok.html','korosztalyok.html','gyik.html']){
+  const html=read(page);
+  assert(html.includes(`https://programvalaszto.magyariskola.at/${ogImage}`),`${page} must use the versioned social image`);
+  assert(html.includes('<meta property="og:image:width" content="1200">')&&html.includes('<meta property="og:image:height" content="675">'),`${page} must expose social image dimensions`);
+  assert(html.includes(`<meta name="twitter:image" content="https://programvalaszto.magyariskola.at/${ogImage}">`),`${page} must expose an explicit X/Twitter image`);
+}
 const css=read('styles.css');
 assert(!/\.filters\s*\{\s*display\s*:\s*none/i.test(css),'filters must not be globally hidden');
 assert(css.includes('.skip-link'),'skip-link accessibility style must exist');
