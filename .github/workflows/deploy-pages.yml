@@ -137,7 +137,7 @@ jobs:
           BMIPROGRAM_RELEASE=${release_id}
           GIT_SHA=${GITHUB_SHA}
           SCHOOL_YEAR=2026/2027
-          PROGRAM_COUNT=23
+          PROGRAM_COUNT=24
           SOURCE_POLICY=canonical-current-2026-27-only
           RECOMMENDER=ranked-exact-first-age-hard
           DESIGN_SYSTEM=human-editorial-v2
@@ -145,7 +145,7 @@ jobs:
           EOF
 
           cat > _site/version.json <<EOF
-          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":23,"sourcePolicy":"canonical-current-2026-27-only","recommender":"ranked-exact-first-age-hard","designSystem":"human-editorial-v2","builtAt":"${built_at}"}
+          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":24,"sourcePolicy":"canonical-current-2026-27-only","recommender":"ranked-exact-first-age-hard","designSystem":"human-editorial-v2","builtAt":"${built_at}"}
           EOF
 
           test -f _site/index.html
@@ -161,7 +161,7 @@ jobs:
           test "$(cat _site/CNAME)" = "programvalaszto.magyariskola.at"
 
           grep -Fq "GIT_SHA=${GITHUB_SHA}" _site/release.txt
-          grep -Fq 'PROGRAM_COUNT=23' _site/release.txt
+          grep -Fq 'PROGRAM_COUNT=24' _site/release.txt
           grep -Fq 'DESIGN_SYSTEM=human-editorial-v2' _site/release.txt
           grep -Fq "styles.css?v=${short_sha}" _site/index.html
           grep -Fq "ui-20260821.css?v=${short_sha}" _site/index.html
