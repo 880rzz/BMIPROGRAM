@@ -57,12 +57,14 @@ jobs:
           grep -Fq "if(dayEligible(p))score+=25" app.js
           grep -Fq "if(paceEligible(p))score+=15" app.js
           grep -Fq "if(p.provider==='BMI')score+=2" app.js
-          grep -Fq "Mind a 23 foglalkozás" app.js
+          grep -Fq "Mind a 24 foglalkozás és képzés" app.js
           grep -Fq "https://ungarischlernen.at" app.js
           grep -Fq "https://amaped.at" app.js
           grep -Fq 'name:"Sakk és Gondolkodásfejlesztés | Schwedenplatz"' data.js
           grep -Fq 'when:"Havonta 1 alkalommal, szombatonként 13:00–15:00"' data.js
           grep -Fq 'schoolYear:"2026/2027"' data.js
+          grep -Fq 'id:"mos"' data.js
+          grep -Fq 'url:"https://mos.magyariskola.at"' data.js
 
           grep -Fq 'BMIPROGRAM — neutral structural foundation' styles.css
           grep -Fq 'background:linear-gradient(105deg,#0B57D0 0%,#245FB5 38%,#78642D 70%,#9A6400 100%)' styles.css
