@@ -4,7 +4,10 @@ if(!root)return;
 root.setAttribute('aria-live','polite');
 root.setAttribute('aria-atomic','true');
 var cfg=window.BMI_FINDER;
-if(!cfg||!Array.isArray(cfg.programs)||cfg.programs.length!==25){
+if(cfg&&Array.isArray(cfg.programs)&&!cfg.programs.some(function(p){return p.id==='rekreacio'})){
+  cfg.programs.push({id:'rekreacio',name:'ReKreáció – Kreatív Közösségi Kuckó | Schwedenplatz',minAge:18,maxAge:99,ageText:'felnőtteknek',interests:['alkotas'],day:'vasarnap',weekday:'vasarnap',weekdays:['vasarnap'],pace:'rugalmas',when:'Vasárnaponként, meghirdetett időpontokban 10:00–13:00',period:'2026. október 4. – december 13.; alkalmak: október 4., október 18., november 15., november 29., december 13.',location:'Bécsi Magyar Iskola, 1010 Wien, Schwedenplatz 2. Top 8.',teacher:'Egri Mónika – meseíró, illusztrátor',teacherContact:'+36 70 219 5517 · drazsola@gmail.com',fee:'20 € / alkalom',firstDate:'2026. október 4.',registrationDeadline:'2026. szeptember 30.',url:'https://www.magyariskola.at/event-details/rekreacio-2026',provider:'BMI',sourceType:'Wix Events 2026/27',why:'Kreatív, befogadó felnőtt közösségi workshop, ahol hétköznapi vagy feleslegessé vált tárgyakból új, esztétikus és használható alkotások születnek környezettudatos szemlélettel.'});
+}
+if(!cfg||!Array.isArray(cfg.programs)||cfg.programs.length!==26){
   root.innerHTML='<div class="wizard-card"><h3>A kereső most átmenetileg nem elérhető</h3><p>Addig is végignézheted az összes foglalkozást.</p><a class="btn" href="foglalkozasok.html">Összes foglalkozás</a></div>';
   return;
 }
@@ -15,6 +18,7 @@ cfg.days=[
   {id:'csutortok',label:'Csütörtök'},
   {id:'pentek',label:'Péntek'},
   {id:'szombat',label:'Szombat'},
+  {id:'vasarnap',label:'Vasárnap'},
   {id:'mindegy',label:'Mindegy'}
 ];
 var state={},idx=0,totalSteps=4;
@@ -107,7 +111,7 @@ function showResults(){
   }else{
     html+='<h3>Ehhez az életkorhoz most nem találtunk megfelelő foglalkozást</h3><p>Az életkori ajánlást nem szeretnénk felülírni. Ettől még érdemes megnézned a másik két bécsi magyar iskola aktuális kínálatát is.</p>'+externalSchools();
   }
-  html+='<div class="wizard-nav result-actions"><button class="btn ghost" type="button" data-back-result>Vissza az utolsó kérdéshez</button><button class="btn ghost" type="button" data-restart>Újrakezdem</button><a class="btn ghost" href="foglalkozasok.html">Mind a 25 foglalkozás és képzés</a></div></div>';
+  html+='<div class="wizard-nav result-actions"><button class="btn ghost" type="button" data-back-result>Vissza az utolsó kérdéshez</button><button class="btn ghost" type="button" data-restart>Újrakezdem</button><a class="btn ghost" href="foglalkozasok.html">Mind a 26 foglalkozás és képzés</a></div></div>';
   root.innerHTML=html;
   root.querySelector('[data-back-result]').addEventListener('click',function(){idx=3;renderStep()});
   root.querySelector('[data-restart]').addEventListener('click',function(){state={};idx=0;renderAge()});
