@@ -1,24 +1,53 @@
 (function(){
 'use strict';
 var cfg=window.BMI_FINDER;
-if(!cfg||!Array.isArray(cfg.programs)||cfg.programs.length!==25)return;
+if(!cfg||!Array.isArray(cfg.programs)||cfg.programs.length!==26)return;
 var programs=cfg.programs;
 function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
-function ageLabel(p){return p.ageText||((p.minAge===18&&p.maxAge===99)?'Felnőtt':(p.maxAge===99?p.minAge+'+ év':p.minAge+'–'+p.maxAge+' év'))}
-function weekdayLabel(v){return{hetfo:'Hétfő',kedd:'Kedd',szerda:'Szerda',csutortok:'Csütörtök',pentek:'Péntek',szombat:'Szombat',rugalmas:'Rugalmas'}[v]||v}
+function ageLabel(p){return p.ageText||((p.minAge===18&&p.maxAge===99)?'18+':(p.maxAge===99?p.minAge+'+':p.minAge+'–'+p.maxAge+' év'))}
+function weekdayLabel(v){return{hetfo:'Hétfő',kedd:'Kedd',szerda:'Szerda',csutortok:'Csütörtök',pentek:'Péntek',szombat:'Szombat',vasarnap:'Vasárnap',rugalmas:'Rugalmas'}[v]||v}
 function weekdayLabels(p){return (p.weekdays||[p.weekday]).map(weekdayLabel).join(' + ')}
-function schemaDay(v){return{hetfo:'https://schema.org/Monday',kedd:'https://schema.org/Tuesday',szerda:'https://schema.org/Wednesday',csutortok:'https://schema.org/Thursday',pentek:'https://schema.org/Friday',szombat:'https://schema.org/Saturday'}[v]||null}
+function schemaDay(v){return{hetfo:'https://schema.org/Monday',kedd:'https://schema.org/Tuesday',szerda:'https://schema.org/Wednesday',csutortok:'https://schema.org/Thursday',pentek:'https://schema.org/Friday',szombat:'https://schema.org/Saturday',vasarnap:'https://schema.org/Sunday'}[v]||null}
 function paceLabel(p){return p.pace==='rugalmas'?'Ritkább / rugalmasabb':'Rendszeres'}
-function providerLabel(p){return p.provider==='BMI'?'Bécsi Magyar Iskola':p.provider}
-function providerSchema(p){if(p.provider==='BMI')return {'@id':'https://www.magyariskola.at/#org'};var url=p.url;if(p.provider==='Napraforgók')url='https://napraforgok.at/';if(p.provider.indexOf('Cserkészcsapat')>-1)url='https://cserkesz.at/cserkesz-raj/';return {'@type':'Organization','name':p.provider,'url':url}}
+function providerLabel(p){if(p.relationship==='bmi-partner')return'BMI Partner Program';return p.provider==='BMI'?'Bécsi Magyar Iskola':p.provider}
+function relationLabel(p){if(p.relationship==='bmi')return'BMI saját program';if(p.relationship==='bmi-partner')return'BMI Partner Program';return'Partnerprogram'}
+function providerSchema(p){
+  if(p.relationship==='bmi'||p.provider==='BMI')return {'@id':'https://www.magyariskola.at/#org'};
+  if(p.relationship==='bmi-partner')return null;
+  var url=p.url;
+  if(p.provider==='Napraforgók')url='https://napraforgok.at/';
+  if((p.provider||'').indexOf('Cserkészcsapat')>-1)url='https://cserkesz.at/cserkesz-raj/';
+  return {'@type':'Organization','name':p.provider,'url':url};
+}
 function detail(label,value){return value?'<li><span class="k">'+esc(label)+'</span><span>'+esc(value)+'</span></li>':''}
-function card(p){var weekdays=(p.weekdays||[p.weekday]).join(' ');return '<article class="item program-card" id="'+esc(p.id)+'" data-day="'+esc(p.day)+'" data-weekday="'+esc(p.weekday)+'" data-weekdays="'+esc(weekdays)+'" data-pace="'+esc(p.pace)+'" data-min-age="'+p.minAge+'" data-max-age="'+p.maxAge+'"><h3><a href="'+esc(p.url)+'" target="_blank" rel="noopener">'+esc(p.name)+'</a></h3><div class="sub">'+esc(p.why)+'</div><div class="chips"><span class="chip age">'+esc(ageLabel(p))+'</span><span class="chip">'+esc(weekdayLabels(p))+'</span><span class="chip">'+esc(paceLabel(p))+'</span></div><ul class="kv">'+detail('Mikor',p.when)+detail('Időszak',p.period)+detail('Helyszín',p.location)+detail('Oktató',p.teacher)+detail('Oktatói elérhetőség',p.teacherContact)+detail('Hozzájárulási díj',p.fee)+detail('Csatlakozás',p.enrollment)+detail('Első alkalom',p.firstDate)+detail('Jelentkezési határidő',p.registrationDeadline)+detail('Létszámkorlát',p.capacity)+detail('Próbaalkalom',p.trial)+detail('Foglalkozásgazda',providerLabel(p))+'</ul>'+(p.sourceNote?'<p class="source-note"><strong>Forrásmegjegyzés:</strong> '+esc(p.sourceNote)+'</p>':'')+'<p class="card-action"><a class="btn" href="'+esc(p.url)+'" target="_blank" rel="noopener">Részletek és jelentkezés</a></p></article>'}
-function courseSchema(p){var schedule={'@type':'Schedule','repeatFrequency':p.pace==='rugalmas'?'Ritkább / rugalmasabb':'Rendszeres'};var days=(p.weekdays||[p.weekday]).map(schemaDay).filter(Boolean);if(days.length)schedule.byDay=days;var instance={'@type':'CourseInstance','courseMode':'onsite','courseSchedule':schedule};if(p.location)instance.location={'@type':'Place','name':p.location};var course={'@type':'Course','@id':'https://programvalaszto.magyariskola.at/foglalkozasok.html#'+p.id,'name':p.name,'description':p.why,'url':p.url,'inLanguage':'hu','provider':providerSchema(p),'hasCourseInstance':instance};if(!p.ageRangeOperational&&!p.ageRangeComposite)course.typicalAgeRange=ageLabel(p);return course}
-function injectSchema(){var old=document.getElementById('catalog-schema');if(old)old.remove();var items=programs.map(function(p,i){return {'@type':'ListItem','position':i+1,'item':courseSchema(p)}});var graph={'@context':'https://schema.org','@graph':[{'@type':'EducationalOrganization','@id':'https://www.magyariskola.at/#org','name':'Bécsi Magyar Iskola','alternateName':['BMI','Wiener Ungarische Schule'],'url':'https://www.magyariskola.at','foundingDate':'1987-09','sameAs':['https://hu.wikipedia.org/wiki/B%C3%A9csi_Magyar_Iskola','https://www.magyariskola.at/tortenetunk']},{'@type':'ItemList','name':'Bécsi Magyar Iskola foglalkozásai és képzései 2026/2027','numberOfItems':programs.length,'itemListElement':items}]};var s=document.createElement('script');s.id='catalog-schema';s.type='application/ld+json';s.textContent=JSON.stringify(graph);document.head.appendChild(s)}
+function card(p){
+  var weekdays=(p.weekdays||[p.weekday]).join(' ');
+  return '<article class="item program-card" id="'+esc(p.id)+'" data-day="'+esc(p.day)+'" data-weekday="'+esc(p.weekday)+'" data-weekdays="'+esc(weekdays)+'" data-pace="'+esc(p.pace)+'" data-min-age="'+p.minAge+'" data-max-age="'+p.maxAge+'"><h3><a href="'+esc(p.url)+'" target="_blank" rel="noopener">'+esc(p.name)+'</a></h3><div class="sub">'+esc(p.why)+'</div><div class="chips"><span class="chip age">'+esc(ageLabel(p))+'</span><span class="chip">'+esc(weekdayLabels(p))+'</span><span class="chip">'+esc(paceLabel(p))+'</span><span class="chip">'+esc(relationLabel(p))+'</span></div><ul class="kv">'+detail('Korosztály',ageLabel(p))+detail('Mikor',p.when)+detail('Időszak',p.period)+detail('Helyszín',p.location)+detail('Oktató',p.teacher)+detail('Oktatói elérhetőség',p.teacherContact)+detail('Hozzájárulási díj',p.fee)+detail('Csatlakozás',p.enrollment)+detail('Első alkalom',p.firstDate)+detail('Jelentkezési határidő',p.registrationDeadline)+detail('Létszámkorlát',p.capacity)+detail('Próbaalkalom',p.trial)+detail('Programkapcsolat',relationLabel(p))+detail('Foglalkozásgazda',providerLabel(p))+'</ul><p class="card-action"><a class="btn" href="'+esc(p.url)+'" target="_blank" rel="noopener">Részletek és jelentkezés</a></p></article>';
+}
+function courseSchema(p){
+  var schedule={'@type':'Schedule','repeatFrequency':p.pace==='rugalmas'?'Ritkább / rugalmasabb':'Rendszeres'};
+  var days=(p.weekdays||[p.weekday]).map(schemaDay).filter(Boolean);if(days.length)schedule.byDay=days;
+  var instance={'@type':'CourseInstance','courseMode':p.id==='mos'?'online and onsite':'onsite','courseSchedule':schedule};
+  if(p.location)instance.location={'@type':'Place','name':p.location};
+  var course={'@type':'Course','@id':'https://programvalaszto.magyariskola.at/foglalkozasok.html#'+p.id,'name':p.name,'description':p.why,'url':p.url,'inLanguage':'hu','typicalAgeRange':ageLabel(p),'hasCourseInstance':instance};
+  var provider=providerSchema(p);if(provider)course.provider=provider;
+  if(p.relationship==='bmi-partner')course.additionalType='https://programvalaszto.magyariskola.at/#bmi-partner-program';
+  return course;
+}
+function injectSchema(){
+  var old=document.getElementById('catalog-schema');if(old)old.remove();
+  var items=programs.map(function(p,i){return {'@type':'ListItem','position':i+1,'item':courseSchema(p)}});
+  var graph={'@context':'https://schema.org','@graph':[{'@type':'EducationalOrganization','@id':'https://www.magyariskola.at/#org','name':'Bécsi Magyar Iskola','alternateName':['BMI','Wiener Ungarische Schule'],'url':'https://www.magyariskola.at','foundingDate':'1987-09','sameAs':['https://hu.wikipedia.org/wiki/B%C3%A9csi_Magyar_Iskola','https://www.magyariskola.at/tortenetunk']},{'@type':'ItemList','name':'Bécsi Magyar Iskola és partnerprogramjai 2026/2027','numberOfItems':programs.length,'itemListElement':items}]};
+  var s=document.createElement('script');s.id='catalog-schema';s.type='application/ld+json';s.textContent=JSON.stringify(graph);document.head.appendChild(s);
+}
 function countMarkup(n){return n+' <span class="headline-accent">foglalkozás</span>'}
-function renderCatalog(){var list=document.getElementById('programList');if(!list)return;list.innerHTML=programs.map(card).join('');var count=document.getElementById('count');if(count)count.innerHTML=countMarkup(programs.length);var chips=document.querySelectorAll('#filters [data-filter]');chips.forEach(function(btn){btn.addEventListener('click',function(){chips.forEach(function(x){x.setAttribute('aria-pressed','false')});btn.setAttribute('aria-pressed','true');var f=btn.dataset.filter,n=0;list.querySelectorAll('.program-card').forEach(function(el){var weekdayMatch=(' '+el.dataset.weekdays+' ').indexOf(' '+f+' ')!==-1;var show=f==='all'||weekdayMatch||el.dataset.pace===f;el.hidden=!show;if(show)n++});if(count)count.innerHTML=countMarkup(n)})})}
+function renderCatalog(){
+  var list=document.getElementById('programList');if(!list)return;list.innerHTML=programs.map(card).join('');
+  var count=document.getElementById('count');if(count)count.innerHTML=countMarkup(programs.length);
+  var chips=document.querySelectorAll('#filters [data-filter]');chips.forEach(function(btn){btn.addEventListener('click',function(){chips.forEach(function(x){x.setAttribute('aria-pressed','false')});btn.setAttribute('aria-pressed','true');var f=btn.dataset.filter,n=0;list.querySelectorAll('.program-card').forEach(function(el){var weekdayMatch=(' '+el.dataset.weekdays+' ').indexOf(' '+f+' ')!==-1;var show=f==='all'||weekdayMatch||el.dataset.pace===f;el.hidden=!show;if(show)n++});if(count)count.innerHTML=countMarkup(n)})});
+}
 function overlaps(p,min,max){return p.maxAge>=min&&p.minAge<=max}
 function section(id,title,min,max){var arr=programs.filter(function(p){return overlaps(p,min,max)});return '<section class="section" id="'+id+'"><div class="wrap"><div class="section-head"><div class="kicker">'+esc(title)+'</div><h2>'+arr.length+' <span class="headline-accent">foglalkozás</span></h2></div><div class="list">'+arr.map(card).join('')+'</div></div></section>'}
-function renderAges(){var root=document.getElementById('ageCatalog');if(!root)return;root.innerHTML=section('0-3','0–3 év',0,3)+section('3-6','3–6 év',3,6)+section('6-14','6–14 év',6,14)+section('14-21','14–21 év',14,21)+section('felnott','Felnőtt',18,99)}
+function renderAges(){var root=document.getElementById('ageCatalog');if(!root)return;root.innerHTML=section('0-3','0–3 év',0,3)+section('3-6','3–6 év',3,6)+section('6-14','6–14 év',6,14)+section('14-17','14–17 év',14,17)+section('felnott','18+ / felnőtt',18,99)}
 injectSchema();renderCatalog();renderAges();
 })();
