@@ -45,6 +45,10 @@ main p strong{color:#1d1d1f!important;font-weight:650!important}
 .hero-school-line{align-items:center!important}
 .hero-meta .eyebrow{margin:0!important;line-height:1.2!important}
 
+/* Menu icon: three bars share the exact optical centerline with the “Menü” label. */
+.site-head .menu-btn{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:9px!important;line-height:1!important}
+.site-head .menu-btn::before{content:""!important;display:inline-block!important;flex:0 0 15px!important;width:15px!important;height:12px!important;margin:0!important;background:linear-gradient(to bottom,currentColor 0 1.5px,transparent 1.5px 5.25px,currentColor 5.25px 6.75px,transparent 6.75px 10.5px,currentColor 10.5px 12px)!important;box-shadow:none!important;transform:none!important;align-self:center!important}
+
 @media(max-width:1120px){.result-grid{gap:0!important}}
 @media(max-width:720px){.step-trail{gap:5px 11px;margin-bottom:20px;font-size:.72rem;overflow:hidden}.step-trail span:not(:last-child)::after{left:calc(100% + 3px)}.result-card{padding:21px 0!important;border-radius:0!important}.result-reason{margin-top:14px;padding-top:13px;font-size:.94rem}.external-schools{margin-top:26px;padding:21px 0;border-radius:0}.external-schools .wizard-nav .btn,.result-actions .btn{flex:1 1 100%}.site-foot{padding-top:44px!important}.site-foot .foot-cols{gap:22px}.footer-trust{margin-top:28px;padding-top:18px}.footer-trust p{font-size:.78rem}.hero-identity{align-items:flex-start!important}.hero-identity .hero-mark,.hero-meta{align-self:flex-start!important}.site-head .brand{gap:7px!important}.site-head .brand::before{font-size:1.38rem!important}.site-head .brand .n{font-size:.72rem!important}.site-head .brand .s{font-size:.56rem!important}}
 @media(prefers-reduced-motion:reduce){.result-card{transform:none!important}}
