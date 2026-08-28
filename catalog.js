@@ -12,7 +12,7 @@ function paceLabel(p){return p.pace==='rugalmas'?'Ritkább / rugalmasabb':'Rends
 function providerLabel(p){if(p.relationship==='bmi-partner')return'BMI Partner Program';return p.provider==='BMI'?'Bécsi Magyar Iskola':p.provider}
 function relationLabel(p){if(p.relationship==='bmi')return'BMI saját program';if(p.relationship==='bmi-partner')return'BMI Partner Program';return'Partnerprogram'}
 function providerSchema(p){
-  if(p.relationship==='bmi'||p.provider==='BMI')return {'@id':'https://www.magyariskola.at/#org'};
+  if(p.relationship==='bmi')return {'@id':'https://www.magyariskola.at/#org'};
   if(p.relationship==='bmi-partner')return null;
   var url=p.url;
   if(p.provider==='Napraforgók')url='https://napraforgok.at/';
@@ -22,14 +22,15 @@ function providerSchema(p){
 function detail(label,value){return value?'<li><span class="k">'+esc(label)+'</span><span>'+esc(value)+'</span></li>':''}
 function card(p){
   var weekdays=(p.weekdays||[p.weekday]).join(' ');
-  return '<article class="item program-card" id="'+esc(p.id)+'" data-day="'+esc(p.day)+'" data-weekday="'+esc(p.weekday)+'" data-weekdays="'+esc(weekdays)+'" data-pace="'+esc(p.pace)+'" data-min-age="'+p.minAge+'" data-max-age="'+p.maxAge+'"><h3><a href="'+esc(p.url)+'" target="_blank" rel="noopener">'+esc(p.name)+'</a></h3><div class="sub">'+esc(p.why)+'</div><div class="chips"><span class="chip age">'+esc(ageLabel(p))+'</span><span class="chip">'+esc(weekdayLabels(p))+'</span><span class="chip">'+esc(paceLabel(p))+'</span><span class="chip">'+esc(relationLabel(p))+'</span></div><ul class="kv">'+detail('Korosztály',ageLabel(p))+detail('Mikor',p.when)+detail('Időszak',p.period)+detail('Helyszín',p.location)+detail('Oktató',p.teacher)+detail('Oktatói elérhetőség',p.teacherContact)+detail('Hozzájárulási díj',p.fee)+detail('Csatlakozás',p.enrollment)+detail('Első alkalom',p.firstDate)+detail('Jelentkezési határidő',p.registrationDeadline)+detail('Létszámkorlát',p.capacity)+detail('Próbaalkalom',p.trial)+detail('Programkapcsolat',relationLabel(p))+detail('Foglalkozásgazda',providerLabel(p))+'</ul><p class="card-action"><a class="btn" href="'+esc(p.url)+'" target="_blank" rel="noopener">Részletek és jelentkezés</a></p></article>';
+  return '<article class="item program-card" id="'+esc(p.id)+'" data-day="'+esc(p.day)+'" data-weekday="'+esc(p.weekday)+'" data-weekdays="'+esc(weekdays)+'" data-pace="'+esc(p.pace)+'" data-min-age="'+p.minAge+'" data-max-age="'+p.maxAge+'"><h3><a href="'+esc(p.url)+'" target="_blank" rel="noopener">'+esc(p.name)+'</a></h3><div class="sub">'+esc(p.why)+'</div><div class="chips"><span class="chip age">'+esc(ageLabel(p))+'</span><span class="chip">'+esc(weekdayLabels(p))+'</span><span class="chip">'+esc(paceLabel(p))+'</span><span class="chip">'+esc(relationLabel(p))+'</span></div><ul class="kv">'+detail('Korosztály',ageLabel(p))+detail('Mikor',p.when)+detail('Helyszín',p.location)+detail('Milyen helyzetre?',p.painPoint)+detail('Mit ad?',p.outcome)+detail('Időszak',p.period)+detail('Oktató',p.teacher)+detail('Oktatói elérhetőség',p.teacherContact)+detail('Hozzájárulási díj',p.fee)+detail('Csatlakozás',p.enrollment)+detail('Első alkalom',p.firstDate)+detail('Jelentkezési határidő',p.registrationDeadline)+detail('Létszámkorlát',p.capacity)+detail('Próbaalkalom',p.trial)+detail('Programkapcsolat',relationLabel(p))+detail('Foglalkozásgazda',providerLabel(p))+'</ul><p class="card-action"><a class="btn" href="'+esc(p.url)+'" target="_blank" rel="noopener">Részletek és jelentkezés</a></p></article>';
 }
 function courseSchema(p){
   var schedule={'@type':'Schedule','repeatFrequency':p.pace==='rugalmas'?'Ritkább / rugalmasabb':'Rendszeres'};
   var days=(p.weekdays||[p.weekday]).map(schemaDay).filter(Boolean);if(days.length)schedule.byDay=days;
   var instance={'@type':'CourseInstance','courseMode':p.id==='mos'?'online and onsite':'onsite','courseSchedule':schedule};
   if(p.location)instance.location={'@type':'Place','name':p.location};
-  var course={'@type':'Course','@id':'https://programvalaszto.magyariskola.at/foglalkozasok.html#'+p.id,'name':p.name,'description':p.why,'url':p.url,'inLanguage':'hu','typicalAgeRange':ageLabel(p),'hasCourseInstance':instance};
+  var desc=[p.why,p.painPoint?'Helyzet: '+p.painPoint:'',p.outcome?'Eredmény: '+p.outcome:''].filter(Boolean).join(' ');
+  var course={'@type':'Course','@id':'https://programvalaszto.magyariskola.at/foglalkozasok.html#'+p.id,'name':p.name,'description':desc,'url':p.url,'inLanguage':'hu','typicalAgeRange':ageLabel(p),'hasCourseInstance':instance};
   var provider=providerSchema(p);if(provider)course.provider=provider;
   if(p.relationship==='bmi-partner')course.additionalType='https://programvalaszto.magyariskola.at/#bmi-partner-program';
   return course;
