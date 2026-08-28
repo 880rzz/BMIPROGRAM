@@ -31,6 +31,17 @@ main p strong{color:#1d1d1f!important;font-weight:650!important}
 .footer-trust p{max-width:900px;margin:0 0 9px;font-size:.82rem;line-height:1.52;opacity:1}
 .footer-trust .official-note{font-size:.86rem}
 .footer-trust .creator-credit{margin-top:13px}
+
+/* Optical alignment: identity copy sits on the same visual axis as both BMI marks. */
+.site-head .brand{align-items:center!important}
+.site-head .brand>span{display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:flex-start!important;gap:3px!important;line-height:1!important}
+.site-head .brand .n,.site-head .brand .s{display:block!important;line-height:1.15!important;margin:0!important}
+.hero-identity{align-items:center!important}
+.hero-identity .hero-mark{align-self:center!important}
+.hero-meta{align-self:center!important;justify-content:center!important;padding-bottom:0!important}
+.hero-school-line{align-items:center!important}
+.hero-meta .eyebrow{margin:0!important;line-height:1.2!important}
+
 @media(max-width:1120px){.result-grid{gap:0!important}}
-@media(max-width:720px){.step-trail{gap:5px 11px;margin-bottom:20px;font-size:.72rem;overflow:hidden}.step-trail span:not(:last-child)::after{left:calc(100% + 3px)}.result-card{padding:21px 0!important;border-radius:0!important}.result-reason{margin-top:14px;padding-top:13px;font-size:.94rem}.external-schools{margin-top:26px;padding:21px 0;border-radius:0}.external-schools .wizard-nav .btn,.result-actions .btn{flex:1 1 100%}.site-foot{padding-top:44px!important}.site-foot .foot-cols{gap:22px}.footer-trust{margin-top:28px;padding-top:18px}.footer-trust p{font-size:.78rem}}
+@media(max-width:720px){.step-trail{gap:5px 11px;margin-bottom:20px;font-size:.72rem;overflow:hidden}.step-trail span:not(:last-child)::after{left:calc(100% + 3px)}.result-card{padding:21px 0!important;border-radius:0!important}.result-reason{margin-top:14px;padding-top:13px;font-size:.94rem}.external-schools{margin-top:26px;padding:21px 0;border-radius:0}.external-schools .wizard-nav .btn,.result-actions .btn{flex:1 1 100%}.site-foot{padding-top:44px!important}.site-foot .foot-cols{gap:22px}.footer-trust{margin-top:28px;padding-top:18px}.footer-trust p{font-size:.78rem}.hero-identity{align-items:flex-start!important}.hero-identity .hero-mark,.hero-meta{align-self:flex-start!important}}
 @media(prefers-reduced-motion:reduce){.result-card{transform:none!important}}
