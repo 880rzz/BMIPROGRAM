@@ -5,12 +5,26 @@ root.setAttribute('aria-live','polite');
 root.setAttribute('aria-atomic','true');
 var cfg=window.BMI_FINDER;
 if(cfg&&Array.isArray(cfg.programs)&&!cfg.programs.some(function(p){return p.id==='rekreacio'})){
-  cfg.programs.push({id:'rekreacio',name:'ReKreáció – Kreatív Közösségi Kuckó | Schwedenplatz',minAge:18,maxAge:99,ageText:'felnőtteknek',interests:['alkotas'],day:'vasarnap',weekday:'vasarnap',weekdays:['vasarnap'],pace:'rugalmas',when:'Vasárnaponként, meghirdetett időpontokban 10:00–13:00',period:'2026. október 4. – december 13.; alkalmak: október 4., október 18., november 15., november 29., december 13.',location:'Bécsi Magyar Iskola, 1010 Wien, Schwedenplatz 2. Top 8.',teacher:'Egri Mónika – meseíró, illusztrátor',teacherContact:'+36 70 219 5517 · drazsola@gmail.com',fee:'20 € / alkalom',firstDate:'2026. október 4.',registrationDeadline:'2026. szeptember 30.',url:'https://www.magyariskola.at/event-details/rekreacio-2026',provider:'BMI',sourceType:'Wix Events 2026/27',why:'Kreatív, befogadó felnőtt közösségi workshop, ahol hétköznapi vagy feleslegessé vált tárgyakból új, esztétikus és használható alkotások születnek környezettudatos szemlélettel.'});
+  cfg.programs.push({id:'rekreacio',name:'ReKreáció – Kreatív Közösségi Kuckó | Schwedenplatz',minAge:18,maxAge:99,ageText:'18+',interests:['alkotas'],day:'vasarnap',weekday:'vasarnap',weekdays:['vasarnap'],pace:'rugalmas',when:'Vasárnaponként, meghirdetett időpontokban 10:00–13:00',period:'2026. október 4. – december 13.; alkalmak: október 4., október 18., november 15., november 29., december 13.',location:'Bécsi Magyar Iskola, 1010 Wien, Schwedenplatz 2. Top 8.',teacher:'Egri Mónika – meseíró, illusztrátor',teacherContact:'+36 70 219 5517 · drazsola@gmail.com',fee:'20 € / alkalom',firstDate:'2026. október 4.',registrationDeadline:'2026. szeptember 30.',url:'https://www.magyariskola.at/event-details/rekreacio-2026',provider:'BMI Partner Program',sourceType:'Wix Events 2026/27',why:'Kreatív, befogadó felnőtt közösségi workshop, ahol hétköznapi vagy feleslegessé vált tárgyakból új, esztétikus és használható alkotások születnek környezettudatos szemlélettel.'});
 }
 if(!cfg||!Array.isArray(cfg.programs)||cfg.programs.length!==26){
   root.innerHTML='<div class="wizard-card"><h3>A kereső most átmenetileg nem elérhető</h3><p>Addig is végignézheted az összes foglalkozást.</p><a class="btn" href="foglalkozasok.html">Összes foglalkozás</a></div>';
   return;
 }
+function patchProgram(id,patch){var p=cfg.programs.find(function(x){return x.id===id});if(p)Object.keys(patch).forEach(function(k){p[k]=patch[k]})}
+patchProgram('borsofozde',{minAge:0,maxAge:3,ageText:'0–3 év'});
+patchProgram('ovoda',{minAge:3,maxAge:6,ageText:'3–6 év'});
+patchProgram('rajztabla',{minAge:10,maxAge:16,ageText:'10–16 év',ageRangeOperational:false});
+patchProgram('gimi-svung',{minAge:14,maxAge:18,ageText:'14–18 év',ageRangeOperational:false});
+patchProgram('fecskeklub',{minAge:8,maxAge:14,ageText:'8–14 év',ageRangeOperational:false});
+patchProgram('vilagfa',{minAge:6,maxAge:14,ageText:'6–14 év',ageRangeComposite:false});
+patchProgram('napraforgocskak',{minAge:6,maxAge:15,ageText:'6–15 év',ageRangeOperational:false});
+patchProgram('fokusz',{minAge:18,maxAge:99,ageText:'18+',provider:'BMI Partner Program'});
+patchProgram('kezdo-neptanc',{minAge:18,maxAge:99,ageText:'18+'});
+patchProgram('mos',{minAge:18,maxAge:99,ageText:'18+',provider:'BMI Partner Program'});
+patchProgram('rekreacio',{minAge:18,maxAge:99,ageText:'18+',provider:'BMI Partner Program'});
+patchProgram('schweden-1',{minAge:6,maxAge:10,ageText:'6–10 év',pace:'rendszeres',when:'Minden szombaton 10:00–12:00'});
+patchProgram('schweden-2',{minAge:10,maxAge:14,ageText:'10–14 év',pace:'rugalmas',when:'Kéthetente szombatonként 12:00–14:00'});
 cfg.days=[
   {id:'hetfo',label:'Hétfő'},
   {id:'kedd',label:'Kedd'},
@@ -23,8 +37,8 @@ cfg.days=[
 ];
 var state={},idx=0,totalSteps=4;
 function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
-function ageEligible(p){if(!Number.isInteger(state.age))return false;if(p.ageRangeComposite&&p.id==='vilagfa')return(state.age>=6&&state.age<=14)||state.age>=18;return state.age>=p.minAge&&state.age<=p.maxAge}
-function feeForAge(p){if(p.ageRangeComposite&&p.id==='vilagfa'&&state.age>=18)return'';return p.fee||''}
+function ageEligible(p){if(!Number.isInteger(state.age))return false;return state.age>=p.minAge&&state.age<=p.maxAge}
+function feeForAge(p){return p.fee||''}
 function dayEligible(p){if(state.day==='mindegy'||p.weekday==='rugalmas')return true;return(p.weekdays||[p.weekday]).indexOf(state.day)!==-1}
 function paceEligible(p){return state.pace==='mindegy'||p.pace===state.pace}
 function interestEligible(p){return p.interests.indexOf(state.interest)!==-1}
@@ -81,35 +95,36 @@ function renderChoices(title,text,options,key){
 }
 function renderStep(){
   if(idx===0){renderAge();return}
-  if(idx===1){renderChoices('Mi érdekel a leginkább?','Ezt vesszük a leginkább figyelembe. Ha nincs mindenben pontos egyezés, olyan foglalkozást is mutatunk, amely a választott érdeklődéshez a lehető legközelebb áll.',cfg.interests,'interest');return}
-  if(idx===2){renderChoices('Melyik nap lenne a legjobb?','Ha egy hozzád illő foglalkozás másik napon van, azt sem rejtjük el. Alternatívaként megmutatjuk, és jelezzük az eltérést.',cfg.days,'day');return}
+  if(idx===1){renderChoices('Mi érdekel a leginkább?','Ezt vesszük a leginkább figyelembe. Ha nincs mindenben pontos egyezés, csak olyan BMI vagy BMI-partner programot mutatunk alternatívaként, amely életkorban és érdeklődési célban is valóban illik.',cfg.interests,'interest');return}
+  if(idx===2){renderChoices('Melyik nap lenne a legjobb?','Ha egy hozzád illő BMI-program másik napon van, azt alternatívaként megmutatjuk. Másik iskolát csak akkor ajánlunk, ha a BMI kínálatában nincs életkorban és érdeklődésben megfelelő lehetőség.',cfg.days,'day');return}
   renderChoices('Milyen gyakran fér bele?','Válaszd ki, hogy rendszeres vagy ritkább foglalkozást keresel. Ha mindegy, ezt is megadhatod.',cfg.pace,'pace');
 }
 function meta(label,value){return value?'<div class="result-meta"><strong>'+esc(label)+':</strong> '+esc(value)+'</div>':''}
 function card(p,label,primary){
-  return'<article class="result-card'+(primary?' result-card-primary':'')+'" data-recommendation="'+recommendationTier(p)+'"><span class="kicker">'+esc(label)+'</span><b class="result-title">'+esc(p.name)+'</b><span class="result-when">'+esc(p.when)+'</span><p>'+esc(p.why)+'</p>'+meta('Időszak',p.period)+meta('Helyszín',p.location)+meta('Oktató',p.teacher)+meta('Oktatói elérhetőség',p.teacherContact)+meta('Hozzájárulási díj',feeForAge(p))+meta('Csatlakozás',p.enrollment)+meta('Első alkalom',p.firstDate)+meta('Próbaalkalom',p.trial)+meta('Jelentkezési határidő',p.registrationDeadline)+meta('Létszámkorlát',p.capacity)+'<p class="result-reason"><strong>Miért ezt?</strong> '+esc(resultReason(p,primary))+'</p><p><a class="btn" href="'+esc(p.url)+'" target="_blank" rel="noopener">Megnézem a foglalkozást</a></p></article>';
+  return'<article class="result-card'+(primary?' result-card-primary':'')+'" data-recommendation="'+recommendationTier(p)+'"><span class="kicker">'+esc(label)+'</span><b class="result-title">'+esc(p.name)+'</b><span class="result-when">'+esc(p.when)+'</span><p>'+esc(p.why)+'</p>'+meta('Korosztály',p.ageText)+meta('Programgazda',p.provider==='BMI'?'Bécsi Magyar Iskola':p.provider)+meta('Időszak',p.period)+meta('Helyszín',p.location)+meta('Oktató',p.teacher)+meta('Oktatói elérhetőség',p.teacherContact)+meta('Hozzájárulási díj',feeForAge(p))+meta('Csatlakozás',p.enrollment)+meta('Első alkalom',p.firstDate)+meta('Próbaalkalom',p.trial)+meta('Jelentkezési határidő',p.registrationDeadline)+meta('Létszámkorlát',p.capacity)+'<p class="result-reason"><strong>Miért ezt?</strong> '+esc(resultReason(p,primary))+'</p><p><a class="btn" href="'+esc(p.url)+'" target="_blank" rel="noopener">Megnézem a foglalkozást</a></p></article>';
 }
 function externalSchools(){
-  return'<aside class="external-schools"><span class="kicker">Ha egyik időpont sem jó</span><b>Nézz körül a másik két bécsi magyar iskola kínálatában is</b><p>Az AMAPED és az Ungarisch Lernen foglalkozásai változhatnak, ezért itt nem írunk helyettük időpontokat vagy részleteket. Közvetlenül a saját oldalukra viszünk, ahol az aktuális lehetőségeket találod.</p><div class="wizard-nav"><a class="btn ghost" href="https://ungarischlernen.at" target="_blank" rel="noopener">Ungarisch Lernen</a><a class="btn ghost" href="https://amaped.at" target="_blank" rel="noopener">AMAPED</a></div></aside>';
+  return'<aside class="external-schools"><span class="kicker">Nincs megfelelő BMI-találat</span><b>Nézz körül a másik két bécsi magyar iskola kínálatában is</b><p>A BMI saját és partnerprogramjai között ehhez az életkorhoz és érdeklődési célhoz most nem találtunk megfelelő lehetőséget. Az AMAPED és az Ungarisch Lernen aktuális kínálatát közvetlenül a saját oldalukon tudod megnézni.</p><div class="wizard-nav"><a class="btn ghost" href="https://ungarischlernen.at" target="_blank" rel="noopener">Ungarisch Lernen</a><a class="btn ghost" href="https://amaped.at" target="_blank" rel="noopener">AMAPED</a></div></aside>';
 }
 function showResults(){
   progress(4);
   var eligible=cfg.programs.filter(ageEligible);
-  var exact=eligible.filter(isExact).sort(function(a,b){return scoreProgram(b)-scoreProgram(a)||a.name.localeCompare(b.name,'hu')});
-  var alternatives=eligible.filter(function(p){return!isExact(p)}).sort(function(a,b){return scoreProgram(b)-scoreProgram(a)||a.name.localeCompare(b.name,'hu')});
+  var relevant=eligible.filter(interestEligible);
+  var exact=relevant.filter(isExact).sort(function(a,b){return scoreProgram(b)-scoreProgram(a)||a.name.localeCompare(b.name,'hu')});
+  var alternatives=relevant.filter(function(p){return!isExact(p)}).sort(function(a,b){return scoreProgram(b)-scoreProgram(a)||a.name.localeCompare(b.name,'hu')});
   var selected=[];
   if(exact.length)selected=exact.slice(0,3);
   else selected=alternatives.slice(0,3);
   if(exact.length&&selected.length<3){alternatives.forEach(function(p){if(selected.length<3&&selected.indexOf(p)===-1)selected.push(p)})}
   var html='<div class="wizard-card"><span class="kicker">Neked válogattuk</span>';
   if(selected.length){
-    if(exact.length){html+='<h3>Van olyan foglalkozás, ami jól illik ahhoz, amit keresel</h3><p>Az első kártyán a legerősebb találatot látod. Utána további, életkorban megfelelő foglalkozásokat mutatunk.</p>'}
-    else{html+='<h3>Ezek állnak a legközelebb ahhoz, amit keresel</h3><p>Nincs minden szempontban pontos egyezés, ezért olyan életkorban megfelelő foglalkozásokat mutatunk, amelyek a lehető legjobban közelítenek a választásaidhoz.</p>'}
+    if(exact.length){html+='<h3>Van olyan BMI-program, ami pontosan illik ahhoz, amit keresel</h3><p>Az életkor minden esetben kötelező feltétel. Az első kártyán a legerősebb pontos találatot látod.</p>'}
+    else{html+='<h3>Van életkorban és érdeklődésben megfelelő BMI-program</h3><p>A választott nap vagy ritmus nem egyezik teljesen, ezért a legjobb BMI-alternatívákat mutatjuk. Másik iskolát ilyenkor nem ajánlunk.</p>'}
     html+='<div class="result-grid">';
-    selected.forEach(function(p,i){var label=i===0?(isExact(p)?'Első választás · pontos találat':'Első választás · legjobb alternatíva'):(isExact(p)?'Pontos találat':'Ezt is érdemes megnézni');html+=card(p,label,i===0)});
-    html+='</div>'+externalSchools();
+    selected.forEach(function(p,i){var label=i===0?(isExact(p)?'Első választás · pontos találat':'Első választás · BMI-alternatíva'):(isExact(p)?'Pontos találat':'BMI-alternatíva');html+=card(p,label,i===0)});
+    html+='</div>';
   }else{
-    html+='<h3>Ehhez az életkorhoz most nem találtunk megfelelő foglalkozást</h3><p>Az életkori ajánlást nem szeretnénk felülírni. Ettől még érdemes megnézned a másik két bécsi magyar iskola aktuális kínálatát is.</p>'+externalSchools();
+    html+='<h3>A BMI kínálatában nincs ehhez az életkorhoz és érdeklődéshez megfelelő program</h3><p>Az életkori határokat nem írjuk felül, és más témájú programot sem nevezünk találatnak.</p>'+externalSchools();
   }
   html+='<div class="wizard-nav result-actions"><button class="btn ghost" type="button" data-back-result>Vissza az utolsó kérdéshez</button><button class="btn ghost" type="button" data-restart>Újrakezdem</button><a class="btn ghost" href="foglalkozasok.html">Mind a 26 foglalkozás és képzés</a></div></div>';
   root.innerHTML=html;
