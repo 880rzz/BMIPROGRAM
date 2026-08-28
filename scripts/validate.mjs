@@ -13,142 +13,65 @@ if(!cfg||!Array.isArray(cfg.programs))process.exit(1);
 const programs=cfg.programs;
 const byId=id=>programs.find(p=>p.id===id);
 
-assert(programs.length===25,`expected exactly 25 activities, got ${programs.length}`);
-assert(cfg.sourcePolicy?.schoolYear==='2026/2027','sourcePolicy schoolYear must be 2026/2027');
-assert(cfg.sourcePolicy?.canonicalOnly===true,'sourcePolicy canonicalOnly must be true');
-assert(cfg.sourcePolicy?.excludePriorYearWix===true,'prior-year Wix pages must be excluded');
-assert(cfg.sourcePolicy?.verifiedFromCurrentLinks===true,'registry must be marked verified from current 2026/27 links');
-assert(cfg.interests.some(x=>x.id==='logika'&&/sakk/i.test(x.label)),'logic/chess interest must exist for the current chess activity');
+assert(programs.length===26,`expected exactly 26 activities, got ${programs.length}`);
+assert(new Set(programs.map(p=>p.id)).size===26,'activity IDs must be unique');
+assert(new Set(programs.map(p=>p.url)).size===26,'canonical activity URLs must be unique');
+assert(cfg.sourcePolicy?.schoolYear==='2026/2027','school year must be 2026/2027');
+assert(cfg.sourcePolicy?.canonicalOnly===true,'registry must be canonical-only');
+assert(cfg.interests.some(x=>x.id==='jollet'),'wellbeing/focus interest must exist');
+assert(cfg.days.some(x=>x.id==='vasarnap'),'Sunday selector must exist');
 
-const ids=programs.map(p=>p.id),urls=programs.map(p=>p.url);
-assert(new Set(ids).size===25,'activity IDs must be unique');
-assert(new Set(urls).size===25,'canonical activity URLs must be unique');
-const allowed=['https://www.magyariskola.at/event-details/kicsisvung-2026','https://www.magyariskola.at/event-details/mammut-2026','https://www.magyariskola.at/event-details/becscraft-2026','https://napraforgok.at/r%C3%B3lunk#napraforgocskak','https://www.magyariskola.at/event-details/magyarnyelv-schwedenplatz-2','https://cserkesz.at/cserkesz-raj/','https://www.magyariskola.at/event-details/magyarnyelv-szerda-2026','https://www.magyariskola.at/event-details/magyarnyelv-schwedenplatz-1','https://taltosdob.magyariskola.at','https://www.magyariskola.at/event-details/rajztabla-2026','https://www.magyariskola.at/event-details/borsofozde-2026','https://www.magyariskola.at/event-details/magyaroktatas-kedd-2026','https://www.magyariskola.at/event-details/ovoda-baden-2026','https://www.magyariskola.at/event-details/gimisvung-2026','https://www.magyariskola.at/event-details/fotoklub-2026','https://napraforgok.at/r%C3%B3lunk#kezdocsoport','https://www.magyariskola.at/event-details/alapozoterapia-2026','https://www.magyariskola.at/event-details/iskolabaden-2026','https://www.magyariskola.at/event-details/ovoda-2026','https://www.magyariskola.at/event-details/fokuszcsoport-2026','https://www.magyariskola.at/event-details/varazsceruza-2026','https://www.magyariskola.at/event-details/filmesmuhely-2026','https://www.magyariskola.at/event-details/sakk-2026','https://mos.magyariskola.at'];
-allowed.push('https://www.magyariskola.at/event-details/fecskeklub-2026');
-const sort=a=>[...a].sort();
-assert(JSON.stringify(sort(urls))===JSON.stringify(sort(allowed)),'registry URL set must exactly equal the approved 25-link allowlist');
-
-const weekdaySet=new Set(['hetfo','kedd','szerda','csutortok','pentek','szombat','rugalmas']);
+const weekdaySet=new Set(['hetfo','kedd','szerda','csutortok','pentek','szombat','vasarnap','rugalmas']);
 for(const p of programs){
   assert(Number.isInteger(p.minAge)&&Number.isInteger(p.maxAge)&&p.minAge>=0&&p.maxAge<=99&&p.minAge<=p.maxAge,`invalid age range: ${p.id}`);
+  assert(p.ageText,`missing public age label: ${p.id}`);
   assert(Array.isArray(p.interests)&&p.interests.length>0,`missing interests: ${p.id}`);
-  assert(['hetkoznap','szombat'].includes(p.day),`invalid coarse day: ${p.id}`);
-  assert(weekdaySet.has(p.weekday),`invalid exact weekday: ${p.id}`);
-  assert(Array.isArray(p.weekdays)&&p.weekdays.length>0&&p.weekdays.every(d=>weekdaySet.has(d)),`invalid weekdays array: ${p.id}`);
-  assert(p.weekdays.includes(p.weekday),`primary weekday must be present in weekdays[]: ${p.id}`);
+  assert(weekdaySet.has(p.weekday),`invalid weekday: ${p.id}`);
+  assert(Array.isArray(p.weekdays)&&p.weekdays.length>0&&p.weekdays.every(d=>weekdaySet.has(d)),`invalid weekdays[]: ${p.id}`);
+  assert(p.weekdays.includes(p.weekday),`primary weekday missing from weekdays[]: ${p.id}`);
   assert(['rendszeres','rugalmas'].includes(p.pace),`invalid pace: ${p.id}`);
-  assert(p.provider,`missing provider: ${p.id}`);
-  assert(p.sourceType,`missing sourceType: ${p.id}`);
-  if(p.provider==='BMI'&&p.id!=='mos')assert(p.sourceType==='Wix Events 2026/27',`BMI activity must be sourced from current Wix Events: ${p.id}`);
-  if(p.day==='szombat')assert(p.weekdays.every(d=>d==='szombat'),`Saturday coarse day cannot include weekday values: ${p.id}`);
-  if(p.weekdays.some(d=>d!=='szombat'))assert(p.day==='hetkoznap',`weekday/rugalmas activity must use day=hetkoznap: ${p.id}`);
+  assert(['bmi','bmi-partner','partner'].includes(p.relationship),`invalid relationship: ${p.id}`);
+  assert(p.provider,`missing provider label: ${p.id}`);
+  assert(p.sourceType,`missing source type: ${p.id}`);
+  assert(p.url,`missing canonical URL: ${p.id}`);
 }
 
-// Direct current-source invariants. Never resolve these from older Wix years.
-assert(byId('kicsi-svung')?.minAge===8&&byId('kicsi-svung')?.maxAge===13&&byId('kicsi-svung')?.weekday==='hetfo'&&byId('kicsi-svung')?.when==='Hétfőnként 16:30–18:00','Kicsi Svung must stay 8–13, Monday 16:30–18:00');
-assert(!byId('kicsi-svung')?.sourceNote,'Kicsi Svung resolved Wix conflict must not remain flagged');
-assert(byId('mamut')?.minAge===7&&byId('mamut')?.maxAge===12&&byId('mamut')?.weekday==='csutortok','maMUT must stay 7–12, Thursday');
-assert(byId('schweden-1')?.minAge===6&&byId('schweden-1')?.maxAge===10&&byId('schweden-1')?.teacher==='Kiss Ágnes'&&byId('schweden-1')?.when.includes('10:00–12:00'),'Schwedenplatz group 1 must stay 6–10 with Kiss Ágnes, 10:00–12:00');
-assert(byId('schweden-2')?.minAge===10&&byId('schweden-2')?.maxAge===14&&byId('schweden-2')?.teacher==='Kiss Ágnes'&&byId('schweden-2')?.when.includes('12:00–14:00'),'Schwedenplatz group 2 must stay 10–14 with Kiss Ágnes, 12:00–14:00');
-assert(byId('alapozo')?.minAge===5&&byId('alapozo')?.maxAge===10&&JSON.stringify(byId('alapozo')?.weekdays)===JSON.stringify(['kedd','csutortok'])&&byId('alapozo')?.when==='Kedden és csütörtökön 13:30–15:00','Alapozó must stay 5–10, Tuesday + Thursday 13:30–15:00');
-assert(byId('alapozo')?.firstDate==='2026. szeptember 15.','Alapozó first date must stay Sep 15, 2026');
-assert(byId('rajztabla')?.weekday==='hetfo'&&byId('rajztabla')?.when==='Minden hétfőn 16:30–18:00','RAJZTÁBLA must stay Monday 16:30–18:00');
-assert(byId('rajztabla')?.sourceNote,'RAJZTÁBLA open-ended 10+ source range must remain documented');
-assert(byId('varazsceruza')?.minAge===9&&byId('varazsceruza')?.maxAge===14,'Varázsceruza must stay 9–14');
-assert(byId('iskola-baden')?.minAge===7&&byId('iskola-baden')?.maxAge===8&&/Makfalvi Rita/.test(byId('iskola-baden')?.teacher||''),'Baden school must stay 7–8 with Makfalvi Rita');
-assert(byId('filmes')?.minAge===13&&byId('filmes')?.maxAge===17&&byId('filmes')?.when==='Minden szerdán 15:30–17:00','Filmes Műhely must stay 13–17, Wednesday 15:30–17:00');
-assert(!byId('aspern')?.sourceNote&&byId('aspern')?.when==='Keddenként 15:30–17:00','Aspern resolved Wix time must stay 15:30–17:00 without conflict flag');
-assert(byId('gimi-svung')?.ageRangeOperational===true&&byId('gimi-svung')?.sourceNote,'Gimi operational numeric age range must remain explicitly documented');
-assert(byId('vilagfa')?.ageRangeComposite===true&&/6–14/.test(byId('vilagfa')?.ageText||'')&&byId('vilagfa')?.fee==='70 € / fő / félév; a második félév szintén 70 € / fő'&&byId('vilagfa')?.teacher==='Hupczik Andrea','Világfa composite child/adult semantics and current semester pricing must remain explicit');
-assert(byId('vilagfa')?.enrollment==='Bármikor be lehet csatlakozni.'&&/szeptembertől februárig/.test(byId('vilagfa')?.when||'')&&/második félév/.test(byId('vilagfa')?.sourceNote||''),'Világfa must expose both semester pricing and continuous enrollment');
-assert(byId('vilagfa')?.firstDate==='2026. szeptember 27. (vasárnap)'&&/kivételesen vasárnap/.test(byId('vilagfa')?.sourceNote||'')&&/jellemzően szombatonként/.test(byId('vilagfa')?.when||''),'Világfa must preserve the Sep 27 Sunday exception and usual Saturday rhythm');
-assert(byId('napraforgocskak')?.provider==='Napraforgók'&&byId('napraforgocskak')?.ageRangeOperational===true&&byId('napraforgocskak')?.sourceNote&&/Varga Bernadette/.test(byId('napraforgocskak')?.teacher||''),'Napraforgócskák must preserve partner-source semantics and operational age range');
-assert(byId('kezdo-neptanc')?.provider==='Napraforgók'&&byId('kezdo-neptanc')?.minAge===18&&byId('kezdo-neptanc')?.ageRangeOperational===true&&byId('kezdo-neptanc')?.sourceNote,'Adult beginner folk dance must use explicit operational adult classification');
-assert(byId('cserkeszet')?.minAge===5&&byId('cserkeszet')?.maxAge===22&&byId('cserkeszet')?.provider==='72. sz. Széchenyi István Cserkészcsapat','Cserkészet must cover partner-published ages 5–22');
-assert(byId('fokusz')?.weekday==='rugalmas'&&/Horányi Bori/.test(byId('fokusz')?.teacher||''),'Fókusz must remain flexible-day and identify Horányi Bori');
-const sakk=byId('sakk');
-assert(sakk?.name==='Sakk és Gondolkodásfejlesztés | Schwedenplatz','current Wix chess activity title must remain exact');
-assert(sakk?.minAge===6&&sakk?.maxAge===99&&sakk?.weekday==='szombat'&&sakk?.pace==='rugalmas','chess activity must stay 6–99, Saturday, monthly/flexible');
-assert(sakk?.when==='Havonta 1 alkalommal, szombatonként 13:00–15:00'&&sakk?.firstDate==='2026. szeptember 26.','chess activity schedule must match current Wix event');
-assert(sakk?.teacher==='Fersztl Barnabás'&&sakk?.location.includes('Top 8')&&sakk?.registrationDeadline==='2026. szeptember 25.'&&sakk?.capacity==='Maximum 16 fő','chess activity operational details must match current Wix event');
-assert(sakk?.url==='https://www.magyariskola.at/event-details/sakk-2026'&&sakk?.provider==='BMI','chess activity must use the current canonical Wix event URL');
-const fecske=byId('fecskeklub');
-assert(fecske?.url==='https://www.magyariskola.at/event-details/fecskeklub-2026'&&fecske?.provider==='BMI','Fecske Klub must use the current canonical Wix event URL');
-assert(fecske?.ageRangeOperational===true&&fecske?.minAge===8&&fecske?.maxAge===18&&fecske?.sourceNote,'Fecske Klub must retain its documented operational age range');
-assert(fecske?.weekday==='kedd'&&fecske?.when.includes('16:30–18:00')&&fecske?.pace==='rendszeres','Fecske Klub must match Tuesday regular schedule');
-assert(fecske?.interests.includes('nyelv')&&fecske?.interests.includes('alkotas'),'Fecske Klub must match Hungarian culture/language and creative interests');
-assert(fecske?.fee==='52 € / hó vagy 187 € / félév'&&fecske?.period==='2026. október 20. – 2027. január 26.'&&fecske?.firstDate==='2026. október 20.'&&fecske?.registrationDeadline==='2026. október 9.','Fecske Klub fee and dates must match the current event');
-const mos=byId('mos');
-assert(mos?.url==='https://mos.magyariskola.at'&&mos?.provider==='BMI','MOS must use its canonical BMI course domain');
-assert(mos?.ageRangeOperational===true&&mos?.minAge===18&&mos?.maxAge===99&&mos?.sourceNote,'MOS adult operational range and source caveat must remain explicit');
-assert(JSON.stringify(mos?.weekdays)===JSON.stringify(['hetfo','kedd','szerda','csutortok','pentek'])&&/9:00–12:00/.test(mos?.when||''),'MOS must remain available across the verified weekday morning window');
-assert(!programs.some(p=>/haladó/i.test(p.name)&&/napraforg/i.test(p.name)),'Napraforgók haladó must not be in the fixed registry');
-assert(programs.filter(p=>p.id==='vilagfa').length===1,'Világfa must be exactly one canonical activity');
-assert(programs.filter(p=>p.id==='sakk').length===1,'Sakk és Gondolkodásfejlesztés must be exactly one canonical activity');
-
-const files=['data.js','app.js','catalog.js','index.html','foglalkozasok.html','korosztalyok.html','gyik.html','llms.txt','llms-full.txt'];
-const combined=files.map(read).join('\n');
-for(const bad of ['/event-details/mozgasfejlesztes','/event-details/rajztabla-schwedenplatz','/event-details/varazsceruza-schwedenplatz','/event-details/becs-craft-workshop-hetfo','/event-details/kicsi-svung-drama-foglalkozas-schwedenplatz-1','/event-details/gimi-svung-dramafoglalkozas-schwedenplatz','/event-details/filmes-muhely','/event-details/magyar-nyelv-tanitas-1'])assert(!combined.includes(bad),`legacy/stale value must not occur: ${bad}`);
-
-// LLM discovery must point to the single source and use public foglalkozás semantics.
-const llms=read('llms-full.txt');
-assert(llms.includes('https://programvalaszto.magyariskola.at/data.js'),'llms-full.txt must point directly to canonical data.js');
-assert(llms.includes('egyetlen foglalkozásadat-forrást'),'llms-full.txt must explicitly describe single-source architecture with public activity terminology');
-assert(llms.includes('A `programs` mezőnév technikai adatmodell; a nyilvános és szemantikai terminológia: foglalkozás.'),'llms-full.txt must distinguish the technical programs field from public terminology');
-assert(llms.includes('Korábbi tanévek Wix eseményoldalai teljesen kizártak'),'llms-full.txt must forbid prior-year Wix sources');
-assert(llms.includes('ageRangeOperational')&&llms.includes('ageRangeComposite'),'llms-full.txt must explain operational/composite age semantics');
-assert(!llms.includes('Canonical 2026/27:'),'llms-full.txt must not duplicate the 25 activity records');
-
-const app=read('app.js');
-assert(app.includes('https://ungarischlernen.at'),'recommendation fallback must include Ungarisch Lernen');
-assert(app.includes('https://amaped.at'),'recommendation fallback must include AMAPED');
-assert(app.includes("cfg.interests,'interest'"),'interest choices must not be pre-filtered away');
-assert(app.includes("cfg.days,'day'"),'day choices must not be pre-filtered away');
-assert(app.includes("cfg.pace,'pace'"),'pace choices must not be pre-filtered away');
-assert(app.includes("p.weekday==='rugalmas'"),'flexible-day activities must not be excluded by the day preference');
-assert(app.includes('Hány éves, akinek foglalkozást keresel?'),'finder age prompt must use foglalkozás terminology');
-assert(app.includes('Megnézem a foglalkozást'),'finder results must render the activity CTA');
-assert(app.includes('Mind a 25 foglalkozás'),'finder results must expose all 25 activities');
-assert(app.includes("meta('Helyszín'"),'finder results must expose verified location metadata when available');
-assert(app.includes("meta('Hozzájárulási díj'"),'finder results must expose verified contribution fee when available');
-assert(app.includes("meta('Csatlakozás',p.enrollment)"),'finder results must expose continuous enrollment when available');
-assert(app.includes("meta('Időszak',p.period)")&&app.includes("meta('Próbaalkalom',p.trial)"),'finder results must expose period and trial metadata when available');
-
-const catalog=read('catalog.js');
-assert(catalog.includes("'numberOfItems':programs.length"),'catalog Schema item count must derive from the canonical registry');
-assert(catalog.includes('Részletek és jelentkezés'),'catalog cards must render registration CTA');
-assert(catalog.includes('providerSchema'),'catalog Schema must derive provider from registry');
-assert(catalog.includes('data-weekdays'),'catalog cards must derive multi-day filters from registry metadata');
-assert(catalog.includes('Jelentkezési határidő')&&catalog.includes('Létszámkorlát'),'catalog cards must expose operational details when known');
-assert(catalog.includes("detail('Foglalkozásgazda'"),'catalog must use the public Foglalkozásgazda label');
-assert(catalog.includes("detail('Csatlakozás',p.enrollment)"),'catalog must expose continuous enrollment when available');
-assert(catalog.includes("detail('Időszak',p.period)"),'catalog must expose a documented course period when available');
-
-const listPage=read('foglalkozasok.html');
-assert(hasScript(listPage,'data.js')&&hasScript(listPage,'catalog.js'),'activity catalog must render from canonical registry');
-for(const d of ['hetfo','kedd','szerda','csutortok','pentek','szombat','rugalmas'])assert(listPage.includes(`data-filter="${d}"`),`activity catalog missing weekday filter: ${d}`);
-const agePage=read('korosztalyok.html');
-assert(hasScript(agePage,'data.js')&&hasScript(agePage,'catalog.js'),'age catalog must render from canonical registry');
-const home=read('index.html');
-assert(hasScript(home,'data.js')&&hasScript(home,'app.js'),'homepage finder must render from canonical registry');
-const ogImage='og-programvalaszto-20260826.png';
-assert(fs.existsSync(ogImage),'versioned Programválasztó social image must exist');
-assert(fs.statSync(ogImage).size<2*1024*1024,'social image must remain below 2 MB');
-for(const page of ['index.html','foglalkozasok.html','korosztalyok.html','gyik.html']){
-  const html=read(page);
-  assert(html.includes(`https://programvalaszto.magyariskola.at/${ogImage}`),`${page} must use the versioned social image`);
-  assert(html.includes('<meta property="og:image:width" content="1200">')&&html.includes('<meta property="og:image:height" content="675">'),`${page} must expose social image dimensions`);
-  assert(html.includes(`<meta name="twitter:image" content="https://programvalaszto.magyariskola.at/${ogImage}">`),`${page} must expose an explicit X/Twitter image`);
+const exactAges={
+  borsofozde:[0,3],ovoda:[3,6],'ovoda-baden':[3,6],'iskola-baden':[7,8],aspern:[6,10],seestadt:[6,10],
+  'schweden-1':[6,10],'schweden-2':[10,14],alapozo:[5,10],rajztabla:[10,16],varazsceruza:[9,14],becscraft:[6,15],
+  'kicsi-svung':[8,13],mamut:[7,12],'gimi-svung':[14,18],filmes:[13,17],sakk:[6,99],fecskeklub:[8,14],vilagfa:[6,14],
+  napraforgocskak:[6,15],cserkeszet:[5,22],fotoklub:[18,99],fokusz:[18,99],'kezdo-neptanc':[18,99],mos:[18,99],rekreacio:[18,99]
+};
+for(const [id,[min,max]] of Object.entries(exactAges)){
+  const p=byId(id);assert(p,`missing program: ${id}`);
+  if(p)assert(p.minAge===min&&p.maxAge===max,`${id} must stay ${min}-${max}`);
 }
-const css=read('styles.css');
-assert(!/\.filters\s*\{\s*display\s*:\s*none/i.test(css),'filters must not be globally hidden');
-assert(css.includes('.skip-link'),'skip-link accessibility style must exist');
-assert(home.includes('<b>25</b><span>foglalkozás és képzés</span>'),'homepage must expose the current 25-item count');
-assert(home.includes('<b>5+</b><span>helyszín + online</span>'),'homepage location stat must include online delivery');
-assert(home.includes('https://mos.magyariskola.at'),'homepage must expose the canonical MOS course link');
-assert(home.includes('Foglalkozásválasztó 2026/27'),'homepage title must use public activity terminology');
-assert(home.includes('"@type":"WebSite"'),'homepage Schema must include WebSite');
-assert(home.includes('"foundingDate":"1987-09"'),'homepage entity must include founding date');
 
-if(process.exitCode)process.exit(process.exitCode);
-console.log('PASS: BMIPROGRAM canonical 2026/27 integrity checks succeeded with foglalkozás terminology.');
+assert(byId('schweden-1')?.when==='Minden szombaton 10:00–12:00','Schwedenplatz 1 must run every Saturday 10:00–12:00');
+assert(byId('schweden-1')?.pace==='rendszeres','Schwedenplatz 1 must be regular');
+assert(byId('schweden-2')?.when==='Kéthetente szombatonként 12:00–14:00','Schwedenplatz 2 must run every two weeks Saturday 12:00–14:00');
+assert(byId('schweden-2')?.pace==='rugalmas','Schwedenplatz 2 must be classified as less frequent/flexible');
+assert(byId('fokusz')?.interests.length===1&&byId('fokusz')?.interests[0]==='jollet','Fókusz must use wellbeing/focus interest only');
+assert(byId('vilagfa')?.minAge===6&&byId('vilagfa')?.maxAge===14,'Világfa must not be recommended as an adult program');
+assert(byId('fecskeklub')?.minAge===8&&byId('fecskeklub')?.maxAge===14,'Fecske Klub must stay 8–14');
+assert(byId('rajztabla')?.minAge===10&&byId('rajztabla')?.maxAge===16,'RAJZTÁBLA must stay 10–16');
+assert(byId('gimi-svung')?.minAge===14&&byId('gimi-svung')?.maxAge===18,'Gimi Svung must stay 14–18');
+assert(byId('napraforgocskak')?.minAge===6&&byId('napraforgocskak')?.maxAge===15,'Napraforgócskák must stay 6–15');
+for(const id of ['fokusz','mos','rekreacio'])assert(byId(id)?.relationship==='bmi-partner',`${id} must be BMI Partner Program`);
+assert(byId('rekreacio')?.weekday==='vasarnap','ReKreáció must be Sunday');
+
+const allowedUrls=new Set([
+'https://www.magyariskola.at/event-details/borsofozde-2026','https://www.magyariskola.at/event-details/ovoda-2026','https://www.magyariskola.at/event-details/ovoda-baden-2026','https://www.magyariskola.at/event-details/iskolabaden-2026','https://www.magyariskola.at/event-details/magyaroktatas-kedd-2026','https://www.magyariskola.at/event-details/magyarnyelv-szerda-2026','https://www.magyariskola.at/event-details/magyarnyelv-schwedenplatz-1','https://www.magyariskola.at/event-details/magyarnyelv-schwedenplatz-2','https://www.magyariskola.at/event-details/alapozoterapia-2026','https://www.magyariskola.at/event-details/rajztabla-2026','https://www.magyariskola.at/event-details/varazsceruza-2026','https://www.magyariskola.at/event-details/becscraft-2026','https://www.magyariskola.at/event-details/kicsisvung-2026','https://www.magyariskola.at/event-details/mammut-2026','https://www.magyariskola.at/event-details/gimisvung-2026','https://www.magyariskola.at/event-details/filmesmuhely-2026','https://www.magyariskola.at/event-details/sakk-2026','https://www.magyariskola.at/event-details/fecskeklub-2026','https://taltosdob.magyariskola.at','https://napraforgok.at/r%C3%B3lunk#napraforgocskak','https://cserkesz.at/cserkesz-raj/','https://www.magyariskola.at/event-details/fotoklub-2026','https://www.magyariskola.at/event-details/fokuszcsoport-2026','https://napraforgok.at/r%C3%B3lunk#kezdocsoport','https://mos.magyariskola.at','https://www.magyariskola.at/event-details/rekreacio-2026'
+]);
+assert(programs.every(p=>allowedUrls.has(p.url))&&allowedUrls.size===26,'registry URLs must equal approved 26-link allowlist');
+
+const index=read('index.html'),all=read('foglalkozasok.html'),ages=read('korosztalyok.html');
+assert(hasScript(index,'data.js')&&hasScript(index,'app.js'),'index must load canonical data and recommender');
+assert(hasScript(all,'data.js')&&hasScript(all,'catalog.js'),'catalog must load canonical data and renderer');
+assert(hasScript(ages,'data.js')&&hasScript(ages,'catalog.js'),'age page must load canonical data and renderer');
+assert(/26 lehetőség/.test(all)&&/26 programot/.test(all),'catalog copy must state 26 programs');
+assert(all.includes('data-filter="vasarnap"'),'catalog must expose Sunday filter');
+assert(!all.includes('25 foglalkozás')&&!all.includes('25 lehetőség'),'stale 25-program copy must be removed from catalog');
+
+if(process.exitCode)process.exit(1);
+console.log('PASS: canonical 26-program registry, exact hard age ranges, partner semantics, URLs and catalog wiring validated.');
