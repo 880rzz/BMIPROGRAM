@@ -36,8 +36,8 @@ assert(whatsapp.includes('typography-polish.css?v='),'Shared typography polish l
 assert(whatsapp.includes('transit-routing.js?v=')&&whatsapp.includes('result-travel-polish.js?v='),'Scheduled transit/travel loader contract missing.');
 assert(typography.includes('.hero h1')&&typography.includes('.section-head h2')&&typography.includes('white-space:normal!important'),'Heading scale / safe line-break contract missing.');
 assert(typography.includes('text-wrap:balance')&&typography.includes('@media(max-width:720px)'),'Responsive balanced-heading contract missing.');
-assert(transit.includes('vao.demo.hafas.de/gate')&&transit.includes("outFrwd:false")&&transit.includes('numF:6'),'VAO scheduled transit query contract missing.');
-assert(transit.includes('target-60')&&transit.includes('median(')&&transit.includes('nextOccurrence'),'Transit must use the program occurrence and preceding 60-minute window.');
+assert(transit.includes('fahrplan.oebb.at/bin/mgate.exe')&&transit.includes("outFrwd:false")&&transit.includes('numF:6'),'ÖBB scheduled transit query contract missing.');
+assert(transit.includes('LocGeoPos')&&transit.includes('target-60')&&transit.includes('median(')&&transit.includes('nextOccurrence'),'Transit must resolve stops and use the program occurrence plus preceding 60-minute window.');
 assert(travel.includes('container-type:inline-size')&&travel.includes('@container(max-width:390px)'),'Responsive travel panel container contract missing.');
 assert(travel.includes('Átlagos menetidő')&&travel.includes('Nem a keresés pillanatát használjuk.'),'Scheduled-time travel explanation missing.');
-console.log('PASS: 28-program copy, multi-select, identified address, scheduled transit, responsive travel panel, recognizable WhatsApp, typography and footer contracts are consistent.');
+console.log('PASS: 28-program copy, multi-select, identified address, scheduled ÖBB transit, responsive travel panel, recognizable WhatsApp, typography and footer contracts are consistent.');
