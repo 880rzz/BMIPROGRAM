@@ -1,14 +1,14 @@
 # Bécsi Magyar Iskola – Foglalkozások 2026/2027
 
 > A Bécsi Magyar Iskola (BMI, Wiener Ungarische Schule) hivatalos foglalkozásválasztója.
-> A 2026/2027-es programválasztó 27 aktuális BMI-, BMI Partner- és partnerprogrammal dolgozik, kicsiknek és nagyoknak.
-> Az életkor kemény feltétel; az igény a legerősebb rangsorolási szempont, utána a nap és a rendszeresség következik.
+> A 2026/2027-es programválasztó 28 aktuális BMI-, BMI Partner- és partnerprogrammal dolgozik, kicsiknek és nagyoknak.
+> Az életkor kemény feltétel; az igény a legerősebb rangsorolási szempont, ezt követi a választott nap, a rendszeresség, az aktuális bécsi dátum/idő, és ha a látogató megadja, a távolság/utazási idő.
 
 ## Gépi adatforrások
 - Alap registry: https://programvalaszto.magyariskola.at/data.js
-- Zenebona partnerrekord: https://programvalaszto.magyariskola.at/zenebona-program.js
+- Partnerrekordok (Zenebona és Örömzene): https://programvalaszto.magyariskola.at/zenebona-program.js
 - Foglalkozásválasztó: https://programvalaszto.magyariskola.at/
-- Összes 27 foglalkozás: https://programvalaszto.magyariskola.at/foglalkozasok.html
+- Összes 28 foglalkozás: https://programvalaszto.magyariskola.at/foglalkozasok.html
 - Korosztályok: https://programvalaszto.magyariskola.at/korosztalyok.html
 - Gyakori kérdések: https://programvalaszto.magyariskola.at/gyik.html
 - Részletes gépi leírás: https://programvalaszto.magyariskola.at/llms-full.txt
@@ -26,11 +26,24 @@
 - Befizetési határidő: 2026. október 1.
 - Foglalkozásvezető: Mag. Dapin Hajnalka Judit, zenepedagógus és zeneterapeuta
 - Kapcsolat: +43 699 11569467 · hajnide@yahoo.de
-- Ajánlási profil: magyar nyelv, közösség, zene, mondókák, mozgás, ritmus, szülő–gyermek kapcsolódás
+
+## Együtt dobban Bécs – Közös örömzene
+- Canonical részletes oldal: https://www.magyariskola.at/event-details/oromzene-2026
+- Kapcsolat: BMI Partner Program
+- Korosztály: minden korosztály
+- Időpont: havonta 1 alkalom, jellemzően szombaton 18:00-tól
+- Első alkalom: 2026. szeptember 27., vasárnap 18:00
+- Helyszín: Bécsi Magyar Iskola, Schwedenplatz 2 / Laurenzerberg 5, 1010 Wien
+- Díj: 5 € / fő; az előtte zajló gyermek dobos foglalkozás résztvevőinek ingyenes
+
+## Ajánlási szabály
+- A „Még ma” találat csak igazoltan az aktuális napon megtartott és még el nem kezdődött program lehet.
+- Konkrét dátumsorral rendelkező programnál a rendszer az eventDates mezőt használja, nem pusztán a hét napját.
+- Ha a látogató címet vagy böngészős helyzetet ad meg, a rendszer a távolságot és becsült utazási időt is figyelembe veszi; a címet nem tárolja tartósan.
+- Az autós menetidő útvonalalapú becslés, élő forgalmi adat nélkül; a gyalogos idő becslés.
 
 ## Forrásszabály
 - Korábbi tanévek Wix eseményoldalai nem használhatók aktuális 2026/27-es foglalkozásadatként.
 - BMI saját foglalkozásnál az aktuális hivatalos 2026/27-es magyariskola.at oldal az irányadó.
 - Partnerprogramnál az adott partner saját aktuális oldala az elsődleges.
-- A Zenebona esetén a canonical forrás: https://zenebona.magyariskola.at
 - Ha egy részlet nincs aktuális forrásban megerősítve, azt nem szabad régi oldalból kipótolni.
