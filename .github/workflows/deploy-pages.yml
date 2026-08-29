@@ -43,7 +43,7 @@ jobs:
           node scripts/validate-schema-age.mjs
           node scripts/validate-matching.mjs
           node scripts/validate-copy.mjs
-      - name: Zenebona release contracts
+      - name: Partner and recommender release contracts
         run: |
           set -euo pipefail
           grep -Fq 'id:"zenebona"' zenebona-program.js
@@ -52,10 +52,15 @@ jobs:
           grep -Fq 'paymentDeadline:"2026. október 1."' zenebona-program.js
           grep -Fq 'Fleschgasse 15/1/1' zenebona-program.js
           grep -Fq 'Mag. Dapin Hajnalka Judit' zenebona-program.js
-          grep -Fq 'Mind a 27 foglalkozás és képzés' app.js
+          grep -Fq 'id:"oromzene"' zenebona-program.js
+          grep -Fq 'https://www.magyariskola.at/event-details/oromzene-2026' zenebona-program.js
+          grep -Fq 'eventDates' zenebona-program.js
+          grep -Fq "programs.length+' foglalkozás és képzés" app.js
+          grep -Fq 'Még ma' app.js
+          grep -Fq 'travelInfo' app.js
           grep -Fq "detail('Befizetési határidő',p.paymentDeadline)" catalog.js
-          grep -Fq '27 aktuális' llms.txt
-          echo 'PASS: 27-program Zenebona contracts are intact.'
+          grep -Fq '28 aktuális' llms.txt
+          echo 'PASS: 28-program partner, date and travel contracts are intact.'
 
   build:
     needs: validate
@@ -95,15 +100,16 @@ jobs:
           BMIPROGRAM_RELEASE=${release_id}
           GIT_SHA=${GITHUB_SHA}
           SCHOOL_YEAR=2026/2027
-          PROGRAM_COUNT=27
+          PROGRAM_COUNT=28
           ZENEBONA_CANONICAL=https://zenebona.magyariskola.at
+          OROMZENE_CANONICAL=https://www.magyariskola.at/event-details/oromzene-2026
           SOURCE_POLICY=canonical-current-2026-27-only
-          RECOMMENDER=age-hard-need-first-bmi-partner-fallback
+          RECOMMENDER=age-hard-need-first-date-time-travel-aware
           BUILT_AT=${built_at}
           EOF
 
           cat > _site/version.json <<EOF
-          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":27,"zenebonaCanonical":"https://zenebona.magyariskola.at","sourcePolicy":"canonical-current-2026-27-only","recommender":"age-hard-need-first-bmi-partner-fallback","builtAt":"${built_at}"}
+          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"zenebonaCanonical":"https://zenebona.magyariskola.at","oromzeneCanonical":"https://www.magyariskola.at/event-details/oromzene-2026","sourcePolicy":"canonical-current-2026-27-only","recommender":"age-hard-need-first-date-time-travel-aware","builtAt":"${built_at}"}
           EOF
 
           test -f _site/index.html
@@ -112,8 +118,9 @@ jobs:
           test -f _site/app.js
           test -f _site/catalog.js
           test "$(cat _site/CNAME)" = "programvalaszto.magyariskola.at"
-          grep -Fq 'PROGRAM_COUNT=27' _site/release.txt
+          grep -Fq 'PROGRAM_COUNT=28' _site/release.txt
           grep -Fq 'id:"zenebona"' _site/zenebona-program.js
+          grep -Fq 'id:"oromzene"' _site/zenebona-program.js
 
       - uses: actions/upload-pages-artifact@v3
         with:
@@ -135,7 +142,7 @@ jobs:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Verify production release and Zenebona assets
+      - name: Verify production release and recommender assets
         shell: bash
         run: |
           set -euo pipefail
@@ -148,11 +155,15 @@ jobs:
             sleep 10
           done
           grep -Fq "GIT_SHA=${expected_sha}" <<<"${release}"
-          grep -Fq 'PROGRAM_COUNT=27' <<<"${release}"
+          grep -Fq 'PROGRAM_COUNT=28' <<<"${release}"
           zen="$(fetch /zenebona-program.js)"
           grep -Fq 'id:"zenebona"' <<<"${zen}"
+          grep -Fq 'id:"oromzene"' <<<"${zen}"
           grep -Fq 'https://zenebona.magyariskola.at' <<<"${zen}"
+          grep -Fq 'https://www.magyariskola.at/event-details/oromzene-2026' <<<"${zen}"
           app="$(fetch /app.js)"
-          grep -Fq 'Mind a 27 foglalkozás és képzés' <<<"${app}"
+          grep -Fq "programs.length+' foglalkozás és képzés" <<<"${app}"
+          grep -Fq 'Még ma' <<<"${app}"
+          grep -Fq 'travelInfo' <<<"${app}"
           for path in / /foglalkozasok.html /korosztalyok.html /gyik.html /data.js /zenebona-program.js /app.js /catalog.js /llms.txt /llms-full.txt /release.txt /version.json; do fetch "${path}" >/dev/null; done
-          echo "EXACT-LIVE: ${expected_sha} is serving on ${base} with Zenebona and 27 programs."
+          echo "EXACT-LIVE: ${expected_sha} is serving on ${base} with 28 programs and date/travel-aware recommendation assets."
