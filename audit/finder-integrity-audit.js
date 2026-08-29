@@ -18,10 +18,8 @@ function norm(s) { return String(s || '').toLowerCase().normalize('NFD').replace
 function loadDatabase() {
   const sandbox = { window: {}, console };
   vm.createContext(sandbox);
-  const data = fs.readFileSync(`${ROOT}/data.js`, 'utf8');
-  vm.runInContext(data, sandbox, {filename:'data.js'});
+  vm.runInContext(fs.readFileSync(`${ROOT}/data.js`, 'utf8'), sandbox, {filename:'data.js'});
   if (!sandbox.window.BMI_FINDER) throw new Error('window.BMI_FINDER missing after loading data.js');
-
   const addonPath = `${ROOT}/zenebona-program.js`;
   if (fs.existsSync(addonPath)) {
     sandbox.document = undefined;
@@ -55,6 +53,7 @@ function auditDatabase(cfg) {
   const dayIds = new Set((cfg.days || []).map(x => x.id).filter(x => x !== 'mindegy'));
   const paceIds = new Set((cfg.pace || []).map(x => x.id).filter(x => x !== 'mindegy'));
   const validRelationships = new Set(['bmi','bmi-partner','partner']);
+  const validScheduleModes = new Set(['fixed','appointment']);
   const ids = programs.map(p => p.id);
 
   if (!programs.length) err('DB_EMPTY', 'A programadatbázis üres.');
@@ -76,12 +75,22 @@ function auditDatabase(cfg) {
     if (!Array.isArray(p.needs) || !p.needs.length) err('NO_NEED', 'A programhoz nincs ajánlási need hozzárendelve.', ctx);
     else p.needs.forEach(x => { if (!needIds.has(x)) err('UNKNOWN_NEED', `Ismeretlen need: ${x}`, ctx); });
     if (!paceIds.has(p.pace)) err('PACE', `Érvénytelen pace: ${p.pace}`, ctx);
-    if (!dayIds.has(p.weekday)) err('WEEKDAY', `Érvénytelen elsődleges weekday: ${p.weekday}`, ctx);
-    if (!Array.isArray(p.weekdays) || !p.weekdays.length) err('WEEKDAYS', 'Hiányzó weekdays lista.', ctx);
-    else {
-      p.weekdays.forEach(x => { if (!dayIds.has(x)) err('UNKNOWN_WEEKDAY', `Ismeretlen weekdays érték: ${x}`, ctx); });
-      if (p.weekday && !p.weekdays.includes(p.weekday)) err('WEEKDAY_MISMATCH', 'A weekday nincs benne a weekdays listában.', ctx);
+
+    const scheduleMode = p.scheduleMode || 'fixed';
+    if (!validScheduleModes.has(scheduleMode)) err('SCHEDULE_MODE', `Érvénytelen scheduleMode: ${scheduleMode}`, ctx);
+    if (scheduleMode === 'appointment') {
+      if (p.exactDayEligible !== false) err('APPOINTMENT_EXACT_MATCH', 'Egyeztetéses programnál exactDayEligible=false szükséges.', ctx);
+      if (Array.isArray(p.weekdays) && p.weekdays.length) warn('APPOINTMENT_WEEKDAYS', 'Egyeztetéses programhoz konkrét weekdays van megadva; ellenőrizd, hogy ez valóban kötött napot jelent-e.', ctx);
+      note('APPOINTMENT_SCHEDULE', `${p.id}: egyeztetéses időpont, konkrét napra és „Még ma” keresésre nem tekinthető exact találatnak.`);
+    } else {
+      if (!dayIds.has(p.weekday)) err('WEEKDAY', `Érvénytelen elsődleges weekday: ${p.weekday}`, ctx);
+      if (!Array.isArray(p.weekdays) || !p.weekdays.length) err('WEEKDAYS', 'Hiányzó weekdays lista.', ctx);
+      else {
+        p.weekdays.forEach(x => { if (!dayIds.has(x)) err('UNKNOWN_WEEKDAY', `Ismeretlen weekdays érték: ${x}`, ctx); });
+        if (p.weekday && !p.weekdays.includes(p.weekday)) err('WEEKDAY_MISMATCH', 'A weekday nincs benne a weekdays listában.', ctx);
+      }
     }
+
     if (!validRelationships.has(p.relationship)) err('RELATIONSHIP', `Ismeretlen relationship: ${p.relationship}`, ctx);
     if (!/^https:\/\//i.test(String(p.url || ''))) err('URL_HTTPS', 'A program URL-je nem HTTPS.', ctx);
     if (/2024|2025|2025\/26/.test(String(p.sourceType || ''))) warn('STALE_SOURCE', 'Korábbi tanévre utaló sourceType.', {...ctx, sourceType:p.sourceType});
@@ -103,14 +112,14 @@ function auditDatabase(cfg) {
       dates.forEach(d => {
         if (!/^20\d{2}-\d{2}-\d{2}$/.test(d)) err('EVENT_DATE_FORMAT', `Érvénytelen eventDate formátum: ${d}`, ctx);
         const wd = weekdayFromIso(d);
-        if (wd && Array.isArray(p.weekdays) && !p.weekdays.includes(wd)) err('EVENT_DATE_WEEKDAY', `${d} (${wd}) nincs összhangban a weekdays mezővel.`, ctx);
+        if (scheduleMode !== 'appointment' && wd && Array.isArray(p.weekdays) && !p.weekdays.includes(wd)) err('EVENT_DATE_WEEKDAY', `${d} (${wd}) nincs összhangban a weekdays mezővel.`, ctx);
       });
     }
 
     const schedule = norm(p.when);
     const isIrregular = /havonta|kethetente|ritkabban|alkalom|egyeztet/.test(schedule);
-    if (isIrregular && !dates.length) warn('IRREGULAR_WITHOUT_DATES', 'Ritka/havi/kétheti program eventDates nélkül nem ajánlható megbízhatóan a „Még ma” keresésben.', ctx);
-    if (extractStartMinutes(p.when) == null) warn('NO_START_TIME', 'A kezdési idő nem olvasható ki a when mezőből; a „Még ma” logika nem tud pontos érkezést számolni.', {...ctx, when:p.when});
+    if (scheduleMode !== 'appointment' && isIrregular && !dates.length) warn('IRREGULAR_WITHOUT_DATES', 'Ritka/havi/kétheti program eventDates nélkül nem ajánlható megbízhatóan a „Még ma” keresésben.', ctx);
+    if (scheduleMode !== 'appointment' && extractStartMinutes(p.when) == null) warn('NO_START_TIME', 'A kezdési idő nem olvasható ki a when mezőből; a „Még ma” logika nem tud pontos érkezést számolni.', {...ctx, when:p.when});
   });
 
   (cfg.needs || []).forEach(n => {
@@ -129,17 +138,13 @@ function auditLogic() {
   if (!/scoreProgram/.test(app) || !/_travel\.minutes/.test(app)) err('TRAVEL_SCORE', 'A távolság/utazási idő nem igazolható a pontozási logikában.');
   if (/geocode\(v,false\)/.test(app)) warn('USER_GEOCODE_GLOBAL', 'A felhasználói cím geokódolása nincs Ausztriára preferálva; rövid irányítószám vagy utcanév rossz országba oldódhat fel.');
   if (/cfg\.programs\.push\(\{id:'zenebona'/.test(app)) warn('DUPLICATED_PROGRAM_SOURCE', 'Az app.js külön Zenebona fallback rekordot tartalmaz; ez eltérhet a fő adatforrástól.');
-  if (/p\.weekday==='rugalmas'/.test(app)) warn('DEAD_WEEKDAY_BRANCH', 'A dayEligible logikában weekday="rugalmas" ág szerepel, miközben a program weekday mező napnevet vár. Valószínűleg holt vagy félrevezető ág.');
+  if (/p\.weekday==='rugalmas'/.test(app)) warn('DEAD_WEEKDAY_BRANCH', 'A dayEligible logikában legacy weekday="rugalmas" ág maradt; ezt a következő app.js tisztításnál el kell távolítani.');
   if (!/eventDateKeys/.test(app) || !/todayStatus/.test(app)) err('TODAY_LOGIC', 'Nem igazolható az explicit eventDates-alapú „Még ma” döntési logika.');
   if (!/haversine/.test(app)) err('DISTANCE_FALLBACK', 'Nincs kimutatható geometriai távolság-fallback.');
 }
 
 function renderReport() {
-  const report = {
-    generatedAt: new Date().toISOString(),
-    summary: {errors:errors.length, warnings:warnings.length, info:info.length},
-    errors, warnings, info
-  };
+  const report = {generatedAt:new Date().toISOString(),summary:{errors:errors.length,warnings:warnings.length,info:info.length},errors,warnings,info};
   fs.mkdirSync(`${ROOT}/audit/output`, {recursive:true});
   fs.writeFileSync(`${ROOT}/audit/output/finder-audit.json`, JSON.stringify(report, null, 2));
   const rows = [...errors, ...warnings, ...info].map(x => `- **${x.severity.toUpperCase()} · ${x.code}** — ${x.message}${x.context ? ` \`${JSON.stringify(x.context)}\`` : ''}`);
