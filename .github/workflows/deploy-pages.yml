@@ -35,6 +35,7 @@ jobs:
           node --check address-autocomplete.js
           node --check catalog.js
           node --check whatsapp-widget.js
+          node --check result-travel-polish.js
           node --check scripts/validate.mjs
           node --check scripts/validate-schema-age.mjs
           node --check scripts/validate-matching.mjs
@@ -79,6 +80,10 @@ jobs:
           grep -Fq "detail('Befizetési határidő',p.paymentDeadline)" catalog.js
           grep -Fq 'bmi-whatsapp-widget' whatsapp-widget.js
           grep -Fq 'width:58px!important' whatsapp-widget.js
+          grep -Fq 'result-travel-polish.js?v=' whatsapp-widget.js
+          grep -Fq 'Vizsgált érkezési időablak' result-travel-polish.js
+          grep -Fq 'forgalom nélküli alap útvonalidő' result-travel-polish.js
+          grep -Fq 'nem rendelkezik hiteles, időablak-specifikus transit menetidő-adatforrással' result-travel-polish.js
           for html in index.html foglalkozasok.html korosztalyok.html gyik.html; do
             grep -Fq 'whatsapp-widget.js?v=' "$html"
             grep -Fq 'marketing@kozpontiszovetseg.at' "$html"
@@ -87,7 +92,7 @@ jobs:
           done
           ! grep -Fq '<h4>Zenebona</h4>' gyik.html
           grep -Fq '28 aktuális' llms.txt
-          echo 'PASS: multi-select, identified address, safe transit, route map, WhatsApp and footer contracts are intact.'
+          echo 'PASS: multi-select, identified address, safe transit, truthful travel panel, WhatsApp and footer contracts are intact.'
 
   build:
     needs: validate
@@ -134,12 +139,12 @@ jobs:
           ZENEBONA_CANONICAL=https://zenebona.magyariskola.at
           OROMZENE_CANONICAL=https://www.magyariskola.at/event-details/oromzene-2026
           SOURCE_POLICY=canonical-current-2026-27-only
-          RECOMMENDER=age-hard-multineed-multiday-multipace-identified-address-route-transit-safe
+          RECOMMENDER=age-hard-multineed-multiday-multipace-identified-address-route-transit-safe-truthful-travel-panel
           BUILT_AT=${built_at}
           EOF
 
           cat > _site/version.json <<EOF
-          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"zenebonaCanonical":"https://zenebona.magyariskola.at","oromzeneCanonical":"https://www.magyariskola.at/event-details/oromzene-2026","sourcePolicy":"canonical-current-2026-27-only","recommender":"age-hard-multineed-multiday-multipace-identified-address-route-transit-safe","builtAt":"${built_at}"}
+          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"zenebonaCanonical":"https://zenebona.magyariskola.at","oromzeneCanonical":"https://www.magyariskola.at/event-details/oromzene-2026","sourcePolicy":"canonical-current-2026-27-only","recommender":"age-hard-multineed-multiday-multipace-identified-address-route-transit-safe-truthful-travel-panel","builtAt":"${built_at}"}
           EOF
 
           test -f _site/index.html
@@ -150,12 +155,14 @@ jobs:
           test -f _site/address-autocomplete.js
           test -f _site/catalog.js
           test -f _site/whatsapp-widget.js
+          test -f _site/result-travel-polish.js
           test "$(cat _site/CNAME)" = "programvalaszto.magyariskola.at"
           grep -Fq 'PROGRAM_COUNT=28' _site/release.txt
           grep -Fq 'id:"zenebona"' _site/zenebona-program.js
           grep -Fq 'id:"oromzene"' _site/zenebona-program.js
           grep -Fq 'address-autocomplete.js?v=' _site/index.html
           grep -Fq 'route-map.js?v=' _site/index.html
+          grep -Fq 'Vizsgált érkezési időablak' _site/result-travel-polish.js
           for html in _site/index.html _site/foglalkozasok.html _site/korosztalyok.html _site/gyik.html; do grep -Fq 'whatsapp-widget.js?v=' "$html"; done
 
       - uses: actions/upload-pages-artifact@v3
@@ -210,6 +217,10 @@ jobs:
           wa="$(fetch /whatsapp-widget.js)"
           grep -Fq 'bmi-whatsapp-widget' <<<"${wa}"
           grep -Fq 'width:58px!important' <<<"${wa}"
+          grep -Fq 'result-travel-polish.js?v=' <<<"${wa}"
+          travel="$(fetch /result-travel-polish.js)"
+          grep -Fq 'Vizsgált érkezési időablak' <<<"${travel}"
+          grep -Fq 'forgalom nélküli alap útvonalidő' <<<"${travel}"
           for path in / /foglalkozasok.html /korosztalyok.html /gyik.html; do
             page="$(fetch "${path}")"
             grep -Fq 'whatsapp-widget.js?v=' <<<"${page}"
@@ -217,5 +228,5 @@ jobs:
             grep -Fq 'Be Smart Kids Club csapata' <<<"${page}"
             grep -Fq 'https://business.vipach.at' <<<"${page}"
           done
-          for path in / /foglalkozasok.html /korosztalyok.html /gyik.html /data.js /zenebona-program.js /app.js /route-map.js /address-autocomplete.js /catalog.js /whatsapp-widget.js /llms.txt /llms-full.txt /release.txt /version.json; do fetch "${path}" >/dev/null; done
-          echo "EXACT-LIVE: ${expected_sha} is serving with multi-select, identified address, safe transit, route-map, shared WhatsApp and footer assets."
+          for path in / /foglalkozasok.html /korosztalyok.html /gyik.html /data.js /zenebona-program.js /app.js /route-map.js /address-autocomplete.js /catalog.js /whatsapp-widget.js /result-travel-polish.js /llms.txt /llms-full.txt /release.txt /version.json; do fetch "${path}" >/dev/null; done
+          echo "EXACT-LIVE: ${expected_sha} is serving with multi-select, identified address, safe transit, route-map, truthful travel panel, shared WhatsApp and footer assets."
