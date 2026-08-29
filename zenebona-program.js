@@ -58,7 +58,7 @@ function normalizeRouteLocation(p){
 }
 cfg.programs.forEach(normalizeRouteLocation);
 
-/* Official Austrian public holidays + Vienna/Niederösterreich school breaks used by the 2026/27 finder. */
+/* Official 2026/27 Vienna + Niederösterreich school calendar. */
 cfg.calendarRules={
   timezone:'Europe/Vienna',
   schoolYear:{start:'2026-09-07',end:'2027-07-02'},
@@ -66,8 +66,9 @@ cfg.calendarRules={
     '2026-01-01','2026-01-06','2026-04-06','2026-05-01','2026-05-14','2026-05-25','2026-06-04','2026-08-15','2026-10-26','2026-11-01','2026-12-08','2026-12-25','2026-12-26',
     '2027-01-01','2027-01-06','2027-03-29','2027-05-01','2027-05-06','2027-05-17','2027-05-27','2027-08-15','2027-10-26','2027-11-01','2027-12-08','2027-12-25','2027-12-26'
   ],
+  schoolFreeDates:['2026-11-02','2026-11-15'],
   schoolBreaks:[
-    ['2026-10-27','2026-11-02'],
+    ['2026-10-27','2026-10-31'],
     ['2026-12-24','2027-01-06'],
     ['2027-01-30','2027-02-06'],
     ['2027-03-20','2027-03-29'],
@@ -75,6 +76,7 @@ cfg.calendarRules={
     ['2027-07-03','2027-09-05']
   ],
   regions:['Wien','Niederösterreich'],
+  sourceUrls:['https://www.bildung-wien.gv.at/schulen/Schulferien-und-schulfreie-Tage/Schuljahr-2026-2027.html','https://www.bmb.gv.at/Themen/schule/schulpraxis/termine/ferientermine_26_27.html'],
   note:'Schulautonome Tage sind nicht zentral vorhersagbar und müssen bei Bekanntgabe separat ergänzt werden.'
 };
 
@@ -83,11 +85,18 @@ function dateUtc(iso){var p=String(iso).split('-').map(Number);return new Date(D
 function between(x,a,b){return x>=a&&x<=b}
 function isClosed(iso){
   if(cfg.calendarRules.publicHolidays.indexOf(iso)!==-1)return true;
+  if(cfg.calendarRules.schoolFreeDates.indexOf(iso)!==-1)return true;
   return cfg.calendarRules.schoolBreaks.some(function(r){return between(iso,r[0],r[1])});
 }
 function parseFirstDate(p){
   var m=norm(p.firstDate||'').match(/(20\d{2})\.\s*([a-z]+)\s+(\d{1,2})/),months={januar:1,februar:2,marcius:3,aprilis:4,majus:5,junius:6,julius:7,augusztus:8,szeptember:9,oktober:10,november:11,december:12};
   return m&&months[m[2]]?m[1]+'-'+String(months[m[2]]).padStart(2,'0')+'-'+String(Number(m[3])).padStart(2,'0'):null;
+}
+function isIrregularSchedule(p){var t=norm(p.when);return /kethetente|havonta|ritkabban|meghirdetett\s+idopont|egyeztetett\s+sav|jelentkezes\s+utan/.test(t)}
+function isWeeklySchedule(p){
+  if(isIrregularSchedule(p))return false;
+  var t=norm(p.when);
+  return /minden\s+|hetfonkent|keddenkent|szerdankent|csutortokonkent|pentekenkent|szombatonkent|vasarnaponkent|kedden\s+es\s+csutortokon/.test(t);
 }
 function recurringDates(p,endOverride){
   var wd={vasarnap:0,hetfo:1,kedd:2,szerda:3,csutortok:4,pentek:5,szombat:6};
@@ -101,7 +110,10 @@ function recurringDates(p,endOverride){
 }
 
 var fokus=findProgram('fokusz');
-if(fokus){fokus.scheduleMode='appointment';fokus.weekday=null;fokus.weekdays=[];fokus.exactDayEligible=false;}
+if(fokus){fokus.scheduleMode='appointment';fokus.weekday=null;fokus.weekdays=[];fokus.exactTodayEligible=false;}
+
+var mos=findProgram('mos');
+if(mos){mos.scheduleMode='arranged';mos.exactTodayEligible=false;}
 
 var napra=findProgram('napraforgocskak');
 if(napra){
@@ -114,20 +126,48 @@ var vilagfa=findProgram('vilagfa');
 if(vilagfa){
   vilagfa.weekday='szombat';vilagfa.weekdays=['szombat','vasarnap'];vilagfa.when='Havonta 1 alkalom 18:00-tól';
   vilagfa.period='2026/27-es tanév; alkalmak: 09.27. · 10.24. · 11.28. · 01.16. · 02.13. · 03.13. · 04.17. · 05.22.; évzáró: 06.19. / 06.26., egyeztetés alatt';
-  vilagfa.eventDates=sharedDates.slice();vilagfa.tentativeEventDates=['2027-06-19','2027-06-26'];vilagfa.firstDate='2026. szeptember 27., vasárnap 18:00';
+  vilagfa.eventDates=sharedDates.slice();vilagfa.tentativeEventDates=['2027-06-19','2027-06-26'];vilagfa.firstDate='2026. szeptember 27., vasárnap 18:00';vilagfa.scheduleMode='irregular';
 }
 var orom=findProgram('oromzene');
-if(orom){orom.eventDates=sharedDates.slice();orom.tentativeEventDates=['2027-06-19','2027-06-26'];orom.when='Havonta 1 alkalom 18:00-tól';}
+if(orom){orom.eventDates=sharedDates.slice();orom.tentativeEventDates=['2027-06-19','2027-06-26'];orom.when='Havonta 1 alkalom 18:00-tól';orom.scheduleMode='irregular';}
 
-/* Give normal weekly courses explicit valid teaching dates, so “Még ma” cannot fire during official breaks/holidays. */
+var schweden2=findProgram('schweden-2');
+if(schweden2){
+  schweden2.scheduleMode='irregular';
+  var schweden2First=parseFirstDate(schweden2);schweden2.eventDates=schweden2First?[schweden2First]:[];
+  if(!schweden2.eventDates.length)schweden2.exactTodayEligible=false;
+}
+var sakk=findProgram('sakk');
+if(sakk){
+  sakk.scheduleMode='irregular';
+  var sakkFirst=parseFirstDate(sakk);sakk.eventDates=sakkFirst?[sakkFirst]:[];
+  if(!sakk.eventDates.length)sakk.exactTodayEligible=false;
+}
+var cserkeszet=findProgram('cserkeszet');
+if(cserkeszet){cserkeszet.scheduleMode='irregular';cserkeszet.exactTodayEligible=false;}
+
+var rekreacio=findProgram('rekreacio');
+if(rekreacio){
+  rekreacio.scheduleMode='irregular';
+  rekreacio.eventDates=['2026-10-04','2026-10-18','2026-11-15','2026-11-29','2026-12-13'];
+  rekreacio.blockedEventDates=['2026-11-15'];
+}
+
+/* Only truly weekly courses receive generated dates. Irregular wording can never expand to every matching weekday. */
 cfg.programs.forEach(function(p){
   if(Array.isArray(p.eventDates)&&p.eventDates.length)return;
-  if(p.scheduleMode==='appointment')return;
-  var t=norm(p.when);
-  var weekly=/minden\s+|hetfonkent|keddenkent|szerdankent|csutortokonkent|pentekenkent|szombatonkent|vasarnaponkent/.test(t);
-  if(!weekly)return;
+  if(p.scheduleMode==='appointment'||p.scheduleMode==='arranged'||p.scheduleMode==='irregular')return;
+  if(!isWeeklySchedule(p))return;
   var end=p.id==='fecskeklub'?'2027-01-26':null;
   p.eventDates=recurringDates(p,end);
+});
+
+/* Remaining irregular programs without concrete dates are explicitly prevented from becoming “Még ma” exact matches. */
+cfg.programs.forEach(function(p){
+  if(p.scheduleMode==='appointment'||p.scheduleMode==='arranged')return;
+  if(!isIrregularSchedule(p))return;
+  if(Array.isArray(p.eventDates)&&p.eventDates.length)return;
+  p.scheduleMode='irregular';p.exactTodayEligible=false;
 });
 
 var partnerIds=['zenebona','oromzene','mos','fokusz','rekreacio'];
