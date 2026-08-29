@@ -47,12 +47,12 @@ if(!cfg.programs.some(function(p){return p.id==='oromzene'})){
     needs:["kozosseg-identitas","tanc-hagyomany","mozgas-fejlodes"],
     painPoint:"Olyan bécsi magyar közösségi programot keresel, ahol gyermekek, fiatalok, szülők és felnőttek együtt kapcsolódhatnak, és a zenéléshez nem kell előképzettség.",
     outcome:"Közös dobolás, éneklés, magyar dallamok, generációkat összekötő közösségi élmény és felszabadult örömzenélés teljesítménykényszer nélkül.",
-    day:"vasarnap",
-    weekday:"vasarnap",
-    weekdays:["vasarnap"],
+    day:"szombat",
+    weekday:"szombat",
+    weekdays:["szombat","vasarnap"],
     pace:"rugalmas",
-    when:"Havi közösségi alkalom; első alkalom: 2026. szeptember 27., vasárnap 18:00",
-    period:"2026/27-es tanév; első alkalom 2026. szeptember 27. 18:00",
+    when:"Havonta 1 alkalom, általában szombaton 18:00-tól; első alkalom: 2026. szeptember 27., vasárnap 18:00",
+    period:"2026/27-es tanév; tervezett alkalmak: 2026.09.27. vasárnap 18:00; 2026.10.24. szombat 18:00; 2026.11.28. szombat 18:00; 2027.01.16. szombat 18:00; 2027.02.13. szombat 18:00; 2027.03.13. szombat 18:00; 2027.04.17. szombat 18:00; 2027.05.22. szombat 18:00; évzáró: 2027.06.19. vagy 06.26., egyeztetés alatt",
     location:"Bécsi Magyar Iskola, Schwedenplatz 2. / Laurenzerberg 5., 1010 Wien",
     language:"Magyar",
     teacher:"Regélő Fehér Táltos Hagyományőrző Egyesület Dobcsapata",
@@ -65,7 +65,7 @@ if(!cfg.programs.some(function(p){return p.id==='oromzene'})){
     provider:"Regélő Fehér Táltos Hagyományőrző Egyesület",
     relationship:"bmi-partner",
     sourceType:"Wix Events 2026/27 · BMI Partner Program",
-    why:"Közös dobolás, éneklés és magyar dallamok minden korosztálynak. Zenei vagy dobos előképzettség nem szükséges; saját hangszer hozható."
+    why:"Közös dobolás, éneklés és magyar dallamok minden korosztálynak. Havi egy alkalom, jellemzően szombat esténként 18:00-tól; zenei vagy dobos előképzettség nem szükséges, saját hangszer hozható."
   });
 }
 
