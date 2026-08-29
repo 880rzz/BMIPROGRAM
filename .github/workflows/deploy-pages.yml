@@ -62,17 +62,22 @@ jobs:
           grep -Fq 'selectedPaces' app.js
           grep -Fq "'days',3" app.js
           grep -Fq "'paces',2" app.js
+          grep -Fq 'data-mode="transit"' app.js
+          grep -Fq 'transitExternal' app.js
+          grep -Fq 'identifiedOrigin(input)' app.js
           grep -Fq 'data-route-origin-lat' app.js
           grep -Fq 'Még ma' app.js
           grep -Fq 'travelInfo' app.js
           grep -Fq 'routeData(card)' route-map.js
           grep -Fq 'overview=full&geometries=geojson' route-map.js
+          grep -Fq "data.mode==='transit'" route-map.js
+          grep -Fq "travelmode='+mode" route-map.js
           grep -Fq 'addressSuggestions' address-autocomplete.js
           grep -Fq 'countrycode=AT' address-autocomplete.js
           grep -Fq 'Azonosított cím:' address-autocomplete.js
           grep -Fq "detail('Befizetési határidő',p.paymentDeadline)" catalog.js
           grep -Fq '28 aktuális' llms.txt
-          echo 'PASS: multi-select, live address, route map, date and travel contracts are intact.'
+          echo 'PASS: multi-select, identified address, safe transit, route map, date and travel contracts are intact.'
 
   build:
     needs: validate
@@ -118,12 +123,12 @@ jobs:
           ZENEBONA_CANONICAL=https://zenebona.magyariskola.at
           OROMZENE_CANONICAL=https://www.magyariskola.at/event-details/oromzene-2026
           SOURCE_POLICY=canonical-current-2026-27-only
-          RECOMMENDER=age-hard-multineed-multiday-multipace-route-aware
+          RECOMMENDER=age-hard-multineed-multiday-multipace-identified-address-route-transit-safe
           BUILT_AT=${built_at}
           EOF
 
           cat > _site/version.json <<EOF
-          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"zenebonaCanonical":"https://zenebona.magyariskola.at","oromzeneCanonical":"https://www.magyariskola.at/event-details/oromzene-2026","sourcePolicy":"canonical-current-2026-27-only","recommender":"age-hard-multineed-multiday-multipace-route-aware","builtAt":"${built_at}"}
+          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"zenebonaCanonical":"https://zenebona.magyariskola.at","oromzeneCanonical":"https://www.magyariskola.at/event-details/oromzene-2026","sourcePolicy":"canonical-current-2026-27-only","recommender":"age-hard-multineed-multiday-multipace-identified-address-route-transit-safe","builtAt":"${built_at}"}
           EOF
 
           test -f _site/index.html
@@ -180,13 +185,17 @@ jobs:
           app="$(fetch /app.js)"
           grep -Fq 'selectedDays' <<<"${app}"
           grep -Fq 'selectedPaces' <<<"${app}"
+          grep -Fq 'data-mode="transit"' <<<"${app}"
+          grep -Fq 'transitExternal' <<<"${app}"
+          grep -Fq 'identifiedOrigin(input)' <<<"${app}"
           grep -Fq 'data-route-origin-lat' <<<"${app}"
           route="$(fetch /route-map.js)"
           grep -Fq 'routeData(card)' <<<"${route}"
+          grep -Fq "data.mode==='transit'" <<<"${route}"
           address="$(fetch /address-autocomplete.js)"
           grep -Fq 'Azonosított cím:' <<<"${address}"
           index="$(fetch /)"
           grep -Fq 'route-map.js?v=' <<<"${index}"
           grep -Fq 'address-autocomplete.js?v=' <<<"${index}"
           for path in / /foglalkozasok.html /korosztalyok.html /gyik.html /data.js /zenebona-program.js /app.js /route-map.js /address-autocomplete.js /catalog.js /llms.txt /llms-full.txt /release.txt /version.json; do fetch "${path}" >/dev/null; done
-          echo "EXACT-LIVE: ${expected_sha} is serving with multi-select, live address identification and route-map assets."
+          echo "EXACT-LIVE: ${expected_sha} is serving with multi-select, identified address, safe transit and route-map assets."
