@@ -36,7 +36,40 @@ if(!cfg.programs.some(function(p){return p.id==='zenebona'})){
   });
 }
 
-var partnerIds=['zenebona','mos','fokusz','rekreacio'];
+if(!cfg.programs.some(function(p){return p.id==='oromzene'})){
+  cfg.programs.push({
+    id:"oromzene",
+    name:"Együtt dobban Bécs – Közös örömzene | Schwedenplatz",
+    minAge:0,
+    maxAge:99,
+    ageText:"Minden korosztály – kicsik és nagyok",
+    interests:["nyelv","mozgas"],
+    needs:["kozosseg-identitas","tanc-hagyomany","mozgas-fejlodes"],
+    painPoint:"Olyan bécsi magyar közösségi programot keresel, ahol gyermekek, fiatalok, szülők és felnőttek együtt kapcsolódhatnak, és a zenéléshez nem kell előképzettség.",
+    outcome:"Közös dobolás, éneklés, magyar dallamok, generációkat összekötő közösségi élmény és felszabadult örömzenélés teljesítménykényszer nélkül.",
+    day:"vasarnap",
+    weekday:"vasarnap",
+    weekdays:["vasarnap"],
+    pace:"rugalmas",
+    when:"Havi közösségi alkalom; első alkalom: 2026. szeptember 27., vasárnap 18:00",
+    period:"2026/27-es tanév; első alkalom 2026. szeptember 27. 18:00",
+    location:"Bécsi Magyar Iskola, Schwedenplatz 2. / Laurenzerberg 5., 1010 Wien",
+    language:"Magyar",
+    teacher:"Regélő Fehér Táltos Hagyományőrző Egyesület Dobcsapata",
+    teacherContact:"Hupczik Andrea · +43 670 6539011 · taltosdob@gmail.com",
+    fee:"5 € / fő; a közvetlenül előtte zajló gyermek dobos foglalkozás résztvevőinek ingyenes",
+    capacity:"10–30 fő",
+    duration:"1,5 óra",
+    firstDate:"2026. szeptember 27., vasárnap 18:00",
+    url:"https://www.magyariskola.at/event-details/oromzene-2026",
+    provider:"Regélő Fehér Táltos Hagyományőrző Egyesület",
+    relationship:"bmi-partner",
+    sourceType:"Wix Events 2026/27 · BMI Partner Program",
+    why:"Közös dobolás, éneklés és magyar dallamok minden korosztálynak. Zenei vagy dobos előképzettség nem szükséges; saját hangszer hozható."
+  });
+}
+
+var partnerIds=['zenebona','oromzene','mos','fokusz','rekreacio'];
 var partners=partnerIds.map(function(id){return cfg.programs.find(function(p){return p.id===id})}).filter(Boolean);
 if(typeof document==='undefined'||!partners.length||document.getElementById('partner-programok'))return;
 
