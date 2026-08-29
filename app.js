@@ -69,3 +69,15 @@ async function showResults(){progress(5);var needSummary=selectedNeeds().map(nee
 var stat=document.querySelector('.stats .stat:first-child b');if(stat)stat.textContent=programs.length;
 renderAge();
 })();
+(function(){
+  function addFooterCredits(){
+    var wrap=document.querySelector('.site-foot .wrap');
+    if(!wrap||wrap.querySelector('.footer-support-credit'))return;
+    var block=document.createElement('div');
+    block.className='footer-support-credit';
+    block.style.cssText='margin-top:20px;padding-top:18px;border-top:1px solid rgba(255,255,255,.16);font-size:.92rem;line-height:1.7';
+    block.innerHTML='<p style="margin:0 0 6px"><strong>Hibajelentés:</strong> Bánhalmi Norbert · <a href="mailto:marketing@kozpontiszovetseg.at">marketing@kozpontiszovetseg.at</a></p><p style="margin:0">Fejlesztette a <a href="https://rolunk.at/aktualis/a-fiataloknak-ma-mar-bizonyitek-kell-egy-becsi-kreativ-kozosseg-uj-generaciot-epit/" target="_blank" rel="noopener">Be Smart Kids Club csapata</a> · <a href="https://business.vipach.at" target="_blank" rel="noopener">business.vipach.at</a></p>';
+    wrap.appendChild(block);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',addFooterCredits);else addFooterCredits();
+})();
