@@ -70,7 +70,12 @@ assert(/p\.exactTodayEligible===false/.test(app),'runtime today logic must honor
 assert(/routing\.openstreetmap\.de/.test(app)&&/profile=mode==='walk'\?'foot':'car'/.test(app),'runtime must use distinct OSM car/foot route profiles');
 assert(/countrycode=AT/.test(app),'destination/user Austrian geocoding must use an AT filter');
 assert(/state\.origin&&!p\._travel\)return false/.test(app),'missing route must not certify exact-today reachability');
-assert(/p\._travel\.estimated\)return false/.test(app),'fallback estimate must not certify exact-today reachability');
-assert(/app\.js\?v=20260830-reality-route-v3/.test(index),'index must cache-bust the current reality-route runtime');
+assert(/transitExternal\|\|p\._travel\.estimated/.test(app),'transit and fallback estimates must not certify exact-today reachability');
+assert(/identifiedOrigin\(input\)/.test(app),'selected address coordinates must be reused instead of silently geocoding a different result');
+assert(/data-mode="transit"/.test(app),'public-transit choice must exist');
+assert(/transitExternal:true/.test(app),'public transit must be explicitly modeled as external/fail-safe without fabricated duration');
+assert(/app\.js\?v=[^"']+/.test(index),'index must use an explicit cache-busted app.js asset');
+assert(/route-map\.js\?v=[^"']+/.test(index),'index must use an explicit cache-busted route-map asset');
+assert(/address-autocomplete\.js\?v=[^"']+/.test(index),'index must use an explicit cache-busted address autocomplete asset');
 if(process.exitCode)process.exit(1);
-console.log('PASS: 28 current programs validated with schedule, real-route, fail-safe reachability and cache contracts.');
+console.log('PASS: 28 current programs validated with multi-select, identified address, real OSM routes, transit fail-safe reachability and cache contracts.');
