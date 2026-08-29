@@ -55,6 +55,7 @@ Az életkor kemény feltétel. Az életkorban megfelelő lehetőségek között 
 - Nyelv: magyar
 - Ritmus: havonta 1 alkalom, jellemzően szombaton 18:00-tól
 - Első alkalom: 2026. szeptember 27., vasárnap 18:00
+- A 2026. szeptember 27-i első alkalom kivételesen vasárnapra esik.
 - Megerősített dátumok: 2026.09.27.; 2026.10.24.; 2026.11.28.; 2027.01.16.; 2027.02.13.; 2027.03.13.; 2027.04.17.; 2027.05.22.
 - Júniusi évzáró: 2027.06.19. vagy 06.26., még egyeztetés alatt, ezért nincs megerősített `eventDates` elemként kezelve.
 - Helyszín: Bécsi Magyar Iskola, Schwedenplatz 2 / Laurenzerberg 5, 1010 Wien
