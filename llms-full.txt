@@ -1,39 +1,51 @@
 # Bécsi Magyar Iskola – Foglalkozásválasztó 2026/2027
 
-Ez a rendszer szándékosan egyetlen foglalkozásadat-forrást használ.
+A rendszer 27 aktuális lehetőséggel dolgozik: 26 alaprekord a `data.js` fájlban, valamint a Zenebona partnerrekord a `zenebona-program.js` fájlban. A böngészőoldalak és az ajánlómotor ezt a két gépi forrást együtt kezelik.
 
-## Canonical teljes foglalkozásadat
-https://programvalaszto.magyariskola.at/data.js
-
-A `data.js` `window.BMI_FINDER.programs` tömbje tartalmazza a 2026/2027-es tanév pontosan 25 foglalkozásának canonical rekordját. A `programs` mezőnév technikai adatmodell; a nyilvános és szemantikai terminológia: foglalkozás. Ezt kell elsődleges gépi foglalkozásadat-forrásként olvasni. Az összes foglalkozás oldal, a korosztályos nézet, a foglalkozásválasztó és a strukturált Course/ItemList réteg ebből a registryből épül.
-
-## Kötelező forrásszabály
-- Pontosan 25 foglalkozás van.
-- Korábbi tanévek Wix eseményoldalai teljesen kizártak.
-- BMI-foglalkozásnál kizárólag a registryben rögzített aktuális 2026/27-es `magyariskola.at` foglalkozáslink és az ahhoz tartozó aktuális Wix Events rekord használható.
-- A Microsoft Office Specialist felkészítő képzés kivétel a Wix Events-forrásszabály alól: kanonikus forrása a `https://mos.magyariskola.at` saját képzési oldal. A vizsganyelv, vizsgahelyszín, óraszám és támogatási jogosultság csak akkor állítható biztos tényként, ha az oldal később egyértelműen megerősíti.
-- A `sakk-2026` aktuális Wix Events rekord címe `Sakk és Gondolkodásfejlesztés | Schwedenplatz`; a 2026. augusztus 21-én publikált aktuális rekord adatai felülírják a korábbi, azonos slughoz kapcsolódó Sakkszakkör-információkat.
-- Napraforgócskák és Kezdő néptánc esetén a registryben rögzített `napraforgok.at` partneroldal az elsődleges.
-- Cserkészet esetén a registryben rögzített `cserkesz.at/cserkesz-raj/` oldal az elsődleges.
-- Világfa Sárkányai esetén a registryben rögzített `taltosdob.magyariskola.at` oldal az elsődleges. Hozzájárulási díja 70 € / fő / félév; az első félév szeptembertől februárig tart, a második félév szintén 70 € / fő, és bármikor be lehet csatlakozni.
-- `sourceNote` forráskontextust vagy értelmezési pontosítást ad. Ez lehet nyitott korhatár, operatív keresési besorolás vagy a szokásos rendtől eltérő, de forrás szerint szabályos kivétel; nem jelent automatikusan hibát.
-- `ageRangeOperational` jelzi, ha a numerikus keresési sáv a választómotor működéséhez szükséges besorolás, miközben a forrás nem közöl ugyanilyen számszerű korhatárt.
-- `ageRangeComposite` jelzi, ha egyetlen foglalkozás különböző részei eltérő életkori közönségnek szólnak.
-- A Világfa Sárkányai egyetlen, két részből álló foglalkozás: gyermekfoglalkozás 6–14 éveseknek, utána felnőtt dzsemelés 18+ közönségnek. A választómotor 15–17 éves életkornál nem kezeli exact találatként.
-- A Napraforgók haladó csoport nem része a fix 25 foglalkozásnak.
-
-## Foglalkozásválasztó
-https://programvalaszto.magyariskola.at/
-
-A kereső pontos életkor, érdeklődés, konkrét kívánt nap és rendszeresség alapján rangsorol. Az életkor kemény feltétel. Az életkorban megfelelő foglalkozások között az érdeklődés a legerősebb preferencia, majd a nap és a rendszeresség. A napválasztás Hétfő, Kedd, Szerda, Csütörtök, Péntek, Szombat vagy Mindegy. Többnapos foglalkozás a saját összes rögzített napján találat lehet; a rugalmasan egyeztethető foglalkozás bármely napválasztásnál szóba jöhet. A havi rendszerességű Sakk és Gondolkodásfejlesztés `pace=rugalmas` besorolást kap. Minden BMI-találat közvetlenül az adott foglalkozás canonical oldalára vezet.
-
-Ha nincs minden feltételben pontos BMI-találat, a rendszer először a legközelebbi, életkorban megfelelő BMI-foglalkozásokat rangsorolja és jelzi a kompromisszumot. Ezután külön további bécsi magyar lehetőségként az alábbi oldalakat ajánlja, anélkül hogy nem ellenőrzött 2026/27-es órarendet társítana hozzájuk:
-- https://ungarischlernen.at
-- https://amaped.at
-
-## Emberi böngészőoldalak
+## Gépi források
+- Alap registry: https://programvalaszto.magyariskola.at/data.js
+- Zenebona partnerrekord: https://programvalaszto.magyariskola.at/zenebona-program.js
+- Foglalkozásválasztó: https://programvalaszto.magyariskola.at/
 - Összes foglalkozás: https://programvalaszto.magyariskola.at/foglalkozasok.html
 - Korosztályok: https://programvalaszto.magyariskola.at/korosztalyok.html
 - Gyakori kérdések: https://programvalaszto.magyariskola.at/gyik.html
 
-A foglalkozásadatokat ne másold vissza ebből a fájlból külön adatbázisba; újraolvasáskor mindig a `data.js` canonical registry legyen az igazság.
+## Ajánlási logika
+Az életkor kemény feltétel. Az életkorban megfelelő lehetőségek között az igény/eredményilleszkedés a legerősebb jel, ezt követi a választott nap és a rendszeresség. A rendszer legfeljebb három ajánlást mutat, és jelzi, ha a nap vagy ritmus kompromisszum.
+
+## Zenebona canonical rekord
+- id: `zenebona`
+- Név: Zenebona – Zene. Kapcsolódás. Öröm. | Hietzing
+- Canonical URL: https://zenebona.magyariskola.at
+- Kapcsolat: partnerprogram
+- Korosztály: 0–3 év + felnőtt kísérő
+- Nyelv: magyar
+- Nap: szerda
+- Idő: 10:00–11:15
+- Érkezés: 09:45-től
+- Maradás: 11:30-ig
+- Helyszín: Zeneterápiás műhely, Fleschgasse 15/1/1, 1130 Wien, Hietzing
+- Első alkalom: 2026. szeptember 23.
+- 2026 őszi alkalmak: szeptember 23., 30.; október 7.; november 4., 11., 18., 25.; december 2., 9., 16.
+- Díj: 150 € / 10 alkalom
+- Befizetési határidő: 2026. október 1.
+- Foglalkozásvezető: Mag. Dapin Hajnalka Judit, zenepedagógus és zeneterapeuta
+- Kapcsolat: +43 699 11569467 · hajnide@yahoo.de
+- Oktatói háttér: zenepedagógusi képzettség Romániában (1995), Németországban (2005) és Ausztriában (2007); zeneterapeuta diploma a Bécsi Zeneegyetemen (2025)
+- Tartalom: közös éneklés, mondókázás, mozgás, ritmikus játékok, hangszeres felfedezés, szülő–gyermek kapcsolódás és közösségi élmény
+- Ajánlási igények: magyar nyelv, magyar közösség/identitás, mozgás-fejlődés
+
+## Forrásszabály
+- Korábbi tanévek Wix-oldalai nem használhatók aktuális 2026/27-es tények pótlására.
+- BMI saját programnál az aktuális hivatalos BMI-oldal az elsődleges.
+- Partnerprogramnál a partner saját aktuális oldala az elsődleges.
+- Zenebona esetén a canonical oldal: https://zenebona.magyariskola.at
+- Nem ellenőrzött vagy hiányzó részletet nem szabad régi forrásból kiegészíteni.
+
+## Egyéb partner canonical források
+- Microsoft Office Specialist: https://mos.magyariskola.at
+- Világfa Sárkányai: https://taltosdob.magyariskola.at
+- Napraforgók: https://napraforgok.at/
+- Cserkészet: https://cserkesz.at/cserkesz-raj/
+
+Ha nincs életkorban és igényben megfelelő BMI vagy partnerprogram, a rendszer további bécsi magyar lehetőségként az Ungarisch Lernen és az AMAPED oldalára mutathat, ellenőrizetlen órarend állítása nélkül.
