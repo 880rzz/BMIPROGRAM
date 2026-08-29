@@ -26,6 +26,8 @@ a.target='_blank';
 a.rel='noopener noreferrer';
 a.setAttribute('aria-label','Csatlakozás a BMI WhatsApp szülői közösségéhez');
 a.innerHTML='<svg class="bmi-wa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="16" cy="16" r="15" fill="#25D366"/><path fill="#fff" d="M23.2 8.7A9.85 9.85 0 0 0 7.7 20.6L6.3 25.7l5.2-1.4A9.85 9.85 0 0 0 26 15.6a9.78 9.78 0 0 0-2.8-6.9Zm-7.1 14.9a8.1 8.1 0 1 1 6.9 3.8Zm4.4-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.4-.7-2.4-1.3-3.3-2.9-.2-.3.2-.3.6-1.1.1-.2 0-.4 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2 0 1.3.9 2.5 1.1 2.7.1.2 1.9 2.9 4.6 4 .6.3 1.1.4 1.5.6.6.2 1.2.2 1.7.1.5-.1 1.4-.6 1.6-1.2.2-.6.2-1.1.2-1.2-.1-.2-.3-.3-.5-.4Z"/></svg><span class="bmi-wa-label">Szülői WhatsApp közösség<small>Csatlakozás egy kattintással</small></span>';
+var footerHeadings=document.querySelectorAll('.site-foot h4');
+footerHeadings.forEach(function(h){if(h.textContent.trim()==='Hibajelentés és fejlesztés'&&h.parentElement)h.parentElement.classList.add('footer-support-credit')});
 if(document.getElementById('wizard')&&!document.querySelector('script[data-travel-polish]')){
   var p=document.createElement('script');p.src='result-travel-polish.js?v=20260830-travel-panel-v1';p.defer=true;p.dataset.travelPolish='1';document.head.appendChild(p);
 }
