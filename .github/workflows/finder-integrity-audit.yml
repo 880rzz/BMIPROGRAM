@@ -1,0 +1,42 @@
+name: Finder integrity audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data.js'
+      - 'zenebona-program.js'
+      - 'app.js'
+      - 'audit/**'
+      - '.github/workflows/finder-integrity-audit.yml'
+  pull_request:
+    paths:
+      - 'data.js'
+      - 'zenebona-program.js'
+      - 'app.js'
+      - 'audit/**'
+      - '.github/workflows/finder-integrity-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run finder integrity audit
+        run: node audit/finder-integrity-audit.js
+      - name: Upload audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: finder-integrity-audit
+          path: audit/output/
+          if-no-files-found: warn
