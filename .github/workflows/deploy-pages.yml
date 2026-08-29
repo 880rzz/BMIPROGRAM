@@ -34,6 +34,7 @@ jobs:
           node --check route-map.js
           node --check address-autocomplete.js
           node --check catalog.js
+          node --check whatsapp-widget.js
           node --check scripts/validate.mjs
           node --check scripts/validate-schema-age.mjs
           node --check scripts/validate-matching.mjs
@@ -76,8 +77,17 @@ jobs:
           grep -Fq 'countrycode=AT' address-autocomplete.js
           grep -Fq 'Azonosított cím:' address-autocomplete.js
           grep -Fq "detail('Befizetési határidő',p.paymentDeadline)" catalog.js
+          grep -Fq 'bmi-whatsapp-widget' whatsapp-widget.js
+          grep -Fq 'width:58px!important' whatsapp-widget.js
+          for html in index.html foglalkozasok.html korosztalyok.html gyik.html; do
+            grep -Fq 'whatsapp-widget.js?v=' "$html"
+            grep -Fq 'marketing@kozpontiszovetseg.at' "$html"
+            grep -Fq 'Be Smart Kids Club csapata' "$html"
+            grep -Fq 'https://business.vipach.at' "$html"
+          done
+          ! grep -Fq '<h4>Zenebona</h4>' gyik.html
           grep -Fq '28 aktuális' llms.txt
-          echo 'PASS: multi-select, identified address, safe transit, route map, date and travel contracts are intact.'
+          echo 'PASS: multi-select, identified address, safe transit, route map, WhatsApp and footer contracts are intact.'
 
   build:
     needs: validate
@@ -113,6 +123,7 @@ jobs:
             sed -E -i "s#address-autocomplete\.js\?v=[^\"']+#address-autocomplete.js?v=${short_sha}#g" "$html"
             sed -E -i "s#catalog\.js\?v=[^\"']+#catalog.js?v=${short_sha}#g" "$html"
             sed -E -i "s#zenebona-program\.js\?v=[^\"']+#zenebona-program.js?v=${short_sha}#g" "$html"
+            sed -E -i "s#whatsapp-widget\.js\?v=[^\"']+#whatsapp-widget.js?v=${short_sha}#g" "$html"
           done
 
           cat > _site/release.txt <<EOF
@@ -138,12 +149,14 @@ jobs:
           test -f _site/route-map.js
           test -f _site/address-autocomplete.js
           test -f _site/catalog.js
+          test -f _site/whatsapp-widget.js
           test "$(cat _site/CNAME)" = "programvalaszto.magyariskola.at"
           grep -Fq 'PROGRAM_COUNT=28' _site/release.txt
           grep -Fq 'id:"zenebona"' _site/zenebona-program.js
           grep -Fq 'id:"oromzene"' _site/zenebona-program.js
           grep -Fq 'address-autocomplete.js?v=' _site/index.html
           grep -Fq 'route-map.js?v=' _site/index.html
+          for html in _site/index.html _site/foglalkozasok.html _site/korosztalyok.html _site/gyik.html; do grep -Fq 'whatsapp-widget.js?v=' "$html"; done
 
       - uses: actions/upload-pages-artifact@v3
         with:
@@ -194,8 +207,15 @@ jobs:
           grep -Fq "data.mode==='transit'" <<<"${route}"
           address="$(fetch /address-autocomplete.js)"
           grep -Fq 'Azonosított cím:' <<<"${address}"
-          index="$(fetch /)"
-          grep -Fq 'route-map.js?v=' <<<"${index}"
-          grep -Fq 'address-autocomplete.js?v=' <<<"${index}"
-          for path in / /foglalkozasok.html /korosztalyok.html /gyik.html /data.js /zenebona-program.js /app.js /route-map.js /address-autocomplete.js /catalog.js /llms.txt /llms-full.txt /release.txt /version.json; do fetch "${path}" >/dev/null; done
-          echo "EXACT-LIVE: ${expected_sha} is serving with multi-select, identified address, safe transit and route-map assets."
+          wa="$(fetch /whatsapp-widget.js)"
+          grep -Fq 'bmi-whatsapp-widget' <<<"${wa}"
+          grep -Fq 'width:58px!important' <<<"${wa}"
+          for path in / /foglalkozasok.html /korosztalyok.html /gyik.html; do
+            page="$(fetch "${path}")"
+            grep -Fq 'whatsapp-widget.js?v=' <<<"${page}"
+            grep -Fq 'marketing@kozpontiszovetseg.at' <<<"${page}"
+            grep -Fq 'Be Smart Kids Club csapata' <<<"${page}"
+            grep -Fq 'https://business.vipach.at' <<<"${page}"
+          done
+          for path in / /foglalkozasok.html /korosztalyok.html /gyik.html /data.js /zenebona-program.js /app.js /route-map.js /address-autocomplete.js /catalog.js /whatsapp-widget.js /llms.txt /llms-full.txt /release.txt /version.json; do fetch "${path}" >/dev/null; done
+          echo "EXACT-LIVE: ${expected_sha} is serving with multi-select, identified address, safe transit, route-map, shared WhatsApp and footer assets."
