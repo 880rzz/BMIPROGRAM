@@ -73,6 +73,29 @@ if(!cfg.programs.some(function(p){return p.id==='oromzene'})){
   });
 }
 
+function norm(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
+function normalizeRouteLocation(p){
+  if(p.routeLocation||!p.location||/online/i.test(p.location))return;
+  var n=norm(p.location);
+  if(/schwedenplatz|laurenzerberg/.test(n))p.routeLocation='Schwedenplatz 2, 1010 Wien, Austria';
+  else if(/fleschgasse/.test(n))p.routeLocation='Fleschgasse 15/1/1, 1130 Wien, Austria';
+  else if(/friedrich[- ]schiller[- ]platz/.test(n))p.routeLocation='Friedrich-Schiller-Platz 1, 2500 Baden, Austria';
+  else if(/johannesgasse/.test(n)&&/2500/.test(n))p.routeLocation='Johannesgasse 9, 2500 Baden, Austria';
+  else if(/wulzendorfstrasse|wulzendorfstraße/.test(n))p.routeLocation='Wulzendorfstraße 1, 1220 Wien, Austria';
+  else if(/sonnenallee/.test(n))p.routeLocation='Sonnenallee 116, 1220 Wien, Austria';
+  else if(/alliiertenstrasse|alliiertenstraße/.test(n))p.routeLocation='Alliiertenstraße 2, 1020 Wien, Austria';
+}
+
+cfg.programs.forEach(normalizeRouteLocation);
+
+var fokus=cfg.programs.find(function(p){return p.id==='fokusz'});
+if(fokus){
+  fokus.scheduleMode='appointment';
+  fokus.weekday=null;
+  fokus.weekdays=[];
+  fokus.exactDayEligible=false;
+}
+
 var partnerIds=['zenebona','oromzene','mos','fokusz','rekreacio'];
 var partners=partnerIds.map(function(id){return cfg.programs.find(function(p){return p.id===id})}).filter(Boolean);
 if(typeof document==='undefined'||!partners.length||document.getElementById('partner-programok'))return;
