@@ -1,0 +1,40 @@
+name: One-shot stale program count repair
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Repair stale 27-count copy without touching school-year notation
+        shell: bash
+        run: |
+          set -euo pipefail
+          files=(index.html gyik.html korosztalyok.html foglalkozasok.html)
+          perl -0pi -e 's/27 BMI- és partnerprogram/28 BMI- és partnerprogram/g; s/27 aktuális BMI- és partnerprogram/28 aktuális BMI- és partnerprogram/g; s/<b>27<\/b><span>foglalkozás és képzés/<b>28<\/b><span>foglalkozás és képzés/g; s/27 programos/28 programos/g; s/27 aktuális BMI-, BMI Partner-/28 aktuális BMI-, BMI Partner-/g; s/27 aktuális program/28 aktuális program/g; s/27 aktuális lehetőség/28 aktuális lehetőség/g; s/27 rekordos/28 rekordos/g; s/Mind a 27 lehetőség/Mind a 28 lehetőség/g; s/27 foglalkozása és képzése/28 foglalkozása és képzése/g; s/Mind a 27 aktuális/Mind a 28 aktuális/g; s/27 aktuális 2026\/2027-es/28 aktuális 2026\/2027-es/g; s/<strong>27 program<\/strong>/<strong>28 program<\/strong>/g; s/id="count">27 /id="count">28 /g; s/headline-accent">27 lehetőség/headline-accent">28 lehetőség/g' "${files[@]}"
+
+          stale='27 BMI- és partnerprogram|27 aktuális BMI- és partnerprogram|<b>27</b><span>foglalkozás és képzés|27 programos|27 aktuális BMI-, BMI Partner-|27 aktuális program|27 aktuális lehetőség|27 rekordos|Mind a 27 lehetőség|27 foglalkozása és képzése|Mind a 27 aktuális|27 aktuális 2026/2027-es|<strong>27 program</strong>|id="count">27 |headline-accent">27 lehetőség'
+          if grep -E -n "$stale" "${files[@]}"; then
+            echo 'Stale program count remains.' >&2
+            exit 1
+          fi
+      - name: Commit repaired copy and remove one-shot workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm .github/workflows/fix-program-count.yml
+          git add index.html gyik.html korosztalyok.html foglalkozasok.html
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Fix stale 27-program copy across public pages'
+          git push
