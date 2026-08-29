@@ -38,9 +38,9 @@ if(!cfg.programs.some(function(p){return p.id==='zenebona'})){
 
 var partnerIds=['zenebona','mos','fokusz','rekreacio'];
 var partners=partnerIds.map(function(id){return cfg.programs.find(function(p){return p.id===id})}).filter(Boolean);
-if(!partners.length||document.getElementById('partner-programok'))return;
+if(typeof document==='undefined'||!partners.length||document.getElementById('partner-programok'))return;
 
-function esc(s){return String(s||'').replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function esc(s){return String(s||'').replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c]})}
 function card(p){
   return '<article class="tile partner-program-card">'+
     '<span class="partner-badge">BMI Partner Program</span>'+
@@ -66,7 +66,7 @@ var anchor=null;
 for(var i=0;i<aboutSections.length;i++){
   if(aboutSections[i].querySelector('.kicker')&&aboutSections[i].querySelector('.kicker').textContent.indexOf('A Bécsi Magyar Iskoláról')!==-1){anchor=aboutSections[i];break}
 }
-if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(section,anchor)}else{document.querySelector('main')?.appendChild(section)}
+if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(section,anchor)}else{var main=document.querySelector('main');if(main)main.appendChild(section)}
 
 if(!document.getElementById('partner-program-styles')){
   var style=document.createElement('style');
