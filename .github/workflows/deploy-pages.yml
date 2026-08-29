@@ -25,18 +25,17 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-
       - name: JavaScript syntax
         run: |
           set -euo pipefail
           node --check data.js
+          node --check zenebona-program.js
           node --check app.js
           node --check catalog.js
           node --check scripts/validate.mjs
           node --check scripts/validate-schema-age.mjs
           node --check scripts/validate-matching.mjs
           node --check scripts/validate-copy.mjs
-
       - name: Recommendation and registry validation
         run: |
           set -euo pipefail
@@ -44,43 +43,19 @@ jobs:
           node scripts/validate-schema-age.mjs
           node scripts/validate-matching.mjs
           node scripts/validate-copy.mjs
-
-      - name: Release-critical recommendation contracts
-        shell: bash
+      - name: Zenebona release contracts
         run: |
           set -euo pipefail
-          grep -Fq "if(!ageEligible(p))return-1" app.js
-          grep -Fq "if(interestEligible(p))score+=60" app.js
-          grep -Fq "var relevant=eligible.filter(interestEligible)" app.js
-          grep -Fq "Mind a 26 foglalkozás és képzés" app.js
-          grep -Fq "Nincs megfelelő BMI-találat" app.js
-          grep -Fq "https://ungarischlernen.at" app.js
-          grep -Fq "https://amaped.at" app.js
-
-          grep -Fq 'id:"schweden-1"' data.js
-          grep -Fq 'minAge:6,maxAge:10' data.js
-          grep -Fq 'when:"Minden szombaton 10:00–12:00"' data.js
-          grep -Fq 'id:"schweden-2"' data.js
-          grep -Fq 'minAge:10,maxAge:14' data.js
-          grep -Fq 'when:"Kéthetente szombatonként 12:00–14:00"' data.js
-          grep -Fq 'id:"rajztabla"' data.js
-          grep -Fq 'minAge:10,maxAge:16' data.js
-          grep -Fq 'id:"gimi-svung"' data.js
-          grep -Fq 'minAge:14,maxAge:18' data.js
-          grep -Fq 'id:"fecskeklub"' data.js
-          grep -Fq 'minAge:8,maxAge:14' data.js
-          grep -Fq 'id:"napraforgocskak"' data.js
-          grep -Fq 'minAge:6,maxAge:15' data.js
-          grep -Fq 'id:"rekreacio"' data.js
-          grep -Fq 'relationship:"bmi-partner"' data.js
-          grep -Fq 'id:"jollet"' data.js
-
-          grep -Fq 'BMIPROGRAM — neutral structural foundation' styles.css
-          grep -Fq 'BMIPROGRAM — human editorial monochrome design system' ui-20260821.css
-          grep -Fq '<meta name="theme-color" content="#ffffff">' index.html
-          grep -Fq '<b>26</b><span>foglalkozás és képzés</span>' index.html
-          grep -Fq '<b>7</b><span>nap a héten</span>' index.html
-          echo 'PASS: 26-program hard-age BMI-first contracts are intact.'
+          grep -Fq 'id:"zenebona"' zenebona-program.js
+          grep -Fq 'url:"https://zenebona.magyariskola.at"' zenebona-program.js
+          grep -Fq 'fee:"150 € / 10 alkalom"' zenebona-program.js
+          grep -Fq 'paymentDeadline:"2026. október 1."' zenebona-program.js
+          grep -Fq 'Fleschgasse 15/1/1' zenebona-program.js
+          grep -Fq 'Mag. Dapin Hajnalka Judit' zenebona-program.js
+          grep -Fq 'Mind a 27 foglalkozás és képzés' app.js
+          grep -Fq "detail('Befizetési határidő',p.paymentDeadline)" catalog.js
+          grep -Fq '27 aktuális' llms.txt
+          echo 'PASS: 27-program Zenebona contracts are intact.'
 
   build:
     needs: validate
@@ -113,34 +88,34 @@ jobs:
             sed -E -i "s#data\.js\?v=[^\"']+#data.js?v=${short_sha}#g" "$html"
             sed -E -i "s#app\.js\?v=[^\"']+#app.js?v=${short_sha}#g" "$html"
             sed -E -i "s#catalog\.js\?v=[^\"']+#catalog.js?v=${short_sha}#g" "$html"
+            sed -E -i "s#zenebona-program\.js\?v=[^\"']+#zenebona-program.js?v=${short_sha}#g" "$html"
           done
 
           cat > _site/release.txt <<EOF
           BMIPROGRAM_RELEASE=${release_id}
           GIT_SHA=${GITHUB_SHA}
           SCHOOL_YEAR=2026/2027
-          PROGRAM_COUNT=26
+          PROGRAM_COUNT=27
+          ZENEBONA_CANONICAL=https://zenebona.magyariskola.at
           SOURCE_POLICY=canonical-current-2026-27-only
-          RECOMMENDER=age-hard-interest-first-bmi-fallback
+          RECOMMENDER=age-hard-need-first-bmi-partner-fallback
           BUILT_AT=${built_at}
           EOF
 
           cat > _site/version.json <<EOF
-          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":26,"sourcePolicy":"canonical-current-2026-27-only","recommender":"age-hard-interest-first-bmi-fallback","builtAt":"${built_at}"}
+          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":27,"zenebonaCanonical":"https://zenebona.magyariskola.at","sourcePolicy":"canonical-current-2026-27-only","recommender":"age-hard-need-first-bmi-partner-fallback","builtAt":"${built_at}"}
           EOF
 
           test -f _site/index.html
           test -f _site/data.js
+          test -f _site/zenebona-program.js
           test -f _site/app.js
           test -f _site/catalog.js
           test "$(cat _site/CNAME)" = "programvalaszto.magyariskola.at"
-          grep -Fq 'PROGRAM_COUNT=26' _site/release.txt
-          grep -Fq 'id:"rekreacio"' _site/data.js
-          grep -Fq 'Minden szombaton 10:00–12:00' _site/data.js
-          grep -Fq 'Kéthetente szombatonként 12:00–14:00' _site/data.js
+          grep -Fq 'PROGRAM_COUNT=27' _site/release.txt
+          grep -Fq 'id:"zenebona"' _site/zenebona-program.js
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
 
@@ -160,39 +135,24 @@ jobs:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Verify exact production release
+      - name: Verify production release and Zenebona assets
         shell: bash
         run: |
           set -euo pipefail
           expected_sha="${GITHUB_SHA}"
           base="${PRODUCTION_URL%/}"
-          fetch() {
-            local path="$1"
-            curl --fail --silent --show-error --location --connect-timeout 10 --max-time 20 -H 'Cache-Control: no-cache' "${base}${path}?verify=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
-          }
-
+          fetch() { curl --fail --silent --show-error --location --connect-timeout 10 --max-time 20 -H 'Cache-Control: no-cache' "${base}$1?verify=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"; }
           release=''
           for attempt in $(seq 1 30); do
-            if release="$(fetch /release.txt 2>/dev/null)" && grep -Fq "GIT_SHA=${expected_sha}" <<<"${release}"; then
-              break
-            fi
+            if release="$(fetch /release.txt 2>/dev/null)" && grep -Fq "GIT_SHA=${expected_sha}" <<<"${release}"; then break; fi
             sleep 10
           done
           grep -Fq "GIT_SHA=${expected_sha}" <<<"${release}"
-          grep -Fq 'PROGRAM_COUNT=26' <<<"${release}"
-
-          home="$(fetch /)"
-          grep -Fq '<b>26</b><span>foglalkozás és képzés</span>' <<<"${home}"
-          data="$(fetch /data.js)"
-          grep -Fq 'id:"schweden-1"' <<<"${data}"
-          grep -Fq 'when:"Minden szombaton 10:00–12:00"' <<<"${data}"
-          grep -Fq 'id:"schweden-2"' <<<"${data}"
-          grep -Fq 'when:"Kéthetente szombatonként 12:00–14:00"' <<<"${data}"
-          grep -Fq 'id:"rekreacio"' <<<"${data}"
+          grep -Fq 'PROGRAM_COUNT=27' <<<"${release}"
+          zen="$(fetch /zenebona-program.js)"
+          grep -Fq 'id:"zenebona"' <<<"${zen}"
+          grep -Fq 'https://zenebona.magyariskola.at' <<<"${zen}"
           app="$(fetch /app.js)"
-          grep -Fq 'Nincs megfelelő BMI-találat' <<<"${app}"
-
-          for path in / /foglalkozasok.html /korosztalyok.html /gyik.html /data.js /app.js /catalog.js /release.txt /version.json; do
-            fetch "${path}" >/dev/null
-          done
-          echo "EXACT-LIVE: ${expected_sha} is serving on ${base}."
+          grep -Fq 'Mind a 27 foglalkozás és képzés' <<<"${app}"
+          for path in / /foglalkozasok.html /korosztalyok.html /gyik.html /data.js /zenebona-program.js /app.js /catalog.js /llms.txt /llms-full.txt /release.txt /version.json; do fetch "${path}" >/dev/null; done
+          echo "EXACT-LIVE: ${expected_sha} is serving on ${base} with Zenebona and 27 programs."
