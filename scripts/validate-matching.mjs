@@ -4,7 +4,7 @@ const ctx={window:{}};
 vm.runInNewContext(fs.readFileSync('data.js','utf8'),ctx,{filename:'data.js'});
 vm.runInNewContext(fs.readFileSync('zenebona-program.js','utf8'),ctx,{filename:'zenebona-program.js'});
 const cfg=ctx.window.BMI_FINDER;
-if(!cfg||!Array.isArray(cfg.programs)||cfg.programs.length!==27)throw new Error('Expected 27-program registry.');
+if(!cfg||!Array.isArray(cfg.programs)||cfg.programs.length!==28)throw new Error('Expected 28-program registry.');
 const needs=cfg.needs.map(x=>x.id),days=['hetfo','kedd','szerda','csutortok','pentek','szombat','vasarnap','mindegy'],paces=cfg.pace.map(x=>x.id);
 function ageEligible(p,age){return age>=p.minAge&&age<=p.maxAge}
 function dayEligible(p,day){if(day==='mindegy'||p.weekday==='rugalmas')return true;return(p.weekdays||[p.weekday]).includes(day)}
@@ -20,5 +20,9 @@ if(!z)throw new Error('Zenebona missing');
 if(!ranked(1,'magyar-nyelv','szerda','rendszeres').selected.some(p=>p.id==='zenebona'))throw new Error('Zenebona must be recommended for age 1 + Hungarian + Wednesday + regular');
 if(!ranked(2,'kozosseg-identitas','szerda','rendszeres').relevant.some(p=>p.id==='zenebona'))throw new Error('Zenebona must match community need for age 2');
 if(ranked(4,'magyar-nyelv','szerda','rendszeres').relevant.some(p=>p.id==='zenebona'))throw new Error('Zenebona must not be recommended above age 3');
+const o=cfg.programs.find(p=>p.id==='oromzene');
+if(!o)throw new Error('Örömzene missing');
+if(!ranked(35,'kozosseg-identitas','szombat','rugalmas').relevant.some(p=>p.id==='oromzene'))throw new Error('Örömzene must match adult community need on Saturday');
+if(!ranked(8,'tanc-hagyomany','vasarnap','rugalmas').relevant.some(p=>p.id==='oromzene'))throw new Error('Örömzene must support the exceptional Sunday date classification');
 if(combinations!==24000)throw new Error(`Expected 24000 states, got ${combinations}`);
-console.log(`PASS: ${combinations} selector states checked; Zenebona recommendation behavior verified.`);
+console.log(`PASS: ${combinations} selector states checked; Zenebona and Örömzene recommendation behavior verified.`);
