@@ -9,9 +9,9 @@ const cfg=ctx.window.BMI_FINDER;
 assert(cfg&&Array.isArray(cfg.programs),'program registry missing');
 if(!cfg||!Array.isArray(cfg.programs))process.exit(1);
 const programs=cfg.programs,byId=id=>programs.find(p=>p.id===id);
-assert(programs.length===27,`expected exactly 27 activities, got ${programs.length}`);
-assert(new Set(programs.map(p=>p.id)).size===27,'activity IDs must be unique');
-assert(new Set(programs.map(p=>p.url)).size===27,'canonical activity URLs must be unique');
+assert(programs.length===28,`expected exactly 28 activities, got ${programs.length}`);
+assert(new Set(programs.map(p=>p.id)).size===programs.length,'activity IDs must be unique');
+assert(new Set(programs.map(p=>p.url)).size===programs.length,'canonical activity URLs must be unique');
 assert(cfg.sourcePolicy?.schoolYear==='2026/2027','school year must be 2026/2027');
 assert(Array.isArray(cfg.needs)&&cfg.needs.length===10,'exactly 10 user-need choices must exist');
 const needIds=new Set(cfg.needs.map(x=>x.id));
@@ -39,6 +39,16 @@ if(z){
   assert(z.fee==='150 € / 10 alkalom','Zenebona fee mismatch');
   assert(z.paymentDeadline==='2026. október 1.','Zenebona payment deadline mismatch');
   assert(z.teacher.includes('Dapin Hajnalka Judit'),'Zenebona teacher missing');
+  assert(Array.isArray(z.eventDates)&&z.eventDates.length===10,'Zenebona exact dates missing');
+}
+const o=byId('oromzene');
+assert(o,'Örömzene missing');
+if(o){
+  assert(o.url==='https://www.magyariskola.at/event-details/oromzene-2026','Örömzene canonical URL mismatch');
+  assert(o.relationship==='bmi-partner','Örömzene must be BMI Partner Program');
+  assert(o.weekday==='szombat'&&o.weekdays.includes('vasarnap'),'Örömzene weekday classification mismatch');
+  assert(o.when.includes('18:00'),'Örömzene time missing');
+  assert(Array.isArray(o.eventDates)&&o.eventDates.includes('2026-09-27')&&o.eventDates.includes('2027-05-22'),'Örömzene exact confirmed dates missing');
 }
 if(process.exitCode)process.exit(1);
-console.log('PASS: 27 current programs validated, including complete Zenebona canonical metadata.');
+console.log('PASS: 28 current programs validated, including Zenebona and Örömzene metadata.');
