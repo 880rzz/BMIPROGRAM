@@ -3,6 +3,9 @@
 var LINK='https://chat.whatsapp.com/Cv4xy5LsODzIztASzPCdCV?s=cl&p=i&mlu=4';
 var STYLE_ID='bmi-whatsapp-widget-style';
 var ID='bmi-whatsapp-widget';
+if(!document.querySelector('link[data-typography-polish]')){
+  var typo=document.createElement('link');typo.rel='stylesheet';typo.href='typography-polish.css?v=20260830-heading-v1';typo.dataset.typographyPolish='1';document.head.appendChild(typo);
+}
 var style=document.getElementById(STYLE_ID);
 if(!style){
   style=document.createElement('style');
