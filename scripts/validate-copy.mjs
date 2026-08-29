@@ -29,6 +29,7 @@ publicPages.forEach((page,i)=>{
 });
 assert(!faqPage.includes('<h4>Zenebona</h4>'),'Zenebona must not have a dedicated footer column.');
 assert(whatsapp.includes("id='bmi-whatsapp-widget'")||whatsapp.includes("ID='bmi-whatsapp-widget'"),'Stable WhatsApp widget id missing.');
-assert(whatsapp.includes('width:58px!important')&&whatsapp.includes('bmi-wa-icon'),'Mobile WhatsApp geometry contract missing.');
+assert(whatsapp.includes('width:60px!important')&&whatsapp.includes('width:40px!important')&&whatsapp.includes('bmi-wa-icon'),'Mobile WhatsApp geometry contract missing.');
+assert(whatsapp.includes('viewBox="0 0 24 24"')&&whatsapp.includes('M17.472 14.382'),'Recognizable WhatsApp brand glyph contract missing.');
 assert(whatsapp.includes('2147483000'),'WhatsApp widget must stay above page UI layers.');
-console.log('PASS: 28-program copy, multi-select, identified address, date/travel/transit, shared WhatsApp and footer contracts are consistent.');
+console.log('PASS: 28-program copy, multi-select, identified address, date/travel/transit, recognizable WhatsApp and footer contracts are consistent.');
