@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 function read(path){return fs.readFileSync(path,'utf8')}
 function assert(ok,msg){if(!ok)throw new Error(msg)}
-const home=read('index.html'),programsPage=read('foglalkozasok.html'),agesPage=read('korosztalyok.html'),faqPage=read('gyik.html'),app=read('app.js'),route=read('route-map.js'),address=read('address-autocomplete.js'),catalog=read('catalog.js'),zen=read('zenebona-program.js'),whatsapp=read('whatsapp-widget.js'),typography=read('typography-polish.css'),llms=read('llms.txt');
+const home=read('index.html'),programsPage=read('foglalkozasok.html'),agesPage=read('korosztalyok.html'),faqPage=read('gyik.html'),app=read('app.js'),route=read('route-map.js'),address=read('address-autocomplete.js'),catalog=read('catalog.js'),zen=read('zenebona-program.js'),whatsapp=read('whatsapp-widget.js'),typography=read('typography-polish.css'),transit=read('transit-routing.js'),travel=read('result-travel-polish.js'),llms=read('llms.txt');
 const publicPages=[home,programsPage,agesPage,faqPage];
 assert(home.includes('Magyar nyelvű'),'Homepage positioning missing.');
 assert(app.includes("programs.length+' foglalkozás és képzés"),'Finder must link to the dynamic full registry count.');
@@ -33,6 +33,11 @@ assert(whatsapp.includes('width:60px!important')&&whatsapp.includes('width:40px!
 assert(whatsapp.includes('viewBox="0 0 24 24"')&&whatsapp.includes('M17.472 14.382'),'Recognizable WhatsApp brand glyph contract missing.');
 assert(whatsapp.includes('2147483000'),'WhatsApp widget must stay above page UI layers.');
 assert(whatsapp.includes('typography-polish.css?v='),'Shared typography polish loader missing.');
+assert(whatsapp.includes('transit-routing.js?v=')&&whatsapp.includes('result-travel-polish.js?v='),'Scheduled transit/travel loader contract missing.');
 assert(typography.includes('.hero h1')&&typography.includes('.section-head h2')&&typography.includes('white-space:normal!important'),'Heading scale / safe line-break contract missing.');
 assert(typography.includes('text-wrap:balance')&&typography.includes('@media(max-width:720px)'),'Responsive balanced-heading contract missing.');
-console.log('PASS: 28-program copy, multi-select, identified address, date/travel/transit, recognizable WhatsApp, typography and footer contracts are consistent.');
+assert(transit.includes('vao.demo.hafas.de/gate')&&transit.includes("outFrwd:false")&&transit.includes('numF:6'),'VAO scheduled transit query contract missing.');
+assert(transit.includes('target-60')&&transit.includes('median(')&&transit.includes('nextOccurrence'),'Transit must use the program occurrence and preceding 60-minute window.');
+assert(travel.includes('container-type:inline-size')&&travel.includes('@container(max-width:390px)'),'Responsive travel panel container contract missing.');
+assert(travel.includes('Átlagos menetidő')&&travel.includes('Nem a keresés pillanatát használjuk.'),'Scheduled-time travel explanation missing.');
+console.log('PASS: 28-program copy, multi-select, identified address, scheduled transit, responsive travel panel, recognizable WhatsApp, typography and footer contracts are consistent.');
