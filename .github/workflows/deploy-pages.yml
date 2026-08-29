@@ -31,6 +31,8 @@ jobs:
           node --check data.js
           node --check zenebona-program.js
           node --check app.js
+          node --check route-map.js
+          node --check address-autocomplete.js
           node --check catalog.js
           node --check scripts/validate.mjs
           node --check scripts/validate-schema-age.mjs
@@ -56,11 +58,21 @@ jobs:
           grep -Fq 'https://www.magyariskola.at/event-details/oromzene-2026' zenebona-program.js
           grep -Fq 'eventDates' zenebona-program.js
           grep -Fq "programs.length+' foglalkozás és képzés" app.js
+          grep -Fq 'selectedDays' app.js
+          grep -Fq 'selectedPaces' app.js
+          grep -Fq "'days',3" app.js
+          grep -Fq "'paces',2" app.js
+          grep -Fq 'data-route-origin-lat' app.js
           grep -Fq 'Még ma' app.js
           grep -Fq 'travelInfo' app.js
+          grep -Fq 'routeData(card)' route-map.js
+          grep -Fq 'overview=full&geometries=geojson' route-map.js
+          grep -Fq 'addressSuggestions' address-autocomplete.js
+          grep -Fq 'countrycode=AT' address-autocomplete.js
+          grep -Fq 'Azonosított cím:' address-autocomplete.js
           grep -Fq "detail('Befizetési határidő',p.paymentDeadline)" catalog.js
           grep -Fq '28 aktuális' llms.txt
-          echo 'PASS: 28-program partner, date and travel contracts are intact.'
+          echo 'PASS: multi-select, live address, route map, date and travel contracts are intact.'
 
   build:
     needs: validate
@@ -92,6 +104,8 @@ jobs:
             sed -E -i "s#recommendation-polish\.css\?v=[^\"']+#recommendation-polish.css?v=${short_sha}#g" "$html"
             sed -E -i "s#data\.js\?v=[^\"']+#data.js?v=${short_sha}#g" "$html"
             sed -E -i "s#app\.js\?v=[^\"']+#app.js?v=${short_sha}#g" "$html"
+            sed -E -i "s#route-map\.js\?v=[^\"']+#route-map.js?v=${short_sha}#g" "$html"
+            sed -E -i "s#address-autocomplete\.js\?v=[^\"']+#address-autocomplete.js?v=${short_sha}#g" "$html"
             sed -E -i "s#catalog\.js\?v=[^\"']+#catalog.js?v=${short_sha}#g" "$html"
             sed -E -i "s#zenebona-program\.js\?v=[^\"']+#zenebona-program.js?v=${short_sha}#g" "$html"
           done
@@ -104,23 +118,27 @@ jobs:
           ZENEBONA_CANONICAL=https://zenebona.magyariskola.at
           OROMZENE_CANONICAL=https://www.magyariskola.at/event-details/oromzene-2026
           SOURCE_POLICY=canonical-current-2026-27-only
-          RECOMMENDER=age-hard-need-first-date-time-travel-aware
+          RECOMMENDER=age-hard-multineed-multiday-multipace-route-aware
           BUILT_AT=${built_at}
           EOF
 
           cat > _site/version.json <<EOF
-          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"zenebonaCanonical":"https://zenebona.magyariskola.at","oromzeneCanonical":"https://www.magyariskola.at/event-details/oromzene-2026","sourcePolicy":"canonical-current-2026-27-only","recommender":"age-hard-need-first-date-time-travel-aware","builtAt":"${built_at}"}
+          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"zenebonaCanonical":"https://zenebona.magyariskola.at","oromzeneCanonical":"https://www.magyariskola.at/event-details/oromzene-2026","sourcePolicy":"canonical-current-2026-27-only","recommender":"age-hard-multineed-multiday-multipace-route-aware","builtAt":"${built_at}"}
           EOF
 
           test -f _site/index.html
           test -f _site/data.js
           test -f _site/zenebona-program.js
           test -f _site/app.js
+          test -f _site/route-map.js
+          test -f _site/address-autocomplete.js
           test -f _site/catalog.js
           test "$(cat _site/CNAME)" = "programvalaszto.magyariskola.at"
           grep -Fq 'PROGRAM_COUNT=28' _site/release.txt
           grep -Fq 'id:"zenebona"' _site/zenebona-program.js
           grep -Fq 'id:"oromzene"' _site/zenebona-program.js
+          grep -Fq 'address-autocomplete.js?v=' _site/index.html
+          grep -Fq 'route-map.js?v=' _site/index.html
 
       - uses: actions/upload-pages-artifact@v3
         with:
@@ -159,11 +177,16 @@ jobs:
           zen="$(fetch /zenebona-program.js)"
           grep -Fq 'id:"zenebona"' <<<"${zen}"
           grep -Fq 'id:"oromzene"' <<<"${zen}"
-          grep -Fq 'https://zenebona.magyariskola.at' <<<"${zen}"
-          grep -Fq 'https://www.magyariskola.at/event-details/oromzene-2026' <<<"${zen}"
           app="$(fetch /app.js)"
-          grep -Fq "programs.length+' foglalkozás és képzés" <<<"${app}"
-          grep -Fq 'Még ma' <<<"${app}"
-          grep -Fq 'travelInfo' <<<"${app}"
-          for path in / /foglalkozasok.html /korosztalyok.html /gyik.html /data.js /zenebona-program.js /app.js /catalog.js /llms.txt /llms-full.txt /release.txt /version.json; do fetch "${path}" >/dev/null; done
-          echo "EXACT-LIVE: ${expected_sha} is serving on ${base} with 28 programs and date/travel-aware recommendation assets."
+          grep -Fq 'selectedDays' <<<"${app}"
+          grep -Fq 'selectedPaces' <<<"${app}"
+          grep -Fq 'data-route-origin-lat' <<<"${app}"
+          route="$(fetch /route-map.js)"
+          grep -Fq 'routeData(card)' <<<"${route}"
+          address="$(fetch /address-autocomplete.js)"
+          grep -Fq 'Azonosított cím:' <<<"${address}"
+          index="$(fetch /)"
+          grep -Fq 'route-map.js?v=' <<<"${index}"
+          grep -Fq 'address-autocomplete.js?v=' <<<"${index}"
+          for path in / /foglalkozasok.html /korosztalyok.html /gyik.html /data.js /zenebona-program.js /app.js /route-map.js /address-autocomplete.js /catalog.js /llms.txt /llms-full.txt /release.txt /version.json; do fetch "${path}" >/dev/null; done
+          echo "EXACT-LIVE: ${expected_sha} is serving with multi-select, live address identification and route-map assets."
