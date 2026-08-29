@@ -34,9 +34,12 @@ if(origin){for(const [loc,g] of geo){const straight=hav(origin,g);for(const prof
 
 const app=fs.readFileSync('app.js','utf8');
 if(!/countrycode=AT/.test(app))err('APP_GEOCODE_NOT_AT_FILTERED','Az éles app nem használ Photon countrycode=AT szűrést');
-if(!/routed-car/.test(app))err('APP_CAR_NOT_REAL_ROUTE','Az éles app nem használ routed-car úthálózati routingot');
-if(!/routed-foot/.test(app))err('APP_FOOT_NOT_REAL_ROUTE','Az éles app nem használ routed-foot gyalogos routingot');
+const dynamicProfiles=/profile=mode==='walk'\?'foot':'car'/.test(app)&&/routing\.openstreetmap\.de\/routed-'\+profile/.test(app);
+if(!dynamicProfiles)err('APP_ROUTE_PROFILE_DYNAMIC','Az éles appban nem igazolható a car/foot OSM profilváltás');
 if(!/p\._travel\.estimated\)return false/.test(app))err('APP_TODAY_FALLBACK_UNSAFE','A routing fallback még használható biztos „Még ma odaérek” állításhoz');
+if(!/state\.origin&&!p\._travel\)return false/.test(app))err('APP_MISSING_ROUTE_UNSAFE','Megadott kiindulópont mellett hiányzó útvonal még exact „Még ma” találatot engedhet');
+if(!/if\(state\.day==='ma'\)\{var ts=todayStatus\(p\)/.test(app))err('APP_TODAY_SCORE_LEAK','Az aktuális mai időpont más nap kiválasztásakor is torzíthatja a rangsort');
+if(!/p\._travel&&!p\._travel\.estimated/.test(app))err('APP_ESTIMATE_RANKING','Fallback becslés még befolyásolhatja a rangsort');
 if(/if\(mode==='walk'\).*haversine[\s\S]{0,180}return\{km/.test(app))err('APP_WALK_MODEL_ONLY','A gyalogos mód továbbra is pusztán légvonalas modell');
 
 const report={generatedAt:new Date().toISOString(),summary:{errors:errors.length,warnings:warnings.length,info:info.length,programs:programs.length,physicalLocations:physical.length},errors,warnings,info};
