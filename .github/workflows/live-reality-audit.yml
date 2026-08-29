@@ -1,0 +1,36 @@
+name: Live reality audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - data.js
+      - zenebona-program.js
+      - app.js
+      - audit/live-reality-audit.mjs
+      - .github/workflows/live-reality-audit.yml
+  schedule:
+    - cron: '17 4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Run live reality audit
+        run: node audit/live-reality-audit.mjs
+      - name: Upload reality report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-reality-audit
+          path: audit/output/live-reality-audit.*
+          if-no-files-found: warn
