@@ -62,5 +62,11 @@ if(o){
   assert(o.when.includes('18:00'),'Örömzene time missing');
   assert(Array.isArray(o.eventDates)&&o.eventDates.includes('2026-09-27')&&o.eventDates.includes('2027-05-22'),'Örömzene exact confirmed dates missing');
 }
+const app=read('app.js');
+const index=read('index.html');
+assert(/schoolFreeDates/.test(app),'runtime calendar guard must include schoolFreeDates');
+assert(/blockedEventDates/.test(app),'runtime today logic must honor blockedEventDates');
+assert(/p\.exactTodayEligible===false/.test(app),'runtime today logic must honor explicit exactTodayEligible=false');
+assert(/app\.js\?v=20260830-critical-final/.test(index),'index must cache-bust the critical runtime fix');
 if(process.exitCode)process.exit(1);
-console.log('PASS: 28 current programs validated with schedule-mode-aware release contracts.');
+console.log('PASS: 28 current programs validated with schedule-mode-aware runtime and cache contracts.');
