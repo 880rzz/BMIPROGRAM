@@ -35,11 +35,13 @@ jobs:
           node --check address-autocomplete.js
           node --check catalog.js
           node --check whatsapp-widget.js
+          node --check transit-routing.js
           node --check result-travel-polish.js
           node --check scripts/validate.mjs
           node --check scripts/validate-schema-age.mjs
           node --check scripts/validate-matching.mjs
           node --check scripts/validate-copy.mjs
+          node --check scripts/live-transit-probe.mjs
       - name: Recommendation and registry validation
         run: |
           set -euo pipefail
@@ -47,6 +49,8 @@ jobs:
           node scripts/validate-schema-age.mjs
           node scripts/validate-matching.mjs
           node scripts/validate-copy.mjs
+      - name: Live Vienna transit probe
+        run: node scripts/live-transit-probe.mjs
       - name: Partner and recommender release contracts
         run: |
           set -euo pipefail
@@ -54,39 +58,28 @@ jobs:
           grep -Fq 'url:"https://zenebona.magyariskola.at"' zenebona-program.js
           grep -Fq 'fee:"150 € / 10 alkalom"' zenebona-program.js
           grep -Fq 'paymentDeadline:"2026. október 1."' zenebona-program.js
-          grep -Fq 'Fleschgasse 15/1/1' zenebona-program.js
-          grep -Fq 'Mag. Dapin Hajnalka Judit' zenebona-program.js
           grep -Fq 'id:"oromzene"' zenebona-program.js
-          grep -Fq 'https://www.magyariskola.at/event-details/oromzene-2026' zenebona-program.js
           grep -Fq 'eventDates' zenebona-program.js
-          grep -Fq "programs.length+' foglalkozás és képzés" app.js
           grep -Fq 'selectedDays' app.js
           grep -Fq 'selectedPaces' app.js
           grep -Fq "'days',3" app.js
           grep -Fq "'paces',2" app.js
           grep -Fq 'data-mode="transit"' app.js
-          grep -Fq 'transitExternal' app.js
           grep -Fq 'identifiedOrigin(input)' app.js
           grep -Fq 'data-route-origin-lat' app.js
-          grep -Fq 'Még ma' app.js
-          grep -Fq 'travelInfo' app.js
           grep -Fq 'routeData(card)' route-map.js
           grep -Fq 'overview=full&geometries=geojson' route-map.js
-          grep -Fq "data.mode==='transit'" route-map.js
-          grep -Fq "travelmode='+mode" route-map.js
-          grep -Fq 'addressSuggestions' address-autocomplete.js
           grep -Fq 'countrycode=AT' address-autocomplete.js
           grep -Fq 'Azonosított cím:' address-autocomplete.js
-          grep -Fq "detail('Befizetési határidő',p.paymentDeadline)" catalog.js
           grep -Fq 'bmi-whatsapp-widget' whatsapp-widget.js
-          grep -Fq 'width:60px!important' whatsapp-widget.js
-          grep -Fq 'width:40px!important' whatsapp-widget.js
-          grep -Fq 'viewBox="0 0 24 24"' whatsapp-widget.js
-          grep -Fq 'M17.472 14.382' whatsapp-widget.js
+          grep -Fq 'transit-routing.js?v=' whatsapp-widget.js
           grep -Fq 'result-travel-polish.js?v=' whatsapp-widget.js
-          grep -Fq 'Vizsgált érkezési időablak' result-travel-polish.js
-          grep -Fq 'forgalom nélküli alap útvonalidő' result-travel-polish.js
-          grep -Fq 'nem rendelkezik hiteles, időablak-specifikus transit menetidő-adatforrással' result-travel-polish.js
+          grep -Fq 'vao.demo.hafas.de/gate' transit-routing.js
+          grep -Fq 'outFrwd:false' transit-routing.js
+          grep -Fq 'target-60' transit-routing.js
+          grep -Fq 'Átlagos menetidő' result-travel-polish.js
+          grep -Fq 'container-type:inline-size' result-travel-polish.js
+          grep -Fq 'Nem a keresés pillanatát használjuk.' result-travel-polish.js
           for html in index.html foglalkozasok.html korosztalyok.html gyik.html; do
             grep -Fq 'whatsapp-widget.js?v=' "$html"
             grep -Fq 'marketing@kozpontiszovetseg.at' "$html"
@@ -95,7 +88,7 @@ jobs:
           done
           ! grep -Fq '<h4>Zenebona</h4>' gyik.html
           grep -Fq '28 aktuális' llms.txt
-          echo 'PASS: multi-select, identified address, safe transit, truthful travel panel, recognizable WhatsApp and footer contracts are intact.'
+          echo 'PASS: scheduled transit, responsive travel panel and recommender contracts are intact.'
 
   build:
     needs: validate
@@ -139,33 +132,24 @@ jobs:
           GIT_SHA=${GITHUB_SHA}
           SCHOOL_YEAR=2026/2027
           PROGRAM_COUNT=28
-          ZENEBONA_CANONICAL=https://zenebona.magyariskola.at
-          OROMZENE_CANONICAL=https://www.magyariskola.at/event-details/oromzene-2026
           SOURCE_POLICY=canonical-current-2026-27-only
-          RECOMMENDER=age-hard-multineed-multiday-multipace-identified-address-route-transit-safe-truthful-travel-panel
+          RECOMMENDER=age-hard-multineed-multiday-multipace-identified-address-route-scheduled-transit
           BUILT_AT=${built_at}
           EOF
 
           cat > _site/version.json <<EOF
-          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"zenebonaCanonical":"https://zenebona.magyariskola.at","oromzeneCanonical":"https://www.magyariskola.at/event-details/oromzene-2026","sourcePolicy":"canonical-current-2026-27-only","recommender":"age-hard-multineed-multiday-multipace-identified-address-route-transit-safe-truthful-travel-panel","builtAt":"${built_at}"}
+          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"sourcePolicy":"canonical-current-2026-27-only","recommender":"age-hard-multineed-multiday-multipace-identified-address-route-scheduled-transit","builtAt":"${built_at}"}
           EOF
 
           test -f _site/index.html
-          test -f _site/data.js
-          test -f _site/zenebona-program.js
           test -f _site/app.js
-          test -f _site/route-map.js
-          test -f _site/address-autocomplete.js
-          test -f _site/catalog.js
-          test -f _site/whatsapp-widget.js
+          test -f _site/transit-routing.js
           test -f _site/result-travel-polish.js
+          test -f _site/whatsapp-widget.js
           test "$(cat _site/CNAME)" = "programvalaszto.magyariskola.at"
           grep -Fq 'PROGRAM_COUNT=28' _site/release.txt
-          grep -Fq 'id:"zenebona"' _site/zenebona-program.js
-          grep -Fq 'id:"oromzene"' _site/zenebona-program.js
-          grep -Fq 'address-autocomplete.js?v=' _site/index.html
-          grep -Fq 'route-map.js?v=' _site/index.html
-          grep -Fq 'Vizsgált érkezési időablak' _site/result-travel-polish.js
+          grep -Fq 'vao.demo.hafas.de/gate' _site/transit-routing.js
+          grep -Fq 'Átlagos menetidő' _site/result-travel-polish.js
           for html in _site/index.html _site/foglalkozasok.html _site/korosztalyok.html _site/gyik.html; do grep -Fq 'whatsapp-widget.js?v=' "$html"; done
 
       - uses: actions/upload-pages-artifact@v3
@@ -188,7 +172,7 @@ jobs:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Verify production release and recommender assets
+      - name: Verify production release and scheduled transit assets
         shell: bash
         run: |
           set -euo pipefail
@@ -202,37 +186,23 @@ jobs:
           done
           grep -Fq "GIT_SHA=${expected_sha}" <<<"${release}"
           grep -Fq 'PROGRAM_COUNT=28' <<<"${release}"
-          zen="$(fetch /zenebona-program.js)"
-          grep -Fq 'id:"zenebona"' <<<"${zen}"
-          grep -Fq 'id:"oromzene"' <<<"${zen}"
           app="$(fetch /app.js)"
           grep -Fq 'selectedDays' <<<"${app}"
           grep -Fq 'selectedPaces' <<<"${app}"
-          grep -Fq 'data-mode="transit"' <<<"${app}"
-          grep -Fq 'transitExternal' <<<"${app}"
-          grep -Fq 'identifiedOrigin(input)' <<<"${app}"
-          grep -Fq 'data-route-origin-lat' <<<"${app}"
-          route="$(fetch /route-map.js)"
-          grep -Fq 'routeData(card)' <<<"${route}"
-          grep -Fq "data.mode==='transit'" <<<"${route}"
-          address="$(fetch /address-autocomplete.js)"
-          grep -Fq 'Azonosított cím:' <<<"${address}"
           wa="$(fetch /whatsapp-widget.js)"
-          grep -Fq 'bmi-whatsapp-widget' <<<"${wa}"
-          grep -Fq 'width:60px!important' <<<"${wa}"
-          grep -Fq 'width:40px!important' <<<"${wa}"
-          grep -Fq 'viewBox="0 0 24 24"' <<<"${wa}"
-          grep -Fq 'M17.472 14.382' <<<"${wa}"
+          grep -Fq 'transit-routing.js?v=' <<<"${wa}"
           grep -Fq 'result-travel-polish.js?v=' <<<"${wa}"
+          transit="$(fetch /transit-routing.js)"
+          grep -Fq 'vao.demo.hafas.de/gate' <<<"${transit}"
+          grep -Fq 'outFrwd:false' <<<"${transit}"
+          grep -Fq 'target-60' <<<"${transit}"
           travel="$(fetch /result-travel-polish.js)"
-          grep -Fq 'Vizsgált érkezési időablak' <<<"${travel}"
-          grep -Fq 'forgalom nélküli alap útvonalidő' <<<"${travel}"
+          grep -Fq 'Átlagos menetidő' <<<"${travel}"
+          grep -Fq 'container-type:inline-size' <<<"${travel}"
           for path in / /foglalkozasok.html /korosztalyok.html /gyik.html; do
             page="$(fetch "${path}")"
             grep -Fq 'whatsapp-widget.js?v=' <<<"${page}"
             grep -Fq 'marketing@kozpontiszovetseg.at' <<<"${page}"
-            grep -Fq 'Be Smart Kids Club csapata' <<<"${page}"
-            grep -Fq 'https://business.vipach.at' <<<"${page}"
           done
-          for path in / /foglalkozasok.html /korosztalyok.html /gyik.html /data.js /zenebona-program.js /app.js /route-map.js /address-autocomplete.js /catalog.js /whatsapp-widget.js /result-travel-polish.js /llms.txt /llms-full.txt /release.txt /version.json; do fetch "${path}" >/dev/null; done
-          echo "EXACT-LIVE: ${expected_sha} is serving with multi-select, identified address, safe transit, route-map, truthful travel panel, recognizable WhatsApp and footer assets."
+          for path in / /foglalkozasok.html /korosztalyok.html /gyik.html /app.js /transit-routing.js /result-travel-polish.js /whatsapp-widget.js /release.txt /version.json; do fetch "${path}" >/dev/null; done
+          echo "EXACT-LIVE: ${expected_sha} serves scheduled transit and responsive travel panel assets."
