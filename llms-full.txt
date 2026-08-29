@@ -1,23 +1,38 @@
 # Bécsi Magyar Iskola – Foglalkozásválasztó 2026/2027
 
-A rendszer 27 aktuális lehetőséggel dolgozik: 26 alaprekord a `data.js` fájlban, valamint a Zenebona partnerrekord a `zenebona-program.js` fájlban. A böngészőoldalak és az ajánlómotor ezt a két gépi forrást együtt kezelik.
+A rendszer 28 aktuális lehetőséggel dolgozik: 26 alaprekord a `data.js` fájlban, valamint a Zenebona és az Együtt dobban Bécs – Közös örömzene partnerrekordjai a `zenebona-program.js` fájlban. A böngészőoldalak és az ajánlómotor ezeket a gépi forrásokat együtt kezelik.
 
 ## Gépi források
 - Alap registry: https://programvalaszto.magyariskola.at/data.js
-- Zenebona partnerrekord: https://programvalaszto.magyariskola.at/zenebona-program.js
+- Partnerrekordok: https://programvalaszto.magyariskola.at/zenebona-program.js
 - Foglalkozásválasztó: https://programvalaszto.magyariskola.at/
 - Összes foglalkozás: https://programvalaszto.magyariskola.at/foglalkozasok.html
 - Korosztályok: https://programvalaszto.magyariskola.at/korosztalyok.html
 - Gyakori kérdések: https://programvalaszto.magyariskola.at/gyik.html
 
 ## Ajánlási logika
-Az életkor kemény feltétel. Az életkorban megfelelő lehetőségek között az igény/eredményilleszkedés a legerősebb jel, ezt követi a választott nap és a rendszeresség. A rendszer legfeljebb három ajánlást mutat, és jelzi, ha a nap vagy ritmus kompromisszum.
+Az életkor kemény feltétel. Az életkorban megfelelő lehetőségek között az igény/eredményilleszkedés a legerősebb jel. Ezt követi a választott nap, a rendszeresség, az aktuális bécsi dátum és idő, valamint opcionálisan a látogató által megadott kiindulási pontból számított távolság és utazási idő. A rendszer legfeljebb három ajánlást mutat, és jelzi, ha a nap, ritmus vagy az aznapi elérhetőség kompromisszum.
+
+### Aktuális dátum és „Még ma”
+- A rendszer az `Europe/Vienna` időzónát használja.
+- „Még ma” találat csak akkor lehet, ha a program az adott napon igazoltan megtartásra kerül és a kezdési idő még nem múlt el.
+- Konkrét alkalomsorral rendelkező programoknál az `eventDates` mező az irányadó. Nem elegendő pusztán az, hogy a hét napja egyezik.
+- Havi, kétheti vagy bizonytalan dátumú programot pontos dátum nélkül nem jelölünk „ma elérhetőnek”.
+- Ha utazási adat rendelkezésre áll, a rendszer 10 perces érkezési tartalékkal ellenőrzi, hogy az aznapi program reálisan elérhető-e.
+
+### Távolság és utazási idő
+- A látogató opcionálisan megadhat címet/irányítószámot vagy külön böngészőengedéllyel használhatja a jelenlegi helyzetét.
+- A cím nincs tartósan eltárolva.
+- A geokódolás külső szolgáltatással történik; hibánál a kereső továbbra is használható távolságadat nélkül.
+- Autós idő: útvonalalapú becslés, élő forgalmi adatok nélkül.
+- Gyalogos idő: becslés.
+- Az utazási adat a rangsorolás része, de nem írja felül az életkori hard constraintet és az alapvető igényilleszkedést.
 
 ## Zenebona canonical rekord
 - id: `zenebona`
 - Név: Zenebona – Zene. Kapcsolódás. Öröm. | Hietzing
 - Canonical URL: https://zenebona.magyariskola.at
-- Kapcsolat: partnerprogram
+- Kapcsolat: BMI Partner Program
 - Korosztály: 0–3 év + felnőtt kísérő
 - Nyelv: magyar
 - Nap: szerda
@@ -31,15 +46,27 @@ Az életkor kemény feltétel. Az életkorban megfelelő lehetőségek között 
 - Befizetési határidő: 2026. október 1.
 - Foglalkozásvezető: Mag. Dapin Hajnalka Judit, zenepedagógus és zeneterapeuta
 - Kapcsolat: +43 699 11569467 · hajnide@yahoo.de
-- Oktatói háttér: zenepedagógusi képzettség Romániában (1995), Németországban (2005) és Ausztriában (2007); zeneterapeuta diploma a Bécsi Zeneegyetemen (2025)
-- Tartalom: közös éneklés, mondókázás, mozgás, ritmikus játékok, hangszeres felfedezés, szülő–gyermek kapcsolódás és közösségi élmény
-- Ajánlási igények: magyar nyelv, magyar közösség/identitás, mozgás-fejlődés
+
+## Együtt dobban Bécs – Közös örömzene canonical rekord
+- id: `oromzene`
+- Canonical URL: https://www.magyariskola.at/event-details/oromzene-2026
+- Kapcsolat: BMI Partner Program
+- Korosztály: minden korosztály
+- Nyelv: magyar
+- Ritmus: havonta 1 alkalom, jellemzően szombaton 18:00-tól
+- Első alkalom: 2026. szeptember 27., vasárnap 18:00
+- Megerősített dátumok: 2026.09.27.; 2026.10.24.; 2026.11.28.; 2027.01.16.; 2027.02.13.; 2027.03.13.; 2027.04.17.; 2027.05.22.
+- Júniusi évzáró: 2027.06.19. vagy 06.26., még egyeztetés alatt, ezért nincs megerősített `eventDates` elemként kezelve.
+- Helyszín: Bécsi Magyar Iskola, Schwedenplatz 2 / Laurenzerberg 5, 1010 Wien
+- Díj: 5 € / fő; az előtte zajló gyermek dobos foglalkozás résztvevőinek ingyenes
+- Programgazda: Regélő Fehér Táltos Hagyományőrző Egyesület
 
 ## Forrásszabály
 - Korábbi tanévek Wix-oldalai nem használhatók aktuális 2026/27-es tények pótlására.
 - BMI saját programnál az aktuális hivatalos BMI-oldal az elsődleges.
 - Partnerprogramnál a partner saját aktuális oldala az elsődleges.
 - Zenebona esetén a canonical oldal: https://zenebona.magyariskola.at
+- Örömzene esetén a canonical oldal: https://www.magyariskola.at/event-details/oromzene-2026
 - Nem ellenőrzött vagy hiányzó részletet nem szabad régi forrásból kiegészíteni.
 
 ## Egyéb partner canonical források
