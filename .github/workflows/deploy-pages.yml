@@ -51,7 +51,8 @@ jobs:
           grep -Fq 'bmi-whatsapp-widget' whatsapp-widget.js
           grep -Fq 'transit-routing.js?v=' whatsapp-widget.js
           grep -Fq 'result-travel-polish.js?v=' whatsapp-widget.js
-          grep -Fq 'v6.oebb.transport.rest/api' transit-routing.js
+          grep -Fq 'v6.db.transport.rest' transit-routing.js
+          grep -Fq 'profile=dbnav' transit-routing.js
           grep -Fq '/locations/nearby?' transit-routing.js
           grep -Fq '/journeys?' transit-routing.js
           grep -Fq 'windowStart=target-60' transit-routing.js
@@ -68,7 +69,7 @@ jobs:
           done
           ! grep -Fq '<h4>Zenebona</h4>' gyik.html
           grep -Fq '28 aktuális' llms.txt
-          echo 'PASS: browser-safe scheduled transit distance/time and existing release contracts are intact.'
+          echo 'PASS: DB Navigator Vienna transit candidate and existing release contracts are intact.'
 
   build:
     needs: validate
@@ -94,11 +95,11 @@ jobs:
           SCHOOL_YEAR=2026/2027
           PROGRAM_COUNT=28
           SOURCE_POLICY=canonical-current-2026-27-only
-          RECOMMENDER=age-hard-multineed-multiday-multipace-identified-address-route-scheduled-transit-rest
+          RECOMMENDER=age-hard-multineed-multiday-multipace-identified-address-route-scheduled-transit-dbnav
           BUILT_AT=${built_at}
           EOF
           cat > _site/version.json <<EOF
-          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"sourcePolicy":"canonical-current-2026-27-only","recommender":"age-hard-multineed-multiday-multipace-identified-address-route-scheduled-transit-rest","builtAt":"${built_at}"}
+          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"sourcePolicy":"canonical-current-2026-27-only","recommender":"age-hard-multineed-multiday-multipace-identified-address-route-scheduled-transit-dbnav","builtAt":"${built_at}"}
           EOF
           test -f _site/index.html
           test -f _site/app.js
@@ -107,7 +108,7 @@ jobs:
           test -f _site/whatsapp-widget.js
           test "$(cat _site/CNAME)" = "programvalaszto.magyariskola.at"
           grep -Fq 'PROGRAM_COUNT=28' _site/release.txt
-          grep -Fq 'v6.oebb.transport.rest/api' _site/transit-routing.js
+          grep -Fq 'v6.db.transport.rest' _site/transit-routing.js
           grep -Fq 'Átlagos útvonalhossz' _site/result-travel-polish.js
       - uses: actions/upload-pages-artifact@v3
         with:
@@ -144,7 +145,8 @@ jobs:
           grep -Fq "GIT_SHA=${expected_sha}" <<<"${release}"
           grep -Fq 'PROGRAM_COUNT=28' <<<"${release}"
           transit="$(fetch /transit-routing.js)"
-          grep -Fq 'v6.oebb.transport.rest/api' <<<"${transit}"
+          grep -Fq 'v6.db.transport.rest' <<<"${transit}"
+          grep -Fq 'profile=dbnav' <<<"${transit}"
           grep -Fq 'windowStart=target-60' <<<"${transit}"
           grep -Fq 'polylines=true' <<<"${transit}"
           travel="$(fetch /result-travel-polish.js)"
@@ -154,4 +156,4 @@ jobs:
           wa="$(fetch /whatsapp-widget.js)"
           grep -Fq 'transit-routing.js?v=' <<<"${wa}"
           for path in / /foglalkozasok.html /korosztalyok.html /gyik.html /app.js /transit-routing.js /result-travel-polish.js /whatsapp-widget.js /release.txt /version.json; do fetch "${path}" >/dev/null; done
-          echo "EXACT-LIVE: ${expected_sha} serves browser-safe scheduled transit time/distance and responsive travel assets."
+          echo "EXACT-LIVE: ${expected_sha} serves scheduled Vienna transit time/distance and responsive travel assets."
