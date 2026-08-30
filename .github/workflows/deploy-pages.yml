@@ -223,4 +223,5 @@ jobs:
           npx playwright install --with-deps chromium
           E2E_BASE="${PRODUCTION_URL%/}" node scripts/browser-e2e.mjs
       - name: Release complete
-        run: echo "EXACT-LIVE: ${GITHUB_SHA} passed data integrity, live reality, built-artifact browser E2E, exact deploy, production smoke and production browser E2E."
+        run: |
+          echo "EXACT-LIVE: ${GITHUB_SHA} passed data integrity, live reality, built-artifact browser E2E, exact deploy, production smoke and production browser E2E."
