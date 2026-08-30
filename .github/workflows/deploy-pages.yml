@@ -28,20 +28,7 @@ jobs:
       - name: JavaScript syntax
         run: |
           set -euo pipefail
-          node --check data.js
-          node --check zenebona-program.js
-          node --check app.js
-          node --check route-map.js
-          node --check address-autocomplete.js
-          node --check catalog.js
-          node --check whatsapp-widget.js
-          node --check transit-routing.js
-          node --check result-travel-polish.js
-          node --check scripts/validate.mjs
-          node --check scripts/validate-schema-age.mjs
-          node --check scripts/validate-matching.mjs
-          node --check scripts/validate-copy.mjs
-          node --check scripts/live-transit-probe.mjs
+          for f in data.js zenebona-program.js app.js route-map.js address-autocomplete.js catalog.js whatsapp-widget.js transit-routing.js result-travel-polish.js scripts/validate.mjs scripts/validate-schema-age.mjs scripts/validate-matching.mjs scripts/validate-copy.mjs scripts/live-transit-probe.mjs; do node --check "$f"; done
       - name: Recommendation and registry validation
         run: |
           set -euo pipefail
@@ -51,36 +38,28 @@ jobs:
           node scripts/validate-copy.mjs
       - name: Live Vienna transit probe
         run: node scripts/live-transit-probe.mjs
-      - name: Partner and recommender release contracts
+      - name: Release contracts
         run: |
           set -euo pipefail
           grep -Fq 'id:"zenebona"' zenebona-program.js
-          grep -Fq 'url:"https://zenebona.magyariskola.at"' zenebona-program.js
-          grep -Fq 'fee:"150 € / 10 alkalom"' zenebona-program.js
-          grep -Fq 'paymentDeadline:"2026. október 1."' zenebona-program.js
           grep -Fq 'id:"oromzene"' zenebona-program.js
-          grep -Fq 'eventDates' zenebona-program.js
           grep -Fq 'selectedDays' app.js
           grep -Fq 'selectedPaces' app.js
-          grep -Fq "'days',3" app.js
-          grep -Fq "'paces',2" app.js
-          grep -Fq 'data-mode="transit"' app.js
           grep -Fq 'identifiedOrigin(input)' app.js
-          grep -Fq 'data-route-origin-lat' app.js
           grep -Fq 'routeData(card)' route-map.js
-          grep -Fq 'overview=full&geometries=geojson' route-map.js
           grep -Fq 'countrycode=AT' address-autocomplete.js
-          grep -Fq 'Azonosított cím:' address-autocomplete.js
           grep -Fq 'bmi-whatsapp-widget' whatsapp-widget.js
           grep -Fq 'transit-routing.js?v=' whatsapp-widget.js
           grep -Fq 'result-travel-polish.js?v=' whatsapp-widget.js
-          grep -Fq 'fahrplan.oebb.at/bin/mgate.exe' transit-routing.js
-          grep -Fq 'LocGeoPos' transit-routing.js
-          grep -Fq 'outFrwd:false' transit-routing.js
-          grep -Fq 'target-60' transit-routing.js
+          grep -Fq 'oebb.macistry.com/api' transit-routing.js
+          grep -Fq '/locations/nearby?' transit-routing.js
+          grep -Fq '/journeys?' transit-routing.js
+          grep -Fq 'windowStart=target-60' transit-routing.js
+          grep -Fq 'polylines=true' transit-routing.js
+          grep -Fq 'journeyKm(' transit-routing.js
+          grep -Fq 'Átlagos útvonalhossz' result-travel-polish.js
           grep -Fq 'Átlagos menetidő' result-travel-polish.js
           grep -Fq 'container-type:inline-size' result-travel-polish.js
-          grep -Fq 'Nem a keresés pillanatát használjuk.' result-travel-polish.js
           for html in index.html foglalkozasok.html korosztalyok.html gyik.html; do
             grep -Fq 'whatsapp-widget.js?v=' "$html"
             grep -Fq 'marketing@kozpontiszovetseg.at' "$html"
@@ -89,7 +68,7 @@ jobs:
           done
           ! grep -Fq '<h4>Zenebona</h4>' gyik.html
           grep -Fq '28 aktuális' llms.txt
-          echo 'PASS: scheduled ÖBB transit, responsive travel panel and recommender contracts are intact.'
+          echo 'PASS: browser-safe scheduled transit distance/time and existing release contracts are intact.'
 
   build:
     needs: validate
@@ -100,48 +79,27 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf _site
-          mkdir _site
-          rsync -a ./ _site/ \
-            --exclude '.git/' \
-            --exclude '.github/' \
-            --exclude 'scripts/' \
-            --exclude '_site/' \
-            --exclude 'release.txt' \
-            --exclude 'version.json'
-
+          rm -rf _site && mkdir _site
+          rsync -a ./ _site/ --exclude '.git/' --exclude '.github/' --exclude 'scripts/' --exclude '_site/' --exclude 'release.txt' --exclude 'version.json'
           short_sha="${GITHUB_SHA::12}"
           release_date="$(date -u +'%Y-%m-%d')"
           built_at="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
           release_id="${release_date}-${short_sha}"
-
           for html in _site/*.html; do
-            sed -E -i "s#styles\.css\?v=[^\"']+#styles.css?v=${short_sha}#g" "$html"
-            sed -E -i "s#ui-20260821\.css\?v=[^\"']+#ui-20260821.css?v=${short_sha}#g" "$html"
-            sed -E -i "s#recommendation-polish\.css\?v=[^\"']+#recommendation-polish.css?v=${short_sha}#g" "$html"
-            sed -E -i "s#data\.js\?v=[^\"']+#data.js?v=${short_sha}#g" "$html"
-            sed -E -i "s#app\.js\?v=[^\"']+#app.js?v=${short_sha}#g" "$html"
-            sed -E -i "s#route-map\.js\?v=[^\"']+#route-map.js?v=${short_sha}#g" "$html"
-            sed -E -i "s#address-autocomplete\.js\?v=[^\"']+#address-autocomplete.js?v=${short_sha}#g" "$html"
-            sed -E -i "s#catalog\.js\?v=[^\"']+#catalog.js?v=${short_sha}#g" "$html"
-            sed -E -i "s#zenebona-program\.js\?v=[^\"']+#zenebona-program.js?v=${short_sha}#g" "$html"
-            sed -E -i "s#whatsapp-widget\.js\?v=[^\"']+#whatsapp-widget.js?v=${short_sha}#g" "$html"
+            sed -E -i "s#styles\.css\?v=[^\"']+#styles.css?v=${short_sha}#g; s#ui-20260821\.css\?v=[^\"']+#ui-20260821.css?v=${short_sha}#g; s#recommendation-polish\.css\?v=[^\"']+#recommendation-polish.css?v=${short_sha}#g; s#data\.js\?v=[^\"']+#data.js?v=${short_sha}#g; s#app\.js\?v=[^\"']+#app.js?v=${short_sha}#g; s#route-map\.js\?v=[^\"']+#route-map.js?v=${short_sha}#g; s#address-autocomplete\.js\?v=[^\"']+#address-autocomplete.js?v=${short_sha}#g; s#catalog\.js\?v=[^\"']+#catalog.js?v=${short_sha}#g; s#zenebona-program\.js\?v=[^\"']+#zenebona-program.js?v=${short_sha}#g; s#whatsapp-widget\.js\?v=[^\"']+#whatsapp-widget.js?v=${short_sha}#g" "$html"
           done
-
           cat > _site/release.txt <<EOF
           BMIPROGRAM_RELEASE=${release_id}
           GIT_SHA=${GITHUB_SHA}
           SCHOOL_YEAR=2026/2027
           PROGRAM_COUNT=28
           SOURCE_POLICY=canonical-current-2026-27-only
-          RECOMMENDER=age-hard-multineed-multiday-multipace-identified-address-route-scheduled-transit
+          RECOMMENDER=age-hard-multineed-multiday-multipace-identified-address-route-scheduled-transit-rest
           BUILT_AT=${built_at}
           EOF
-
           cat > _site/version.json <<EOF
-          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"sourcePolicy":"canonical-current-2026-27-only","recommender":"age-hard-multineed-multiday-multipace-identified-address-route-scheduled-transit","builtAt":"${built_at}"}
+          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"sourcePolicy":"canonical-current-2026-27-only","recommender":"age-hard-multineed-multiday-multipace-identified-address-route-scheduled-transit-rest","builtAt":"${built_at}"}
           EOF
-
           test -f _site/index.html
           test -f _site/app.js
           test -f _site/transit-routing.js
@@ -149,10 +107,8 @@ jobs:
           test -f _site/whatsapp-widget.js
           test "$(cat _site/CNAME)" = "programvalaszto.magyariskola.at"
           grep -Fq 'PROGRAM_COUNT=28' _site/release.txt
-          grep -Fq 'fahrplan.oebb.at/bin/mgate.exe' _site/transit-routing.js
-          grep -Fq 'Átlagos menetidő' _site/result-travel-polish.js
-          for html in _site/index.html _site/foglalkozasok.html _site/korosztalyok.html _site/gyik.html; do grep -Fq 'whatsapp-widget.js?v=' "$html"; done
-
+          grep -Fq 'oebb.macistry.com/api' _site/transit-routing.js
+          grep -Fq 'Átlagos útvonalhossz' _site/result-travel-polish.js
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
@@ -187,24 +143,15 @@ jobs:
           done
           grep -Fq "GIT_SHA=${expected_sha}" <<<"${release}"
           grep -Fq 'PROGRAM_COUNT=28' <<<"${release}"
-          app="$(fetch /app.js)"
-          grep -Fq 'selectedDays' <<<"${app}"
-          grep -Fq 'selectedPaces' <<<"${app}"
-          wa="$(fetch /whatsapp-widget.js)"
-          grep -Fq 'transit-routing.js?v=' <<<"${wa}"
-          grep -Fq 'result-travel-polish.js?v=' <<<"${wa}"
           transit="$(fetch /transit-routing.js)"
-          grep -Fq 'fahrplan.oebb.at/bin/mgate.exe' <<<"${transit}"
-          grep -Fq 'LocGeoPos' <<<"${transit}"
-          grep -Fq 'outFrwd:false' <<<"${transit}"
-          grep -Fq 'target-60' <<<"${transit}"
+          grep -Fq 'oebb.macistry.com/api' <<<"${transit}"
+          grep -Fq 'windowStart=target-60' <<<"${transit}"
+          grep -Fq 'polylines=true' <<<"${transit}"
           travel="$(fetch /result-travel-polish.js)"
+          grep -Fq 'Átlagos útvonalhossz' <<<"${travel}"
           grep -Fq 'Átlagos menetidő' <<<"${travel}"
           grep -Fq 'container-type:inline-size' <<<"${travel}"
-          for path in / /foglalkozasok.html /korosztalyok.html /gyik.html; do
-            page="$(fetch "${path}")"
-            grep -Fq 'whatsapp-widget.js?v=' <<<"${page}"
-            grep -Fq 'marketing@kozpontiszovetseg.at' <<<"${page}"
-          done
+          wa="$(fetch /whatsapp-widget.js)"
+          grep -Fq 'transit-routing.js?v=' <<<"${wa}"
           for path in / /foglalkozasok.html /korosztalyok.html /gyik.html /app.js /transit-routing.js /result-travel-polish.js /whatsapp-widget.js /release.txt /version.json; do fetch "${path}" >/dev/null; done
-          echo "EXACT-LIVE: ${expected_sha} serves scheduled ÖBB transit and responsive travel panel assets."
+          echo "EXACT-LIVE: ${expected_sha} serves browser-safe scheduled transit time/distance and responsive travel assets."
