@@ -4,43 +4,26 @@ function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){retur
 function norm(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
 var DISTRICTS={'1010':'Innere Stadt','1020':'Leopoldstadt','1030':'Landstraße','1040':'Wieden','1050':'Margareten','1060':'Mariahilf','1070':'Neubau','1080':'Josefstadt','1090':'Alsergrund','1100':'Favoriten','1110':'Simmering','1120':'Meidling','1130':'Hietzing','1140':'Penzing','1150':'Rudolfsheim-Fünfhaus','1160':'Ottakring','1170':'Hernals','1180':'Währing','1190':'Döbling','1200':'Brigittenau','1210':'Floridsdorf','1220':'Donaustadt','1230':'Liesing','2500':'Baden'};
 var KNOWN_LABELS=['1010 Wien, Schwedenplatz 2','1010 Wien, Laurenzerberg 5','1020 Wien, Alliiertenstraße 2','1130 Wien, Fleschgasse 15','1220 Wien, Wulzendorfstraße 1','1220 Wien, Sonnenallee 116','2500 Baden, Friedrich-Schiller-Platz 1','2500 Baden, Johannesgasse 9'];
-function localMatches(q){var resolver=window.BMI_LOCAL_LOCATION,n=norm(q),out=[];function push(label){var p=resolver&&resolver(label);if(!p)return;if(out.some(function(x){return x.label===label}))return;out.push({label:label,lat:p.lat,lon:p.lon})}
+function localMatches(q){var resolver=window.BMI_LOCAL_LOCATION,n=norm(q),out=[];function push(label){var p=resolver&&resolver(label);if(!p)return;if(out.some(function(x){return x.label===label}))return;out.push({label:label,lat:p.lat,lon:p.lon,source:'local'})}
 KNOWN_LABELS.forEach(function(label){if(norm(label).indexOf(n)!==-1||n.split(/\s+/).every(function(t){return !t||norm(label).indexOf(t)!==-1}))push(label)});
 var m=String(q||'').match(/\b(1\d{3}|2\d{3})\b/),pc=m&&m[1];if(pc&&DISTRICTS[pc]){var city=pc==='2500'?'Baden':'Wien',district=DISTRICTS[pc];push(pc+' '+city);push(pc+' '+city+' – '+district);push((pc==='2500'?'Baden':'Wien')+' '+district+' ('+pc+')')}
 if(!out.length&&q.trim().length>=3){var p=resolver&&resolver(q);if(p)push(p.label)}return out.slice(0,3)}
+function externalMatches(q){if(window.BMI_MAP_CONSENT!==true||q.trim().length<3)return Promise.resolve([]);var url='https://photon.komoot.io/api/?limit=3&lang=de&bbox=9.5,46.3,17.2,49.1&q='+encodeURIComponent(q);return fetch(url,{headers:{Accept:'application/json'}}).then(function(r){if(!r.ok)throw new Error('Geocoder '+r.status);return r.json()}).then(function(data){return(data.features||[]).filter(function(f){return f&&f.geometry&&Array.isArray(f.geometry.coordinates)}).slice(0,3).map(function(f){var p=f.properties||{},c=f.geometry.coordinates,label=[p.name||p.street,p.housenumber,p.postcode,p.city||p.town||p.village].filter(Boolean).join(' ').replace(/\s+/g,' ').trim();return{label:label||p.name||'Címjavaslat',lat:Number(c[1]),lon:Number(c[0]),source:'external'}})}).catch(function(){return[]})}
 function attach(){
   var input=document.getElementById('addressInput');
   if(!input||input.dataset.addressIdentifyReady)return;
-  input.dataset.addressIdentifyReady='1';
-  input.setAttribute('autocomplete','off');
-  input.setAttribute('inputmode','text');
+  input.dataset.addressIdentifyReady='1';input.setAttribute('autocomplete','off');input.setAttribute('inputmode','text');
   var wrap=input.parentNode;wrap.style.position='relative';
+  var consent=document.createElement('label');consent.className='map-consent';consent.style.cssText='display:flex;align-items:flex-start;gap:10px;margin:10px 0 12px;padding:12px 14px;border:1px solid #d2d2d7;border-radius:12px;background:#fff;font-size:.88rem;line-height:1.42;cursor:pointer';consent.innerHTML='<input type="checkbox" id="mapConsent" style="margin-top:3px;flex:0 0 auto"><span><strong>Térkép és pontos címjavaslatok engedélyezése.</strong> Elfogadom, hogy a cím/helyadat a geokódoláshoz és útvonaltervezéshez szükséges mértékben Photon/Komoot és OpenStreetMap szolgáltatásokhoz továbbításra kerüljön. Nincs analitika vagy követés; a hozzájárulás csak az aktuális oldal megnyitásáig él.</span>';wrap.insertBefore(consent,input.nextSibling);
   var list=document.createElement('div');list.className='local-address-suggestions';list.hidden=true;list.setAttribute('role','listbox');list.style.cssText='position:absolute;left:0;right:0;top:calc(100% - 2px);z-index:50;background:#fff;border:1px solid #d2d2d7;border-radius:14px;box-shadow:0 14px 34px rgba(0,0,0,.12);overflow:hidden';wrap.appendChild(list);
-  var note=document.createElement('div');
-  note.className='address-identified';
-  note.style.marginTop='8px';
-  note.style.padding='10px 12px';
-  note.style.borderRadius='12px';
-  note.style.background='rgba(40,140,80,.08)';
-  note.innerHTML='<strong>Privát helybecslés.</strong> Gépelés közben legfeljebb 3 helyi javaslat jelenik meg. A beírt szöveg nem hagyja el a böngészőt; a kiválasztott helyből készül közelítő távolságbecslés.';
-  wrap.appendChild(note);
-  function setPoint(p,label){input.value=label;input.dataset.identifiedLat=String(p.lat);input.dataset.identifiedLon=String(p.lon);input.dataset.identifiedLabel=label;list.hidden=true;var st=document.getElementById('locStatus');if(st)st.textContent='Helyben azonosított becslési pont: '+label+'. Az adat nem került elküldésre.'}
-  function renderSuggestions(){var q=input.value.trim(),items=localMatches(q);if(!q||!items.length){list.hidden=true;list.innerHTML='';return}list.innerHTML=items.map(function(x,i){return'<button type="button" role="option" data-i="'+i+'" style="display:block;width:100%;padding:12px 14px;border:0;border-bottom:'+(i===items.length-1?'0':'1px solid #eee')+';background:#fff;text-align:left;font:inherit;cursor:pointer">'+esc(x.label)+'</button>'}).join('');list.hidden=false;Array.prototype.forEach.call(list.querySelectorAll('button'),function(btn){btn.addEventListener('mousedown',function(e){e.preventDefault();var x=items[Number(btn.dataset.i)];if(x)setPoint(x,x.label)})})}
-  function identify(){
-    delete input.dataset.identifiedLat;delete input.dataset.identifiedLon;delete input.dataset.identifiedLabel;
-    var q=input.value.trim(),resolver=window.BMI_LOCAL_LOCATION,p=resolver&&resolver(q),st=document.getElementById('locStatus');
-    renderSuggestions();
-    if(!q){if(st)st.textContent='';return}
-    if(!p){if(st)st.textContent='Válassz a helyi javaslatok közül, vagy adj meg támogatott osztrák irányítószámot.';return}
-    input.dataset.identifiedLat=String(p.lat);input.dataset.identifiedLon=String(p.lon);input.dataset.identifiedLabel=p.label;
-    if(st)st.textContent='Helyben azonosított becslési pont: '+p.label+'. Az adat nem került elküldésre.';
-  }
-  input.addEventListener('input',identify);
-  input.addEventListener('change',identify);
-  input.addEventListener('focus',renderSuggestions);
-  input.addEventListener('keydown',function(e){if(e.key==='Escape')list.hidden=true});
-  document.addEventListener('click',function(e){if(e.target!==input&&!list.contains(e.target))list.hidden=true});
-  identify();
+  var note=document.createElement('div');note.className='address-identified';note.style.cssText='margin-top:8px;padding:10px 12px;border-radius:12px;background:rgba(40,140,80,.08)';note.innerHTML='<strong>Adatvédelmi mód.</strong> Beleegyezés nélkül a cím nem hagyja el a böngészőt, és csak helyi irányítószám-becslés használható. Beleegyezés után maximum 3 valós címjavaslat és pontosabb útvonal kérhető külső térképszolgáltatástól.';wrap.appendChild(note);
+  var seq=0;
+  function setPoint(p,label){input.value=label;input.dataset.identifiedLat=String(p.lat);input.dataset.identifiedLon=String(p.lon);input.dataset.identifiedLabel=label;list.hidden=true;var st=document.getElementById('locStatus');if(st)st.textContent=(p.source==='external'?'Külső térképszolgáltatással azonosított cím: ':'Helyben azonosított becslési pont: ')+label+'.'}
+  function paint(items){if(!items.length){list.hidden=true;list.innerHTML='';return}list.innerHTML=items.map(function(x,i){return'<button type="button" role="option" data-i="'+i+'" style="display:block;width:100%;padding:12px 14px;border:0;border-bottom:'+(i===items.length-1?'0':'1px solid #eee')+';background:#fff;text-align:left;font:inherit;cursor:pointer"><strong>'+esc(x.label)+'</strong><small style="display:block;margin-top:2px;color:#6e6e73">'+(x.source==='external'?'Térképszolgáltatói javaslat':'Helyi javaslat')+'</small></button>'}).join('');list.hidden=false;Array.prototype.forEach.call(list.querySelectorAll('button'),function(btn){btn.addEventListener('mousedown',function(e){e.preventDefault();var x=items[Number(btn.dataset.i)];if(x)setPoint(x,x.label)})})}
+  function renderSuggestions(){var q=input.value.trim(),ticket=++seq;if(!q){paint([]);return}if(window.BMI_MAP_CONSENT===true){externalMatches(q).then(function(items){if(ticket!==seq)return;paint(items.length?items:localMatches(q))})}else paint(localMatches(q))}
+  function identify(){delete input.dataset.identifiedLat;delete input.dataset.identifiedLon;delete input.dataset.identifiedLabel;var q=input.value.trim(),resolver=window.BMI_LOCAL_LOCATION,p=resolver&&resolver(q),st=document.getElementById('locStatus');renderSuggestions();if(!q){if(st)st.textContent='';return}if(!p&&window.BMI_MAP_CONSENT!==true){if(st)st.textContent='A pontos utcajavaslatokhoz pipáld ki a térképes adatkezelés engedélyét, vagy adj meg támogatott osztrák irányítószámot.';return}if(p){input.dataset.identifiedLat=String(p.lat);input.dataset.identifiedLon=String(p.lon);input.dataset.identifiedLabel=p.label;if(st)st.textContent='Helyben azonosított becslési pont: '+p.label+'.'}}
+  var box=consent.querySelector('#mapConsent');box.checked=window.BMI_MAP_CONSENT===true;box.addEventListener('change',function(){if(typeof window.BMI_SET_MAP_CONSENT==='function')window.BMI_SET_MAP_CONSENT(box.checked);renderSuggestions();var st=document.getElementById('locStatus');if(st)st.textContent=box.checked?'A térképes adatkezelést engedélyezted erre az oldalmegnyitásra. A címjavaslatok most külső geokódolással pontosíthatók.':'A térképes adatkezelés kikapcsolva. Külső cím- és útvonal-lekérdezés nem történik.'});
+  input.addEventListener('input',identify);input.addEventListener('change',identify);input.addEventListener('focus',renderSuggestions);input.addEventListener('keydown',function(e){if(e.key==='Escape')list.hidden=true});document.addEventListener('click',function(e){if(e.target!==input&&!list.contains(e.target))list.hidden=true});identify();
 }
 var wizard=document.getElementById('wizard');if(wizard)new MutationObserver(attach).observe(wizard,{childList:true,subtree:true});if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',attach);else attach();
 })();
