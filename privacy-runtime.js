@@ -2,7 +2,7 @@
 'use strict';
 // Privacy-first consent layer for the finder.
 // Default: no address, coordinate, selection or usage data is sent to third parties.
-// Explicit map consent is memory-only and allows only the services required for geocoding/routing/maps.
+// Explicit map/routing consent is memory-only and allows only the services required for geocoding/routing/maps.
 var nativeFetch=window.fetch.bind(window);
 var POSTCODES={
 '1010':[48.2082,16.3738],'1020':[48.2163,16.4010],'1030':[48.1969,16.3950],'1040':[48.1920,16.3700],'1050':[48.1865,16.3533],'1060':[48.1940,16.3500],'1070':[48.2020,16.3490],'1080':[48.2100,16.3480],'1090':[48.2250,16.3570],
@@ -23,12 +23,12 @@ function locFor(q){for(var i=0;i<KNOWN.length;i++)if(KNOWN[i].re.test(q))return 
 function photonLocal(url){var q=new URL(url).searchParams.get('q')||'',p=locFor(q);if(!p)return response({features:[]});return response({features:[{type:'Feature',geometry:{type:'Point',coordinates:[p.lon,p.lat]},properties:{name:p.label,postcode:p.pc,city:p.pc==='2500'?'Baden':'Wien',countrycode:'AT'}}]})}
 function hav(a,b){var R=6371,rad=Math.PI/180,dLat=(b.lat-a.lat)*rad,dLon=(b.lon-a.lon)*rad,x=Math.sin(dLat/2)*Math.sin(dLat/2)+Math.cos(a.lat*rad)*Math.cos(b.lat*rad)*Math.sin(dLon/2)*Math.sin(dLon/2);return R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x))}
 function localRoute(url){var u=new URL(url),m=u.pathname.match(/\/route\/v1\/driving\/([\d.-]+),([\d.-]+);([\d.-]+),([\d.-]+)/);if(!m)return response({routes:[]});var a={lon:+m[1],lat:+m[2]},b={lon:+m[3],lat:+m[4]},walk=/routed-foot/.test(u.pathname),straight=hav(a,b),km=straight*(walk?1.18:1.28),speed=walk?4.5:(km<8?24:km<20?32:42),minutes=Math.max(1,km/speed*60);return response({code:'Ok',routes:[{distance:km*1000,duration:minutes*60,geometry:{type:'LineString',coordinates:[[a.lon,a.lat],[b.lon,b.lat]]}}]})}
-var ALLOWED_WITH_CONSENT=['photon.komoot.io','routing.openstreetmap.de','tile.openstreetmap.org','a.tile.openstreetmap.org','b.tile.openstreetmap.org','c.tile.openstreetmap.org','unpkg.com'];
+var ALLOWED_WITH_CONSENT=['photon.komoot.io','routing.openstreetmap.de','tile.openstreetmap.org','a.tile.openstreetmap.org','b.tile.openstreetmap.org','c.tile.openstreetmap.org','unpkg.com','routes.googleapis.com'];
 window.BMI_PRIVACY_LOCAL=true;
 window.BMI_MAP_CONSENT=false;
 window.BMI_LOCAL_POSTCODES=POSTCODES;
 window.BMI_LOCAL_LOCATION=locFor;
 window.BMI_SET_MAP_CONSENT=function(value){window.BMI_MAP_CONSENT=value===true;window.dispatchEvent(new CustomEvent('bmi-map-consent-change',{detail:{accepted:window.BMI_MAP_CONSENT}}));return window.BMI_MAP_CONSENT};
-window.fetch=function(input,init){var url=typeof input==='string'?input:(input&&input.url)||'';try{var u=new URL(url,location.href);if(u.origin===location.origin)return nativeFetch(input,init);if(window.BMI_MAP_CONSENT===true&&ALLOWED_WITH_CONSENT.indexOf(u.hostname)!==-1)return nativeFetch(input,init);if(u.hostname==='photon.komoot.io')return photonLocal(u.href);if(u.hostname==='routing.openstreetmap.de')return localRoute(u.href);return Promise.reject(new Error('Privacy policy: automatic third-party network request blocked until explicit map consent.'));}catch(e){return Promise.reject(e)}
+window.fetch=function(input,init){var url=typeof input==='string'?input:(input&&input.url)||'';try{var u=new URL(url,location.href);if(u.origin===location.origin)return nativeFetch(input,init);if(window.BMI_MAP_CONSENT===true&&ALLOWED_WITH_CONSENT.indexOf(u.hostname)!==-1)return nativeFetch(input,init);if(u.hostname==='photon.komoot.io')return photonLocal(u.href);if(u.hostname==='routing.openstreetmap.de')return localRoute(u.href);return Promise.reject(new Error('Privacy policy: automatic third-party network request blocked until explicit map/routing consent.'));}catch(e){return Promise.reject(e)}
 };
 })();
