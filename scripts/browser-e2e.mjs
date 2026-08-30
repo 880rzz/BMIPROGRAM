@@ -21,14 +21,14 @@ for (const path of pages) {
   await page.goto(base + path, {waitUntil:'networkidle', timeout:30000});
   await page.waitForTimeout(300);
   const shell = await page.evaluate(() => {
-    const heroLogo = document.querySelector('.hero-mark img');
+    const heroLogo = document.querySelector('.bmi-hero-wordmark');
     const heroLogoRect = heroLogo?.getBoundingClientRect();
     const heroLogoStyle = heroLogo ? getComputedStyle(heroLogo) : null;
     return {
       brand: document.querySelector('.site-head .brand')?.textContent?.replace(/\s+/g,' ').trim() || '',
       menu: !!document.querySelector('#menuBtn'),
       hero: !!document.querySelector('.hero h1'),
-      heroLogo: !!heroLogo && heroLogo.complete && heroLogo.naturalWidth > 0 && heroLogoRect.width >= 70 && heroLogoRect.height >= 25 && heroLogoStyle.display !== 'none' && heroLogoStyle.visibility !== 'hidden' && Number(heroLogoStyle.opacity) > 0,
+      heroLogo: !!heroLogo && heroLogo.textContent.trim()==='BMI' && heroLogoRect.width >= 55 && heroLogoRect.height >= 28 && heroLogoStyle.display !== 'none' && heroLogoStyle.visibility !== 'hidden' && Number(heroLogoStyle.opacity||1) > 0,
       heroLogoBox: heroLogoRect ? {width:heroLogoRect.width,height:heroLogoRect.height} : null,
       overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
       wa: !!document.querySelector('#bmi-whatsapp-widget'),
@@ -63,4 +63,4 @@ for (const path of pages) {
 }
 await browser.close();
 if (failed) process.exit(1);
-console.log('PASS: mobile browser E2E, visible hero logo, zero automatic third-party requests, zero client storage/cookies, trust disclosure, WhatsApp and finder runtime.');
+console.log('PASS: mobile browser E2E, visible BMI hero wordmark, zero automatic third-party requests, zero client storage/cookies, trust disclosure, WhatsApp and finder runtime.');
