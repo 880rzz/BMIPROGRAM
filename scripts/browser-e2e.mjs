@@ -29,7 +29,7 @@ for (const path of pages) {
       brand: document.querySelector('.site-head .brand')?.textContent?.replace(/\s+/g,' ').trim() || '',
       menu: !!document.querySelector('#menuBtn'),
       hero: !!document.querySelector('.hero h1'),
-      heroLogo: !!heroLogo && /bmi-header-logo\.png(?:\?|$)/.test(heroLogoSrc) && heroLogo.complete && heroLogo.naturalWidth > 0 && heroLogo.naturalHeight > 0 && heroLogoRect.width >= 70 && heroLogoRect.height >= 25 && heroLogoStyle.display !== 'none' && heroLogoStyle.visibility !== 'hidden' && Number(heroLogoStyle.opacity||1) > 0,
+      heroLogo: !!heroLogo && /bmi-hero-original\.png(?:\?|$)/.test(heroLogoSrc) && heroLogo.complete && heroLogo.naturalWidth > 0 && heroLogo.naturalHeight > 0 && heroLogoRect.width >= 100 && heroLogoRect.height >= 45 && heroLogoStyle.display !== 'none' && heroLogoStyle.visibility !== 'hidden' && Number(heroLogoStyle.opacity||1) > 0,
       heroLogoSrc,
       heroLogoNatural: heroLogo ? {width:heroLogo.naturalWidth,height:heroLogo.naturalHeight,complete:heroLogo.complete} : null,
       heroLogoBox: heroLogoRect ? {width:heroLogoRect.width,height:heroLogoRect.height} : null,
@@ -67,4 +67,4 @@ for (const path of pages) {
 }
 await browser.close();
 if (failed) process.exit(1);
-console.log('PASS: mobile browser E2E, original loaded BMI hero logo, zero automatic third-party requests, zero client storage/cookies, trust disclosure, WhatsApp and finder runtime.');
+console.log('PASS: mobile browser E2E, true original BMI hero artwork loaded and visible, zero automatic third-party requests, zero client storage/cookies, trust disclosure, WhatsApp and finder runtime.');
