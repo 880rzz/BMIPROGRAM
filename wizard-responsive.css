@@ -1,6 +1,9 @@
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 #wizard{scroll-margin-top:96px}
 #finder,#wizard,.wizard-card,.result-grid,.result-card,.result-travel,.travel-data-panel,.travel-metrics,.travel-metric{min-width:0;box-sizing:border-box}
 #wizard .result-card{width:100%;max-width:100%}
+#wizard input,#wizard select,#wizard textarea{font-size:16px!important;line-height:1.35}
+#wizard button,#wizard .btn{touch-action:manipulation}
 #wizard .result-travel.travel-data-panel{display:block!important;grid-template-columns:none!important;width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important;overflow:visible!important}
 #wizard .travel-panel-head{width:100%;min-width:0}
 #wizard .travel-metrics{width:100%;min-width:0}
@@ -14,9 +17,14 @@
 #wizard .result-card>.result-travel{margin-top:22px!important;margin-bottom:24px!important}
 #wizard .result-card>.result-reason{margin:26px 0 0!important;padding:20px!important;border-top:1px solid rgba(29,29,31,.12)!important;border-bottom:1px solid rgba(29,29,31,.08)!important;border-radius:14px!important;background:rgba(248,248,250,.9)!important;line-height:1.62!important}
 #wizard .result-card>.result-reason strong{display:block!important;margin:0 0 10px!important;font-size:.78rem!important;line-height:1.25!important;letter-spacing:.06em!important;text-transform:uppercase!important;color:#1d1d1f!important}
-#wizard .result-card>.result-reason+p{margin:22px 0 0!important;padding-top:4px!important}
-#wizard .result-card>.result-reason+p .btn{margin-top:0!important}
 #wizard .route-map-shell,#wizard .route-map-wrap,#wizard [data-route-map]{margin-top:22px!important}
+
+/* Unified actions: equal controls, responsive short-button columns. */
+#wizard .result-action-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px!important;margin:24px 0 0!important;padding:0!important;align-items:stretch}
+#wizard .result-action-grid>*{margin:0!important;min-width:0!important}
+#wizard .result-action-grid .btn{display:flex!important;align-items:center!important;justify-content:center!important;width:100%!important;min-width:0!important;min-height:54px!important;height:100%!important;padding:12px 16px!important;margin:0!important;box-sizing:border-box!important;text-align:center!important;line-height:1.2!important;white-space:normal!important}
+#wizard .result-action-grid .action-wide{grid-column:1/-1}
+#wizard .result-action-grid .route-map-action{display:block!important}
 
 @media(max-width:760px){
   #wizard{scroll-margin-top:86px}
@@ -25,7 +33,6 @@
   #wizard .result-card>.result-meta{padding:12px 0!important;line-height:1.58!important}
   #wizard .result-card>.result-travel{margin-top:24px!important;margin-bottom:26px!important}
   #wizard .result-card>.result-reason{margin-top:28px!important;padding:18px!important;line-height:1.64!important}
-  #wizard .result-card>.result-reason+p{margin-top:24px!important}
   #wizard .result-travel.travel-data-panel{margin:18px 0 24px!important;padding:16px!important;border-radius:14px!important}
   #wizard .travel-panel-head{display:block!important;margin-bottom:14px!important}
   #wizard .travel-panel-source{text-align:left!important;max-width:none!important;margin-top:5px!important;line-height:1.45!important}
@@ -33,6 +40,8 @@
   #wizard .travel-metric,#wizard .travel-metric:last-child{grid-column:auto!important;width:100%!important;padding:14px!important}
   #wizard .travel-mode-row{align-items:flex-start!important;justify-content:flex-start!important;gap:10px!important;padding-top:16px!important}
   #wizard .travel-note{margin-top:12px!important;line-height:1.58!important}
+  #wizard .result-action-grid{gap:10px!important;margin-top:24px!important}
+  #wizard .result-action-grid .btn{min-height:52px!important;padding:11px 12px!important;font-size:.96rem!important}
 }
 @media(max-width:430px){
   #wizard{scroll-margin-top:78px}
@@ -41,4 +50,9 @@
   #wizard .result-card>.result-meta{padding-left:2px!important;padding-right:2px!important}
   #wizard .result-travel.travel-data-panel{width:100%!important;margin-left:0!important;margin-right:0!important}
   #wizard .result-card>.result-reason{border-radius:12px!important;padding:16px!important}
+  #wizard .result-action-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:355px){
+  #wizard .result-action-grid{grid-template-columns:minmax(0,1fr)!important}
+  #wizard .result-action-grid .action-wide{grid-column:auto}
 }
