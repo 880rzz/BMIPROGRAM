@@ -30,8 +30,8 @@ publicPages.forEach((page,i)=>{
 assert(!faqPage.includes('<h4>Zenebona</h4>'),'Zenebona footer duplicate.');
 assert(whatsapp.includes('bmi-whatsapp-widget')&&whatsapp.includes('transit-routing.js?v=')&&whatsapp.includes('result-travel-polish.js?v='),'Shared loaders missing.');
 assert(typography.includes('.hero-identity')&&typography.includes('.site-head .head-in')&&typography.includes('.hero h1')&&typography.includes('text-wrap:balance'),'Unified responsive shell/heading polish missing.');
-assert(transit.includes('vao.demo.hafas.de/gate')&&transit.includes("envelope(req,'LocGeoPos'")&&transit.includes('extId:stops[0].extId')&&transit.includes("envelope(req,'TripSearch'"),'VAO extId transit flow missing.');
-assert(transit.includes('outFrwd:false')&&transit.includes('windowStart=target-60')&&transit.includes('mean(')&&transit.includes('nextOccurrence'),'Transit next-occurrence preceding-hour average contract missing.');
+assert(transit.includes('nextOccurrence')&&transit.includes('windowFor')&&transit.includes("providerStatus:'backend-required'"),'Scheduled transit target fail-safe missing.');
+assert(transit.includes("transitReason='trusted-backend-unavailable'")&&transit.includes('delete card.dataset.transitMinutes')&&transit.includes('delete card.dataset.transitKm'),'Transit must clear untrusted time/distance values.');
 assert(travel.includes('container-type:inline-size')&&travel.includes('@container(max-width:390px)'),'Responsive travel panel missing.');
-assert(travel.includes('Átlagos útvonalhossz')&&travel.includes('Átlagos menetidő')&&travel.includes('számtani átlagát')&&travel.includes('Nem a keresés pillanatából számol.'),'Scheduled transit average copy missing.');
-console.log('PASS: unified public shell, Zenebona scope, VAO scheduled transit averages, responsive travel UI and recommender contracts are consistent.');
+assert(travel.includes('Átlagos útvonalhossz')&&travel.includes('Átlagos menetidő')&&travel.includes('nincs hiteles adat')&&travel.includes('nem talál ki perc- vagy kilométerértéket'),'Transit fail-safe result copy missing.');
+console.log('PASS: unified public shell, Zenebona scope, scheduled transit target fail-safe, responsive travel UI and recommender contracts are consistent.');
