@@ -51,18 +51,24 @@ jobs:
           grep -Fq 'selectedPaces' app.js
           grep -Fq 'identifiedOrigin(input)' app.js
           grep -Fq 'BMI_PRIVACY_LOCAL=true' privacy-runtime.js
-          grep -Fq 'automatic third-party network request blocked' privacy-runtime.js
+          grep -Fq 'BMI_MAP_CONSENT=false' privacy-runtime.js
+          grep -Fq 'BMI_SET_MAP_CONSENT' privacy-runtime.js
+          grep -Fq 'ALLOWED_WITH_CONSENT' privacy-runtime.js
+          grep -Fq 'automatic third-party network request blocked until explicit map consent' privacy-runtime.js
           grep -Fq 'BMI_LOCAL_LOCATION' address-autocomplete.js
-          ! grep -Fq 'fetch(' address-autocomplete.js
-          ! grep -Fq 'photon.komoot.io' address-autocomplete.js
+          grep -Fq 'mapConsent' address-autocomplete.js
+          grep -Fq 'photon.komoot.io' address-autocomplete.js
+          grep -Fq 'limit=3' address-autocomplete.js
           grep -Fq 'routeData(card)' route-map.js
           grep -Fq 'Térkép és útvonal' route-map.js
           grep -Fq 'mapSvg(data)' route-map.js
-          ! grep -Fq 'unpkg.com' route-map.js
-          ! grep -Fq 'tile.openstreetmap.org' route-map.js
-          ! grep -Fq 'fetch(' route-map.js
+          grep -Fq 'osmEmbedUrl' route-map.js
+          grep -Fq 'openstreetmap.org/export/embed.html' route-map.js
+          grep -Fq 'BMI_MAP_CONSENT===true' route-map.js
           grep -Fq "p.id!=='zenebona'&&overlaps" catalog.js
           grep -Fq 'bmi-whatsapp-widget' whatsapp-widget.js
+          grep -Fq 'bmi-hero-wordmark' whatsapp-widget.js
+          grep -Fq 'opcionális térképes hozzájárulással' whatsapp-widget.js
           ! grep -Fq 'transit-routing.js' whatsapp-widget.js
           ! grep -Fq 'wizard-responsive.css' whatsapp-widget.js
           grep -Fq 'wizard-responsive.css?v=' finder-runtime.js
@@ -75,9 +81,10 @@ jobs:
           grep -Fq 'travelPanelSignature' result-travel-polish.js
           grep -Fq -- '-webkit-text-size-adjust:100%' wizard-responsive.css
           grep -Fq 'font-size:16px!important' wizard-responsive.css
-          grep -Fq '.result-action-grid' wizard-responsive.css
-          grep -Fq 'min-height:54px!important' wizard-responsive.css
-          grep -Fq 'result-action-grid' result-actions.js
+          grep -Fq 'repeat(3,minmax(0,1fr))' wizard-responsive.css
+          grep -Fq 'white-space:nowrap!important' wizard-responsive.css
+          grep -Fq 'height:54px!important' wizard-responsive.css
+          grep -Fq 'has-long-action' result-actions.js
           grep -Fq 'scrollToCurrentBlock' wizard-anchor.js
           grep -Fq 'subtree:false' wizard-anchor.js
           grep -Fq '.hero-identity' recommendation-polish.css
@@ -105,7 +112,7 @@ jobs:
           ! grep -Fq 'Zenebona' index.html
           ! grep -Fq 'Zenebona' korosztalyok.html
           ! grep -Fq 'Zenebona' gyik.html
-          echo 'PASS: data, local-only privacy, zero-tracking contract, finder runtime, partner scope, mobile UX and release contracts are intact.'
+          echo 'PASS: data, default-private explicit map consent, no-tracking contract, finder runtime, address suggestions, real map, mobile UX and release contracts are intact.'
 
   build:
     needs: validate
@@ -136,12 +143,12 @@ jobs:
           SCHOOL_YEAR=2026/2027
           PROGRAM_COUNT=28
           SOURCE_POLICY=canonical-current-2026-27-only
-          PRIVACY=local-only-no-analytics-no-tracking-no-client-storage-no-background-third-party-requests
-          RECOMMENDER=age-hard-multineed-multiday-multipace-local-location-estimate-three-mode-ranges-local-map-mobile-anchor-spacious-actions-ios-browser-e2e
+          PRIVACY=default-private-explicit-map-consent-no-analytics-no-tracking-no-client-storage
+          RECOMMENDER=age-hard-multineed-multiday-multipace-consent-location-routing-three-mode-ranges-real-map-mobile-anchor-spacious-actions-ios-browser-e2e
           BUILT_AT=${built_at}
           EOF
           cat > _site/version.json <<EOF
-          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"sourcePolicy":"canonical-current-2026-27-only","privacy":"local-only-no-analytics-no-tracking-no-client-storage-no-background-third-party-requests","recommender":"age-hard-multineed-multiday-multipace-local-location-estimate-three-mode-ranges-local-map-mobile-anchor-spacious-actions-ios-browser-e2e","builtAt":"${built_at}"}
+          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"sourcePolicy":"canonical-current-2026-27-only","privacy":"default-private-explicit-map-consent-no-analytics-no-tracking-no-client-storage","recommender":"age-hard-multineed-multiday-multipace-consent-location-routing-three-mode-ranges-real-map-mobile-anchor-spacious-actions-ios-browser-e2e","builtAt":"${built_at}"}
           EOF
           test -f _site/index.html
           test -f _site/app.js
@@ -157,12 +164,12 @@ jobs:
           test -f _site/whatsapp-widget.js
           test "$(cat _site/CNAME)" = "programvalaszto.magyariskola.at"
           grep -Fq 'PROGRAM_COUNT=28' _site/release.txt
-          grep -Fq 'PRIVACY=local-only-no-analytics-no-tracking-no-client-storage-no-background-third-party-requests' _site/release.txt
+          grep -Fq 'PRIVACY=default-private-explicit-map-consent-no-analytics-no-tracking-no-client-storage' _site/release.txt
           grep -Fq 'privacy-runtime.js?v=' _site/index.html
           grep -Fq 'finder-runtime.js?v=' _site/index.html
           grep -Fq 'wizard-responsive.css?v=' _site/finder-runtime.js
           grep -Fq 'mapSvg(data)' _site/route-map.js
-          ! grep -Fq 'unpkg.com' _site/route-map.js
+          grep -Fq 'osmEmbedUrl' _site/route-map.js
           ! grep -Fq 'wizard-responsive.css' _site/whatsapp-widget.js
       - name: Browser E2E on built artifact
         shell: bash
@@ -214,7 +221,7 @@ jobs:
           done
           grep -Fq "GIT_SHA=${expected_sha}" <<<"${release}"
           grep -Fq 'PROGRAM_COUNT=28' <<<"${release}"
-          grep -Fq 'PRIVACY=local-only-no-analytics-no-tracking-no-client-storage-no-background-third-party-requests' <<<"${release}"
+          grep -Fq 'PRIVACY=default-private-explicit-map-consent-no-analytics-no-tracking-no-client-storage' <<<"${release}"
           home="$(fetch /)"
           grep -Fq 'Microsoft Office Specialist' <<<"${home}"
           grep -Fq 'privacy-runtime.js?v=' <<<"${home}"
@@ -224,15 +231,23 @@ jobs:
           ! grep -Fq 'homepage-polish.js' <<<"${home}"
           privacy="$(fetch /privacy-runtime.js)"
           grep -Fq 'BMI_PRIVACY_LOCAL=true' <<<"${privacy}"
+          grep -Fq 'BMI_MAP_CONSENT=false' <<<"${privacy}"
+          grep -Fq 'BMI_SET_MAP_CONSENT' <<<"${privacy}"
           runtime="$(fetch /finder-runtime.js)"
           grep -Fq 'wizard-responsive.css?v=' <<<"${runtime}"
           wa="$(fetch /whatsapp-widget.js)"
           grep -Fq 'bmi-whatsapp-widget' <<<"${wa}"
+          grep -Fq 'bmi-hero-wordmark' <<<"${wa}"
+          grep -Fq 'opcionális térképes hozzájárulással' <<<"${wa}"
           ! grep -Fq 'transit-routing.js' <<<"${wa}"
           route="$(fetch /route-map.js)"
           grep -Fq 'mapSvg(data)' <<<"${route}"
-          ! grep -Fq 'unpkg.com' <<<"${route}"
-          ! grep -Fq 'tile.openstreetmap.org' <<<"${route}"
+          grep -Fq 'osmEmbedUrl' <<<"${route}"
+          grep -Fq 'openstreetmap.org/export/embed.html' <<<"${route}"
+          address="$(fetch /address-autocomplete.js)"
+          grep -Fq 'mapConsent' <<<"${address}"
+          grep -Fq 'photon.komoot.io' <<<"${address}"
+          grep -Fq 'limit=3' <<<"${address}"
           sitemap="$(fetch /sitemap.xml)"
           grep -Fq '<lastmod>2026-08-30</lastmod>' <<<"${sitemap}"
           llmfull="$(fetch /llms-full.txt)"
@@ -253,4 +268,4 @@ jobs:
           E2E_BASE="${PRODUCTION_URL%/}" node scripts/browser-e2e.mjs
       - name: Release complete
         run: |
-          echo "EXACT-LIVE: ${GITHUB_SHA} passed data integrity, source reality, local-only privacy contracts, zero third-party browser requests, exact deploy and production browser E2E."
+          echo "EXACT-LIVE: ${GITHUB_SHA} passed data integrity, source reality, default-private consent contracts, zero third-party requests before consent, exact deploy and production browser E2E."
