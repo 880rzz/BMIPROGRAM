@@ -53,9 +53,9 @@ jobs:
           grep -Fq 'transit-routing.js?v=' whatsapp-widget.js
           grep -Fq 'result-travel-polish.js?v=' whatsapp-widget.js
           grep -Fq 'vao.demo.hafas.de/gate' transit-routing.js
-          grep -Fq "meth:'LocGeoPos'" transit-routing.js
+          grep -Fq "envelope(req,'LocGeoPos'" transit-routing.js
           grep -Fq 'extId:stops[0].extId' transit-routing.js
-          grep -Fq "meth:'TripSearch'" transit-routing.js
+          grep -Fq "envelope(req,'TripSearch'" transit-routing.js
           grep -Fq 'outFrwd:false' transit-routing.js
           grep -Fq 'windowStart=target-60' transit-routing.js
           grep -Fq 'mean(' transit-routing.js
