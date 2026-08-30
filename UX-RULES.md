@@ -46,6 +46,18 @@ These rules are release constraints, not optional visual preferences.
 - Every newly rendered form/function step must scroll to the beginning of the new block.
 - Internal updates inside a result card (travel data, route map, async enrichment) must not reset the user's scroll position.
 
+## Privacy and trust
+
+- The public application must not use analytics, tracking pixels, advertising pixels, behavioral telemetry or session recording.
+- The application must not write user choices, age, address, location or usage data to cookies, `localStorage` or `sessionStorage`.
+- Finder selections and optional location data may exist only in the current page's in-memory JavaScript state and must disappear on reload.
+- No automatic browser request may send address, coordinates, selections or usage information to a third-party origin.
+- Manual location lookup must remain local. If an approximate postcode centroid is used, the UI must clearly call it an estimate.
+- Travel distance/time calculations must remain local estimates unless a future privacy-approved same-origin service is introduced.
+- The in-app map must be local/schematic and must not automatically load third-party map tiles, scripts or routing APIs.
+- External program pages, WhatsApp, Google Maps or Apple Maps may open only after an explicit user click. The trust copy must state that the external provider's own privacy terms apply after leaving the site.
+- The footer trust block must explain the operating principle in plain Hungarian and must not claim more privacy than the code actually guarantees.
+
 ## Release protection
 
-Any change that removes these spacing, grouping, mobile scaling, action-grid or anchor guarantees must fail validation before deployment.
+Any change that removes these spacing, grouping, mobile scaling, action-grid, anchor or privacy guarantees must fail validation before deployment. Browser E2E must fail if an automatic third-party request, cookie, localStorage or sessionStorage state appears on page load.
