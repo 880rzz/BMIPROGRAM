@@ -37,7 +37,7 @@ assert(transit.includes("providerStatus:'approximate-planning-range'")&&transit.
 assert(travel.includes('container-type:inline-size')&&travel.includes('@container(max-width:390px)'),'Responsive travel panel missing.');
 assert(travel.includes("mode==='car'")&&travel.includes("mode==='walk'")&&travel.includes("mode==='transit'"),'All travel modes must be rendered.');
 assert(travel.includes('Várható menetidő')&&travel.includes('kb. ')&&travel.includes('perc'),'Travel range copy missing.');
-assert(travel.includes('travelPanelSignature')&&travel.includes("m.target.closest&&m.target.closest('.result-travel')"),'Travel render-loop guard missing.');
+assert(travel.includes('travelPanelSignature')&&travel.includes("t.closest&&t.closest('.result-travel')"),'Travel render-loop guard missing.');
 assert(wizardResponsive.includes('display:block!important')&&wizardResponsive.includes('grid-template-columns:minmax(0,1fr)!important'),'Mobile travel/result single-column override missing.');
 assert(wizardResponsive.includes('min-width:0')&&wizardResponsive.includes('#wizard .result-card{width:100%'),'Mobile result width guard missing.');
 assert(wizardAnchor.includes("observer.observe(root,{childList:true,subtree:false})"),'Wizard anchor must observe direct view replacements only.');
