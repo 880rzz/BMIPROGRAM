@@ -13,6 +13,7 @@ assert(app.includes('identifiedOrigin(input)'),'Identified origin reuse missing.
 assert(route.includes("b.textContent='Térkép és útvonal'")&&route.includes('mapSvg(data)'),'Local in-app map action missing.');
 assert(/helyben rajzolt/i.test(route)&&!route.includes('unpkg.com')&&!route.includes('tile.openstreetmap.org')&&!route.includes('fetch('),'Route map must stay local and must not load external tiles/CDNs.');
 assert(address.includes('BMI_LOCAL_LOCATION')&&!address.includes('fetch(')&&!address.includes('photon.komoot.io'),'Address identification must stay local-only.');
+assert(address.includes('local-address-suggestions')&&address.includes('slice(0,3)'),'Three local address suggestions must be available without external geocoding.');
 assert(privacy.includes('BMI_PRIVACY_LOCAL=true')&&privacy.includes('BMI_LOCAL_POSTCODES')&&privacy.includes('automatic third-party network request blocked'),'Privacy runtime local-only guard missing.');
 assert(home.indexOf('privacy-runtime.js')<home.indexOf('address-autocomplete.js')&&home.indexOf('privacy-runtime.js')<home.indexOf('app.js'),'Privacy runtime must load before finder network-capable legacy code.');
 const executableRuntime=[app,address,route,whatsapp,finderRuntime,transit,travel,wizardAnchor,actions,catalog,zen].join('\n');
@@ -39,6 +40,7 @@ assert(home.includes('nem használ analitikát'),'Homepage trust must disclose n
 assert(home.includes('nem küld háttérben harmadik félnek'),'Homepage trust must disclose no background data forwarding.');
 assert(faqPage.includes('Gyűjt-e statisztikát')&&faqPage.includes('Hogyan működik a térkép?'),'FAQ privacy operating model missing.');
 assert(whatsapp.includes('bmi-whatsapp-widget')&&!whatsapp.includes('transit-routing.js')&&!whatsapp.includes('wizard-responsive.css')&&!whatsapp.includes('result-actions.js'),'WhatsApp must be independent from finder runtime.');
+assert(whatsapp.includes('bmi-hero-wordmark')&&whatsapp.includes("w.textContent='BMI'"),'Shared visible BMI hero wordmark fallback missing.');
 assert(finderRuntime.includes('wizard-responsive.css?v=')&&finderRuntime.includes('wizard-anchor.js?v=')&&finderRuntime.includes('result-actions.js?v=')&&finderRuntime.includes('transit-routing.js?v=')&&finderRuntime.includes('result-travel-polish.js?v='),'Finder runtime loaders missing.');
 assert(sharedCss.includes('.hero-identity')&&sharedCss.includes('.site-head .head-in')&&sharedCss.includes('.hero h1')&&sharedCss.includes('text-wrap:balance'),'Unified responsive shell/heading polish missing from shared stylesheet.');
 assert(transit.includes('nextOccurrence')&&transit.includes('windowFor')&&transit.includes('haversineKm')&&transit.includes('transitEstimate'),'Transit planning estimate missing.');
@@ -50,9 +52,10 @@ assert(travel.includes('travelPanelSignature')&&travel.includes("t.closest&&t.cl
 assert(wizardResponsive.includes('display:block!important')&&wizardResponsive.includes('grid-template-columns:minmax(0,1fr)!important'),'Mobile travel/result single-column override missing.');
 assert(wizardResponsive.includes('min-width:0')&&wizardResponsive.includes('#wizard .result-card{width:100%'),'Mobile result width guard missing.');
 assert(wizardResponsive.includes('-webkit-text-size-adjust:100%')&&wizardResponsive.includes('font-size:16px!important'),'iOS text/input scaling protection missing.');
-assert(wizardResponsive.includes('.result-action-grid')&&wizardResponsive.includes('min-height:54px!important'),'Responsive equal action-button grid missing.');
-assert(actions.includes('result-action-grid')&&actions.includes('action-wide')&&actions.includes('text.length>22'),'Short/long action classification missing.');
+assert(wizardResponsive.includes('repeat(3,minmax(0,1fr))')&&wizardResponsive.includes('[data-mode]'),'Desktop car/transit/walk selector must use three equal columns.');
+assert(wizardResponsive.includes('.result-action-grid')&&wizardResponsive.includes('height:54px!important')&&wizardResponsive.includes('white-space:nowrap!important'),'Equal no-wrap result action buttons missing.');
+assert(actions.includes('result-action-grid')&&actions.includes('has-long-action')&&actions.includes('labelLength(el)>20'),'Short/long equal action layout classification missing.');
 assert(uxRules.includes('Functional block hierarchy')&&uxRules.includes('Mobile scaling')&&uxRules.includes('Action buttons')&&uxRules.includes('Privacy and trust')&&uxRules.includes('Release protection'),'Persistent UX/privacy rules missing.');
 assert(wizardAnchor.includes("observer.observe(root,{childList:true,subtree:false})"),'Wizard anchor must observe direct view replacements only.');
 assert(wizardAnchor.includes('scrollToCurrentBlock')&&wizardAnchor.includes('.site-head'),'Wizard anchor/header offset missing.');
-console.log('PASS: privacy-first local finder, zero tracking/storage contract, local map, shared trust copy, scoped partner discovery, travel and mobile UX are consistent.');
+console.log('PASS: privacy-first local finder, local 3-suggestion address UX, visible BMI hero wordmark, three-mode desktop selector, equal no-wrap actions and mobile UX are consistent.');
