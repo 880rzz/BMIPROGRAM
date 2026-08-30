@@ -1,6 +1,6 @@
 # Bécsi Magyar Iskola – Foglalkozásválasztó 2026/2027
 
-A rendszer 28 aktuális lehetőséggel dolgozik: 26 alaprekord a `data.js` fájlban, valamint a Zenebona és az Együtt dobban Bécs – Közös örömzene partnerrekordjai a `zenebona-program.js` fájlban. A böngészőoldalak és az ajánlómotor ezeket a gépi forrásokat együtt kezelik.
+A rendszer 28 aktuális lehetőséggel dolgozik: 26 alaprekord a `data.js` fájlban és 2 partnerrekord a `zenebona-program.js` fájlban. A böngészőoldalak és az ajánlómotor ezeket a gépi forrásokat együtt, azonos rangsorolási szabályok szerint kezelik.
 
 ## Gépi források
 - Alap registry: https://programvalaszto.magyariskola.at/data.js
@@ -24,56 +24,23 @@ Az életkor kemény feltétel. Az életkorban megfelelő lehetőségek között 
 - A látogató opcionálisan megadhat címet/irányítószámot vagy külön böngészőengedéllyel használhatja a jelenlegi helyzetét.
 - A cím nincs tartósan eltárolva.
 - A geokódolás külső szolgáltatással történik; hibánál a kereső továbbra is használható távolságadat nélkül.
-- Autós idő: útvonalalapú becslés, élő forgalmi adatok nélkül.
-- Gyalogos idő: becslés.
+- Autó és gyalog: OpenStreetMap-alapú útvonalhossz és tervezési menetidő-sáv.
+- Tömegközlekedés: tervezési becslés, nem élő menetrendi adat; a tényleges járatot Google Maps vagy Apple Maps segítségével lehet ellenőrizni.
 - Az utazási adat a rangsorolás része, de nem írja felül az életkori hard constraintet és az alapvető igényilleszkedést.
 
-## Zenebona canonical rekord
-- id: `zenebona`
-- Név: Zenebona – Zene. Kapcsolódás. Öröm. | Hietzing
-- Canonical URL: https://zenebona.magyariskola.at
-- Kapcsolat: BMI Partner Program
-- Korosztály: 0–3 év + felnőtt kísérő
-- Nyelv: magyar
-- Nap: szerda
-- Idő: 10:00–11:15
-- Érkezés: 09:45-től
-- Maradás: 11:30-ig
-- Helyszín: Zeneterápiás műhely, Fleschgasse 15/1/1, 1130 Wien, Hietzing
-- Első alkalom: 2026. szeptember 23.
-- 2026 őszi alkalmak: szeptember 23., 30.; október 7.; november 4., 11., 18., 25.; december 2., 9., 16.
-- Díj: 150 € / 10 alkalom
-- Befizetési határidő: 2026. október 1.
-- Foglalkozásvezető: Mag. Dapin Hajnalka Judit, zenepedagógus és zeneterapeuta
-- Kapcsolat: +43 699 11569467 · hajnide@yahoo.de
-
-## Együtt dobban Bécs – Közös örömzene canonical rekord
-- id: `oromzene`
-- Canonical URL: https://www.magyariskola.at/event-details/oromzene-2026
-- Kapcsolat: BMI Partner Program
-- Korosztály: minden korosztály
-- Nyelv: magyar
-- Ritmus: havonta 1 alkalom, jellemzően szombaton 18:00-tól
-- Első alkalom: 2026. szeptember 27., vasárnap 18:00
-- A 2026. szeptember 27-i első alkalom kivételesen vasárnapra esik.
-- Megerősített dátumok: 2026.09.27.; 2026.10.24.; 2026.11.28.; 2027.01.16.; 2027.02.13.; 2027.03.13.; 2027.04.17.; 2027.05.22.
-- Júniusi évzáró: 2027.06.19. vagy 06.26., még egyeztetés alatt, ezért nincs megerősített `eventDates` elemként kezelve.
-- Helyszín: Bécsi Magyar Iskola, Schwedenplatz 2 / Laurenzerberg 5, 1010 Wien
-- Díj: 5 € / fő; az előtte zajló gyermek dobos foglalkozás résztvevőinek ingyenes
-- Programgazda: Regélő Fehér Táltos Hagyományőrző Egyesület
+## Partnerprogramok canonical forrásai
+A partnerprogramok nem kapnak külön kiemelt rangot; ugyanazok az életkor-, igény-, nap- és ritmusszabályok vonatkoznak rájuk, mint a többi rekordra.
+- Microsoft Office Specialist: https://mos.magyariskola.at
+- Világfa Sárkányai / örömzene: https://taltosdob.magyariskola.at és https://www.magyariskola.at/event-details/oromzene-2026
+- Zenebona: https://zenebona.magyariskola.at
+- Napraforgók: https://napraforgok.at/
+- Cserkészet: https://cserkesz.at/cserkesz-raj/
 
 ## Forrásszabály
 - Korábbi tanévek Wix-oldalai nem használhatók aktuális 2026/27-es tények pótlására.
 - BMI saját programnál az aktuális hivatalos BMI-oldal az elsődleges.
 - Partnerprogramnál a partner saját aktuális oldala az elsődleges.
-- Zenebona esetén a canonical oldal: https://zenebona.magyariskola.at
-- Örömzene esetén a canonical oldal: https://www.magyariskola.at/event-details/oromzene-2026
 - Nem ellenőrzött vagy hiányzó részletet nem szabad régi forrásból kiegészíteni.
-
-## Egyéb partner canonical források
-- Microsoft Office Specialist: https://mos.magyariskola.at
-- Világfa Sárkányai: https://taltosdob.magyariskola.at
-- Napraforgók: https://napraforgok.at/
-- Cserkészet: https://cserkesz.at/cserkesz-raj/
+- A részletes időpont-, ár- és kapcsolati adat mindig a canonical programrekordból vagy az aktuális programoldalról veendő; az LLM-fájl nem helyettesíti ezeket.
 
 Ha nincs életkorban és igényben megfelelő BMI vagy partnerprogram, a rendszer további bécsi magyar lehetőségként az Ungarisch Lernen és az AMAPED oldalára mutathat, ellenőrizetlen órarend állítása nélkül.
