@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 function read(path){return fs.readFileSync(path,'utf8')}
 function assert(ok,msg){if(!ok)throw new Error(msg)}
-const home=read('index.html'),programsPage=read('foglalkozasok.html'),agesPage=read('korosztalyok.html'),faqPage=read('gyik.html'),app=read('app.js'),route=read('route-map.js'),address=read('address-autocomplete.js'),catalog=read('catalog.js'),zen=read('zenebona-program.js'),whatsapp=read('whatsapp-widget.js'),typography=read('typography-polish.css'),transit=read('transit-routing.js'),travel=read('result-travel-polish.js'),llms=read('llms.txt');
+const home=read('index.html'),programsPage=read('foglalkozasok.html'),agesPage=read('korosztalyok.html'),faqPage=read('gyik.html'),app=read('app.js'),route=read('route-map.js'),address=read('address-autocomplete.js'),catalog=read('catalog.js'),zen=read('zenebona-program.js'),whatsapp=read('whatsapp-widget.js'),typography=read('typography-polish.css'),transit=read('transit-routing.js'),travel=read('result-travel-polish.js'),wizardResponsive=read('wizard-responsive.css'),wizardAnchor=read('wizard-anchor.js'),llms=read('llms.txt');
 const publicPages=[home,programsPage,agesPage,faqPage];
 assert(home.includes('Magyar nyelvű'),'Homepage positioning missing.');
 assert(app.includes("programs.length+' foglalkozás és képzés"),'Finder must link to dynamic registry count.');
@@ -30,11 +30,16 @@ publicPages.forEach((page,i)=>{
 });
 assert(!faqPage.includes('<h4>Zenebona</h4>'),'Zenebona footer duplicate.');
 assert(whatsapp.includes('bmi-whatsapp-widget')&&whatsapp.includes('transit-routing.js?v=')&&whatsapp.includes('result-travel-polish.js?v='),'Shared loaders missing.');
+assert(whatsapp.includes('wizard-responsive.css?v=')&&whatsapp.includes('wizard-anchor.js?v='),'Finder responsive/anchor loaders missing.');
 assert(typography.includes('.hero-identity')&&typography.includes('.site-head .head-in')&&typography.includes('.hero h1')&&typography.includes('text-wrap:balance'),'Unified responsive shell/heading polish missing.');
 assert(transit.includes('nextOccurrence')&&transit.includes('windowFor')&&transit.includes('haversineKm')&&transit.includes('transitEstimate'),'Transit planning estimate missing.');
 assert(transit.includes("providerStatus:'approximate-planning-range'")&&transit.includes('transitMinMinutes')&&transit.includes('transitMaxMinutes'),'Transit range contract missing.');
 assert(travel.includes('container-type:inline-size')&&travel.includes('@container(max-width:390px)'),'Responsive travel panel missing.');
 assert(travel.includes("mode==='car'")&&travel.includes("mode==='walk'")&&travel.includes("mode==='transit'"),'All travel modes must be rendered.');
 assert(travel.includes('Várható menetidő')&&travel.includes('kb. ')&&travel.includes('perc'),'Travel range copy missing.');
-assert(travel.includes('travelPanelSignature')&&travel.includes('requestAnimationFrame')&&travel.includes("closest('.result-travel')"),'Travel panel must be idempotent and protected from self-triggered MutationObserver loops.');
-console.log('PASS: unified shell, Zenebona scope, approximate km/time ranges for car-walk-transit, responsive travel UI, in-app maps and render-loop guards are consistent.');
+assert(travel.includes('travelPanelSignature')&&travel.includes("m.target.closest&&m.target.closest('.result-travel')"),'Travel render-loop guard missing.');
+assert(wizardResponsive.includes('display:block!important')&&wizardResponsive.includes('grid-template-columns:minmax(0,1fr)!important'),'Mobile travel/result single-column override missing.');
+assert(wizardResponsive.includes('min-width:0')&&wizardResponsive.includes('#wizard .result-card{width:100%'),'Mobile result width guard missing.');
+assert(wizardAnchor.includes("observer.observe(root,{childList:true,subtree:false})"),'Wizard anchor must observe direct view replacements only.');
+assert(wizardAnchor.includes('scrollToCurrentBlock')&&wizardAnchor.includes('.site-head'),'Wizard anchor/header offset missing.');
+console.log('PASS: unified shell, Zenebona scope, three-mode travel ranges, render-loop guard, mobile result geometry and per-view wizard anchors are consistent.');
