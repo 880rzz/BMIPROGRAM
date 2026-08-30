@@ -1,0 +1,25 @@
+#wizard{scroll-margin-top:96px}
+#finder,#wizard,.wizard-card,.result-grid,.result-card,.result-travel,.travel-data-panel,.travel-metrics,.travel-metric{min-width:0;box-sizing:border-box}
+#wizard .result-card{width:100%;max-width:100%}
+#wizard .result-travel.travel-data-panel{display:block!important;grid-template-columns:none!important;width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important;overflow:visible!important}
+#wizard .travel-panel-head{width:100%;min-width:0}
+#wizard .travel-metrics{width:100%;min-width:0}
+#wizard .travel-metric{min-width:0;max-width:100%}
+#wizard .travel-metric span,#wizard .travel-metric strong{max-width:100%;overflow-wrap:anywhere;word-break:normal}
+@media(max-width:760px){
+  #wizard{scroll-margin-top:86px}
+  #wizard .result-grid{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:18px!important;width:100%!important}
+  #wizard .result-card{width:100%!important;max-width:100%!important;overflow:visible!important}
+  #wizard .result-travel.travel-data-panel{margin:16px 0 20px!important;padding:14px!important;border-radius:14px!important}
+  #wizard .travel-panel-head{display:block!important;margin-bottom:12px!important}
+  #wizard .travel-panel-source{text-align:left!important;max-width:none!important;margin-top:4px!important}
+  #wizard .travel-metrics{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:10px!important}
+  #wizard .travel-metric,#wizard .travel-metric:last-child{grid-column:auto!important;width:100%!important;padding:12px 13px!important}
+  #wizard .travel-mode-row{align-items:flex-start!important;justify-content:flex-start!important;gap:10px!important}
+}
+@media(max-width:430px){
+  #wizard{scroll-margin-top:78px}
+  #wizard .wizard-card{padding-left:0!important;padding-right:0!important}
+  #wizard .result-card{padding-left:0!important;padding-right:0!important}
+  #wizard .result-travel.travel-data-panel{width:100%!important;margin-left:0!important;margin-right:0!important}
+}
