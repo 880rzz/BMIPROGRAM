@@ -28,16 +28,14 @@ jobs:
       - name: JavaScript syntax
         run: |
           set -euo pipefail
-          for f in data.js zenebona-program.js app.js route-map.js address-autocomplete.js catalog.js whatsapp-widget.js transit-routing.js result-travel-polish.js scripts/validate.mjs scripts/validate-schema-age.mjs scripts/validate-matching.mjs scripts/validate-copy.mjs scripts/live-transit-probe.mjs; do node --check "$f"; done
-      - name: Recommendation, registry and shell validation
+          for f in data.js zenebona-program.js app.js route-map.js address-autocomplete.js catalog.js whatsapp-widget.js transit-routing.js result-travel-polish.js scripts/validate.mjs scripts/validate-schema-age.mjs scripts/validate-matching.mjs scripts/validate-copy.mjs; do node --check "$f"; done
+      - name: Recommendation, registry, shell and transit fail-safe validation
         run: |
           set -euo pipefail
           node scripts/validate.mjs
           node scripts/validate-schema-age.mjs
           node scripts/validate-matching.mjs
           node scripts/validate-copy.mjs
-      - name: Live Vienna VAO transit probe
-        run: node scripts/live-transit-probe.mjs
       - name: Release contracts
         run: |
           set -euo pipefail
@@ -52,16 +50,15 @@ jobs:
           grep -Fq 'bmi-whatsapp-widget' whatsapp-widget.js
           grep -Fq 'transit-routing.js?v=' whatsapp-widget.js
           grep -Fq 'result-travel-polish.js?v=' whatsapp-widget.js
-          grep -Fq 'vao.demo.hafas.de/gate' transit-routing.js
-          grep -Fq "envelope(req,'LocGeoPos'" transit-routing.js
-          grep -Fq 'extId:stops[0].extId' transit-routing.js
-          grep -Fq "envelope(req,'TripSearch'" transit-routing.js
-          grep -Fq 'outFrwd:false' transit-routing.js
-          grep -Fq 'windowStart=target-60' transit-routing.js
-          grep -Fq 'mean(' transit-routing.js
+          grep -Fq 'nextOccurrence' transit-routing.js
+          grep -Fq 'windowFor' transit-routing.js
+          grep -Fq "providerStatus:'backend-required'" transit-routing.js
+          grep -Fq "transitReason='trusted-backend-unavailable'" transit-routing.js
+          grep -Fq 'delete card.dataset.transitMinutes' transit-routing.js
+          grep -Fq 'delete card.dataset.transitKm' transit-routing.js
           grep -Fq 'Átlagos útvonalhossz' result-travel-polish.js
           grep -Fq 'Átlagos menetidő' result-travel-polish.js
-          grep -Fq 'számtani átlagát' result-travel-polish.js
+          grep -Fq 'nem talál ki perc- vagy kilométerértéket' result-travel-polish.js
           grep -Fq 'container-type:inline-size' result-travel-polish.js
           grep -Fq '.hero-identity' typography-polish.css
           for html in index.html foglalkozasok.html korosztalyok.html gyik.html; do
@@ -79,7 +76,7 @@ jobs:
           ! grep -Fq 'Zenebona' gyik.html
           ! grep -Fq '## Zenebona' llms.txt
           grep -Fq '28 aktuális' llms.txt
-          echo 'PASS: unified shell, Zenebona scope, VAO scheduled transit averages and release contracts are intact.'
+          echo 'PASS: unified shell, Zenebona scope and safe scheduled-transit target contracts are intact.'
 
   build:
     needs: validate
@@ -106,11 +103,11 @@ jobs:
           SCHOOL_YEAR=2026/2027
           PROGRAM_COUNT=28
           SOURCE_POLICY=canonical-current-2026-27-only
-          RECOMMENDER=age-hard-multineed-multiday-multipace-identified-address-route-scheduled-transit-vao
+          RECOMMENDER=age-hard-multineed-multiday-multipace-identified-address-route-scheduled-transit-failsafe
           BUILT_AT=${built_at}
           EOF
           cat > _site/version.json <<EOF
-          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"sourcePolicy":"canonical-current-2026-27-only","recommender":"age-hard-multineed-multiday-multipace-identified-address-route-scheduled-transit-vao","builtAt":"${built_at}"}
+          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"sourcePolicy":"canonical-current-2026-27-only","recommender":"age-hard-multineed-multiday-multipace-identified-address-route-scheduled-transit-failsafe","builtAt":"${built_at}"}
           EOF
           test -f _site/index.html
           test -f _site/app.js
@@ -120,8 +117,8 @@ jobs:
           test -f _site/whatsapp-widget.js
           test "$(cat _site/CNAME)" = "programvalaszto.magyariskola.at"
           grep -Fq 'PROGRAM_COUNT=28' _site/release.txt
-          grep -Fq 'vao.demo.hafas.de/gate' _site/transit-routing.js
-          grep -Fq 'Átlagos menetidő' _site/result-travel-polish.js
+          grep -Fq "providerStatus:'backend-required'" _site/transit-routing.js
+          grep -Fq 'nincs hiteles adat' _site/result-travel-polish.js
           grep -Fq '.hero-identity' _site/typography-polish.css
       - uses: actions/upload-pages-artifact@v3
         with:
@@ -143,7 +140,7 @@ jobs:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Verify production release, unified shell and scheduled transit assets
+      - name: Verify production release, unified shell and safe scheduled transit target
         shell: bash
         run: |
           set -euo pipefail
@@ -158,14 +155,13 @@ jobs:
           grep -Fq "GIT_SHA=${expected_sha}" <<<"${release}"
           grep -Fq 'PROGRAM_COUNT=28' <<<"${release}"
           transit="$(fetch /transit-routing.js)"
-          grep -Fq 'vao.demo.hafas.de/gate' <<<"${transit}"
-          grep -Fq 'extId:stops[0].extId' <<<"${transit}"
-          grep -Fq 'windowStart=target-60' <<<"${transit}"
-          grep -Fq 'mean(' <<<"${transit}"
+          grep -Fq "providerStatus:'backend-required'" <<<"${transit}"
+          grep -Fq 'nextOccurrence' <<<"${transit}"
+          grep -Fq 'windowFor' <<<"${transit}"
           travel="$(fetch /result-travel-polish.js)"
           grep -Fq 'Átlagos útvonalhossz' <<<"${travel}"
           grep -Fq 'Átlagos menetidő' <<<"${travel}"
-          grep -Fq 'számtani átlagát' <<<"${travel}"
+          grep -Fq 'nem talál ki perc- vagy kilométerértéket' <<<"${travel}"
           shellcss="$(fetch /typography-polish.css)"
           grep -Fq '.hero-identity' <<<"${shellcss}"
           wa="$(fetch /whatsapp-widget.js)"
@@ -182,4 +178,4 @@ jobs:
           ! grep -Fq 'Zenebona' <<<"${ages}"
           ! grep -Fq 'Zenebona' <<<"${faq}"
           for path in /app.js /catalog.js /transit-routing.js /result-travel-polish.js /typography-polish.css /whatsapp-widget.js /release.txt /version.json; do fetch "${path}" >/dev/null; done
-          echo "EXACT-LIVE: ${expected_sha} serves unified shell, scoped Zenebona content and scheduled VAO transit averages."
+          echo "EXACT-LIVE: ${expected_sha} serves unified shell, scoped Zenebona content and safe scheduled transit target metadata."
