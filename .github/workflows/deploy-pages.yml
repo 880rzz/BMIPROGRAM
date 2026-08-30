@@ -28,8 +28,8 @@ jobs:
       - name: JavaScript syntax
         run: |
           set -euo pipefail
-          for f in data.js zenebona-program.js app.js route-map.js address-autocomplete.js catalog.js whatsapp-widget.js transit-routing.js result-travel-polish.js scripts/validate.mjs scripts/validate-schema-age.mjs scripts/validate-matching.mjs scripts/validate-copy.mjs; do node --check "$f"; done
-      - name: Recommendation, registry, shell and travel range validation
+          for f in data.js zenebona-program.js app.js route-map.js address-autocomplete.js catalog.js whatsapp-widget.js transit-routing.js result-travel-polish.js wizard-anchor.js scripts/validate.mjs scripts/validate-schema-age.mjs scripts/validate-matching.mjs scripts/validate-copy.mjs; do node --check "$f"; done
+      - name: Recommendation, registry, shell and mobile UX validation
         run: |
           set -euo pipefail
           node scripts/validate.mjs
@@ -52,6 +52,8 @@ jobs:
           grep -Fq 'bmi-whatsapp-widget' whatsapp-widget.js
           grep -Fq 'transit-routing.js?v=' whatsapp-widget.js
           grep -Fq 'result-travel-polish.js?v=' whatsapp-widget.js
+          grep -Fq 'wizard-responsive.css?v=' whatsapp-widget.js
+          grep -Fq 'wizard-anchor.js?v=' whatsapp-widget.js
           grep -Fq 'nextOccurrence' transit-routing.js
           grep -Fq 'windowFor' transit-routing.js
           grep -Fq 'haversineKm' transit-routing.js
@@ -60,11 +62,13 @@ jobs:
           grep -Fq 'transitMinMinutes' transit-routing.js
           grep -Fq 'transitMaxMinutes' transit-routing.js
           grep -Fq 'Várható menetidő' result-travel-polish.js
-          grep -Fq 'kb. ' result-travel-polish.js
-          grep -Fq 'container-type:inline-size' result-travel-polish.js
           grep -Fq 'travelPanelSignature' result-travel-polish.js
-          grep -Fq 'requestAnimationFrame' result-travel-polish.js
-          grep -Fq "closest('.result-travel')" result-travel-polish.js
+          grep -Fq "m.target.closest&&m.target.closest('.result-travel')" result-travel-polish.js
+          grep -Fq 'display:block!important' wizard-responsive.css
+          grep -Fq 'grid-template-columns:minmax(0,1fr)!important' wizard-responsive.css
+          grep -Fq 'min-width:0' wizard-responsive.css
+          grep -Fq 'scrollToCurrentBlock' wizard-anchor.js
+          grep -Fq 'subtree:false' wizard-anchor.js
           grep -Fq '.hero-identity' typography-polish.css
           for html in index.html foglalkozasok.html korosztalyok.html gyik.html; do
             grep -Fq 'Délutáni és hétvégi foglalkozások · 2026 / 2027' "$html"
@@ -81,7 +85,7 @@ jobs:
           ! grep -Fq 'Zenebona' gyik.html
           ! grep -Fq '## Zenebona' llms.txt
           grep -Fq '28 aktuális' llms.txt
-          echo 'PASS: unified shell, three-mode travel ranges, shared map and render-loop guard contracts are intact.'
+          echo 'PASS: unified shell, scoped Zenebona, three-mode travel, mobile geometry and wizard anchor contracts are intact.'
 
   build:
     needs: validate
@@ -101,24 +105,26 @@ jobs:
           for html in _site/*.html; do
             sed -E -i "s#styles\.css\?v=[^\"']+#styles.css?v=${short_sha}#g; s#ui-20260821\.css\?v=[^\"']+#ui-20260821.css?v=${short_sha}#g; s#recommendation-polish\.css\?v=[^\"']+#recommendation-polish.css?v=${short_sha}#g; s#data\.js\?v=[^\"']+#data.js?v=${short_sha}#g; s#app\.js\?v=[^\"']+#app.js?v=${short_sha}#g; s#route-map\.js\?v=[^\"']+#route-map.js?v=${short_sha}#g; s#address-autocomplete\.js\?v=[^\"']+#address-autocomplete.js?v=${short_sha}#g; s#catalog\.js\?v=[^\"']+#catalog.js?v=${short_sha}#g; s#zenebona-program\.js\?v=[^\"']+#zenebona-program.js?v=${short_sha}#g; s#whatsapp-widget\.js\?v=[^\"']+#whatsapp-widget.js?v=${short_sha}#g" "$html"
           done
-          sed -E -i "s#typography-polish\.css\?v=[^\"']+#typography-polish.css?v=${short_sha}#g; s#transit-routing\.js\?v=[^\"']+#transit-routing.js?v=${short_sha}#g; s#result-travel-polish\.js\?v=[^\"']+#result-travel-polish.js?v=${short_sha}#g" _site/whatsapp-widget.js
+          sed -E -i "s#typography-polish\.css\?v=[^\"']+#typography-polish.css?v=${short_sha}#g; s#transit-routing\.js\?v=[^\"']+#transit-routing.js?v=${short_sha}#g; s#result-travel-polish\.js\?v=[^\"']+#result-travel-polish.js?v=${short_sha}#g; s#wizard-responsive\.css\?v=[^\"']+#wizard-responsive.css?v=${short_sha}#g; s#wizard-anchor\.js\?v=[^\"']+#wizard-anchor.js?v=${short_sha}#g" _site/whatsapp-widget.js
           cat > _site/release.txt <<EOF
           BMIPROGRAM_RELEASE=${release_id}
           GIT_SHA=${GITHUB_SHA}
           SCHOOL_YEAR=2026/2027
           PROGRAM_COUNT=28
           SOURCE_POLICY=canonical-current-2026-27-only
-          RECOMMENDER=age-hard-multineed-multiday-multipace-identified-address-route-three-mode-ranges-map-loopguard
+          RECOMMENDER=age-hard-multineed-multiday-multipace-identified-address-route-three-mode-ranges-map-mobile-anchor
           BUILT_AT=${built_at}
           EOF
           cat > _site/version.json <<EOF
-          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"sourcePolicy":"canonical-current-2026-27-only","recommender":"age-hard-multineed-multiday-multipace-identified-address-route-three-mode-ranges-map-loopguard","builtAt":"${built_at}"}
+          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"sourcePolicy":"canonical-current-2026-27-only","recommender":"age-hard-multineed-multiday-multipace-identified-address-route-three-mode-ranges-map-mobile-anchor","builtAt":"${built_at}"}
           EOF
           test -f _site/index.html
           test -f _site/app.js
           test -f _site/transit-routing.js
           test -f _site/result-travel-polish.js
           test -f _site/route-map.js
+          test -f _site/wizard-responsive.css
+          test -f _site/wizard-anchor.js
           test -f _site/typography-polish.css
           test -f _site/whatsapp-widget.js
           test "$(cat _site/CNAME)" = "programvalaszto.magyariskola.at"
@@ -127,6 +133,8 @@ jobs:
           grep -Fq 'Várható menetidő' _site/result-travel-polish.js
           grep -Fq 'travelPanelSignature' _site/result-travel-polish.js
           grep -Fq 'Térkép és útvonal' _site/route-map.js
+          grep -Fq 'display:block!important' _site/wizard-responsive.css
+          grep -Fq 'subtree:false' _site/wizard-anchor.js
           grep -Fq '.hero-identity' _site/typography-polish.css
       - uses: actions/upload-pages-artifact@v3
         with:
@@ -148,7 +156,7 @@ jobs:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Verify production release, unified shell and travel ranges
+      - name: Verify production release, mobile geometry and view anchors
         shell: bash
         run: |
           set -euo pipefail
@@ -168,16 +176,20 @@ jobs:
           grep -Fq 'transitMaxMinutes' <<<"${transit}"
           travel="$(fetch /result-travel-polish.js)"
           grep -Fq 'Várható menetidő' <<<"${travel}"
-          grep -Fq 'kb. ' <<<"${travel}"
           grep -Fq 'travelPanelSignature' <<<"${travel}"
-          grep -Fq 'requestAnimationFrame' <<<"${travel}"
           route="$(fetch /route-map.js)"
           grep -Fq 'Térkép és útvonal' <<<"${route}"
-          grep -Fq "dashArray:'8 8'" <<<"${route}"
+          responsive="$(fetch /wizard-responsive.css)"
+          grep -Fq 'display:block!important' <<<"${responsive}"
+          grep -Fq 'grid-template-columns:minmax(0,1fr)!important' <<<"${responsive}"
+          anchor="$(fetch /wizard-anchor.js)"
+          grep -Fq 'scrollToCurrentBlock' <<<"${anchor}"
+          grep -Fq 'subtree:false' <<<"${anchor}"
           shellcss="$(fetch /typography-polish.css)"
           grep -Fq '.hero-identity' <<<"${shellcss}"
           wa="$(fetch /whatsapp-widget.js)"
-          grep -Fq 'transit-routing.js?v=' <<<"${wa}"
+          grep -Fq 'wizard-responsive.css?v=' <<<"${wa}"
+          grep -Fq 'wizard-anchor.js?v=' <<<"${wa}"
           for path in / /foglalkozasok.html /korosztalyok.html /gyik.html; do
             page="$(fetch "${path}")"
             grep -Fq 'Délutáni és hétvégi foglalkozások · 2026 / 2027' <<<"${page}"
@@ -189,5 +201,5 @@ jobs:
           ! grep -Fq 'Zenebona' <<<"${home}"
           ! grep -Fq 'Zenebona' <<<"${ages}"
           ! grep -Fq 'Zenebona' <<<"${faq}"
-          for path in /app.js /catalog.js /route-map.js /transit-routing.js /result-travel-polish.js /typography-polish.css /whatsapp-widget.js /release.txt /version.json; do fetch "${path}" >/dev/null; done
-          echo "EXACT-LIVE: ${expected_sha} serves travel ranges, map assets and loop-safe travel panel rendering."
+          for path in /app.js /catalog.js /route-map.js /transit-routing.js /result-travel-polish.js /wizard-responsive.css /wizard-anchor.js /typography-polish.css /whatsapp-widget.js /release.txt /version.json; do fetch "${path}" >/dev/null; done
+          echo "EXACT-LIVE: ${expected_sha} serves unified shell, mobile single-column results, three-mode travel ranges, maps and per-view wizard anchors."
