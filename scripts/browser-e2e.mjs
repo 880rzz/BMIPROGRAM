@@ -21,14 +21,17 @@ for (const path of pages) {
   await page.goto(base + path, {waitUntil:'networkidle', timeout:30000});
   await page.waitForTimeout(300);
   const shell = await page.evaluate(() => {
-    const heroLogo = document.querySelector('.bmi-hero-wordmark');
+    const heroLogo = document.querySelector('.hero-mark img');
     const heroLogoRect = heroLogo?.getBoundingClientRect();
     const heroLogoStyle = heroLogo ? getComputedStyle(heroLogo) : null;
+    const heroLogoSrc = heroLogo?.getAttribute('src') || '';
     return {
       brand: document.querySelector('.site-head .brand')?.textContent?.replace(/\s+/g,' ').trim() || '',
       menu: !!document.querySelector('#menuBtn'),
       hero: !!document.querySelector('.hero h1'),
-      heroLogo: !!heroLogo && heroLogo.textContent.trim()==='BMI' && heroLogoRect.width >= 55 && heroLogoRect.height >= 28 && heroLogoStyle.display !== 'none' && heroLogoStyle.visibility !== 'hidden' && Number(heroLogoStyle.opacity||1) > 0,
+      heroLogo: !!heroLogo && /bmi_blue_round_rgb_logo\.svg(?:\?|$)/.test(heroLogoSrc) && heroLogo.complete && heroLogo.naturalWidth > 0 && heroLogo.naturalHeight > 0 && heroLogoRect.width >= 55 && heroLogoRect.height >= 28 && heroLogoStyle.display !== 'none' && heroLogoStyle.visibility !== 'hidden' && Number(heroLogoStyle.opacity||1) > 0,
+      heroLogoSrc,
+      heroLogoNatural: heroLogo ? {width:heroLogo.naturalWidth,height:heroLogo.naturalHeight,complete:heroLogo.complete} : null,
       heroLogoBox: heroLogoRect ? {width:heroLogoRect.width,height:heroLogoRect.height} : null,
       overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
       wa: !!document.querySelector('#bmi-whatsapp-widget'),
@@ -51,6 +54,7 @@ for (const path of pages) {
       hasRuntime: [...document.scripts].some(s => /finder-runtime\.js/.test(s.src)),
       hasPrivacy: [...document.scripts].some(s => /privacy-runtime\.js/.test(s.src)) && window.BMI_PRIVACY_LOCAL === true,
       hasResponsive: [...document.styleSheets].some(s => /wizard-responsive\.css/.test(s.href||'')),
+      preciseRoutingConfigured: !!window.BMI_GOOGLE_ROUTES_API_KEY,
       stuck: /Találatok számítása/.test(document.querySelector('#wizard')?.textContent||''),
       width: document.querySelector('#wizard')?.getBoundingClientRect().width || 0,
       vw: document.documentElement.clientWidth
@@ -63,4 +67,4 @@ for (const path of pages) {
 }
 await browser.close();
 if (failed) process.exit(1);
-console.log('PASS: mobile browser E2E, visible BMI hero wordmark, zero automatic third-party requests, zero client storage/cookies, trust disclosure, WhatsApp and finder runtime.');
+console.log('PASS: mobile browser E2E, real loaded BMI hero SVG, zero automatic third-party requests, zero client storage/cookies, trust disclosure, WhatsApp and finder runtime.');
