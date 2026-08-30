@@ -11,7 +11,7 @@ assert(app.includes("if(!ageEligible(p))return-1"),'Age hard filter missing.');
 assert(app.includes('Még ma')&&app.includes('eventDates'),'Date-aware recommendation missing.');
 assert(app.includes('identifiedOrigin(input)'),'Identified origin reuse missing.');
 assert(route.includes("b.textContent='Térkép és útvonal'")&&route.includes('mapSvg(data)'),'Local in-app map action missing.');
-assert(route.includes('helyben rajzolt')&&!route.includes('unpkg.com')&&!route.includes('tile.openstreetmap.org')&&!route.includes('fetch('),'Route map must stay local and must not load external tiles/CDNs.');
+assert(/helyben rajzolt/i.test(route)&&!route.includes('unpkg.com')&&!route.includes('tile.openstreetmap.org')&&!route.includes('fetch('),'Route map must stay local and must not load external tiles/CDNs.');
 assert(address.includes('BMI_LOCAL_LOCATION')&&!address.includes('fetch(')&&!address.includes('photon.komoot.io'),'Address identification must stay local-only.');
 assert(privacy.includes('BMI_PRIVACY_LOCAL=true')&&privacy.includes('BMI_LOCAL_POSTCODES')&&privacy.includes('automatic third-party network request blocked'),'Privacy runtime local-only guard missing.');
 assert(home.indexOf('privacy-runtime.js')<home.indexOf('address-autocomplete.js')&&home.indexOf('privacy-runtime.js')<home.indexOf('app.js'),'Privacy runtime must load before finder network-capable legacy code.');
@@ -35,7 +35,7 @@ publicPages.forEach((page,i)=>{
  assert(page.includes('footer-trust')&&page.includes('Privát működés'),`Privacy trust explanation missing page ${i+1}`);
 });
 assert(home.includes('finder-runtime.js?v='),'Finder runtime must be loaded directly by homepage.');
-assert(home.includes('nincs analitikát')||home.includes('nem használ analitikát'),'Homepage trust must disclose no analytics.');
+assert(home.includes('nem használ analitikát'),'Homepage trust must disclose no analytics.');
 assert(home.includes('nem küld háttérben harmadik félnek'),'Homepage trust must disclose no background data forwarding.');
 assert(faqPage.includes('Gyűjt-e statisztikát')&&faqPage.includes('Hogyan működik a térkép?'),'FAQ privacy operating model missing.');
 assert(whatsapp.includes('bmi-whatsapp-widget')&&!whatsapp.includes('transit-routing.js')&&!whatsapp.includes('wizard-responsive.css')&&!whatsapp.includes('result-actions.js'),'WhatsApp must be independent from finder runtime.');
@@ -52,7 +52,7 @@ assert(wizardResponsive.includes('min-width:0')&&wizardResponsive.includes('#wiz
 assert(wizardResponsive.includes('-webkit-text-size-adjust:100%')&&wizardResponsive.includes('font-size:16px!important'),'iOS text/input scaling protection missing.');
 assert(wizardResponsive.includes('.result-action-grid')&&wizardResponsive.includes('min-height:54px!important'),'Responsive equal action-button grid missing.');
 assert(actions.includes('result-action-grid')&&actions.includes('action-wide')&&actions.includes('text.length>22'),'Short/long action classification missing.');
-assert(uxRules.includes('Functional block hierarchy')&&uxRules.includes('Mobile scaling')&&uxRules.includes('Action buttons')&&uxRules.includes('Release protection'),'Persistent UX rules missing.');
+assert(uxRules.includes('Functional block hierarchy')&&uxRules.includes('Mobile scaling')&&uxRules.includes('Action buttons')&&uxRules.includes('Privacy and trust')&&uxRules.includes('Release protection'),'Persistent UX/privacy rules missing.');
 assert(wizardAnchor.includes("observer.observe(root,{childList:true,subtree:false})"),'Wizard anchor must observe direct view replacements only.');
 assert(wizardAnchor.includes('scrollToCurrentBlock')&&wizardAnchor.includes('.site-head'),'Wizard anchor/header offset missing.');
 console.log('PASS: privacy-first local finder, zero tracking/storage contract, local map, shared trust copy, scoped partner discovery, travel and mobile UX are consistent.');
