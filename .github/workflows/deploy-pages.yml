@@ -74,7 +74,8 @@ jobs:
           grep -Fq 'bmi-whatsapp-widget' whatsapp-widget.js
           grep -Fq 'transit-routing.js?v=' whatsapp-widget.js
           grep -Fq 'result-travel-polish.js?v=' whatsapp-widget.js
-          grep -Fq 'vao.demo.hafas.de/gate' transit-routing.js
+          grep -Fq 'fahrplan.oebb.at/bin/mgate.exe' transit-routing.js
+          grep -Fq 'LocGeoPos' transit-routing.js
           grep -Fq 'outFrwd:false' transit-routing.js
           grep -Fq 'target-60' transit-routing.js
           grep -Fq 'Átlagos menetidő' result-travel-polish.js
@@ -88,7 +89,7 @@ jobs:
           done
           ! grep -Fq '<h4>Zenebona</h4>' gyik.html
           grep -Fq '28 aktuális' llms.txt
-          echo 'PASS: scheduled transit, responsive travel panel and recommender contracts are intact.'
+          echo 'PASS: scheduled ÖBB transit, responsive travel panel and recommender contracts are intact.'
 
   build:
     needs: validate
@@ -148,7 +149,7 @@ jobs:
           test -f _site/whatsapp-widget.js
           test "$(cat _site/CNAME)" = "programvalaszto.magyariskola.at"
           grep -Fq 'PROGRAM_COUNT=28' _site/release.txt
-          grep -Fq 'vao.demo.hafas.de/gate' _site/transit-routing.js
+          grep -Fq 'fahrplan.oebb.at/bin/mgate.exe' _site/transit-routing.js
           grep -Fq 'Átlagos menetidő' _site/result-travel-polish.js
           for html in _site/index.html _site/foglalkozasok.html _site/korosztalyok.html _site/gyik.html; do grep -Fq 'whatsapp-widget.js?v=' "$html"; done
 
@@ -193,7 +194,8 @@ jobs:
           grep -Fq 'transit-routing.js?v=' <<<"${wa}"
           grep -Fq 'result-travel-polish.js?v=' <<<"${wa}"
           transit="$(fetch /transit-routing.js)"
-          grep -Fq 'vao.demo.hafas.de/gate' <<<"${transit}"
+          grep -Fq 'fahrplan.oebb.at/bin/mgate.exe' <<<"${transit}"
+          grep -Fq 'LocGeoPos' <<<"${transit}"
           grep -Fq 'outFrwd:false' <<<"${transit}"
           grep -Fq 'target-60' <<<"${transit}"
           travel="$(fetch /result-travel-polish.js)"
@@ -205,4 +207,4 @@ jobs:
             grep -Fq 'marketing@kozpontiszovetseg.at' <<<"${page}"
           done
           for path in / /foglalkozasok.html /korosztalyok.html /gyik.html /app.js /transit-routing.js /result-travel-polish.js /whatsapp-widget.js /release.txt /version.json; do fetch "${path}" >/dev/null; done
-          echo "EXACT-LIVE: ${expected_sha} serves scheduled transit and responsive travel panel assets."
+          echo "EXACT-LIVE: ${expected_sha} serves scheduled ÖBB transit and responsive travel panel assets."
