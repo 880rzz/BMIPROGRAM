@@ -20,11 +20,26 @@ These rules are release constraints, not optional visual preferences.
 
 ## Mobile result cards
 
-- One-column layout only below 760 px.
+- One-column result-card layout only below 760 px.
 - All cards and nested panels use `min-width: 0` and `max-width: 100%`.
 - Result metadata is grouped into semantic blocks with padding and separation.
 - The `Miért ezt?` explanation must be a standalone block with its own top border/background or equivalent separation.
 - Route/map actions must not visually merge into recommendation copy.
+
+## Mobile scaling
+
+- Keep the standard responsive viewport; never disable user pinch zoom with `maximum-scale=1` or `user-scalable=no`.
+- Stabilize Safari text sizing with `-webkit-text-size-adjust: 100%` / `text-size-adjust: 100%`.
+- Form inputs, selects and textareas must be at least 16 px on mobile so iOS does not auto-zoom the page on focus.
+- Interactive controls use `touch-action: manipulation` where appropriate.
+
+## Action buttons
+
+- Buttons that belong to one result action area must use a shared grid and consistent height, padding, radius and typography.
+- Use two columns when at least two action labels are short enough to remain readable; long labels span the full row.
+- Never force a long action label into a narrow two-column cell.
+- On very narrow screens, the action grid may collapse to one column.
+- Route/map and primary program actions should align visually and must not use arbitrary per-button widths.
 
 ## Wizard anchors
 
@@ -33,4 +48,4 @@ These rules are release constraints, not optional visual preferences.
 
 ## Release protection
 
-Any change that removes these spacing, grouping or anchor guarantees must fail validation before deployment.
+Any change that removes these spacing, grouping, mobile scaling, action-grid or anchor guarantees must fail validation before deployment.
