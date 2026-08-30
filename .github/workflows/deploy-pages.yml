@@ -29,8 +29,8 @@ jobs:
       - name: JavaScript syntax
         run: |
           set -euo pipefail
-          for f in data.js zenebona-program.js app.js route-map.js address-autocomplete.js catalog.js whatsapp-widget.js finder-runtime.js transit-routing.js result-travel-polish.js wizard-anchor.js result-actions.js scripts/validate.mjs scripts/validate-schema-age.mjs scripts/validate-matching.mjs scripts/validate-copy.mjs scripts/browser-e2e.mjs audit/finder-integrity-audit.js audit/live-reality-audit.mjs; do node --check "$f"; done
-      - name: Registry, finder and UX validation
+          for f in data.js zenebona-program.js app.js privacy-runtime.js route-map.js address-autocomplete.js catalog.js whatsapp-widget.js finder-runtime.js transit-routing.js result-travel-polish.js wizard-anchor.js result-actions.js scripts/validate.mjs scripts/validate-schema-age.mjs scripts/validate-matching.mjs scripts/validate-copy.mjs scripts/browser-e2e.mjs audit/finder-integrity-audit.js audit/live-reality-audit.mjs; do node --check "$f"; done
+      - name: Registry, finder, privacy and UX validation
         run: |
           set -euo pipefail
           node scripts/validate.mjs
@@ -38,7 +38,7 @@ jobs:
           node scripts/validate-matching.mjs
           node scripts/validate-copy.mjs
           node audit/finder-integrity-audit.js
-      - name: Live reality audit
+      - name: Live source reality audit
         run: |
           set -euo pipefail
           node audit/live-reality-audit.mjs || (sleep 8 && node audit/live-reality-audit.mjs)
@@ -50,11 +50,17 @@ jobs:
           grep -Fq 'selectedDays' app.js
           grep -Fq 'selectedPaces' app.js
           grep -Fq 'identifiedOrigin(input)' app.js
+          grep -Fq 'BMI_PRIVACY_LOCAL=true' privacy-runtime.js
+          grep -Fq 'automatic third-party network request blocked' privacy-runtime.js
+          grep -Fq 'BMI_LOCAL_LOCATION' address-autocomplete.js
+          ! grep -Fq 'fetch(' address-autocomplete.js
+          ! grep -Fq 'photon.komoot.io' address-autocomplete.js
           grep -Fq 'routeData(card)' route-map.js
           grep -Fq 'Térkép és útvonal' route-map.js
-          grep -Fq 'sha256-p4NxAoJBhIINfQ3eMZqQxE5XAlRMw6jO3K6FJvG5s4U=' route-map.js
-          grep -Fq 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=' route-map.js
-          grep -Fq 'countrycode=AT' address-autocomplete.js
+          grep -Fq 'mapSvg(data)' route-map.js
+          ! grep -Fq 'unpkg.com' route-map.js
+          ! grep -Fq 'tile.openstreetmap.org' route-map.js
+          ! grep -Fq 'fetch(' route-map.js
           grep -Fq "p.id!=='zenebona'&&overlaps" catalog.js
           grep -Fq 'bmi-whatsapp-widget' whatsapp-widget.js
           ! grep -Fq 'transit-routing.js' whatsapp-widget.js
@@ -76,6 +82,7 @@ jobs:
           grep -Fq 'subtree:false' wizard-anchor.js
           grep -Fq '.hero-identity' recommendation-polish.css
           grep -Fq 'text-wrap:balance' recommendation-polish.css
+          grep -Fq 'privacy-runtime.js?v=' index.html
           grep -Fq 'finder-runtime.js?v=' index.html
           ! grep -Fq 'homepage-polish.js' index.html
           ! test -e homepage-polish.js
@@ -92,11 +99,13 @@ jobs:
             grep -Fq 'Délutáni és hétvégi foglalkozások · 2026 / 2027' "$html"
             grep -Fq 'whatsapp-widget.js?v=' "$html"
             grep -Fq 'marketing@kozpontiszovetseg.at' "$html"
+            grep -Fq 'footer-trust' "$html"
+            grep -Fq 'Privát működés' "$html"
           done
           ! grep -Fq 'Zenebona' index.html
           ! grep -Fq 'Zenebona' korosztalyok.html
           ! grep -Fq 'Zenebona' gyik.html
-          echo 'PASS: data, finder runtime, partner scope, SRI, mobile UX, assets and release contracts are intact.'
+          echo 'PASS: data, local-only privacy, zero-tracking contract, finder runtime, partner scope, mobile UX and release contracts are intact.'
 
   build:
     needs: validate
@@ -118,7 +127,7 @@ jobs:
           built_at="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
           release_id="${release_date}-${short_sha}"
           for html in _site/*.html; do
-            sed -E -i "s#styles\.css\?v=[^\"']+#styles.css?v=${short_sha}#g; s#ui-20260821\.css\?v=[^\"']+#ui-20260821.css?v=${short_sha}#g; s#recommendation-polish\.css\?v=[^\"']+#recommendation-polish.css?v=${short_sha}#g; s#data\.js\?v=[^\"']+#data.js?v=${short_sha}#g; s#app\.js\?v=[^\"']+#app.js?v=${short_sha}#g; s#route-map\.js\?v=[^\"']+#route-map.js?v=${short_sha}#g; s#address-autocomplete\.js\?v=[^\"']+#address-autocomplete.js?v=${short_sha}#g; s#catalog\.js\?v=[^\"']+#catalog.js?v=${short_sha}#g; s#zenebona-program\.js\?v=[^\"']+#zenebona-program.js?v=${short_sha}#g; s#whatsapp-widget\.js\?v=[^\"']+#whatsapp-widget.js?v=${short_sha}#g; s#finder-runtime\.js\?v=[^\"']+#finder-runtime.js?v=${short_sha}#g" "$html"
+            sed -E -i "s#styles\.css\?v=[^\"']+#styles.css?v=${short_sha}#g; s#ui-20260821\.css\?v=[^\"']+#ui-20260821.css?v=${short_sha}#g; s#recommendation-polish\.css\?v=[^\"']+#recommendation-polish.css?v=${short_sha}#g; s#data\.js\?v=[^\"']+#data.js?v=${short_sha}#g; s#app\.js\?v=[^\"']+#app.js?v=${short_sha}#g; s#privacy-runtime\.js\?v=[^\"']+#privacy-runtime.js?v=${short_sha}#g; s#route-map\.js\?v=[^\"']+#route-map.js?v=${short_sha}#g; s#address-autocomplete\.js\?v=[^\"']+#address-autocomplete.js?v=${short_sha}#g; s#catalog\.js\?v=[^\"']+#catalog.js?v=${short_sha}#g; s#zenebona-program\.js\?v=[^\"']+#zenebona-program.js?v=${short_sha}#g; s#whatsapp-widget\.js\?v=[^\"']+#whatsapp-widget.js?v=${short_sha}#g; s#finder-runtime\.js\?v=[^\"']+#finder-runtime.js?v=${short_sha}#g" "$html"
           done
           sed -E -i "s#wizard-responsive\.css\?v=[^\"']+#wizard-responsive.css?v=${short_sha}#g; s#wizard-anchor\.js\?v=[^\"']+#wizard-anchor.js?v=${short_sha}#g; s#result-actions\.js\?v=[^\"']+#result-actions.js?v=${short_sha}#g; s#transit-routing\.js\?v=[^\"']+#transit-routing.js?v=${short_sha}#g; s#result-travel-polish\.js\?v=[^\"']+#result-travel-polish.js?v=${short_sha}#g" _site/finder-runtime.js
           cat > _site/release.txt <<EOF
@@ -127,14 +136,16 @@ jobs:
           SCHOOL_YEAR=2026/2027
           PROGRAM_COUNT=28
           SOURCE_POLICY=canonical-current-2026-27-only
-          RECOMMENDER=age-hard-multineed-multiday-multipace-identified-address-route-three-mode-ranges-map-mobile-anchor-spacious-actions-ios-browser-e2e-sri
+          PRIVACY=local-only-no-analytics-no-tracking-no-client-storage-no-background-third-party-requests
+          RECOMMENDER=age-hard-multineed-multiday-multipace-local-location-estimate-three-mode-ranges-local-map-mobile-anchor-spacious-actions-ios-browser-e2e
           BUILT_AT=${built_at}
           EOF
           cat > _site/version.json <<EOF
-          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"sourcePolicy":"canonical-current-2026-27-only","recommender":"age-hard-multineed-multiday-multipace-identified-address-route-three-mode-ranges-map-mobile-anchor-spacious-actions-ios-browser-e2e-sri","builtAt":"${built_at}"}
+          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"sourcePolicy":"canonical-current-2026-27-only","privacy":"local-only-no-analytics-no-tracking-no-client-storage-no-background-third-party-requests","recommender":"age-hard-multineed-multiday-multipace-local-location-estimate-three-mode-ranges-local-map-mobile-anchor-spacious-actions-ios-browser-e2e","builtAt":"${built_at}"}
           EOF
           test -f _site/index.html
           test -f _site/app.js
+          test -f _site/privacy-runtime.js
           test -f _site/finder-runtime.js
           test -f _site/transit-routing.js
           test -f _site/result-travel-polish.js
@@ -146,9 +157,12 @@ jobs:
           test -f _site/whatsapp-widget.js
           test "$(cat _site/CNAME)" = "programvalaszto.magyariskola.at"
           grep -Fq 'PROGRAM_COUNT=28' _site/release.txt
+          grep -Fq 'PRIVACY=local-only-no-analytics-no-tracking-no-client-storage-no-background-third-party-requests' _site/release.txt
+          grep -Fq 'privacy-runtime.js?v=' _site/index.html
           grep -Fq 'finder-runtime.js?v=' _site/index.html
           grep -Fq 'wizard-responsive.css?v=' _site/finder-runtime.js
-          grep -Fq 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=' _site/route-map.js
+          grep -Fq 'mapSvg(data)' _site/route-map.js
+          ! grep -Fq 'unpkg.com' _site/route-map.js
           ! grep -Fq 'wizard-responsive.css' _site/whatsapp-widget.js
       - name: Browser E2E on built artifact
         shell: bash
@@ -200,19 +214,25 @@ jobs:
           done
           grep -Fq "GIT_SHA=${expected_sha}" <<<"${release}"
           grep -Fq 'PROGRAM_COUNT=28' <<<"${release}"
+          grep -Fq 'PRIVACY=local-only-no-analytics-no-tracking-no-client-storage-no-background-third-party-requests' <<<"${release}"
           home="$(fetch /)"
           grep -Fq 'Microsoft Office Specialist' <<<"${home}"
+          grep -Fq 'privacy-runtime.js?v=' <<<"${home}"
           grep -Fq 'finder-runtime.js?v=' <<<"${home}"
+          grep -Fq 'Privát működés' <<<"${home}"
           ! grep -Fq 'Zenebona' <<<"${home}"
           ! grep -Fq 'homepage-polish.js' <<<"${home}"
+          privacy="$(fetch /privacy-runtime.js)"
+          grep -Fq 'BMI_PRIVACY_LOCAL=true' <<<"${privacy}"
           runtime="$(fetch /finder-runtime.js)"
           grep -Fq 'wizard-responsive.css?v=' <<<"${runtime}"
           wa="$(fetch /whatsapp-widget.js)"
           grep -Fq 'bmi-whatsapp-widget' <<<"${wa}"
           ! grep -Fq 'transit-routing.js' <<<"${wa}"
           route="$(fetch /route-map.js)"
-          grep -Fq 'sha256-p4NxAoJBhIINfQ3eMZqQxE5XAlRMw6jO3K6FJvG5s4U=' <<<"${route}"
-          grep -Fq 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=' <<<"${route}"
+          grep -Fq 'mapSvg(data)' <<<"${route}"
+          ! grep -Fq 'unpkg.com' <<<"${route}"
+          ! grep -Fq 'tile.openstreetmap.org' <<<"${route}"
           sitemap="$(fetch /sitemap.xml)"
           grep -Fq '<lastmod>2026-08-30</lastmod>' <<<"${sitemap}"
           llmfull="$(fetch /llms-full.txt)"
@@ -222,6 +242,7 @@ jobs:
             grep -Fq 'viewport-fit=cover' <<<"${page}"
             grep -Fq 'bmi-header-logo.png' <<<"${page}"
             grep -Fq 'whatsapp-widget.js?v=' <<<"${page}"
+            grep -Fq 'Privát működés' <<<"${page}"
           done
       - name: Browser E2E on production
         shell: bash
@@ -232,4 +253,4 @@ jobs:
           E2E_BASE="${PRODUCTION_URL%/}" node scripts/browser-e2e.mjs
       - name: Release complete
         run: |
-          echo "EXACT-LIVE: ${GITHUB_SHA} passed data integrity, live reality, built-artifact browser E2E, exact deploy, production smoke, SRI and production browser E2E."
+          echo "EXACT-LIVE: ${GITHUB_SHA} passed data integrity, source reality, local-only privacy contracts, zero third-party browser requests, exact deploy and production browser E2E."
