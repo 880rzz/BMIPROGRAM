@@ -13,6 +13,7 @@ assert(app.includes('OpenStreetMap')&&app.includes('travelInfo'),'Travel-aware r
 assert(app.includes('identifiedOrigin(input)')&&address.includes('Azonosított cím:'),'Identified address reuse missing.');
 assert(route.includes("data.mode==='transit'")&&route.includes("b.textContent='Térkép és útvonal'"),'Shared in-app map action missing.');
 assert(route.includes("if(data.mode==='transit')")&&route.includes("dashArray:'8 8'"),'Transit schematic map missing.');
+assert(route.includes("css.integrity='sha256-p4NxAoJBhIINfQ3eMZqQxE5XAlRMw6jO3K6FJvG5s4U='")&&route.includes("s.integrity='sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo='"),'Leaflet CDN assets must stay pinned with SRI.');
 assert(zen.includes('https://zenebona.magyariskola.at')&&zen.includes('https://www.magyariskola.at/event-details/oromzene-2026'),'Canonical partner URLs missing.');
 assert(catalog.includes("p.id!=='zenebona'&&overlaps"),'Zenebona must stay out of age browser.');
 assert(!home.includes('Zenebona')&&!agesPage.includes('Zenebona')&&!faqPage.includes('Zenebona'),'Zenebona must not be promoted in home, age browser or FAQ static copy.');
@@ -47,4 +48,4 @@ assert(actions.includes('result-action-grid')&&actions.includes('action-wide')&&
 assert(uxRules.includes('Functional block hierarchy')&&uxRules.includes('Mobile scaling')&&uxRules.includes('Action buttons')&&uxRules.includes('Release protection'),'Persistent UX rules missing.');
 assert(wizardAnchor.includes("observer.observe(root,{childList:true,subtree:false})"),'Wizard anchor must observe direct view replacements only.');
 assert(wizardAnchor.includes('scrollToCurrentBlock')&&wizardAnchor.includes('.site-head'),'Wizard anchor/header offset missing.');
-console.log('PASS: decoupled finder runtime, consolidated styling, scoped partner discovery, travel, mobile UX and wizard contracts are consistent.');
+console.log('PASS: decoupled finder runtime, consolidated styling, Leaflet SRI, scoped partner discovery, travel, mobile UX and wizard contracts are consistent.');
