@@ -15,8 +15,8 @@ assert(/helyben rajzolt/i.test(route)&&!route.includes('unpkg.com')&&!route.incl
 assert(address.includes('BMI_LOCAL_LOCATION')&&!address.includes('fetch(')&&!address.includes('photon.komoot.io'),'Address identification must stay local-only.');
 assert(privacy.includes('BMI_PRIVACY_LOCAL=true')&&privacy.includes('BMI_LOCAL_POSTCODES')&&privacy.includes('automatic third-party network request blocked'),'Privacy runtime local-only guard missing.');
 assert(home.indexOf('privacy-runtime.js')<home.indexOf('address-autocomplete.js')&&home.indexOf('privacy-runtime.js')<home.indexOf('app.js'),'Privacy runtime must load before finder network-capable legacy code.');
-const runtimeBundle=[home,programsPage,agesPage,faqPage,address,route,whatsapp,finderRuntime,transit,travel,wizardAnchor,actions].join('\n');
-['googletagmanager','google-analytics','gtag(','fbq(','clarity(','plausible','localStorage','sessionStorage','document.cookie','sendBeacon'].forEach(token=>assert(!runtimeBundle.includes(token),`Forbidden tracking/storage token present: ${token}`));
+const executableRuntime=[app,address,route,whatsapp,finderRuntime,transit,travel,wizardAnchor,actions,catalog,zen].join('\n');
+['googletagmanager','google-analytics','gtag(','fbq(','clarity(','plausible','localStorage','sessionStorage','document.cookie','sendBeacon'].forEach(token=>assert(!executableRuntime.includes(token),`Forbidden tracking/storage token present in executable runtime: ${token}`));
 assert(zen.includes('https://zenebona.magyariskola.at')&&zen.includes('https://www.magyariskola.at/event-details/oromzene-2026'),'Canonical partner URLs missing.');
 assert(catalog.includes("p.id!=='zenebona'&&overlaps"),'Zenebona must stay out of age browser.');
 assert(!home.includes('Zenebona')&&!agesPage.includes('Zenebona')&&!faqPage.includes('Zenebona'),'Zenebona must not be promoted in home, age browser or FAQ static copy.');
