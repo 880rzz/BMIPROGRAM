@@ -29,14 +29,14 @@ jobs:
         run: |
           set -euo pipefail
           for f in data.js zenebona-program.js app.js route-map.js address-autocomplete.js catalog.js whatsapp-widget.js transit-routing.js result-travel-polish.js scripts/validate.mjs scripts/validate-schema-age.mjs scripts/validate-matching.mjs scripts/validate-copy.mjs scripts/live-transit-probe.mjs; do node --check "$f"; done
-      - name: Recommendation and registry validation
+      - name: Recommendation, registry and shell validation
         run: |
           set -euo pipefail
           node scripts/validate.mjs
           node scripts/validate-schema-age.mjs
           node scripts/validate-matching.mjs
           node scripts/validate-copy.mjs
-      - name: Live Vienna transit probe
+      - name: Live Vienna VAO transit probe
         run: node scripts/live-transit-probe.mjs
       - name: Release contracts
         run: |
@@ -48,28 +48,38 @@ jobs:
           grep -Fq 'identifiedOrigin(input)' app.js
           grep -Fq 'routeData(card)' route-map.js
           grep -Fq 'countrycode=AT' address-autocomplete.js
+          grep -Fq "p.id!=='zenebona'&&overlaps" catalog.js
           grep -Fq 'bmi-whatsapp-widget' whatsapp-widget.js
           grep -Fq 'transit-routing.js?v=' whatsapp-widget.js
           grep -Fq 'result-travel-polish.js?v=' whatsapp-widget.js
-          grep -Fq 'v6.db.transport.rest' transit-routing.js
-          grep -Fq 'profile=dbnav' transit-routing.js
-          grep -Fq '/locations/nearby?' transit-routing.js
-          grep -Fq '/journeys?' transit-routing.js
+          grep -Fq 'vao.demo.hafas.de/gate' transit-routing.js
+          grep -Fq "meth:'LocGeoPos'" transit-routing.js
+          grep -Fq 'extId:stops[0].extId' transit-routing.js
+          grep -Fq "meth:'TripSearch'" transit-routing.js
+          grep -Fq 'outFrwd:false' transit-routing.js
           grep -Fq 'windowStart=target-60' transit-routing.js
-          grep -Fq 'polylines=true' transit-routing.js
-          grep -Fq 'journeyKm(' transit-routing.js
+          grep -Fq 'mean(' transit-routing.js
           grep -Fq 'Átlagos útvonalhossz' result-travel-polish.js
           grep -Fq 'Átlagos menetidő' result-travel-polish.js
+          grep -Fq 'számtani átlagát' result-travel-polish.js
           grep -Fq 'container-type:inline-size' result-travel-polish.js
+          grep -Fq '.hero-identity' typography-polish.css
           for html in index.html foglalkozasok.html korosztalyok.html gyik.html; do
+            grep -Fq 'Délutáni és hétvégi foglalkozások · 2026 / 2027' "$html"
+            grep -Fq 'hero-identity' "$html"
+            grep -Fq '1987–2027 · 40 éves BMI' "$html"
+            grep -Fq 'Tanévbeszámoló' "$html"
             grep -Fq 'whatsapp-widget.js?v=' "$html"
             grep -Fq 'marketing@kozpontiszovetseg.at' "$html"
             grep -Fq 'Be Smart Kids Club csapata' "$html"
             grep -Fq 'https://business.vipach.at' "$html"
           done
-          ! grep -Fq '<h4>Zenebona</h4>' gyik.html
+          ! grep -Fq 'Zenebona' index.html
+          ! grep -Fq 'Zenebona' korosztalyok.html
+          ! grep -Fq 'Zenebona' gyik.html
+          ! grep -Fq '## Zenebona' llms.txt
           grep -Fq '28 aktuális' llms.txt
-          echo 'PASS: DB Navigator Vienna transit candidate and existing release contracts are intact.'
+          echo 'PASS: unified shell, Zenebona scope, VAO scheduled transit averages and release contracts are intact.'
 
   build:
     needs: validate
@@ -89,27 +99,30 @@ jobs:
           for html in _site/*.html; do
             sed -E -i "s#styles\.css\?v=[^\"']+#styles.css?v=${short_sha}#g; s#ui-20260821\.css\?v=[^\"']+#ui-20260821.css?v=${short_sha}#g; s#recommendation-polish\.css\?v=[^\"']+#recommendation-polish.css?v=${short_sha}#g; s#data\.js\?v=[^\"']+#data.js?v=${short_sha}#g; s#app\.js\?v=[^\"']+#app.js?v=${short_sha}#g; s#route-map\.js\?v=[^\"']+#route-map.js?v=${short_sha}#g; s#address-autocomplete\.js\?v=[^\"']+#address-autocomplete.js?v=${short_sha}#g; s#catalog\.js\?v=[^\"']+#catalog.js?v=${short_sha}#g; s#zenebona-program\.js\?v=[^\"']+#zenebona-program.js?v=${short_sha}#g; s#whatsapp-widget\.js\?v=[^\"']+#whatsapp-widget.js?v=${short_sha}#g" "$html"
           done
+          sed -E -i "s#typography-polish\.css\?v=[^\"']+#typography-polish.css?v=${short_sha}#g; s#transit-routing\.js\?v=[^\"']+#transit-routing.js?v=${short_sha}#g; s#result-travel-polish\.js\?v=[^\"']+#result-travel-polish.js?v=${short_sha}#g" _site/whatsapp-widget.js
           cat > _site/release.txt <<EOF
           BMIPROGRAM_RELEASE=${release_id}
           GIT_SHA=${GITHUB_SHA}
           SCHOOL_YEAR=2026/2027
           PROGRAM_COUNT=28
           SOURCE_POLICY=canonical-current-2026-27-only
-          RECOMMENDER=age-hard-multineed-multiday-multipace-identified-address-route-scheduled-transit-dbnav
+          RECOMMENDER=age-hard-multineed-multiday-multipace-identified-address-route-scheduled-transit-vao
           BUILT_AT=${built_at}
           EOF
           cat > _site/version.json <<EOF
-          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"sourcePolicy":"canonical-current-2026-27-only","recommender":"age-hard-multineed-multiday-multipace-identified-address-route-scheduled-transit-dbnav","builtAt":"${built_at}"}
+          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"sourcePolicy":"canonical-current-2026-27-only","recommender":"age-hard-multineed-multiday-multipace-identified-address-route-scheduled-transit-vao","builtAt":"${built_at}"}
           EOF
           test -f _site/index.html
           test -f _site/app.js
           test -f _site/transit-routing.js
           test -f _site/result-travel-polish.js
+          test -f _site/typography-polish.css
           test -f _site/whatsapp-widget.js
           test "$(cat _site/CNAME)" = "programvalaszto.magyariskola.at"
           grep -Fq 'PROGRAM_COUNT=28' _site/release.txt
-          grep -Fq 'v6.db.transport.rest' _site/transit-routing.js
-          grep -Fq 'Átlagos útvonalhossz' _site/result-travel-polish.js
+          grep -Fq 'vao.demo.hafas.de/gate' _site/transit-routing.js
+          grep -Fq 'Átlagos menetidő' _site/result-travel-polish.js
+          grep -Fq '.hero-identity' _site/typography-polish.css
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
@@ -130,7 +143,7 @@ jobs:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Verify production release and scheduled transit assets
+      - name: Verify production release, unified shell and scheduled transit assets
         shell: bash
         run: |
           set -euo pipefail
@@ -145,15 +158,28 @@ jobs:
           grep -Fq "GIT_SHA=${expected_sha}" <<<"${release}"
           grep -Fq 'PROGRAM_COUNT=28' <<<"${release}"
           transit="$(fetch /transit-routing.js)"
-          grep -Fq 'v6.db.transport.rest' <<<"${transit}"
-          grep -Fq 'profile=dbnav' <<<"${transit}"
+          grep -Fq 'vao.demo.hafas.de/gate' <<<"${transit}"
+          grep -Fq 'extId:stops[0].extId' <<<"${transit}"
           grep -Fq 'windowStart=target-60' <<<"${transit}"
-          grep -Fq 'polylines=true' <<<"${transit}"
+          grep -Fq 'mean(' <<<"${transit}"
           travel="$(fetch /result-travel-polish.js)"
           grep -Fq 'Átlagos útvonalhossz' <<<"${travel}"
           grep -Fq 'Átlagos menetidő' <<<"${travel}"
-          grep -Fq 'container-type:inline-size' <<<"${travel}"
+          grep -Fq 'számtani átlagát' <<<"${travel}"
+          shellcss="$(fetch /typography-polish.css)"
+          grep -Fq '.hero-identity' <<<"${shellcss}"
           wa="$(fetch /whatsapp-widget.js)"
           grep -Fq 'transit-routing.js?v=' <<<"${wa}"
-          for path in / /foglalkozasok.html /korosztalyok.html /gyik.html /app.js /transit-routing.js /result-travel-polish.js /whatsapp-widget.js /release.txt /version.json; do fetch "${path}" >/dev/null; done
-          echo "EXACT-LIVE: ${expected_sha} serves scheduled Vienna transit time/distance and responsive travel assets."
+          for path in / /foglalkozasok.html /korosztalyok.html /gyik.html; do
+            page="$(fetch "${path}")"
+            grep -Fq 'Délutáni és hétvégi foglalkozások · 2026 / 2027' <<<"${page}"
+            grep -Fq 'hero-identity' <<<"${page}"
+            grep -Fq 'Tanévbeszámoló' <<<"${page}"
+            grep -Fq 'marketing@kozpontiszovetseg.at' <<<"${page}"
+          done
+          home="$(fetch /)"; ages="$(fetch /korosztalyok.html)"; faq="$(fetch /gyik.html)"
+          ! grep -Fq 'Zenebona' <<<"${home}"
+          ! grep -Fq 'Zenebona' <<<"${ages}"
+          ! grep -Fq 'Zenebona' <<<"${faq}"
+          for path in /app.js /catalog.js /transit-routing.js /result-travel-polish.js /typography-polish.css /whatsapp-widget.js /release.txt /version.json; do fetch "${path}" >/dev/null; done
+          echo "EXACT-LIVE: ${expected_sha} serves unified shell, scoped Zenebona content and scheduled VAO transit averages."
