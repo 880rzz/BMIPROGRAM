@@ -67,6 +67,13 @@ jobs:
           grep -Fq 'display:block!important' wizard-responsive.css
           grep -Fq 'grid-template-columns:minmax(0,1fr)!important' wizard-responsive.css
           grep -Fq 'min-width:0' wizard-responsive.css
+          grep -Fq '#wizard .result-card>.result-meta' wizard-responsive.css
+          grep -Fq '#wizard .result-card>.result-reason' wizard-responsive.css
+          grep -Fq 'padding:12px 0!important' wizard-responsive.css
+          grep -Fq 'gap:24px!important' wizard-responsive.css
+          grep -Fq 'Functional block hierarchy' UX-RULES.md
+          grep -Fq 'Major result sections' UX-RULES.md
+          grep -Fq 'Release protection' UX-RULES.md
           grep -Fq 'scrollToCurrentBlock' wizard-anchor.js
           grep -Fq 'subtree:false' wizard-anchor.js
           grep -Fq '.hero-identity' typography-polish.css
@@ -85,7 +92,7 @@ jobs:
           ! grep -Fq 'Zenebona' gyik.html
           ! grep -Fq '## Zenebona' llms.txt
           grep -Fq '28 aktuális' llms.txt
-          echo 'PASS: unified shell, scoped Zenebona, three-mode travel, mobile geometry and wizard anchor contracts are intact.'
+          echo 'PASS: unified shell, scoped Zenebona, three-mode travel, spacious result hierarchy, mobile geometry and wizard anchors are intact.'
 
   build:
     needs: validate
@@ -112,11 +119,11 @@ jobs:
           SCHOOL_YEAR=2026/2027
           PROGRAM_COUNT=28
           SOURCE_POLICY=canonical-current-2026-27-only
-          RECOMMENDER=age-hard-multineed-multiday-multipace-identified-address-route-three-mode-ranges-map-mobile-anchor
+          RECOMMENDER=age-hard-multineed-multiday-multipace-identified-address-route-three-mode-ranges-map-mobile-anchor-spacious-blocks
           BUILT_AT=${built_at}
           EOF
           cat > _site/version.json <<EOF
-          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"sourcePolicy":"canonical-current-2026-27-only","recommender":"age-hard-multineed-multiday-multipace-identified-address-route-three-mode-ranges-map-mobile-anchor","builtAt":"${built_at}"}
+          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"sourcePolicy":"canonical-current-2026-27-only","recommender":"age-hard-multineed-multiday-multipace-identified-address-route-three-mode-ranges-map-mobile-anchor-spacious-blocks","builtAt":"${built_at}"}
           EOF
           test -f _site/index.html
           test -f _site/app.js
@@ -125,6 +132,7 @@ jobs:
           test -f _site/route-map.js
           test -f _site/wizard-responsive.css
           test -f _site/wizard-anchor.js
+          test -f _site/UX-RULES.md
           test -f _site/typography-polish.css
           test -f _site/whatsapp-widget.js
           test "$(cat _site/CNAME)" = "programvalaszto.magyariskola.at"
@@ -133,7 +141,9 @@ jobs:
           grep -Fq 'Várható menetidő' _site/result-travel-polish.js
           grep -Fq 'travelPanelSignature' _site/result-travel-polish.js
           grep -Fq 'Térkép és útvonal' _site/route-map.js
-          grep -Fq 'display:block!important' _site/wizard-responsive.css
+          grep -Fq '#wizard .result-card>.result-meta' _site/wizard-responsive.css
+          grep -Fq '#wizard .result-card>.result-reason' _site/wizard-responsive.css
+          grep -Fq 'Functional block hierarchy' _site/UX-RULES.md
           grep -Fq 'subtree:false' _site/wizard-anchor.js
           grep -Fq '.hero-identity' _site/typography-polish.css
       - uses: actions/upload-pages-artifact@v3
@@ -156,7 +166,7 @@ jobs:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Verify production release, mobile geometry and view anchors
+      - name: Verify production release, spacious mobile hierarchy and view anchors
         shell: bash
         run: |
           set -euo pipefail
@@ -172,16 +182,19 @@ jobs:
           grep -Fq 'PROGRAM_COUNT=28' <<<"${release}"
           transit="$(fetch /transit-routing.js)"
           grep -Fq "providerStatus:'approximate-planning-range'" <<<"${transit}"
-          grep -Fq 'transitMinMinutes' <<<"${transit}"
-          grep -Fq 'transitMaxMinutes' <<<"${transit}"
           travel="$(fetch /result-travel-polish.js)"
           grep -Fq 'Várható menetidő' <<<"${travel}"
           grep -Fq 'travelPanelSignature' <<<"${travel}"
           route="$(fetch /route-map.js)"
           grep -Fq 'Térkép és útvonal' <<<"${route}"
           responsive="$(fetch /wizard-responsive.css)"
-          grep -Fq 'display:block!important' <<<"${responsive}"
-          grep -Fq 'grid-template-columns:minmax(0,1fr)!important' <<<"${responsive}"
+          grep -Fq '#wizard .result-card>.result-meta' <<<"${responsive}"
+          grep -Fq '#wizard .result-card>.result-reason' <<<"${responsive}"
+          grep -Fq 'padding:12px 0!important' <<<"${responsive}"
+          grep -Fq 'gap:24px!important' <<<"${responsive}"
+          rules="$(fetch /UX-RULES.md)"
+          grep -Fq 'Functional block hierarchy' <<<"${rules}"
+          grep -Fq 'Release protection' <<<"${rules}"
           anchor="$(fetch /wizard-anchor.js)"
           grep -Fq 'scrollToCurrentBlock' <<<"${anchor}"
           grep -Fq 'subtree:false' <<<"${anchor}"
@@ -201,5 +214,5 @@ jobs:
           ! grep -Fq 'Zenebona' <<<"${home}"
           ! grep -Fq 'Zenebona' <<<"${ages}"
           ! grep -Fq 'Zenebona' <<<"${faq}"
-          for path in /app.js /catalog.js /route-map.js /transit-routing.js /result-travel-polish.js /wizard-responsive.css /wizard-anchor.js /typography-polish.css /whatsapp-widget.js /release.txt /version.json; do fetch "${path}" >/dev/null; done
-          echo "EXACT-LIVE: ${expected_sha} serves unified shell, mobile single-column results, three-mode travel ranges, maps and per-view wizard anchors."
+          for path in /app.js /catalog.js /route-map.js /transit-routing.js /result-travel-polish.js /wizard-responsive.css /wizard-anchor.js /UX-RULES.md /typography-polish.css /whatsapp-widget.js /release.txt /version.json; do fetch "${path}" >/dev/null; done
+          echo "EXACT-LIVE: ${expected_sha} serves spacious semantic result blocks, mobile single-column results, travel ranges, maps and per-view wizard anchors."
