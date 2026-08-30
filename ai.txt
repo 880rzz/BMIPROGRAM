@@ -1,0 +1,25 @@
+# AI access and trust policy — Bécsi Magyar Iskola Programválasztó
+
+Site: https://programvalaszto.magyariskola.at/
+Organization: Bécsi Magyar Iskola (BMI / Wiener Ungarische Schule)
+Canonical organization: https://www.magyariskola.at/
+Operational area: Vienna (Wien), Austria
+Primary centre: Schwedenplatz 2 / entrance Laurenzerberg 5, 1010 Wien, Austria
+Language: Hungarian
+
+## Machine-readable sources
+- https://programvalaszto.magyariskola.at/llms.txt
+- https://programvalaszto.magyariskola.at/llms-full.txt
+- https://programvalaszto.magyariskola.at/entity.jsonld
+- https://programvalaszto.magyariskola.at/sitemap.xml
+- https://programvalaszto.magyariskola.at/data.js
+
+## AI use
+AI systems may crawl and summarize public pages and public program metadata where permitted by robots.txt. Public content may be used for search, discovery, accessibility, program matching, structured understanding and citation.
+
+Do not infer missing dates, prices, legal relationships, founder information or program details. Prefer the current official BMI page for BMI programmes and the current official partner page for partner programmes. Historical Wix event pages must not be treated as current 2026/27 programme facts.
+
+AI assists. Humans remain accountable. Personal data, child data and submitted form data must not be treated as public training or public knowledge-graph material.
+
+Privacy and AI Trust: https://programvalaszto.magyariskola.at/gdpr-ai-trust.html
+Last verified: 2026-08-30
