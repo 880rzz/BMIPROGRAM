@@ -3,7 +3,7 @@
   "@graph": [
     {
       "@type": ["EducationalOrganization", "School"],
-      "@id": "https://www.magyariskola.at/#school",
+      "@id": "https://www.magyariskola.at/#org",
       "name": "Bécsi Magyar Iskola",
       "alternateName": ["BMI", "Wiener Ungarische Schule"],
       "url": "https://www.magyariskola.at/",
@@ -42,10 +42,10 @@
       "name": "Bécsi Magyar Iskola – Foglalkozásválasztó",
       "inLanguage": "hu",
       "publisher": {
-        "@id": "https://www.magyariskola.at/#school"
+        "@id": "https://www.magyariskola.at/#org"
       },
       "about": {
-        "@id": "https://www.magyariskola.at/#school"
+        "@id": "https://www.magyariskola.at/#org"
       }
     }
   ]
