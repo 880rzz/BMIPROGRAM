@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 function read(path){return fs.readFileSync(path,'utf8')}
 function assert(ok,msg){if(!ok)throw new Error(msg)}
-const home=read('index.html'),programsPage=read('foglalkozasok.html'),agesPage=read('korosztalyok.html'),faqPage=read('gyik.html'),app=read('app.js'),route=read('route-map.js'),address=read('address-autocomplete.js'),catalog=read('catalog.js'),zen=read('zenebona-program.js'),whatsapp=read('whatsapp-widget.js'),typography=read('typography-polish.css'),transit=read('transit-routing.js'),travel=read('result-travel-polish.js'),wizardResponsive=read('wizard-responsive.css'),wizardAnchor=read('wizard-anchor.js'),llms=read('llms.txt');
+const home=read('index.html'),programsPage=read('foglalkozasok.html'),agesPage=read('korosztalyok.html'),faqPage=read('gyik.html'),app=read('app.js'),route=read('route-map.js'),address=read('address-autocomplete.js'),catalog=read('catalog.js'),zen=read('zenebona-program.js'),whatsapp=read('whatsapp-widget.js'),typography=read('typography-polish.css'),transit=read('transit-routing.js'),travel=read('result-travel-polish.js'),wizardResponsive=read('wizard-responsive.css'),wizardAnchor=read('wizard-anchor.js'),uxRules=read('UX-RULES.md'),llms=read('llms.txt');
 const publicPages=[home,programsPage,agesPage,faqPage];
 assert(home.includes('Magyar nyelvű'),'Homepage positioning missing.');
 assert(app.includes("programs.length+' foglalkozás és képzés"),'Finder must link to dynamic registry count.');
@@ -40,6 +40,10 @@ assert(travel.includes('Várható menetidő')&&travel.includes('kb. ')&&travel.i
 assert(travel.includes('travelPanelSignature')&&travel.includes("t.closest&&t.closest('.result-travel')"),'Travel render-loop guard missing.');
 assert(wizardResponsive.includes('display:block!important')&&wizardResponsive.includes('grid-template-columns:minmax(0,1fr)!important'),'Mobile travel/result single-column override missing.');
 assert(wizardResponsive.includes('min-width:0')&&wizardResponsive.includes('#wizard .result-card{width:100%'),'Mobile result width guard missing.');
+assert(wizardResponsive.includes('#wizard .result-card>.result-meta')&&wizardResponsive.includes('padding:12px 0!important'),'Result metadata breathing room missing.');
+assert(wizardResponsive.includes('#wizard .result-card>.result-reason')&&wizardResponsive.includes('line-height:1.64!important'),'Recommendation explanation block hierarchy missing.');
+assert(wizardResponsive.includes('margin-top:24px!important')&&wizardResponsive.includes('gap:24px!important'),'Major mobile result block spacing missing.');
+assert(uxRules.includes('Functional block hierarchy')&&uxRules.includes('Major result sections')&&uxRules.includes('Release protection'),'Persistent UX spacing rules missing.');
 assert(wizardAnchor.includes("observer.observe(root,{childList:true,subtree:false})"),'Wizard anchor must observe direct view replacements only.');
 assert(wizardAnchor.includes('scrollToCurrentBlock')&&wizardAnchor.includes('.site-head'),'Wizard anchor/header offset missing.');
-console.log('PASS: unified shell, Zenebona scope, three-mode travel ranges, render-loop guard, mobile result geometry and per-view wizard anchors are consistent.');
+console.log('PASS: unified shell, Zenebona scope, three-mode travel ranges, render-loop guard, spacious result hierarchy, mobile geometry and per-view wizard anchors are consistent.');
