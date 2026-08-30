@@ -63,7 +63,7 @@ jobs:
           grep -Fq 'transitMaxMinutes' transit-routing.js
           grep -Fq 'Várható menetidő' result-travel-polish.js
           grep -Fq 'travelPanelSignature' result-travel-polish.js
-          grep -Fq "m.target.closest&&m.target.closest('.result-travel')" result-travel-polish.js
+          grep -Fq "t.closest&&t.closest('.result-travel')" result-travel-polish.js
           grep -Fq 'display:block!important' wizard-responsive.css
           grep -Fq 'grid-template-columns:minmax(0,1fr)!important' wizard-responsive.css
           grep -Fq 'min-width:0' wizard-responsive.css
