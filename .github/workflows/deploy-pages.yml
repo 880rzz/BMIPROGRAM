@@ -29,7 +29,7 @@ jobs:
         run: |
           set -euo pipefail
           for f in data.js zenebona-program.js app.js route-map.js address-autocomplete.js catalog.js whatsapp-widget.js transit-routing.js result-travel-polish.js scripts/validate.mjs scripts/validate-schema-age.mjs scripts/validate-matching.mjs scripts/validate-copy.mjs; do node --check "$f"; done
-      - name: Recommendation, registry, shell and transit fail-safe validation
+      - name: Recommendation, registry, shell and travel range validation
         run: |
           set -euo pipefail
           node scripts/validate.mjs
@@ -45,6 +45,8 @@ jobs:
           grep -Fq 'selectedPaces' app.js
           grep -Fq 'identifiedOrigin(input)' app.js
           grep -Fq 'routeData(card)' route-map.js
+          grep -Fq 'Térkép és útvonal' route-map.js
+          grep -Fq "dashArray:'8 8'" route-map.js
           grep -Fq 'countrycode=AT' address-autocomplete.js
           grep -Fq "p.id!=='zenebona'&&overlaps" catalog.js
           grep -Fq 'bmi-whatsapp-widget' whatsapp-widget.js
@@ -52,13 +54,13 @@ jobs:
           grep -Fq 'result-travel-polish.js?v=' whatsapp-widget.js
           grep -Fq 'nextOccurrence' transit-routing.js
           grep -Fq 'windowFor' transit-routing.js
-          grep -Fq "providerStatus:'backend-required'" transit-routing.js
-          grep -Fq "transitReason='trusted-backend-unavailable'" transit-routing.js
-          grep -Fq 'delete card.dataset.transitMinutes' transit-routing.js
-          grep -Fq 'delete card.dataset.transitKm' transit-routing.js
-          grep -Fq 'Átlagos útvonalhossz' result-travel-polish.js
-          grep -Fq 'Átlagos menetidő' result-travel-polish.js
-          grep -Fq 'nem talál ki perc- vagy kilométerértéket' result-travel-polish.js
+          grep -Fq 'haversineKm' transit-routing.js
+          grep -Fq 'transitEstimate' transit-routing.js
+          grep -Fq "providerStatus:'approximate-planning-range'" transit-routing.js
+          grep -Fq 'transitMinMinutes' transit-routing.js
+          grep -Fq 'transitMaxMinutes' transit-routing.js
+          grep -Fq 'Várható menetidő' result-travel-polish.js
+          grep -Fq 'kb. ' result-travel-polish.js
           grep -Fq 'container-type:inline-size' result-travel-polish.js
           grep -Fq '.hero-identity' typography-polish.css
           for html in index.html foglalkozasok.html korosztalyok.html gyik.html; do
@@ -76,7 +78,7 @@ jobs:
           ! grep -Fq 'Zenebona' gyik.html
           ! grep -Fq '## Zenebona' llms.txt
           grep -Fq '28 aktuális' llms.txt
-          echo 'PASS: unified shell, Zenebona scope and safe scheduled-transit target contracts are intact.'
+          echo 'PASS: unified shell, Zenebona scope, three-mode travel ranges and shared map contracts are intact.'
 
   build:
     needs: validate
@@ -103,22 +105,24 @@ jobs:
           SCHOOL_YEAR=2026/2027
           PROGRAM_COUNT=28
           SOURCE_POLICY=canonical-current-2026-27-only
-          RECOMMENDER=age-hard-multineed-multiday-multipace-identified-address-route-scheduled-transit-failsafe
+          RECOMMENDER=age-hard-multineed-multiday-multipace-identified-address-route-three-mode-ranges-map
           BUILT_AT=${built_at}
           EOF
           cat > _site/version.json <<EOF
-          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"sourcePolicy":"canonical-current-2026-27-only","recommender":"age-hard-multineed-multiday-multipace-identified-address-route-scheduled-transit-failsafe","builtAt":"${built_at}"}
+          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"sourcePolicy":"canonical-current-2026-27-only","recommender":"age-hard-multineed-multiday-multipace-identified-address-route-three-mode-ranges-map","builtAt":"${built_at}"}
           EOF
           test -f _site/index.html
           test -f _site/app.js
           test -f _site/transit-routing.js
           test -f _site/result-travel-polish.js
+          test -f _site/route-map.js
           test -f _site/typography-polish.css
           test -f _site/whatsapp-widget.js
           test "$(cat _site/CNAME)" = "programvalaszto.magyariskola.at"
           grep -Fq 'PROGRAM_COUNT=28' _site/release.txt
-          grep -Fq "providerStatus:'backend-required'" _site/transit-routing.js
-          grep -Fq 'nincs hiteles adat' _site/result-travel-polish.js
+          grep -Fq "providerStatus:'approximate-planning-range'" _site/transit-routing.js
+          grep -Fq 'Várható menetidő' _site/result-travel-polish.js
+          grep -Fq 'Térkép és útvonal' _site/route-map.js
           grep -Fq '.hero-identity' _site/typography-polish.css
       - uses: actions/upload-pages-artifact@v3
         with:
@@ -140,7 +144,7 @@ jobs:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Verify production release, unified shell and safe scheduled transit target
+      - name: Verify production release, unified shell and travel ranges
         shell: bash
         run: |
           set -euo pipefail
@@ -155,13 +159,15 @@ jobs:
           grep -Fq "GIT_SHA=${expected_sha}" <<<"${release}"
           grep -Fq 'PROGRAM_COUNT=28' <<<"${release}"
           transit="$(fetch /transit-routing.js)"
-          grep -Fq "providerStatus:'backend-required'" <<<"${transit}"
-          grep -Fq 'nextOccurrence' <<<"${transit}"
-          grep -Fq 'windowFor' <<<"${transit}"
+          grep -Fq "providerStatus:'approximate-planning-range'" <<<"${transit}"
+          grep -Fq 'transitMinMinutes' <<<"${transit}"
+          grep -Fq 'transitMaxMinutes' <<<"${transit}"
           travel="$(fetch /result-travel-polish.js)"
-          grep -Fq 'Átlagos útvonalhossz' <<<"${travel}"
-          grep -Fq 'Átlagos menetidő' <<<"${travel}"
-          grep -Fq 'nem talál ki perc- vagy kilométerértéket' <<<"${travel}"
+          grep -Fq 'Várható menetidő' <<<"${travel}"
+          grep -Fq 'kb. ' <<<"${travel}"
+          route="$(fetch /route-map.js)"
+          grep -Fq 'Térkép és útvonal' <<<"${route}"
+          grep -Fq "dashArray:'8 8'" <<<"${route}"
           shellcss="$(fetch /typography-polish.css)"
           grep -Fq '.hero-identity' <<<"${shellcss}"
           wa="$(fetch /whatsapp-widget.js)"
@@ -177,5 +183,5 @@ jobs:
           ! grep -Fq 'Zenebona' <<<"${home}"
           ! grep -Fq 'Zenebona' <<<"${ages}"
           ! grep -Fq 'Zenebona' <<<"${faq}"
-          for path in /app.js /catalog.js /transit-routing.js /result-travel-polish.js /typography-polish.css /whatsapp-widget.js /release.txt /version.json; do fetch "${path}" >/dev/null; done
-          echo "EXACT-LIVE: ${expected_sha} serves unified shell, scoped Zenebona content and safe scheduled transit target metadata."
+          for path in /app.js /catalog.js /route-map.js /transit-routing.js /result-travel-polish.js /typography-polish.css /whatsapp-widget.js /release.txt /version.json; do fetch "${path}" >/dev/null; done
+          echo "EXACT-LIVE: ${expected_sha} serves unified shell, scoped Zenebona content, three-mode travel ranges and in-app map assets."
