@@ -1,8 +1,26 @@
 User-agent: *
 Allow: /
 
-# AI-ügynököknek: strukturált összefoglaló
+# Explicit public AI crawler access
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# Machine-readable discovery
+# https://programvalaszto.magyariskola.at/ai.txt
 # https://programvalaszto.magyariskola.at/llms.txt
 # https://programvalaszto.magyariskola.at/llms-full.txt
+# https://programvalaszto.magyariskola.at/entity.jsonld
 
 Sitemap: https://programvalaszto.magyariskola.at/sitemap.xml
