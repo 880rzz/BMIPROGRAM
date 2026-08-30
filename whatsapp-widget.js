@@ -3,6 +3,7 @@
 var LINK='https://chat.whatsapp.com/Cv4xy5LsODzIztASzPCdCV?s=cl&p=i&mlu=4';
 var STYLE_ID='bmi-whatsapp-widget-style';
 var ID='bmi-whatsapp-widget';
+var fav=document.querySelector('link[rel="icon"]');if(!fav){fav=document.createElement('link');fav.rel='icon';document.head.appendChild(fav)}fav.type='image/png';fav.href='bmi-butterfly-favicon.png?v=20260830';
 var style=document.getElementById(STYLE_ID);if(!style){style=document.createElement('style');style.id=STYLE_ID;style.textContent=''
 +'#'+ID+'{position:fixed!important;right:max(18px,env(safe-area-inset-right))!important;bottom:max(18px,env(safe-area-inset-bottom))!important;z-index:2147483000!important;box-sizing:border-box!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:10px!important;width:auto!important;height:56px!important;min-width:56px!important;max-width:none!important;padding:0 16px 0 11px!important;margin:0!important;border:1px solid rgba(0,0,0,.12)!important;border-radius:999px!important;background:#fff!important;color:#111!important;text-decoration:none!important;box-shadow:0 8px 28px rgba(0,0,0,.16)!important;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif!important;font-size:14px!important;font-weight:650!important;line-height:1.15!important;letter-spacing:-.01em!important;overflow:hidden!important;isolation:isolate!important;transform:none!important}'
 +'#'+ID+':hover,#'+ID+':focus-visible{box-shadow:0 12px 34px rgba(0,0,0,.22)!important;transform:translateY(-2px)!important}'
