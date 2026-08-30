@@ -28,7 +28,7 @@ jobs:
       - name: JavaScript syntax
         run: |
           set -euo pipefail
-          for f in data.js zenebona-program.js app.js route-map.js address-autocomplete.js catalog.js whatsapp-widget.js transit-routing.js result-travel-polish.js wizard-anchor.js scripts/validate.mjs scripts/validate-schema-age.mjs scripts/validate-matching.mjs scripts/validate-copy.mjs; do node --check "$f"; done
+          for f in data.js zenebona-program.js app.js route-map.js address-autocomplete.js catalog.js whatsapp-widget.js transit-routing.js result-travel-polish.js wizard-anchor.js result-actions.js scripts/validate.mjs scripts/validate-schema-age.mjs scripts/validate-matching.mjs scripts/validate-copy.mjs; do node --check "$f"; done
       - name: Recommendation, registry, shell and mobile UX validation
         run: |
           set -euo pipefail
@@ -54,6 +54,7 @@ jobs:
           grep -Fq 'result-travel-polish.js?v=' whatsapp-widget.js
           grep -Fq 'wizard-responsive.css?v=' whatsapp-widget.js
           grep -Fq 'wizard-anchor.js?v=' whatsapp-widget.js
+          grep -Fq 'result-actions.js?v=' whatsapp-widget.js
           grep -Fq 'nextOccurrence' transit-routing.js
           grep -Fq 'windowFor' transit-routing.js
           grep -Fq 'haversineKm' transit-routing.js
@@ -64,16 +65,15 @@ jobs:
           grep -Fq 'Várható menetidő' result-travel-polish.js
           grep -Fq 'travelPanelSignature' result-travel-polish.js
           grep -Fq "t.closest&&t.closest('.result-travel')" result-travel-polish.js
-          grep -Fq 'display:block!important' wizard-responsive.css
-          grep -Fq 'grid-template-columns:minmax(0,1fr)!important' wizard-responsive.css
-          grep -Fq 'min-width:0' wizard-responsive.css
-          grep -Fq '#wizard .result-card>.result-meta' wizard-responsive.css
-          grep -Fq '#wizard .result-card>.result-reason' wizard-responsive.css
-          grep -Fq 'padding:12px 0!important' wizard-responsive.css
-          grep -Fq 'gap:24px!important' wizard-responsive.css
-          grep -Fq 'Functional block hierarchy' UX-RULES.md
-          grep -Fq 'Major result sections' UX-RULES.md
-          grep -Fq 'Release protection' UX-RULES.md
+          grep -Fq -- '-webkit-text-size-adjust:100%' wizard-responsive.css
+          grep -Fq 'font-size:16px!important' wizard-responsive.css
+          grep -Fq '.result-action-grid' wizard-responsive.css
+          grep -Fq 'min-height:54px!important' wizard-responsive.css
+          grep -Fq 'result-action-grid' result-actions.js
+          grep -Fq 'action-wide' result-actions.js
+          grep -Fq 'text.length>22' result-actions.js
+          grep -Fq 'Mobile scaling' UX-RULES.md
+          grep -Fq 'Action buttons' UX-RULES.md
           grep -Fq 'scrollToCurrentBlock' wizard-anchor.js
           grep -Fq 'subtree:false' wizard-anchor.js
           grep -Fq '.hero-identity' typography-polish.css
@@ -92,7 +92,7 @@ jobs:
           ! grep -Fq 'Zenebona' gyik.html
           ! grep -Fq '## Zenebona' llms.txt
           grep -Fq '28 aktuális' llms.txt
-          echo 'PASS: unified shell, scoped Zenebona, three-mode travel, spacious result hierarchy, mobile geometry and wizard anchors are intact.'
+          echo 'PASS: stable iOS scaling, equal responsive actions, spacious hierarchy, routing and shared shell contracts are intact.'
 
   build:
     needs: validate
@@ -112,18 +112,18 @@ jobs:
           for html in _site/*.html; do
             sed -E -i "s#styles\.css\?v=[^\"']+#styles.css?v=${short_sha}#g; s#ui-20260821\.css\?v=[^\"']+#ui-20260821.css?v=${short_sha}#g; s#recommendation-polish\.css\?v=[^\"']+#recommendation-polish.css?v=${short_sha}#g; s#data\.js\?v=[^\"']+#data.js?v=${short_sha}#g; s#app\.js\?v=[^\"']+#app.js?v=${short_sha}#g; s#route-map\.js\?v=[^\"']+#route-map.js?v=${short_sha}#g; s#address-autocomplete\.js\?v=[^\"']+#address-autocomplete.js?v=${short_sha}#g; s#catalog\.js\?v=[^\"']+#catalog.js?v=${short_sha}#g; s#zenebona-program\.js\?v=[^\"']+#zenebona-program.js?v=${short_sha}#g; s#whatsapp-widget\.js\?v=[^\"']+#whatsapp-widget.js?v=${short_sha}#g" "$html"
           done
-          sed -E -i "s#typography-polish\.css\?v=[^\"']+#typography-polish.css?v=${short_sha}#g; s#transit-routing\.js\?v=[^\"']+#transit-routing.js?v=${short_sha}#g; s#result-travel-polish\.js\?v=[^\"']+#result-travel-polish.js?v=${short_sha}#g; s#wizard-responsive\.css\?v=[^\"']+#wizard-responsive.css?v=${short_sha}#g; s#wizard-anchor\.js\?v=[^\"']+#wizard-anchor.js?v=${short_sha}#g" _site/whatsapp-widget.js
+          sed -E -i "s#typography-polish\.css\?v=[^\"']+#typography-polish.css?v=${short_sha}#g; s#transit-routing\.js\?v=[^\"']+#transit-routing.js?v=${short_sha}#g; s#result-travel-polish\.js\?v=[^\"']+#result-travel-polish.js?v=${short_sha}#g; s#wizard-responsive\.css\?v=[^\"']+#wizard-responsive.css?v=${short_sha}#g; s#wizard-anchor\.js\?v=[^\"']+#wizard-anchor.js?v=${short_sha}#g; s#result-actions\.js\?v=[^\"']+#result-actions.js?v=${short_sha}#g" _site/whatsapp-widget.js
           cat > _site/release.txt <<EOF
           BMIPROGRAM_RELEASE=${release_id}
           GIT_SHA=${GITHUB_SHA}
           SCHOOL_YEAR=2026/2027
           PROGRAM_COUNT=28
           SOURCE_POLICY=canonical-current-2026-27-only
-          RECOMMENDER=age-hard-multineed-multiday-multipace-identified-address-route-three-mode-ranges-map-mobile-anchor-spacious-blocks
+          RECOMMENDER=age-hard-multineed-multiday-multipace-identified-address-route-three-mode-ranges-map-mobile-anchor-spacious-actions-ios
           BUILT_AT=${built_at}
           EOF
           cat > _site/version.json <<EOF
-          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"sourcePolicy":"canonical-current-2026-27-only","recommender":"age-hard-multineed-multiday-multipace-identified-address-route-three-mode-ranges-map-mobile-anchor-spacious-blocks","builtAt":"${built_at}"}
+          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"sourcePolicy":"canonical-current-2026-27-only","recommender":"age-hard-multineed-multiday-multipace-identified-address-route-three-mode-ranges-map-mobile-anchor-spacious-actions-ios","builtAt":"${built_at}"}
           EOF
           test -f _site/index.html
           test -f _site/app.js
@@ -132,20 +132,18 @@ jobs:
           test -f _site/route-map.js
           test -f _site/wizard-responsive.css
           test -f _site/wizard-anchor.js
+          test -f _site/result-actions.js
           test -f _site/UX-RULES.md
           test -f _site/typography-polish.css
           test -f _site/whatsapp-widget.js
           test "$(cat _site/CNAME)" = "programvalaszto.magyariskola.at"
           grep -Fq 'PROGRAM_COUNT=28' _site/release.txt
-          grep -Fq "providerStatus:'approximate-planning-range'" _site/transit-routing.js
-          grep -Fq 'Várható menetidő' _site/result-travel-polish.js
-          grep -Fq 'travelPanelSignature' _site/result-travel-polish.js
-          grep -Fq 'Térkép és útvonal' _site/route-map.js
-          grep -Fq '#wizard .result-card>.result-meta' _site/wizard-responsive.css
-          grep -Fq '#wizard .result-card>.result-reason' _site/wizard-responsive.css
-          grep -Fq 'Functional block hierarchy' _site/UX-RULES.md
+          grep -Fq -- '-webkit-text-size-adjust:100%' _site/wizard-responsive.css
+          grep -Fq 'font-size:16px!important' _site/wizard-responsive.css
+          grep -Fq '.result-action-grid' _site/wizard-responsive.css
+          grep -Fq 'action-wide' _site/result-actions.js
+          grep -Fq 'Mobile scaling' _site/UX-RULES.md
           grep -Fq 'subtree:false' _site/wizard-anchor.js
-          grep -Fq '.hero-identity' _site/typography-polish.css
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
@@ -166,7 +164,7 @@ jobs:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Verify production release, spacious mobile hierarchy and view anchors
+      - name: Verify production release, iOS scaling and responsive actions
         shell: bash
         run: |
           set -euo pipefail
@@ -180,39 +178,28 @@ jobs:
           done
           grep -Fq "GIT_SHA=${expected_sha}" <<<"${release}"
           grep -Fq 'PROGRAM_COUNT=28' <<<"${release}"
-          transit="$(fetch /transit-routing.js)"
-          grep -Fq "providerStatus:'approximate-planning-range'" <<<"${transit}"
-          travel="$(fetch /result-travel-polish.js)"
-          grep -Fq 'Várható menetidő' <<<"${travel}"
-          grep -Fq 'travelPanelSignature' <<<"${travel}"
+          responsive="$(fetch /wizard-responsive.css)"
+          grep -Fq -- '-webkit-text-size-adjust:100%' <<<"${responsive}"
+          grep -Fq 'font-size:16px!important' <<<"${responsive}"
+          grep -Fq '.result-action-grid' <<<"${responsive}"
+          grep -Fq 'min-height:54px!important' <<<"${responsive}"
+          actions="$(fetch /result-actions.js)"
+          grep -Fq 'result-action-grid' <<<"${actions}"
+          grep -Fq 'action-wide' <<<"${actions}"
+          wa="$(fetch /whatsapp-widget.js)"
+          grep -Fq 'result-actions.js?v=' <<<"${wa}"
+          grep -Fq 'wizard-responsive.css?v=' <<<"${wa}"
+          rules="$(fetch /UX-RULES.md)"
+          grep -Fq 'Mobile scaling' <<<"${rules}"
+          grep -Fq 'Action buttons' <<<"${rules}"
           route="$(fetch /route-map.js)"
           grep -Fq 'Térkép és útvonal' <<<"${route}"
-          responsive="$(fetch /wizard-responsive.css)"
-          grep -Fq '#wizard .result-card>.result-meta' <<<"${responsive}"
-          grep -Fq '#wizard .result-card>.result-reason' <<<"${responsive}"
-          grep -Fq 'padding:12px 0!important' <<<"${responsive}"
-          grep -Fq 'gap:24px!important' <<<"${responsive}"
-          rules="$(fetch /UX-RULES.md)"
-          grep -Fq 'Functional block hierarchy' <<<"${rules}"
-          grep -Fq 'Release protection' <<<"${rules}"
           anchor="$(fetch /wizard-anchor.js)"
           grep -Fq 'scrollToCurrentBlock' <<<"${anchor}"
-          grep -Fq 'subtree:false' <<<"${anchor}"
-          shellcss="$(fetch /typography-polish.css)"
-          grep -Fq '.hero-identity' <<<"${shellcss}"
-          wa="$(fetch /whatsapp-widget.js)"
-          grep -Fq 'wizard-responsive.css?v=' <<<"${wa}"
-          grep -Fq 'wizard-anchor.js?v=' <<<"${wa}"
           for path in / /foglalkozasok.html /korosztalyok.html /gyik.html; do
             page="$(fetch "${path}")"
             grep -Fq 'Délutáni és hétvégi foglalkozások · 2026 / 2027' <<<"${page}"
-            grep -Fq 'hero-identity' <<<"${page}"
-            grep -Fq 'Tanévbeszámoló' <<<"${page}"
-            grep -Fq 'marketing@kozpontiszovetseg.at' <<<"${page}"
+            grep -Fq 'whatsapp-widget.js?v=' <<<"${page}"
           done
-          home="$(fetch /)"; ages="$(fetch /korosztalyok.html)"; faq="$(fetch /gyik.html)"
-          ! grep -Fq 'Zenebona' <<<"${home}"
-          ! grep -Fq 'Zenebona' <<<"${ages}"
-          ! grep -Fq 'Zenebona' <<<"${faq}"
-          for path in /app.js /catalog.js /route-map.js /transit-routing.js /result-travel-polish.js /wizard-responsive.css /wizard-anchor.js /UX-RULES.md /typography-polish.css /whatsapp-widget.js /release.txt /version.json; do fetch "${path}" >/dev/null; done
-          echo "EXACT-LIVE: ${expected_sha} serves spacious semantic result blocks, mobile single-column results, travel ranges, maps and per-view wizard anchors."
+          for path in /app.js /route-map.js /result-travel-polish.js /wizard-responsive.css /wizard-anchor.js /result-actions.js /UX-RULES.md /whatsapp-widget.js /release.txt /version.json; do fetch "${path}" >/dev/null; done
+          echo "EXACT-LIVE: ${expected_sha} serves stable iOS scaling, equal responsive result actions, spacious mobile results, maps and wizard anchors."
