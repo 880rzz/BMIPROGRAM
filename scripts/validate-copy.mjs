@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 function read(path){return fs.readFileSync(path,'utf8')}
 function assert(ok,msg){if(!ok)throw new Error(msg)}
-const home=read('index.html'),programsPage=read('foglalkozasok.html'),agesPage=read('korosztalyok.html'),faqPage=read('gyik.html'),app=read('app.js'),route=read('route-map.js'),address=read('address-autocomplete.js'),privacy=read('privacy-runtime.js'),catalog=read('catalog.js'),zen=read('zenebona-program.js'),whatsapp=read('whatsapp-widget.js'),finderRuntime=read('finder-runtime.js'),sharedCss=read('recommendation-polish.css'),transit=read('transit-routing.js'),travel=read('result-travel-polish.js'),wizardResponsive=read('wizard-responsive.css'),wizardAnchor=read('wizard-anchor.js'),actions=read('result-actions.js'),uxRules=read('UX-RULES.md'),llms=read('llms.txt'),llmsFull=read('llms-full.txt'),sitemap=read('sitemap.xml');
+const home=read('index.html'),programsPage=read('foglalkozasok.html'),agesPage=read('korosztalyok.html'),faqPage=read('gyik.html'),app=read('app.js'),route=read('route-map.js'),address=read('address-autocomplete.js'),privacy=read('privacy-runtime.js'),catalog=read('catalog.js'),zen=read('zenebona-program.js'),whatsapp=read('whatsapp-widget.js'),finderRuntime=read('finder-runtime.js'),sharedCss=read('recommendation-polish.css'),transit=read('transit-routing.js'),googleRoutes=read('google-routes.js'),routesConfig=read('routes-config.js'),travel=read('result-travel-polish.js'),wizardResponsive=read('wizard-responsive.css'),wizardAnchor=read('wizard-anchor.js'),actions=read('result-actions.js'),uxRules=read('UX-RULES.md'),llms=read('llms.txt'),llmsFull=read('llms-full.txt'),sitemap=read('sitemap.xml');
 const publicPages=[home,programsPage,agesPage,faqPage];
 assert(home.includes('Magyar nyelvű'),'Homepage positioning missing.');
 assert(app.includes("programs.length+' foglalkozás és képzés"),'Finder must link to dynamic registry count.');
@@ -14,11 +14,20 @@ assert(route.includes("b.textContent='Térkép és útvonal'")&&route.includes('
 assert(route.includes('osmEmbedUrl')&&route.includes('BMI_MAP_CONSENT===true')&&route.includes('openstreetmap.org/export/embed.html'),'Consent-gated real OSM map missing.');
 assert(address.includes('BMI_LOCAL_LOCATION')&&address.includes('mapConsent')&&address.includes('photon.komoot.io'),'Consent-gated address identification missing.');
 assert(address.includes('limit=3')&&address.includes('slice(0,3)'),'Maximum three address suggestions contract missing.');
+assert(address.includes('Google Maps Platform Routes'),'Precise-routing consent disclosure missing from address step.');
 assert(privacy.includes('BMI_PRIVACY_LOCAL=true')&&privacy.includes('BMI_MAP_CONSENT=false')&&privacy.includes('BMI_SET_MAP_CONSENT')&&privacy.includes('ALLOWED_WITH_CONSENT'),'Explicit map consent guard missing.');
-assert(privacy.includes('automatic third-party network request blocked until explicit map consent'),'Default external request block missing.');
+assert(privacy.includes('routes.googleapis.com'),'Google Routes must be allowlisted only through the consent guard.');
+assert(privacy.includes('automatic third-party network request blocked until explicit map/routing consent'),'Default external request block missing.');
 assert(home.indexOf('privacy-runtime.js')<home.indexOf('address-autocomplete.js')&&home.indexOf('privacy-runtime.js')<home.indexOf('app.js'),'Privacy runtime must load before finder network-capable code.');
-const executableRuntime=[app,address,route,whatsapp,finderRuntime,transit,travel,wizardAnchor,actions,catalog,zen].join('\n');
+const executableRuntime=[app,address,route,whatsapp,finderRuntime,transit,googleRoutes,travel,wizardAnchor,actions,catalog,zen].join('\n');
 ['googletagmanager','google-analytics','gtag(','fbq(','clarity(','plausible','localStorage','sessionStorage','document.cookie','sendBeacon'].forEach(token=>assert(!executableRuntime.includes(token),`Forbidden tracking/storage token present in executable runtime: ${token}`));
+assert(routesConfig.includes("BMI_GOOGLE_ROUTES_API_KEY=window.BMI_GOOGLE_ROUTES_API_KEY||''"),'Routes config must default to no key.');
+assert(!/AIza[0-9A-Za-z_-]{20,}/.test(routesConfig),'A Google API key must never be committed to source.');
+assert(googleRoutes.includes('routes.googleapis.com/directions/v2:computeRoutes'),'Google Routes endpoint missing.');
+assert(googleRoutes.includes("window.BMI_MAP_CONSENT!==true")&&googleRoutes.includes('BMI_GOOGLE_ROUTES_API_KEY'),'Precise routing must require consent and configured key.');
+assert(googleRoutes.includes("routingPreference='TRAFFIC_AWARE_OPTIMAL'")&&googleRoutes.includes("trafficModel='BEST_GUESS'"),'Traffic-aware future drive routing missing.');
+assert(googleRoutes.includes("travelMode==='TRANSIT'")&&googleRoutes.includes('sampleOffsets'),'Transit/time-window route sampling missing.');
+assert(googleRoutes.includes("[-60,-30,-10]")&&googleRoutes.includes('windowFor'),'Program-start preceding-hour sampling contract missing.');
 assert(zen.includes('https://zenebona.magyariskola.at')&&zen.includes('https://www.magyariskola.at/event-details/oromzene-2026'),'Canonical partner URLs missing.');
 assert(catalog.includes("p.id!=='zenebona'&&overlaps"),'Zenebona must stay out of age browser.');
 assert(!home.includes('Zenebona')&&!agesPage.includes('Zenebona')&&!faqPage.includes('Zenebona'),'Zenebona must not be promoted in home, age browser or FAQ static copy.');
@@ -40,13 +49,14 @@ assert(home.includes('finder-runtime.js?v='),'Finder runtime must be loaded dire
 assert(faqPage.includes('Gyűjt-e statisztikát')&&faqPage.includes('Hogyan működik a térkép?'),'FAQ privacy operating model missing.');
 assert(whatsapp.includes('bmi-whatsapp-widget')&&!whatsapp.includes('transit-routing.js')&&!whatsapp.includes('wizard-responsive.css'),'WhatsApp must be independent from finder runtime.');
 assert(whatsapp.includes('bmi-hero-wordmark')&&whatsapp.includes("w.textContent='BMI'"),'Shared visible BMI hero wordmark fallback missing.');
-assert(whatsapp.includes('opcionális térképes hozzájárulással')&&whatsapp.includes('Photon/Komoot és OpenStreetMap'),'Consent-aware trust copy missing.');
-assert(finderRuntime.includes('wizard-responsive.css?v=')&&finderRuntime.includes('wizard-anchor.js?v=')&&finderRuntime.includes('result-actions.js?v=')&&finderRuntime.includes('transit-routing.js?v=')&&finderRuntime.includes('result-travel-polish.js?v='),'Finder runtime loaders missing.');
+assert(whatsapp.includes('opcionális térképes és pontos útvonal-hozzájárulással')&&whatsapp.includes('Google Maps Platform Routes'),'Consent-aware precise-routing trust copy missing.');
+assert(finderRuntime.includes('wizard-responsive.css?v=')&&finderRuntime.includes('wizard-anchor.js?v=')&&finderRuntime.includes('result-actions.js?v=')&&finderRuntime.includes('routes-config.js?v=')&&finderRuntime.includes('transit-routing.js?v=')&&finderRuntime.includes('google-routes.js?v=')&&finderRuntime.includes('result-travel-polish.js?v='),'Finder runtime loaders missing.');
 assert(sharedCss.includes('.hero-identity')&&sharedCss.includes('.site-head .head-in')&&sharedCss.includes('.hero h1')&&sharedCss.includes('text-wrap:balance'),'Unified responsive shell/heading polish missing from shared stylesheet.');
 assert(transit.includes('nextOccurrence')&&transit.includes('windowFor')&&transit.includes('haversineKm')&&transit.includes('transitEstimate'),'Transit planning estimate missing.');
-assert(transit.includes("providerStatus:'approximate-planning-range'")&&transit.includes('transitMinMinutes')&&transit.includes('transitMaxMinutes'),'Transit range contract missing.');
+assert(transit.includes("providerStatus:'approximate-planning-range'")&&transit.includes('transitMinMinutes')&&transit.includes('transitMaxMinutes'),'Transit fallback range contract missing.');
 assert(travel.includes('container-type:inline-size')&&travel.includes('@container(max-width:390px)'),'Responsive travel panel missing.');
 assert(travel.includes("mode==='car'")&&travel.includes("mode==='walk'")&&travel.includes("mode==='transit'"),'All travel modes must be rendered.');
+assert(travel.includes('Google Routes')&&travel.includes("routeProvider==='google-routes'"),'Precise routing result presentation missing.');
 assert(travel.includes('Várható menetidő')&&travel.includes('kb. ')&&travel.includes('perc'),'Travel range copy missing.');
 assert(travel.includes('travelPanelSignature')&&travel.includes("t.closest&&t.closest('.result-travel')"),'Travel render-loop guard missing.');
 assert(wizardResponsive.includes('display:block!important')&&wizardResponsive.includes('grid-template-columns:minmax(0,1fr)!important'),'Mobile travel/result single-column override missing.');
@@ -58,4 +68,4 @@ assert(actions.includes('result-action-grid')&&actions.includes('has-long-action
 assert(uxRules.includes('Functional block hierarchy')&&uxRules.includes('Mobile scaling')&&uxRules.includes('Action buttons')&&uxRules.includes('Privacy and trust')&&uxRules.includes('Release protection'),'Persistent UX/privacy rules missing.');
 assert(wizardAnchor.includes("observer.observe(root,{childList:true,subtree:false})"),'Wizard anchor must observe direct view replacements only.');
 assert(wizardAnchor.includes('scrollToCurrentBlock')&&wizardAnchor.includes('.site-head'),'Wizard anchor/header offset missing.');
-console.log('PASS: default-private finder with explicit map consent, max-three external address suggestions, real consent-gated OSM map, visible BMI hero wordmark, three-mode desktop selector and equal no-wrap actions.');
+console.log('PASS: default-private finder with explicit map/routing consent, max-three address suggestions, real map, optional Google Routes precision, three-mode desktop selector and equal no-wrap actions.');
