@@ -51,7 +51,7 @@ jobs:
           grep -Fq 'bmi-whatsapp-widget' whatsapp-widget.js
           grep -Fq 'transit-routing.js?v=' whatsapp-widget.js
           grep -Fq 'result-travel-polish.js?v=' whatsapp-widget.js
-          grep -Fq 'oebb.macistry.com/api' transit-routing.js
+          grep -Fq 'v6.oebb.transport.rest/api' transit-routing.js
           grep -Fq '/locations/nearby?' transit-routing.js
           grep -Fq '/journeys?' transit-routing.js
           grep -Fq 'windowStart=target-60' transit-routing.js
@@ -107,7 +107,7 @@ jobs:
           test -f _site/whatsapp-widget.js
           test "$(cat _site/CNAME)" = "programvalaszto.magyariskola.at"
           grep -Fq 'PROGRAM_COUNT=28' _site/release.txt
-          grep -Fq 'oebb.macistry.com/api' _site/transit-routing.js
+          grep -Fq 'v6.oebb.transport.rest/api' _site/transit-routing.js
           grep -Fq 'Átlagos útvonalhossz' _site/result-travel-polish.js
       - uses: actions/upload-pages-artifact@v3
         with:
@@ -144,7 +144,7 @@ jobs:
           grep -Fq "GIT_SHA=${expected_sha}" <<<"${release}"
           grep -Fq 'PROGRAM_COUNT=28' <<<"${release}"
           transit="$(fetch /transit-routing.js)"
-          grep -Fq 'oebb.macistry.com/api' <<<"${transit}"
+          grep -Fq 'v6.oebb.transport.rest/api' <<<"${transit}"
           grep -Fq 'windowStart=target-60' <<<"${transit}"
           grep -Fq 'polylines=true' <<<"${transit}"
           travel="$(fetch /result-travel-polish.js)"
