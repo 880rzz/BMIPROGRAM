@@ -36,4 +36,5 @@ assert(transit.includes("providerStatus:'approximate-planning-range'")&&transit.
 assert(travel.includes('container-type:inline-size')&&travel.includes('@container(max-width:390px)'),'Responsive travel panel missing.');
 assert(travel.includes("mode==='car'")&&travel.includes("mode==='walk'")&&travel.includes("mode==='transit'"),'All travel modes must be rendered.');
 assert(travel.includes('Várható menetidő')&&travel.includes('kb. ')&&travel.includes('perc'),'Travel range copy missing.');
-console.log('PASS: unified shell, Zenebona scope, approximate km/time ranges for car-walk-transit, responsive travel UI and in-app maps are consistent.');
+assert(travel.includes('travelPanelSignature')&&travel.includes('requestAnimationFrame')&&travel.includes("closest('.result-travel')"),'Travel panel must be idempotent and protected from self-triggered MutationObserver loops.');
+console.log('PASS: unified shell, Zenebona scope, approximate km/time ranges for car-walk-transit, responsive travel UI, in-app maps and render-loop guards are consistent.');
