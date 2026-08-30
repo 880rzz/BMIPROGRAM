@@ -52,6 +52,8 @@ jobs:
           grep -Fq 'identifiedOrigin(input)' app.js
           grep -Fq 'routeData(card)' route-map.js
           grep -Fq 'Térkép és útvonal' route-map.js
+          grep -Fq 'sha256-p4NxAoJBhIINfQ3eMZqQxE5XAlRMw6jO3K6FJvG5s4U=' route-map.js
+          grep -Fq 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=' route-map.js
           grep -Fq 'countrycode=AT' address-autocomplete.js
           grep -Fq "p.id!=='zenebona'&&overlaps" catalog.js
           grep -Fq 'bmi-whatsapp-widget' whatsapp-widget.js
@@ -79,6 +81,8 @@ jobs:
           ! test -e homepage-polish.js
           ! test -e typography-polish.css
           ! test -e bmi-header-logo-fixed.png
+          ! test -e favicon_.png
+          ! test -e logo.png
           grep -Fq '<lastmod>2026-08-30</lastmod>' sitemap.xml
           ! grep -Fq '## Zenebona canonical rekord' llms-full.txt
           for html in index.html foglalkozasok.html korosztalyok.html gyik.html; do
@@ -92,7 +96,7 @@ jobs:
           ! grep -Fq 'Zenebona' index.html
           ! grep -Fq 'Zenebona' korosztalyok.html
           ! grep -Fq 'Zenebona' gyik.html
-          echo 'PASS: data, finder runtime, partner scope, mobile UX, assets and release contracts are intact.'
+          echo 'PASS: data, finder runtime, partner scope, SRI, mobile UX, assets and release contracts are intact.'
 
   build:
     needs: validate
@@ -123,11 +127,11 @@ jobs:
           SCHOOL_YEAR=2026/2027
           PROGRAM_COUNT=28
           SOURCE_POLICY=canonical-current-2026-27-only
-          RECOMMENDER=age-hard-multineed-multiday-multipace-identified-address-route-three-mode-ranges-map-mobile-anchor-spacious-actions-ios-browser-e2e
+          RECOMMENDER=age-hard-multineed-multiday-multipace-identified-address-route-three-mode-ranges-map-mobile-anchor-spacious-actions-ios-browser-e2e-sri
           BUILT_AT=${built_at}
           EOF
           cat > _site/version.json <<EOF
-          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"sourcePolicy":"canonical-current-2026-27-only","recommender":"age-hard-multineed-multiday-multipace-identified-address-route-three-mode-ranges-map-mobile-anchor-spacious-actions-ios-browser-e2e","builtAt":"${built_at}"}
+          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"sourcePolicy":"canonical-current-2026-27-only","recommender":"age-hard-multineed-multiday-multipace-identified-address-route-three-mode-ranges-map-mobile-anchor-spacious-actions-ios-browser-e2e-sri","builtAt":"${built_at}"}
           EOF
           test -f _site/index.html
           test -f _site/app.js
@@ -144,6 +148,7 @@ jobs:
           grep -Fq 'PROGRAM_COUNT=28' _site/release.txt
           grep -Fq 'finder-runtime.js?v=' _site/index.html
           grep -Fq 'wizard-responsive.css?v=' _site/finder-runtime.js
+          grep -Fq 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=' _site/route-map.js
           ! grep -Fq 'wizard-responsive.css' _site/whatsapp-widget.js
       - name: Browser E2E on built artifact
         shell: bash
@@ -205,6 +210,9 @@ jobs:
           wa="$(fetch /whatsapp-widget.js)"
           grep -Fq 'bmi-whatsapp-widget' <<<"${wa}"
           ! grep -Fq 'transit-routing.js' <<<"${wa}"
+          route="$(fetch /route-map.js)"
+          grep -Fq 'sha256-p4NxAoJBhIINfQ3eMZqQxE5XAlRMw6jO3K6FJvG5s4U=' <<<"${route}"
+          grep -Fq 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=' <<<"${route}"
           sitemap="$(fetch /sitemap.xml)"
           grep -Fq '<lastmod>2026-08-30</lastmod>' <<<"${sitemap}"
           llmfull="$(fetch /llms-full.txt)"
@@ -224,4 +232,4 @@ jobs:
           E2E_BASE="${PRODUCTION_URL%/}" node scripts/browser-e2e.mjs
       - name: Release complete
         run: |
-          echo "EXACT-LIVE: ${GITHUB_SHA} passed data integrity, live reality, built-artifact browser E2E, exact deploy, production smoke and production browser E2E."
+          echo "EXACT-LIVE: ${GITHUB_SHA} passed data integrity, live reality, built-artifact browser E2E, exact deploy, production smoke, SRI and production browser E2E."
