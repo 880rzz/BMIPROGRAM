@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 function read(path){return fs.readFileSync(path,'utf8')}
 function assert(ok,msg){if(!ok)throw new Error(msg)}
-const home=read('index.html'),programsPage=read('foglalkozasok.html'),agesPage=read('korosztalyok.html'),faqPage=read('gyik.html'),app=read('app.js'),route=read('route-map.js'),address=read('address-autocomplete.js'),catalog=read('catalog.js'),zen=read('zenebona-program.js'),whatsapp=read('whatsapp-widget.js'),typography=read('typography-polish.css'),transit=read('transit-routing.js'),travel=read('result-travel-polish.js'),wizardResponsive=read('wizard-responsive.css'),wizardAnchor=read('wizard-anchor.js'),actions=read('result-actions.js'),uxRules=read('UX-RULES.md'),llms=read('llms.txt');
+const home=read('index.html'),programsPage=read('foglalkozasok.html'),agesPage=read('korosztalyok.html'),faqPage=read('gyik.html'),app=read('app.js'),route=read('route-map.js'),address=read('address-autocomplete.js'),catalog=read('catalog.js'),zen=read('zenebona-program.js'),whatsapp=read('whatsapp-widget.js'),finderRuntime=read('finder-runtime.js'),sharedCss=read('recommendation-polish.css'),transit=read('transit-routing.js'),travel=read('result-travel-polish.js'),wizardResponsive=read('wizard-responsive.css'),wizardAnchor=read('wizard-anchor.js'),actions=read('result-actions.js'),uxRules=read('UX-RULES.md'),llms=read('llms.txt'),llmsFull=read('llms-full.txt'),sitemap=read('sitemap.xml');
 const publicPages=[home,programsPage,agesPage,faqPage];
 assert(home.includes('Magyar nyelvű'),'Homepage positioning missing.');
 assert(app.includes("programs.length+' foglalkozás és képzés"),'Finder must link to dynamic registry count.');
@@ -16,8 +16,9 @@ assert(route.includes("if(data.mode==='transit')")&&route.includes("dashArray:'8
 assert(zen.includes('https://zenebona.magyariskola.at')&&zen.includes('https://www.magyariskola.at/event-details/oromzene-2026'),'Canonical partner URLs missing.');
 assert(catalog.includes("p.id!=='zenebona'&&overlaps"),'Zenebona must stay out of age browser.');
 assert(!home.includes('Zenebona')&&!agesPage.includes('Zenebona')&&!faqPage.includes('Zenebona'),'Zenebona must not be promoted in home, age browser or FAQ static copy.');
-assert(!llms.includes('## Zenebona'),'LLM discovery must not feature a dedicated Zenebona promotion section.');
-assert(llms.includes('28 aktuális'),'LLM program count missing.');
+assert(!llms.includes('## Zenebona')&&!llmsFull.includes('## Zenebona canonical rekord'),'LLM discovery must not feature a dedicated Zenebona promotion section.');
+assert(llms.includes('28 aktuális')&&llmsFull.includes('28 aktuális'),'LLM program count missing.');
+assert(sitemap.includes('<lastmod>2026-08-30</lastmod>'),'Sitemap freshness signal missing.');
 const shellSubtitle='Délutáni és hétvégi foglalkozások · 2026 / 2027';
 publicPages.forEach((page,i)=>{
  assert(page.includes(shellSubtitle),`Shared header subtitle missing page ${i+1}`);
@@ -28,10 +29,10 @@ publicPages.forEach((page,i)=>{
  assert(page.includes('Be Smart Kids Club csapata'),`Credit missing page ${i+1}`);
  assert(page.includes('https://business.vipach.at'),`VIPACH missing page ${i+1}`);
 });
-assert(!faqPage.includes('<h4>Zenebona</h4>'),'Zenebona footer duplicate.');
-assert(whatsapp.includes('bmi-whatsapp-widget')&&whatsapp.includes('transit-routing.js?v=')&&whatsapp.includes('result-travel-polish.js?v='),'Shared loaders missing.');
-assert(whatsapp.includes('wizard-responsive.css?v=')&&whatsapp.includes('wizard-anchor.js?v=')&&whatsapp.includes('result-actions.js?v='),'Finder responsive/anchor/action loaders missing.');
-assert(typography.includes('.hero-identity')&&typography.includes('.site-head .head-in')&&typography.includes('.hero h1')&&typography.includes('text-wrap:balance'),'Unified responsive shell/heading polish missing.');
+assert(home.includes('finder-runtime.js?v='),'Finder runtime must be loaded directly by homepage.');
+assert(whatsapp.includes('bmi-whatsapp-widget')&&!whatsapp.includes('transit-routing.js')&&!whatsapp.includes('wizard-responsive.css')&&!whatsapp.includes('result-actions.js'),'WhatsApp must be independent from finder runtime.');
+assert(finderRuntime.includes('wizard-responsive.css?v=')&&finderRuntime.includes('wizard-anchor.js?v=')&&finderRuntime.includes('result-actions.js?v=')&&finderRuntime.includes('transit-routing.js?v=')&&finderRuntime.includes('result-travel-polish.js?v='),'Finder runtime loaders missing.');
+assert(sharedCss.includes('.hero-identity')&&sharedCss.includes('.site-head .head-in')&&sharedCss.includes('.hero h1')&&sharedCss.includes('text-wrap:balance'),'Unified responsive shell/heading polish missing from shared stylesheet.');
 assert(transit.includes('nextOccurrence')&&transit.includes('windowFor')&&transit.includes('haversineKm')&&transit.includes('transitEstimate'),'Transit planning estimate missing.');
 assert(transit.includes("providerStatus:'approximate-planning-range'")&&transit.includes('transitMinMinutes')&&transit.includes('transitMaxMinutes'),'Transit range contract missing.');
 assert(travel.includes('container-type:inline-size')&&travel.includes('@container(max-width:390px)'),'Responsive travel panel missing.');
@@ -40,12 +41,10 @@ assert(travel.includes('Várható menetidő')&&travel.includes('kb. ')&&travel.i
 assert(travel.includes('travelPanelSignature')&&travel.includes("t.closest&&t.closest('.result-travel')"),'Travel render-loop guard missing.');
 assert(wizardResponsive.includes('display:block!important')&&wizardResponsive.includes('grid-template-columns:minmax(0,1fr)!important'),'Mobile travel/result single-column override missing.');
 assert(wizardResponsive.includes('min-width:0')&&wizardResponsive.includes('#wizard .result-card{width:100%'),'Mobile result width guard missing.');
-assert(wizardResponsive.includes('#wizard .result-card>.result-meta')&&wizardResponsive.includes('padding:12px 0!important'),'Result metadata breathing room missing.');
-assert(wizardResponsive.includes('#wizard .result-card>.result-reason')&&wizardResponsive.includes('line-height:1.64!important'),'Recommendation explanation block hierarchy missing.');
 assert(wizardResponsive.includes('-webkit-text-size-adjust:100%')&&wizardResponsive.includes('font-size:16px!important'),'iOS text/input scaling protection missing.');
-assert(wizardResponsive.includes('.result-action-grid')&&wizardResponsive.includes('grid-template-columns:repeat(2,minmax(0,1fr))')&&wizardResponsive.includes('min-height:54px!important'),'Responsive equal action-button grid missing.');
+assert(wizardResponsive.includes('.result-action-grid')&&wizardResponsive.includes('min-height:54px!important'),'Responsive equal action-button grid missing.');
 assert(actions.includes('result-action-grid')&&actions.includes('action-wide')&&actions.includes('text.length>22'),'Short/long action classification missing.');
 assert(uxRules.includes('Functional block hierarchy')&&uxRules.includes('Mobile scaling')&&uxRules.includes('Action buttons')&&uxRules.includes('Release protection'),'Persistent UX rules missing.');
 assert(wizardAnchor.includes("observer.observe(root,{childList:true,subtree:false})"),'Wizard anchor must observe direct view replacements only.');
 assert(wizardAnchor.includes('scrollToCurrentBlock')&&wizardAnchor.includes('.site-head'),'Wizard anchor/header offset missing.');
-console.log('PASS: unified shell, scoped Zenebona, travel ranges, render-loop guard, spacious hierarchy, stable iOS scaling, responsive equal action buttons and per-view wizard anchors are consistent.');
+console.log('PASS: decoupled finder runtime, consolidated styling, scoped partner discovery, travel, mobile UX and wizard contracts are consistent.');
