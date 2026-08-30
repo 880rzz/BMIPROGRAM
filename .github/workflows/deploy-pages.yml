@@ -29,7 +29,7 @@ jobs:
       - name: JavaScript syntax
         run: |
           set -euo pipefail
-          for f in data.js zenebona-program.js app.js privacy-runtime.js route-map.js address-autocomplete.js catalog.js whatsapp-widget.js finder-runtime.js transit-routing.js result-travel-polish.js wizard-anchor.js result-actions.js scripts/validate.mjs scripts/validate-schema-age.mjs scripts/validate-matching.mjs scripts/validate-copy.mjs scripts/browser-e2e.mjs audit/finder-integrity-audit.js audit/live-reality-audit.mjs; do node --check "$f"; done
+          for f in data.js zenebona-program.js app.js privacy-runtime.js route-map.js address-autocomplete.js catalog.js whatsapp-widget.js finder-runtime.js transit-routing.js google-routes.js routes-config.js result-travel-polish.js wizard-anchor.js result-actions.js scripts/validate.mjs scripts/validate-schema-age.mjs scripts/validate-matching.mjs scripts/validate-copy.mjs scripts/browser-e2e.mjs audit/finder-integrity-audit.js audit/live-reality-audit.mjs; do node --check "$f"; done
       - name: Registry, finder, privacy and UX validation
         run: |
           set -euo pipefail
@@ -53,31 +53,42 @@ jobs:
           grep -Fq 'BMI_PRIVACY_LOCAL=true' privacy-runtime.js
           grep -Fq 'BMI_MAP_CONSENT=false' privacy-runtime.js
           grep -Fq 'BMI_SET_MAP_CONSENT' privacy-runtime.js
-          grep -Fq 'ALLOWED_WITH_CONSENT' privacy-runtime.js
-          grep -Fq 'automatic third-party network request blocked until explicit map consent' privacy-runtime.js
+          grep -Fq 'routes.googleapis.com' privacy-runtime.js
+          grep -Fq 'explicit map/routing consent' privacy-runtime.js
           grep -Fq 'BMI_LOCAL_LOCATION' address-autocomplete.js
           grep -Fq 'mapConsent' address-autocomplete.js
           grep -Fq 'photon.komoot.io' address-autocomplete.js
           grep -Fq 'limit=3' address-autocomplete.js
+          grep -Fq 'Google Maps Platform Routes' address-autocomplete.js
           grep -Fq 'routeData(card)' route-map.js
           grep -Fq 'Térkép és útvonal' route-map.js
           grep -Fq 'mapSvg(data)' route-map.js
           grep -Fq 'osmEmbedUrl' route-map.js
           grep -Fq 'openstreetmap.org/export/embed.html' route-map.js
           grep -Fq 'BMI_MAP_CONSENT===true' route-map.js
+          grep -Fq 'routes.googleapis.com/directions/v2:computeRoutes' google-routes.js
+          grep -Fq "routingPreference='TRAFFIC_AWARE_OPTIMAL'" google-routes.js
+          grep -Fq "trafficModel='BEST_GUESS'" google-routes.js
+          grep -Fq 'BMI_GOOGLE_ROUTES_API_KEY' google-routes.js
+          grep -Fq 'BMI_GOOGLE_ROUTES_API_KEY' routes-config.js
+          ! grep -Eq 'AIza[0-9A-Za-z_-]{20,}' routes-config.js
           grep -Fq "p.id!=='zenebona'&&overlaps" catalog.js
           grep -Fq 'bmi-whatsapp-widget' whatsapp-widget.js
           grep -Fq 'bmi-hero-wordmark' whatsapp-widget.js
-          grep -Fq 'opcionális térképes hozzájárulással' whatsapp-widget.js
+          grep -Fq 'opcionális térképes és pontos útvonal-hozzájárulással' whatsapp-widget.js
           ! grep -Fq 'transit-routing.js' whatsapp-widget.js
           ! grep -Fq 'wizard-responsive.css' whatsapp-widget.js
           grep -Fq 'wizard-responsive.css?v=' finder-runtime.js
           grep -Fq 'wizard-anchor.js?v=' finder-runtime.js
           grep -Fq 'result-actions.js?v=' finder-runtime.js
+          grep -Fq 'routes-config.js?v=' finder-runtime.js
           grep -Fq 'transit-routing.js?v=' finder-runtime.js
+          grep -Fq 'google-routes.js?v=' finder-runtime.js
           grep -Fq 'result-travel-polish.js?v=' finder-runtime.js
           grep -Fq 'nextOccurrence' transit-routing.js
           grep -Fq "providerStatus:'approximate-planning-range'" transit-routing.js
+          grep -Fq 'routeProvider' result-travel-polish.js
+          grep -Fq 'Google Routes' result-travel-polish.js
           grep -Fq 'travelPanelSignature' result-travel-polish.js
           grep -Fq -- '-webkit-text-size-adjust:100%' wizard-responsive.css
           grep -Fq 'font-size:16px!important' wizard-responsive.css
@@ -112,7 +123,7 @@ jobs:
           ! grep -Fq 'Zenebona' index.html
           ! grep -Fq 'Zenebona' korosztalyok.html
           ! grep -Fq 'Zenebona' gyik.html
-          echo 'PASS: data, default-private explicit map consent, no-tracking contract, finder runtime, address suggestions, real map, mobile UX and release contracts are intact.'
+          echo 'PASS: default-private consent, precise-routing provider contract, address suggestions, real map, finder and responsive UX are intact.'
 
   build:
     needs: validate
@@ -125,6 +136,8 @@ jobs:
           node-version: '22'
       - name: Build immutable Pages artifact
         shell: bash
+        env:
+          GOOGLE_ROUTES_API_KEY: ${{ secrets.GOOGLE_ROUTES_API_KEY }}
         run: |
           set -euo pipefail
           rm -rf _site && mkdir _site
@@ -133,27 +146,36 @@ jobs:
           release_date="$(date -u +'%Y-%m-%d')"
           built_at="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
           release_id="${release_date}-${short_sha}"
+          if [ -n "${GOOGLE_ROUTES_API_KEY:-}" ]; then precision_status='google-routes-configured'; else precision_status='local-fallback'; fi
+          node <<'NODE'
+          const fs=require('fs');
+          const key=process.env.GOOGLE_ROUTES_API_KEY||'';
+          fs.writeFileSync('_site/routes-config.js', `(function(){\n'use strict';\nwindow.BMI_GOOGLE_ROUTES_API_KEY=${JSON.stringify(key)};\nwindow.BMI_PRECISE_ROUTING_PROVIDER='google-routes';\n})();\n`);
+          NODE
           for html in _site/*.html; do
             sed -E -i "s#styles\.css\?v=[^\"']+#styles.css?v=${short_sha}#g; s#ui-20260821\.css\?v=[^\"']+#ui-20260821.css?v=${short_sha}#g; s#recommendation-polish\.css\?v=[^\"']+#recommendation-polish.css?v=${short_sha}#g; s#data\.js\?v=[^\"']+#data.js?v=${short_sha}#g; s#app\.js\?v=[^\"']+#app.js?v=${short_sha}#g; s#privacy-runtime\.js\?v=[^\"']+#privacy-runtime.js?v=${short_sha}#g; s#route-map\.js\?v=[^\"']+#route-map.js?v=${short_sha}#g; s#address-autocomplete\.js\?v=[^\"']+#address-autocomplete.js?v=${short_sha}#g; s#catalog\.js\?v=[^\"']+#catalog.js?v=${short_sha}#g; s#zenebona-program\.js\?v=[^\"']+#zenebona-program.js?v=${short_sha}#g; s#whatsapp-widget\.js\?v=[^\"']+#whatsapp-widget.js?v=${short_sha}#g; s#finder-runtime\.js\?v=[^\"']+#finder-runtime.js?v=${short_sha}#g" "$html"
           done
-          sed -E -i "s#wizard-responsive\.css\?v=[^\"']+#wizard-responsive.css?v=${short_sha}#g; s#wizard-anchor\.js\?v=[^\"']+#wizard-anchor.js?v=${short_sha}#g; s#result-actions\.js\?v=[^\"']+#result-actions.js?v=${short_sha}#g; s#transit-routing\.js\?v=[^\"']+#transit-routing.js?v=${short_sha}#g; s#result-travel-polish\.js\?v=[^\"']+#result-travel-polish.js?v=${short_sha}#g" _site/finder-runtime.js
+          sed -E -i "s#wizard-responsive\.css\?v=[^\"']+#wizard-responsive.css?v=${short_sha}#g; s#wizard-anchor\.js\?v=[^\"']+#wizard-anchor.js?v=${short_sha}#g; s#result-actions\.js\?v=[^\"']+#result-actions.js?v=${short_sha}#g; s#routes-config\.js\?v=[^\"']+#routes-config.js?v=${short_sha}#g; s#transit-routing\.js\?v=[^\"']+#transit-routing.js?v=${short_sha}#g; s#google-routes\.js\?v=[^\"']+#google-routes.js?v=${short_sha}#g; s#result-travel-polish\.js\?v=[^\"']+#result-travel-polish.js?v=${short_sha}#g" _site/finder-runtime.js
           cat > _site/release.txt <<EOF
           BMIPROGRAM_RELEASE=${release_id}
           GIT_SHA=${GITHUB_SHA}
           SCHOOL_YEAR=2026/2027
           PROGRAM_COUNT=28
           SOURCE_POLICY=canonical-current-2026-27-only
-          PRIVACY=default-private-explicit-map-consent-no-analytics-no-tracking-no-client-storage
-          RECOMMENDER=age-hard-multineed-multiday-multipace-consent-location-routing-three-mode-ranges-real-map-mobile-anchor-spacious-actions-ios-browser-e2e
+          PRIVACY=default-private-explicit-map-routing-consent-no-analytics-no-tracking-no-client-storage
+          ROUTING_PRECISION=${precision_status}
+          RECOMMENDER=age-hard-multineed-multiday-multipace-consent-location-routing-three-mode-ranges-google-routes-fallback-real-map-mobile-anchor-spacious-actions-ios-browser-e2e
           BUILT_AT=${built_at}
           EOF
           cat > _site/version.json <<EOF
-          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"sourcePolicy":"canonical-current-2026-27-only","privacy":"default-private-explicit-map-consent-no-analytics-no-tracking-no-client-storage","recommender":"age-hard-multineed-multiday-multipace-consent-location-routing-three-mode-ranges-real-map-mobile-anchor-spacious-actions-ios-browser-e2e","builtAt":"${built_at}"}
+          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"sourcePolicy":"canonical-current-2026-27-only","privacy":"default-private-explicit-map-routing-consent-no-analytics-no-tracking-no-client-storage","routingPrecision":"${precision_status}","recommender":"age-hard-multineed-multiday-multipace-consent-location-routing-three-mode-ranges-google-routes-fallback-real-map-mobile-anchor-spacious-actions-ios-browser-e2e","builtAt":"${built_at}"}
           EOF
           test -f _site/index.html
           test -f _site/app.js
           test -f _site/privacy-runtime.js
           test -f _site/finder-runtime.js
+          test -f _site/routes-config.js
+          test -f _site/google-routes.js
           test -f _site/transit-routing.js
           test -f _site/result-travel-polish.js
           test -f _site/route-map.js
@@ -164,9 +186,12 @@ jobs:
           test -f _site/whatsapp-widget.js
           test "$(cat _site/CNAME)" = "programvalaszto.magyariskola.at"
           grep -Fq 'PROGRAM_COUNT=28' _site/release.txt
-          grep -Fq 'PRIVACY=default-private-explicit-map-consent-no-analytics-no-tracking-no-client-storage' _site/release.txt
+          grep -Fq 'PRIVACY=default-private-explicit-map-routing-consent-no-analytics-no-tracking-no-client-storage' _site/release.txt
+          grep -Fq 'ROUTING_PRECISION=' _site/release.txt
           grep -Fq 'privacy-runtime.js?v=' _site/index.html
           grep -Fq 'finder-runtime.js?v=' _site/index.html
+          grep -Fq 'routes-config.js?v=' _site/finder-runtime.js
+          grep -Fq 'google-routes.js?v=' _site/finder-runtime.js
           grep -Fq 'wizard-responsive.css?v=' _site/finder-runtime.js
           grep -Fq 'mapSvg(data)' _site/route-map.js
           grep -Fq 'osmEmbedUrl' _site/route-map.js
@@ -221,7 +246,8 @@ jobs:
           done
           grep -Fq "GIT_SHA=${expected_sha}" <<<"${release}"
           grep -Fq 'PROGRAM_COUNT=28' <<<"${release}"
-          grep -Fq 'PRIVACY=default-private-explicit-map-consent-no-analytics-no-tracking-no-client-storage' <<<"${release}"
+          grep -Fq 'PRIVACY=default-private-explicit-map-routing-consent-no-analytics-no-tracking-no-client-storage' <<<"${release}"
+          grep -Fq 'ROUTING_PRECISION=' <<<"${release}"
           home="$(fetch /)"
           grep -Fq 'Microsoft Office Specialist' <<<"${home}"
           grep -Fq 'privacy-runtime.js?v=' <<<"${home}"
@@ -232,13 +258,19 @@ jobs:
           privacy="$(fetch /privacy-runtime.js)"
           grep -Fq 'BMI_PRIVACY_LOCAL=true' <<<"${privacy}"
           grep -Fq 'BMI_MAP_CONSENT=false' <<<"${privacy}"
-          grep -Fq 'BMI_SET_MAP_CONSENT' <<<"${privacy}"
+          grep -Fq 'routes.googleapis.com' <<<"${privacy}"
           runtime="$(fetch /finder-runtime.js)"
-          grep -Fq 'wizard-responsive.css?v=' <<<"${runtime}"
+          grep -Fq 'routes-config.js?v=' <<<"${runtime}"
+          grep -Fq 'google-routes.js?v=' <<<"${runtime}"
+          precise="$(fetch /google-routes.js)"
+          grep -Fq 'routes.googleapis.com/directions/v2:computeRoutes' <<<"${precise}"
+          grep -Fq "TRAFFIC_AWARE_OPTIMAL" <<<"${precise}"
+          config="$(fetch /routes-config.js)"
+          grep -Fq 'BMI_GOOGLE_ROUTES_API_KEY' <<<"${config}"
           wa="$(fetch /whatsapp-widget.js)"
           grep -Fq 'bmi-whatsapp-widget' <<<"${wa}"
           grep -Fq 'bmi-hero-wordmark' <<<"${wa}"
-          grep -Fq 'opcionális térképes hozzájárulással' <<<"${wa}"
+          grep -Fq 'opcionális térképes és pontos útvonal-hozzájárulással' <<<"${wa}"
           ! grep -Fq 'transit-routing.js' <<<"${wa}"
           route="$(fetch /route-map.js)"
           grep -Fq 'mapSvg(data)' <<<"${route}"
@@ -248,6 +280,7 @@ jobs:
           grep -Fq 'mapConsent' <<<"${address}"
           grep -Fq 'photon.komoot.io' <<<"${address}"
           grep -Fq 'limit=3' <<<"${address}"
+          grep -Fq 'Google Maps Platform Routes' <<<"${address}"
           sitemap="$(fetch /sitemap.xml)"
           grep -Fq '<lastmod>2026-08-30</lastmod>' <<<"${sitemap}"
           llmfull="$(fetch /llms-full.txt)"
@@ -268,4 +301,4 @@ jobs:
           E2E_BASE="${PRODUCTION_URL%/}" node scripts/browser-e2e.mjs
       - name: Release complete
         run: |
-          echo "EXACT-LIVE: ${GITHUB_SHA} passed data integrity, source reality, default-private consent contracts, zero third-party requests before consent, exact deploy and production browser E2E."
+          echo "EXACT-LIVE: ${GITHUB_SHA} passed data integrity, source reality, default-private consent, optional Google Routes precision, exact deploy and production browser E2E."
