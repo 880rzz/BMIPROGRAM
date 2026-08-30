@@ -20,16 +20,23 @@ for (const path of pages) {
   });
   await page.goto(base + path, {waitUntil:'networkidle', timeout:30000});
   await page.waitForTimeout(300);
-  const shell = await page.evaluate(() => ({
-    brand: document.querySelector('.site-head .brand')?.textContent?.replace(/\s+/g,' ').trim() || '',
-    menu: !!document.querySelector('#menuBtn'),
-    hero: !!document.querySelector('.hero h1'),
-    overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
-    wa: !!document.querySelector('#bmi-whatsapp-widget'),
-    trust: document.querySelector('.footer-trust')?.textContent?.replace(/\s+/g,' ').trim() || '',
-    storage: {local: localStorage.length, session: sessionStorage.length, cookie: document.cookie}
-  }));
-  if (!shell.brand.includes('Bécsi Magyar Iskola') || !shell.menu || !shell.hero || shell.overflow > 2 || !shell.wa || errors.length) {
+  const shell = await page.evaluate(() => {
+    const heroLogo = document.querySelector('.hero-mark img');
+    const heroLogoRect = heroLogo?.getBoundingClientRect();
+    const heroLogoStyle = heroLogo ? getComputedStyle(heroLogo) : null;
+    return {
+      brand: document.querySelector('.site-head .brand')?.textContent?.replace(/\s+/g,' ').trim() || '',
+      menu: !!document.querySelector('#menuBtn'),
+      hero: !!document.querySelector('.hero h1'),
+      heroLogo: !!heroLogo && heroLogo.complete && heroLogo.naturalWidth > 0 && heroLogoRect.width >= 70 && heroLogoRect.height >= 25 && heroLogoStyle.display !== 'none' && heroLogoStyle.visibility !== 'hidden' && Number(heroLogoStyle.opacity) > 0,
+      heroLogoBox: heroLogoRect ? {width:heroLogoRect.width,height:heroLogoRect.height} : null,
+      overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+      wa: !!document.querySelector('#bmi-whatsapp-widget'),
+      trust: document.querySelector('.footer-trust')?.textContent?.replace(/\s+/g,' ').trim() || '',
+      storage: {local: localStorage.length, session: sessionStorage.length, cookie: document.cookie}
+    };
+  });
+  if (!shell.brand.includes('Bécsi Magyar Iskola') || !shell.menu || !shell.hero || !shell.heroLogo || shell.overflow > 2 || !shell.wa || errors.length) {
     console.error('E2E_FAIL', path, {shell, errors}); failed = true;
   }
   if (!/Privát működés/.test(shell.trust) || shell.storage.local !== 0 || shell.storage.session !== 0 || shell.storage.cookie) {
@@ -56,4 +63,4 @@ for (const path of pages) {
 }
 await browser.close();
 if (failed) process.exit(1);
-console.log('PASS: mobile browser E2E, zero automatic third-party requests, zero client storage/cookies, trust disclosure, WhatsApp and finder runtime.');
+console.log('PASS: mobile browser E2E, visible hero logo, zero automatic third-party requests, zero client storage/cookies, trust disclosure, WhatsApp and finder runtime.');
