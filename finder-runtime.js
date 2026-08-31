@@ -3,8 +3,9 @@
 if(!document.getElementById('wizard'))return;
 
 /* Program taxonomy normalization.
-   MaMUT Musical is also a drama-pedagogy program, while retaining every
-   existing musical / movement / stage classification and recommendation signal. */
+   Kicsi Svung + GIMI-SVUNG: primarily prose drama / drama-pedagogy.
+   MaMUT Musical: music + singing + dance + drama-pedagogy, not merely a stage activity.
+   Existing classifications are preserved and only extended. */
 var cfg=window.BMI_FINDER;
 if(cfg&&Array.isArray(cfg.programs)){
   function addUnique(list,value){
@@ -18,14 +19,30 @@ if(cfg&&Array.isArray(cfg.programs)){
     p.categories=addUnique(p.categories,'dramapedagogia');
     p.pedagogyTags=addUnique(p.pedagogyTags,'drámapedagógia');
   });
+
+  ['kicsi-svung','gimi-svung'].forEach(function(id){
+    var p=cfg.programs.find(function(x){return x.id===id});
+    if(!p)return;
+    p.categories=addUnique(p.categories,'prozai-drama');
+    p.pedagogyTags=addUnique(p.pedagogyTags,'prózai dráma');
+  });
+
   var mamut=cfg.programs.find(function(x){return x.id==='mamut'});
   if(mamut){
-    /* Preserve the existing categories; only extend the taxonomy. */
     mamut.categories=addUnique(mamut.categories,'musical');
+    mamut.categories=addUnique(mamut.categories,'drama');
+    mamut.categories=addUnique(mamut.categories,'zenes-drama');
     mamut.categories=addUnique(mamut.categories,'enek');
+    mamut.categories=addUnique(mamut.categories,'zene');
     mamut.categories=addUnique(mamut.categories,'tanc');
     mamut.categories=addUnique(mamut.categories,'szinpadi-jatek');
+    mamut.pedagogyTags=addUnique(mamut.pedagogyTags,'zenés dráma');
+    mamut.pedagogyTags=addUnique(mamut.pedagogyTags,'énekes dráma');
+    mamut.pedagogyTags=addUnique(mamut.pedagogyTags,'táncos dráma');
     mamut.needs=addUnique(mamut.needs,'onkifejezes-szinpad');
+    mamut.why='Zenés–táncos–énekes drámafoglalkozás 7–12 éveseknek: a drámapedagógiai és színészi munkát ének, zene, mozgás és koreográfia egészíti ki saját musical-projektekben.';
+    mamut.outcome='Drámapedagógiai önkifejezés és szerepformálás, színpadi jelenlét, ének, zene, tánc, mozgás, együttműködés és közös musical-projekt.';
+    mamut.painPoint='A gyermek dráma, szerepjáték és színpadi önkifejezés iránt érdeklődik, de a prózai dráma mellett énekelni, zenével dolgozni és táncolni is szeretne egy összetett musical-foglalkozásban.';
   }
 }
 
