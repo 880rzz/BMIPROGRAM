@@ -3,9 +3,9 @@
 if(!document.getElementById('wizard'))return;
 
 /* Program taxonomy normalization.
-   Kicsi Svung + GIMI-SVUNG: primarily prose drama / drama-pedagogy.
-   MaMUT Musical: music + singing + dance + drama-pedagogy, not merely a stage activity.
-   Existing classifications are preserved and only extended. */
+   Kicsi Svung + GIMI-SVUNG remain prose drama / drama-pedagogy programs.
+   MaMUT Musical keeps its musical, singing, music, dance and stage classifications,
+   without drama or drama-pedagogy classification. */
 var cfg=window.BMI_FINDER;
 if(cfg&&Array.isArray(cfg.programs)){
   function addUnique(list,value){
@@ -13,36 +13,33 @@ if(cfg&&Array.isArray(cfg.programs)){
     if(list.indexOf(value)===-1)list.push(value);
     return list;
   }
-  ['kicsi-svung','gimi-svung','mamut'].forEach(function(id){
-    var p=cfg.programs.find(function(x){return x.id===id});
-    if(!p)return;
-    p.categories=addUnique(p.categories,'dramapedagogia');
-    p.pedagogyTags=addUnique(p.pedagogyTags,'drámapedagógia');
-  });
+  function removeValues(list,values){
+    list=Array.isArray(list)?list.slice():[];
+    return list.filter(function(value){return values.indexOf(value)===-1});
+  }
 
   ['kicsi-svung','gimi-svung'].forEach(function(id){
     var p=cfg.programs.find(function(x){return x.id===id});
     if(!p)return;
+    p.categories=addUnique(p.categories,'dramapedagogia');
+    p.pedagogyTags=addUnique(p.pedagogyTags,'drámapedagógia');
     p.categories=addUnique(p.categories,'prozai-drama');
     p.pedagogyTags=addUnique(p.pedagogyTags,'prózai dráma');
   });
 
   var mamut=cfg.programs.find(function(x){return x.id==='mamut'});
   if(mamut){
+    mamut.categories=removeValues(mamut.categories,['dramapedagogia','drama','zenes-drama','prozai-drama']);
+    mamut.pedagogyTags=removeValues(mamut.pedagogyTags,['drámapedagógia','zenés dráma','énekes dráma','táncos dráma','prózai dráma']);
     mamut.categories=addUnique(mamut.categories,'musical');
-    mamut.categories=addUnique(mamut.categories,'drama');
-    mamut.categories=addUnique(mamut.categories,'zenes-drama');
     mamut.categories=addUnique(mamut.categories,'enek');
     mamut.categories=addUnique(mamut.categories,'zene');
     mamut.categories=addUnique(mamut.categories,'tanc');
     mamut.categories=addUnique(mamut.categories,'szinpadi-jatek');
-    mamut.pedagogyTags=addUnique(mamut.pedagogyTags,'zenés dráma');
-    mamut.pedagogyTags=addUnique(mamut.pedagogyTags,'énekes dráma');
-    mamut.pedagogyTags=addUnique(mamut.pedagogyTags,'táncos dráma');
     mamut.needs=addUnique(mamut.needs,'onkifejezes-szinpad');
-    mamut.why='Zenés–táncos–énekes drámafoglalkozás 7–12 éveseknek: a drámapedagógiai és színészi munkát ének, zene, mozgás és koreográfia egészíti ki saját musical-projektekben.';
-    mamut.outcome='Drámapedagógiai önkifejezés és szerepformálás, színpadi jelenlét, ének, zene, tánc, mozgás, együttműködés és közös musical-projekt.';
-    mamut.painPoint='A gyermek dráma, szerepjáték és színpadi önkifejezés iránt érdeklődik, de a prózai dráma mellett énekelni, zenével dolgozni és táncolni is szeretne egy összetett musical-foglalkozásban.';
+    mamut.why='Ének, zene, tánc és színpadi játék 7–12 éveseknek saját musical-projektekben, közösségi alkotással és előadói élménnyel.';
+    mamut.outcome='Színpadi jelenlét, ének, zene, tánc, mozgás, szerepformálás, együttműködés és közös musical-projekt.';
+    mamut.painPoint='A gyermek szeret énekelni, táncolni vagy szerepelni, és egy összetett musical-foglalkozásban szeretné kipróbálni magát.';
   }
 }
 
