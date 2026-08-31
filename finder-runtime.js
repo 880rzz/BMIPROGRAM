@@ -2,10 +2,6 @@
 'use strict';
 if(!document.getElementById('wizard'))return;
 
-/* Program taxonomy normalization.
-   Kicsi Svung + GIMI-SVUNG remain prose drama / drama-pedagogy programs.
-   MaMUT Musical keeps its musical, singing, music, dance and stage classifications,
-   without drama or drama-pedagogy classification. */
 var cfg=window.BMI_FINDER;
 if(cfg&&Array.isArray(cfg.programs)){
   function addUnique(list,value){
@@ -25,6 +21,11 @@ if(cfg&&Array.isArray(cfg.programs)){
     p.pedagogyTags=addUnique(p.pedagogyTags,'drámapedagógia');
     p.categories=addUnique(p.categories,'prozai-drama');
     p.pedagogyTags=addUnique(p.pedagogyTags,'prózai dráma');
+    p.categories=addUnique(p.categories,'szinpadi-jatek');
+    p.pedagogyTags=addUnique(p.pedagogyTags,'színpadi játék');
+    p.pedagogyTags=addUnique(p.pedagogyTags,'szerepformálás');
+    p.pedagogyTags=addUnique(p.pedagogyTags,'színpadi önkifejezés');
+    p.needs=addUnique(p.needs,'onkifejezes-szinpad');
   });
 
   var mamut=cfg.programs.find(function(x){return x.id==='mamut'});
