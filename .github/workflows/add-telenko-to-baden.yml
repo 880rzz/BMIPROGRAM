@@ -1,0 +1,49 @@
+name: Add Telenkó Éva to Baden kindergarten
+
+on:
+  push:
+    paths:
+      - '.github/workflows/add-telenko-to-baden.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update program registry and teacher map
+        shell: python
+        run: |
+          from pathlib import Path
+          import re, json
+
+          p=Path('data.js'); s=p.read_text(encoding='utf-8')
+          pat=r'(\{id:"ovoda-baden",name:"Bécsi Magyar Óvoda \| Baden".*?location:"Friedrich-Schiller-Platz 1, 2500 Baden",)(.*?)(fee:"150 € / félév")'
+          m=re.search(pat,s,re.S)
+          if not m: raise SystemExit('ovoda-baden program not found')
+          mid=m.group(2)
+          if 'teacher:"Telenkó Éva"' not in mid:
+              mid='teacher:"Telenkó Éva",teacherBackground:"Mozgás- és képességfejlesztő, kisgyermeknevelő, gyermekjóga- és Brain Gym®-oktató; több mint 15 éve foglalkozik gyermekekkel, jelenleg egy badeni önkormányzati óvodában dolgozik.",'
+          s=s[:m.start()]+m.group(1)+mid+m.group(3)+s[m.end():]
+          p.write_text(s,encoding='utf-8')
+
+          tp=Path('teacher-links.js'); t=tp.read_text(encoding='utf-8')
+          if '"Telenkó Éva":"telenko-eva"' not in t:
+              t=t.replace('"Hupczik Andrea":"hupczik-andrea",','"Hupczik Andrea":"hupczik-andrea","Telenkó Éva":"telenko-eva",')
+          tp.write_text(t,encoding='utf-8')
+
+          jp=Path('teacher-profiles.json'); data=json.loads(jp.read_text(encoding='utf-8'))
+          if not any(x.get('name')=='Telenkó Éva' for x in data.get('profiles',[])):
+              idx=next((i for i,x in enumerate(data['profiles']) if x.get('name')=='Varga Bernadette'),len(data['profiles']))
+              data['profiles'].insert(idx,{'name':'Telenkó Éva','url':'https://tanarok.magyariskola.at/#telenko-eva'})
+          jp.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+      - name: Commit
+        run: |
+          git config user.name "BMI Program Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data.js teacher-links.js teacher-profiles.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Link Telenko Eva to Baden kindergarten"
+          git push
