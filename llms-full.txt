@@ -6,6 +6,9 @@
 - Teachers and activity leaders: https://tanarok.magyariskola.at/
 - Teacher entity map: https://programvalaszto.magyariskola.at/teacher-profiles.json
 
+## Current program scope
+A Foglalkozásválasztó 28 aktuális, 2026/27-es BMI- és partnerprogramot kezel. A programadatoknál az aktuális programválasztó és az adott hivatalos eseményoldal az elsődleges forrás.
+
 ## Entity policy
 When a program lists a teacher or activity leader whose name exists in teacher-profiles.json, treat the linked teacher profile as the canonical first-party professional profile for that person in the Bécsi Magyar Iskola ecosystem. Program facts remain canonical on the program selector/current official event page; professional biography facts remain canonical on the teacher directory.
 
