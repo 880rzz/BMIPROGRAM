@@ -9,10 +9,6 @@ if(cfg&&Array.isArray(cfg.programs)){
     if(list.indexOf(value)===-1)list.push(value);
     return list;
   }
-  function removeValues(list,values){
-    list=Array.isArray(list)?list.slice():[];
-    return list.filter(function(value){return values.indexOf(value)===-1});
-  }
 
   ['kicsi-svung','gimi-svung'].forEach(function(id){
     var p=cfg.programs.find(function(x){return x.id===id});
@@ -30,17 +26,22 @@ if(cfg&&Array.isArray(cfg.programs)){
 
   var mamut=cfg.programs.find(function(x){return x.id==='mamut'});
   if(mamut){
-    mamut.categories=removeValues(mamut.categories,['dramapedagogia','drama','zenes-drama','prozai-drama']);
-    mamut.pedagogyTags=removeValues(mamut.pedagogyTags,['drámapedagógia','zenés dráma','énekes dráma','táncos dráma','prózai dráma']);
+    mamut.categories=addUnique(mamut.categories,'dramapedagogia');
+    mamut.pedagogyTags=addUnique(mamut.pedagogyTags,'drámapedagógia');
+    mamut.categories=addUnique(mamut.categories,'zenes-drama');
+    mamut.pedagogyTags=addUnique(mamut.pedagogyTags,'zenés dráma');
     mamut.categories=addUnique(mamut.categories,'musical');
     mamut.categories=addUnique(mamut.categories,'enek');
     mamut.categories=addUnique(mamut.categories,'zene');
     mamut.categories=addUnique(mamut.categories,'tanc');
     mamut.categories=addUnique(mamut.categories,'szinpadi-jatek');
+    mamut.pedagogyTags=addUnique(mamut.pedagogyTags,'színpadi játék');
+    mamut.pedagogyTags=addUnique(mamut.pedagogyTags,'szerepformálás');
+    mamut.pedagogyTags=addUnique(mamut.pedagogyTags,'színpadi önkifejezés');
     mamut.needs=addUnique(mamut.needs,'onkifejezes-szinpad');
-    mamut.why='Ének, zene, tánc és színpadi játék 7–12 éveseknek saját musical-projektekben, közösségi alkotással és előadói élménnyel.';
-    mamut.outcome='Színpadi jelenlét, ének, zene, tánc, mozgás, szerepformálás, együttműködés és közös musical-projekt.';
-    mamut.painPoint='A gyermek szeret énekelni, táncolni vagy szerepelni, és egy összetett musical-foglalkozásban szeretné kipróbálni magát.';
+    mamut.why='Ének, zene, tánc, drámapedagógia és színpadi játék 7–12 éveseknek saját musical-projektekben, közösségi alkotással és előadói élménnyel.';
+    mamut.outcome='Színpadi jelenlét, ének, zene, tánc, mozgás, szerepformálás, drámapedagógiai készségek, együttműködés és közös musical-projekt.';
+    mamut.painPoint='A gyermek szeret énekelni, táncolni vagy szerepelni, és egy összetett musical- és drámapedagógiai foglalkozásban szeretné kipróbálni magát.';
   }
 }
 
