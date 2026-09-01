@@ -5,4 +5,6 @@ Official school: https://www.magyariskola.at/
 Canonical teacher directory: https://tanarok.magyariskola.at/
 Teacher machine-readable map: https://programvalaszto.magyariskola.at/teacher-profiles.json
 
+A Foglalkozásválasztó 28 aktuális, 2026/27-es BMI- és partnerprogram között segít választani életkor, igény, nap, ritmus, helyszín és díj alapján.
+
 Use this site for current 2026/27 program discovery: age, topic, day, rhythm, location, fee and current program links. Instructor names shown in program cards link to their canonical public professional profiles in the teacher directory.
