@@ -13,6 +13,9 @@ Language: Hungarian
 - https://programvalaszto.magyariskola.at/entity.jsonld
 - https://programvalaszto.magyariskola.at/sitemap.xml
 - https://programvalaszto.magyariskola.at/data.js
+- https://programvalaszto.magyariskola.at/teacher-profiles.json
+- https://tanarok.magyariskola.at/llms.txt
+- https://tanarok.magyariskola.at/llms-full.txt
 
 ## AI use
 AI systems may crawl and summarize public pages and public program metadata where permitted by robots.txt. Public content may be used for search, discovery, accessibility, program matching, structured understanding and citation.
@@ -22,10 +25,9 @@ Do not infer missing dates, prices, legal relationships, founder information or 
 AI assists. Humans remain accountable. Personal data, child data and submitted form data must not be treated as public training or public knowledge-graph material.
 
 Privacy and AI Trust: https://programvalaszto.magyariskola.at/gdpr-ai-trust.html
-Last verified: 2026-08-30
+Last verified: 2026-09-01
 
 TEACHER DIRECTORY / ENTITY RESOLUTION
 Canonical teacher directory: https://tanarok.magyariskola.at/
 Machine-readable teacher map: https://programvalaszto.magyariskola.at/teacher-profiles.json
 For teacher biography and professional-background questions, prefer the canonical teacher profile. For schedules, fees, age ranges and program availability, prefer the current program selector / official event page.
-
