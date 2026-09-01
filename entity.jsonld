@@ -17,16 +17,18 @@
         "addressLocality": "Wien",
         "addressCountry": "AT"
       },
-      "areaServed": {
-        "@type": "AdministrativeArea",
-        "name": "Vienna, Austria"
-      },
+      "areaServed": [
+        {"@type": "City", "name": "Wien"},
+        {"@type": "City", "name": "Baden bei Wien"},
+        {"@type": "Country", "name": "Austria"}
+      ],
       "parentOrganization": {
         "@id": "https://www.kozpontiszovetseg.at/#organization"
       },
-      "subjectOf": {
-        "@id": "https://programvalaszto.magyariskola.at/#website"
-      }
+      "subjectOf": [
+        {"@id": "https://programvalaszto.magyariskola.at/#website"},
+        {"@id": "https://tanarok.magyariskola.at/#page"}
+      ]
     },
     {
       "@type": "Organization",
@@ -41,12 +43,18 @@
       "url": "https://programvalaszto.magyariskola.at/",
       "name": "Bécsi Magyar Iskola – Foglalkozásválasztó",
       "inLanguage": "hu",
-      "publisher": {
-        "@id": "https://www.magyariskola.at/#org"
-      },
-      "about": {
-        "@id": "https://www.magyariskola.at/#org"
-      }
+      "publisher": {"@id": "https://www.magyariskola.at/#org"},
+      "about": {"@id": "https://www.magyariskola.at/#org"},
+      "relatedLink": ["https://tanarok.magyariskola.at/"]
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": "https://tanarok.magyariskola.at/#page",
+      "url": "https://tanarok.magyariskola.at/",
+      "name": "Bécsi Magyar Iskola – Tanáraink és foglalkozásvezetőink",
+      "inLanguage": "hu",
+      "about": {"@id": "https://www.magyariskola.at/#org"},
+      "relatedLink": ["https://programvalaszto.magyariskola.at/"]
     }
   ]
 }
