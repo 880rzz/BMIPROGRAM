@@ -1,0 +1,69 @@
+name: Ensure requested teacher program links
+
+on:
+  push:
+    paths:
+      - '.github/workflows/ensure-teacher-program-links.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ensure teacher assignments and profile mappings
+        shell: python
+        run: |
+          from pathlib import Path
+          import re, json
+
+          p=Path('data.js')
+          s=p.read_text(encoding='utf-8')
+          def set_teacher(pid, value):
+              global s
+              pat=r'(\{id:"'+re.escape(pid)+r'".*?)(?:,teacher:"[^"]*")?(,fee:)'
+              m=re.search(pat,s,re.S)
+              if not m: raise SystemExit('program not found: '+pid)
+              prefix=m.group(1)
+              # remove existing teacher/teacherBackground at tail if present before fee
+              prefix=re.sub(r',teacher:"[^"]*"','',prefix)
+              if pid=='ovoda-baden':
+                  prefix=re.sub(r',teacherBackground:"[^"]*"','',prefix)
+                  add=',teacher:"'+value+'",teacherBackground:"Telenkó Éva: mozgás- és képességfejlesztő, kisgyermeknevelő, gyermekjóga- és Brain Gym®-oktató. Makfalvi Rita: óvodapedagógus, tanító, nyelv- és beszédfejlesztő pedagógus."'
+              else:
+                  add=',teacher:"'+value+'"'
+              s=s[:m.start()]+prefix+add+m.group(2)+s[m.end():]
+          set_teacher('ovoda-baden','Telenkó Éva és Makfalvi Rita')
+          set_teacher('napraforgocskak','Varga Bernadette és Veres Tamás')
+          p.write_text(s,encoding='utf-8')
+
+          tp=Path('teacher-profiles.json')
+          data=json.loads(tp.read_text(encoding='utf-8'))
+          wanted={
+            'Telenkó Éva':'https://tanarok.magyariskola.at/#telenko-eva',
+            'Makfalvi Rita':'https://tanarok.magyariskola.at/#makfalvi-rita',
+            'Varga Bernadette':'https://tanarok.magyariskola.at/#varga-bernadette',
+            'Veres Tamás':'https://tanarok.magyariskola.at/#veres-tamas'
+          }
+          by={x.get('name'):x for x in data.get('profiles',[])}
+          for name,url in wanted.items():
+              if name in by: by[name]['url']=url
+              else: data.setdefault('profiles',[]).append({'name':name,'url':url})
+          tp.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+
+          lp=Path('teacher-links.js')
+          ls=lp.read_text(encoding='utf-8')
+          for name,slug in [('Telenkó Éva','telenko-eva'),('Makfalvi Rita','makfalvi-rita'),('Varga Bernadette','varga-bernadette'),('Veres Tamás','veres-tamas')]:
+              if '"'+name+'":"'+slug+'"' not in ls:
+                  ls=ls.replace('var map={','var map={"'+name+'":"'+slug+'",',1)
+          lp.write_text(ls,encoding='utf-8')
+      - name: Commit
+        run: |
+          git config user.name "BMI Program Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data.js teacher-profiles.json teacher-links.js
+          git diff --cached --quiet && exit 0
+          git commit -m "Ensure Baden and Napraforgocskak teacher links"
+          git push
