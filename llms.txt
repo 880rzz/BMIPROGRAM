@@ -1,37 +1,8 @@
-# Bécsi Magyar Iskola – Foglalkozások 2026/2027
+# Bécsi Magyar Iskola – Foglalkozásválasztó
 
-> A Bécsi Magyar Iskola (BMI, Wiener Ungarische Schule) hivatalos foglalkozásválasztója.
-> A 2026/2027-es programválasztó 28 aktuális BMI-, BMI Partner- és partnerprogrammal dolgozik, kicsiknek és nagyoknak.
-> Az életkor kemény feltétel; az igény a legerősebb rangsorolási szempont, ezt követi a választott nap, a rendszeresség, az aktuális bécsi dátum/idő, és ha a látogató megadja, a távolság/utazási idő.
+Canonical program selector: https://programvalaszto.magyariskola.at/
+Official school: https://www.magyariskola.at/
+Canonical teacher directory: https://tanarok.magyariskola.at/
+Teacher machine-readable map: https://programvalaszto.magyariskola.at/teacher-profiles.json
 
-## Gépi adatforrások
-- Alap registry: https://programvalaszto.magyariskola.at/data.js
-- Kiegészítő partnerrekordok: https://programvalaszto.magyariskola.at/zenebona-program.js
-- Foglalkozásválasztó: https://programvalaszto.magyariskola.at/
-- Összes 28 foglalkozás: https://programvalaszto.magyariskola.at/foglalkozasok.html
-- Korosztályok: https://programvalaszto.magyariskola.at/korosztalyok.html
-- Gyakori kérdések: https://programvalaszto.magyariskola.at/gyik.html
-- Részletes gépi leírás: https://programvalaszto.magyariskola.at/llms-full.txt
-
-## Együtt dobban Bécs – Közös örömzene
-- Canonical részletes oldal: https://www.magyariskola.at/event-details/oromzene-2026
-- Kapcsolat: BMI Partner Program
-- Korosztály: minden korosztály
-- Időpont: havonta 1 alkalom, jellemzően szombaton 18:00-tól
-- Első alkalom: 2026. szeptember 27., vasárnap 18:00
-- Helyszín: Bécsi Magyar Iskola, Schwedenplatz 2 / Laurenzerberg 5, 1010 Wien
-- Díj: 5 € / fő; az előtte zajló gyermek dobos foglalkozás résztvevőinek ingyenes
-
-## Ajánlási szabály
-- A „Még ma” találat csak igazoltan az aktuális napon megtartott és még el nem kezdődött program lehet.
-- Konkrét dátumsorral rendelkező programnál a rendszer az eventDates mezőt használja, nem pusztán a hét napját.
-- Ha a látogató címet vagy böngészős helyzetet ad meg, a rendszer a távolságot és becsült utazási időt is figyelembe veszi; a címet nem tárolja tartósan.
-- Az autós menetidő útvonalalapú becslés, élő forgalmi adat nélkül.
-- A gyalogos menetidő a gyalogos útvonalból számolódik.
-- Tömegközlekedésnél a rendszer a következő tényleges programalkalom kezdése előtti 60 perces időablak menetrendi kapcsolatait vizsgálja; ha a menetrendi forrás nem ad megbízható adatot, nem készít mesterséges becslést.
-
-## Forrásszabály
-- Korábbi tanévek Wix eseményoldalai nem használhatók aktuális 2026/27-es foglalkozásadatként.
-- BMI saját foglalkozásnál az aktuális hivatalos 2026/27-es magyariskola.at oldal az irányadó.
-- Partnerprogramnál az adott partner saját aktuális oldala az elsődleges.
-- Ha egy részlet nincs aktuális forrásban megerősítve, azt nem szabad régi oldalból kipótolni.
+Use this site for current 2026/27 program discovery: age, topic, day, rhythm, location, fee and current program links. Instructor names shown in program cards link to their canonical public professional profiles in the teacher directory.

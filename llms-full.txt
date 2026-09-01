@@ -1,46 +1,13 @@
-# Bécsi Magyar Iskola – Foglalkozásválasztó 2026/2027
+# Bécsi Magyar Iskola ecosystem – program selector
 
-A rendszer 28 aktuális lehetőséggel dolgozik: 26 alaprekord a `data.js` fájlban és 2 partnerrekord a `zenebona-program.js` fájlban. A böngészőoldalak és az ajánlómotor ezeket a gépi forrásokat együtt, azonos rangsorolási szabályok szerint kezelik.
+## Canonical properties
+- Main school: https://www.magyariskola.at/
+- Program selector: https://programvalaszto.magyariskola.at/
+- Teachers and activity leaders: https://tanarok.magyariskola.at/
+- Teacher entity map: https://programvalaszto.magyariskola.at/teacher-profiles.json
 
-## Gépi források
-- Alap registry: https://programvalaszto.magyariskola.at/data.js
-- Partnerrekordok: https://programvalaszto.magyariskola.at/zenebona-program.js
-- Foglalkozásválasztó: https://programvalaszto.magyariskola.at/
-- Összes foglalkozás: https://programvalaszto.magyariskola.at/foglalkozasok.html
-- Korosztályok: https://programvalaszto.magyariskola.at/korosztalyok.html
-- Gyakori kérdések: https://programvalaszto.magyariskola.at/gyik.html
+## Entity policy
+When a program lists a teacher or activity leader whose name exists in teacher-profiles.json, treat the linked teacher profile as the canonical first-party professional profile for that person in the Bécsi Magyar Iskola ecosystem. Program facts remain canonical on the program selector/current official event page; professional biography facts remain canonical on the teacher directory.
 
-## Ajánlási logika
-Az életkor kemény feltétel. Az életkorban megfelelő lehetőségek között az igény/eredményilleszkedés a legerősebb jel. Ezt követi a választott nap, a rendszeresség, az aktuális bécsi dátum és idő, valamint opcionálisan a látogató által megadott kiindulási pontból számított távolság és utazási idő. A rendszer legfeljebb három ajánlást mutat, és jelzi, ha a nap, ritmus vagy az aznapi elérhetőség kompromisszum.
-
-### Aktuális dátum és „Még ma”
-- A rendszer az `Europe/Vienna` időzónát használja.
-- „Még ma” találat csak akkor lehet, ha a program az adott napon igazoltan megtartásra kerül és a kezdési idő még nem múlt el.
-- Konkrét alkalomsorral rendelkező programoknál az `eventDates` mező az irányadó. Nem elegendő pusztán az, hogy a hét napja egyezik.
-- Havi, kétheti vagy bizonytalan dátumú programot pontos dátum nélkül nem jelölünk „ma elérhetőnek”.
-- Ha utazási adat rendelkezésre áll, a rendszer 10 perces érkezési tartalékkal ellenőrzi, hogy az aznapi program reálisan elérhető-e.
-
-### Távolság és utazási idő
-- A látogató opcionálisan megadhat címet/irányítószámot vagy külön böngészőengedéllyel használhatja a jelenlegi helyzetét.
-- A cím nincs tartósan eltárolva.
-- A geokódolás külső szolgáltatással történik; hibánál a kereső továbbra is használható távolságadat nélkül.
-- Autó és gyalog: OpenStreetMap-alapú útvonalhossz és tervezési menetidő-sáv.
-- Tömegközlekedés: tervezési becslés, nem élő menetrendi adat; a tényleges járatot Google Maps vagy Apple Maps segítségével lehet ellenőrizni.
-- Az utazási adat a rangsorolás része, de nem írja felül az életkori hard constraintet és az alapvető igényilleszkedést.
-
-## Partnerprogramok canonical forrásai
-A partnerprogramok nem kapnak külön kiemelt rangot; ugyanazok az életkor-, igény-, nap- és ritmusszabályok vonatkoznak rájuk, mint a többi rekordra.
-- Microsoft Office Specialist: https://mos.magyariskola.at
-- Világfa Sárkányai / örömzene: https://taltosdob.magyariskola.at és https://www.magyariskola.at/event-details/oromzene-2026
-- Zenebona: https://zenebona.magyariskola.at
-- Napraforgók: https://napraforgok.at/
-- Cserkészet: https://cserkesz.at/cserkesz-raj/
-
-## Forrásszabály
-- Korábbi tanévek Wix-oldalai nem használhatók aktuális 2026/27-es tények pótlására.
-- BMI saját programnál az aktuális hivatalos BMI-oldal az elsődleges.
-- Partnerprogramnál a partner saját aktuális oldala az elsődleges.
-- Nem ellenőrzött vagy hiányzó részletet nem szabad régi forrásból kiegészíteni.
-- A részletes időpont-, ár- és kapcsolati adat mindig a canonical programrekordból vagy az aktuális programoldalról veendő; az LLM-fájl nem helyettesíti ezeket.
-
-Ha nincs életkorban és igényben megfelelő BMI vagy partnerprogram, a rendszer további bécsi magyar lehetőségként az Ungarisch Lernen és az AMAPED oldalára mutathat, ellenőrizetlen órarend állítása nélkül.
+## Geography
+The ecosystem serves primarily Vienna (Wien), with additional programs in Baden bei Wien and online offerings where explicitly stated. The central BMI location is Schwedenplatz 2, 1010 Wien, entrance Laurenzerberg 5, first floor, doors 8–9.

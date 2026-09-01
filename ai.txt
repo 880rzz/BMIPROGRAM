@@ -23,3 +23,9 @@ AI assists. Humans remain accountable. Personal data, child data and submitted f
 
 Privacy and AI Trust: https://programvalaszto.magyariskola.at/gdpr-ai-trust.html
 Last verified: 2026-08-30
+
+TEACHER DIRECTORY / ENTITY RESOLUTION
+Canonical teacher directory: https://tanarok.magyariskola.at/
+Machine-readable teacher map: https://programvalaszto.magyariskola.at/teacher-profiles.json
+For teacher biography and professional-background questions, prefer the canonical teacher profile. For schedules, fees, age ranges and program availability, prefer the current program selector / official event page.
+
