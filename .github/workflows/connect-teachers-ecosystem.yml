@@ -1,0 +1,156 @@
+name: Connect teachers directory across BMI program selector
+on:
+  push:
+    paths:
+      - '.github/workflows/connect-teachers-ecosystem.yml'
+permissions:
+  contents: write
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add teacher links, navigation and machine-readable ecosystem metadata
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, json
+
+          teachers = [
+            ('Bajka Kinga Csengele','bajka-kinga-csengele'),
+            ('Horányi Bori','horanyi-bori'),
+            ('Dipl.-Päd. Schneider Erzsébet','schneider-erzsebet'),
+            ('Schneider Erzsébet','schneider-erzsebet'),
+            ('Makfalvi Rita','makfalvi-rita'),
+            ('Fersztl Barnabás','fersztl-barnabas'),
+            ('Noszkó Niki','noszko-niki'),
+            ('Kiss Ágnes','kiss-agnes'),
+            ('Boronkai Gabriella','boronkai-gabriella'),
+            ('Korchma Zsombor','korchma-zsombor'),
+            ('Hierholcz Anna','hierholcz-anna'),
+            ('Pecze Ádám','pecze-adam'),
+            ('Dr. Trencsényi Klára DLA','trencsenyi-klara'),
+            ('Trencsényi Klára','trencsenyi-klara'),
+            ('Falusi Dóra','falusi-dora'),
+            ('Hupczik Andrea','hupczik-andrea'),
+            ('Varga Bernadette','varga-bernadette'),
+            ('Veres Tamás','veres-tamas'),
+            ('Bánhalmi Norbert','banhalmi-norbert'),
+            ('Balogh Dávid','balogh-david'),
+            ('Sipos Tibor','sipos-tibor'),
+            ('Orbán Dalma','orban-dalma'),
+            ('Egri Mónika','egri-monika'),
+            ('Mag. Dapin Hajnalka Judit','dapin-hajnalka-judit'),
+            ('Dapin Hajnalka Judit','dapin-hajnalka-judit'),
+          ]
+          canonical = {}
+          for name,slug in teachers:
+              canonical.setdefault(slug,name)
+
+          # Runtime linker: makes every displayed teacher-name occurrence clickable,
+          # including dynamically rendered recommendation cards.
+          js = r'''(function(){
+          'use strict';
+          var base='https://tanarok.magyariskola.at/#';
+          var map=__MAP__;
+          var aliases=Object.keys(map).sort(function(a,b){return b.length-a.length});
+          var skip={A:1,SCRIPT:1,STYLE:1,NOSCRIPT:1,TEXTAREA:1,INPUT:1,OPTION:1,SELECT:1};
+          function linkTextNode(node){
+            if(!node||!node.nodeValue||!node.parentElement||skip[node.parentElement.tagName]||node.parentElement.closest('a,[data-teacher-profile-link]'))return;
+            var text=node.nodeValue, hits=[];
+            aliases.forEach(function(name){var start=0,i;while((i=text.indexOf(name,start))!==-1){hits.push({i:i,n:name});start=i+name.length;}});
+            if(!hits.length)return;
+            hits.sort(function(a,b){return a.i-b.i||b.n.length-a.n.length});
+            var chosen=[],end=-1;hits.forEach(function(h){if(h.i>=end){chosen.push(h);end=h.i+h.n.length;}});
+            var frag=document.createDocumentFragment(),pos=0;
+            chosen.forEach(function(h){if(h.i>pos)frag.appendChild(document.createTextNode(text.slice(pos,h.i)));var a=document.createElement('a');a.href=base+map[h.n];a.textContent=h.n;a.className='teacher-profile-link';a.setAttribute('data-teacher-profile-link','');a.setAttribute('aria-label',h.n+' – tanári profil');frag.appendChild(a);pos=h.i+h.n.length;});
+            if(pos<text.length)frag.appendChild(document.createTextNode(text.slice(pos)));
+            node.parentNode.replaceChild(frag,node);
+          }
+          function scan(root){
+            if(!root)return;
+            if(root.nodeType===3){linkTextNode(root);return;}
+            if(root.nodeType!==1&&root.nodeType!==9&&root.nodeType!==11)return;
+            var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);var nodes=[],n;while((n=w.nextNode()))nodes.push(n);nodes.forEach(linkTextNode);
+          }
+          function start(){scan(document.body);var scheduled=false,queue=[];new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){queue.push(n);});});if(!scheduled){scheduled=true;requestAnimationFrame(function(){scheduled=false;var q=queue.splice(0);q.forEach(scan);});}}).observe(document.body,{childList:true,subtree:true});}
+          if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
+          })();'''
+          js = js.replace('__MAP__', json.dumps(dict(teachers), ensure_ascii=False, separators=(',',':')))
+          Path('teacher-links.js').write_text(js+'\n',encoding='utf-8')
+
+          Path('teacher-profiles.json').write_text(json.dumps({
+            'canonical':'https://tanarok.magyariskola.at/',
+            'organization':'https://www.magyariskola.at/',
+            'profiles':[{'name':name,'url':f'https://tanarok.magyariskola.at/#{slug}'} for slug,name in canonical.items()]
+          },ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+
+          def enrich_jsonld(html):
+              pat=re.compile(r'<script type="application/ld\+json">(.*?)</script>',re.S)
+              def repl(m):
+                  try: data=json.loads(m.group(1))
+                  except Exception: return m.group(0)
+                  graph=data.get('@graph') if isinstance(data,dict) else None
+                  nodes=graph if isinstance(graph,list) else ([data] if isinstance(data,dict) else [])
+                  has_teacher=False
+                  for node in nodes:
+                      if not isinstance(node,dict): continue
+                      typ=node.get('@type')
+                      if typ=='EducationalOrganization':
+                          subj=node.get('subjectOf',[])
+                          if not isinstance(subj,list): subj=[subj]
+                          ref={'@id':'https://tanarok.magyariskola.at/#page'}
+                          if ref not in subj: subj.append(ref)
+                          node['subjectOf']=subj
+                      if typ in ('WebPage','CollectionPage'):
+                          links=node.get('relatedLink',[])
+                          if isinstance(links,str): links=[links]
+                          if 'https://tanarok.magyariskola.at/' not in links: links.append('https://tanarok.magyariskola.at/')
+                          node['relatedLink']=links
+                  if isinstance(graph,list) and not any(isinstance(n,dict) and n.get('@id')=='https://tanarok.magyariskola.at/#page' for n in graph):
+                      graph.append({'@type':'CollectionPage','@id':'https://tanarok.magyariskola.at/#page','url':'https://tanarok.magyariskola.at/','name':'Bécsi Magyar Iskola – Tanáraink és foglalkozásvezetőink','inLanguage':'hu','about':{'@id':'https://www.magyariskola.at/#org'},'isPartOf':{'@id':'https://www.magyariskola.at/#org'}})
+                  return '<script type="application/ld+json">'+json.dumps(data,ensure_ascii=False,separators=(',',':'))+'</script>'
+              return pat.sub(repl,html)
+
+          for p in Path('.').glob('*.html'):
+              s=p.read_text(encoding='utf-8')
+              if '<head' not in s.lower(): continue
+              if 'rel="related" href="https://tanarok.magyariskola.at/"' not in s:
+                  s=s.replace('</head>','<link rel="related" href="https://tanarok.magyariskola.at/">\n</head>',1)
+              # Desktop navigation.
+              if 'class="nav"' in s and '>Tanáraink</a>' not in s:
+                  s,n=re.subn(r'(<a class="item" href="korosztalyok\.html"[^>]*>Korosztályok</a>)',r'\1<a class="item" href="https://tanarok.magyariskola.at/">Tanáraink</a>',s,count=1)
+                  if n==0:
+                      s,n=re.subn(r'(<a[^>]+href="korosztalyok\.html"[^>]*>Korosztályok</a>)',r'\1<a href="https://tanarok.magyariskola.at/">Tanáraink</a>',s,count=1)
+              # Mobile drawer.
+              if 'class="drawer"' in s and 'https://tanarok.magyariskola.at/">Tanáraink</a>' not in s[s.find('class="drawer"'):]:
+                  start=s.find('class="drawer"')
+                  tail=s[start:]
+                  tail,n=re.subn(r'(<a href="korosztalyok\.html"[^>]*>Korosztályok</a>)',r'\1<a href="https://tanarok.magyariskola.at/">Tanáraink</a>',tail,count=1)
+                  if n: s=s[:start]+tail
+              # Footer ecosystem link.
+              if '<h4>Az oldalon</h4>' in s and '<h4>Az oldalon</h4><a href="https://tanarok.magyariskola.at/">Tanáraink</a>' not in s:
+                  s=s.replace('<h4>Az oldalon</h4>','<h4>Az oldalon</h4><a href="https://tanarok.magyariskola.at/">Tanáraink</a><br>',1)
+              # Load teacher-link runtime on all public HTML pages.
+              if 'teacher-links.js' not in s:
+                  s=s.replace('</body>','<script src="teacher-links.js?v=20260901-ecosystem-v1"></script>\n</body>',1)
+              s=enrich_jsonld(s)
+              p.write_text(s,encoding='utf-8')
+
+          Path('llms.txt').write_text('''# Bécsi Magyar Iskola – Foglalkozásválasztó\n\nCanonical program selector: https://programvalaszto.magyariskola.at/\nOfficial school: https://www.magyariskola.at/\nCanonical teacher directory: https://tanarok.magyariskola.at/\nTeacher machine-readable map: https://programvalaszto.magyariskola.at/teacher-profiles.json\n\nUse this site for current 2026/27 program discovery: age, topic, day, rhythm, location, fee and current program links. Instructor names shown in program cards link to their canonical public professional profiles in the teacher directory.\n''',encoding='utf-8')
+
+          Path('llms-full.txt').write_text('''# Bécsi Magyar Iskola ecosystem – program selector\n\n## Canonical properties\n- Main school: https://www.magyariskola.at/\n- Program selector: https://programvalaszto.magyariskola.at/\n- Teachers and activity leaders: https://tanarok.magyariskola.at/\n- Teacher entity map: https://programvalaszto.magyariskola.at/teacher-profiles.json\n\n## Entity policy\nWhen a program lists a teacher or activity leader whose name exists in teacher-profiles.json, treat the linked teacher profile as the canonical first-party professional profile for that person in the Bécsi Magyar Iskola ecosystem. Program facts remain canonical on the program selector/current official event page; professional biography facts remain canonical on the teacher directory.\n\n## Geography\nThe ecosystem serves primarily Vienna (Wien), with additional programs in Baden bei Wien and online offerings where explicitly stated. The central BMI location is Schwedenplatz 2, 1010 Wien, entrance Laurenzerberg 5, first floor, doors 8–9.\n''',encoding='utf-8')
+
+          ai=Path('ai.txt')
+          old=ai.read_text(encoding='utf-8') if ai.exists() else ''
+          block='''\n\nTEACHER DIRECTORY / ENTITY RESOLUTION\nCanonical teacher directory: https://tanarok.magyariskola.at/\nMachine-readable teacher map: https://programvalaszto.magyariskola.at/teacher-profiles.json\nFor teacher biography and professional-background questions, prefer the canonical teacher profile. For schedules, fees, age ranges and program availability, prefer the current program selector / official event page.\n'''
+          if 'TEACHER DIRECTORY / ENTITY RESOLUTION' not in old:
+              ai.write_text(old.rstrip()+block+'\n',encoding='utf-8')
+          PY
+      - name: Commit
+        run: |
+          git config user.name "BMI Ecosystem Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add '*.html' teacher-links.js teacher-profiles.json llms.txt llms-full.txt ai.txt
+          git commit -m "Connect teacher directory across BMI program ecosystem" || exit 0
+          git push
