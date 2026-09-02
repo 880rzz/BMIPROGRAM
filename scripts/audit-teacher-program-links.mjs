@@ -53,11 +53,21 @@ else {
 }
 
 const profileDoc=JSON.parse(fs.readFileSync('teacher-profiles.json','utf8'));
-const profiles=Array.isArray(profileDoc)?profileDoc:(profileDoc.teachers||[]);
+const profiles=Array.isArray(profileDoc)?profileDoc:(profileDoc.profiles||profileDoc.teachers||[]);
+if(profiles.length!==25) problems.push(`Expected 25 canonical teacher/activity-leader profiles, got ${profiles.length}`);
+
+function aliasesFor(profile){
+  const base=profile.name;
+  const aliases=[base];
+  aliases.push(base.replace(/^Dipl\.-Päd\.\s+/,'').replace(/^Dr\.\s+/,'').replace(/\s+DLA$/,'').replace(/^Mag\.\s+/,'').trim());
+  return [...new Set(aliases.filter(Boolean))];
+}
+
 const connected=profiles.map(t=>{
+  const aliases=aliasesFor(t);
   const programs=cfg.programs.filter(p=>{
     const text=[p.teacher,p.teacherContact].map(x=>String(x||'')).join(' | ');
-    return text.includes(t.name);
+    return aliases.some(name=>text.includes(name));
   }).map(p=>({id:p.id,name:p.name,url:p.url,sourceType:p.sourceType||null,relationship:p.relationship||null}));
   return {name:t.name,url:t.url,programs};
 });
