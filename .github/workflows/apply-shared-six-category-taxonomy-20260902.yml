@@ -1,0 +1,49 @@
+name: Apply shared six-category taxonomy 20260902
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-shared-six-category-taxonomy-20260902.yml'
+      - 'program-taxonomy.js'
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wire taxonomy into runtime and machine knowledge
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('index.html'); s=p.read_text(encoding='utf-8')
+          needle='<script src="data.js?v=20260829"></script><script src="zenebona-program.js?v=20260829-deep-audit"></script>'
+          repl=needle+'<script src="program-taxonomy.js?v=20260902-1"></script>'
+          if 'program-taxonomy.js' not in s:
+              if needle not in s: raise SystemExit('runtime script insertion point missing')
+              s=s.replace(needle,repl,1)
+          s=s.replace('content="hu_HU"','content="hu_AT"')
+          p.write_text(s,encoding='utf-8')
+
+          b=Path('scripts/build-program-knowledge.mjs'); x=b.read_text(encoding='utf-8')
+          if "program-taxonomy.js" not in x:
+              x=x.replace("vm.runInNewContext(fs.readFileSync('zenebona-program.js','utf8'),ctx,{filename:'zenebona-program.js'});", "vm.runInNewContext(fs.readFileSync('zenebona-program.js','utf8'),ctx,{filename:'zenebona-program.js'});\nvm.runInNewContext(fs.readFileSync('program-taxonomy.js','utf8'),ctx,{filename:'program-taxonomy.js'});")
+          x=x.replace("return {...p,semantic:{", "return {...p,primaryCategory6:p.primaryCategory6||ctx.window.BMI_PROGRAM_TAXONOMY?.classify(p),semantic:{")
+          x=x.replace("{'@type':'PropertyValue','name':'relationship','value':p.relationship||''}]", "{'@type':'PropertyValue','name':'relationship','value':p.relationship||''},{'@type':'PropertyValue','name':'primaryCategory6','value':p.primaryCategory6||''}]")
+          b.write_text(x,encoding='utf-8')
+          PY
+          node scripts/build-program-knowledge.mjs
+          node - <<'NODE'
+          const k=require('./program-knowledge.json');
+          if(k.programs.length!==28) throw new Error('Expected 28 programs');
+          const valid=new Set(['nyelv','alkotas','mozgas','logika','jollet','hagyomany']);
+          for(const p of k.programs) if(!valid.has(p.primaryCategory6)) throw new Error('Missing/invalid category '+p.id);
+          console.log('OK: 28/28 programs have shared six-category taxonomy');
+          NODE
+      - name: Commit
+        run: |
+          git config user.name "BMI Program Taxonomy Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html scripts/build-program-knowledge.mjs program-knowledge.json program-knowledge.jsonld
+          git diff --cached --quiet && exit 0
+          git commit -m "Use shared six-category program taxonomy"
+          git push
