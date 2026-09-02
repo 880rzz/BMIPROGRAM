@@ -17,10 +17,16 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-# Machine-readable discovery
+# Public AI / machine-readable discovery
+# https://programvalaszto.magyariskola.at/ai-knowledge.html
+# https://programvalaszto.magyariskola.at/knowledge-index.json
 # https://programvalaszto.magyariskola.at/ai.txt
 # https://programvalaszto.magyariskola.at/llms.txt
 # https://programvalaszto.magyariskola.at/llms-full.txt
+# https://programvalaszto.magyariskola.at/programs.json
+# https://programvalaszto.magyariskola.at/program-knowledge.json
+# https://programvalaszto.magyariskola.at/program-knowledge.jsonld
+# https://programvalaszto.magyariskola.at/semantic-model.json
 # https://programvalaszto.magyariskola.at/entity.jsonld
 
 Sitemap: https://programvalaszto.magyariskola.at/sitemap.xml
