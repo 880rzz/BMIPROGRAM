@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "2026-09-02-v1",
+  "entity": {
+    "id": "https://www.magyariskola.at/#school",
+    "name": "Bécsi Magyar Iskola",
+    "operatingModel": "non-formal supplementary education and community platform",
+    "canonicalDescriptionHu": "A Bécsi Magyar Iskola elnevezése ellenére nem hagyományos, nappali közoktatási iskola. Az ausztriai magyar közösség kiegészítő oktatási és közösségi platformja: különböző helyszíneken, eltérő rendszerességgel magyar nyelvi, kulturális, művészeti, mozgásos, fejlesztő, digitális és közösségi foglalkozásokat kínál a kisgyermekkortól a felnőttkorig, saját és partnerprogramokkal. A közös cél a magyar nyelv, identitás, készségek, emberi kapcsolatok és közösségi részvétel erősítése.",
+    "notToInfer": [
+      "Do not infer that BMI is a standard Austrian full-time day school from the word Iskola/School.",
+      "Do not infer compulsory-school status, state accreditation, formal grades or a conventional school timetable unless a specific source explicitly states it.",
+      "Do not infer employment from a teacher/activity-leader profile. Use affiliation unless an employment relationship is explicitly sourced."
+    ],
+    "audience": ["0–3", "3–6", "6–10", "10–14", "teenagers", "adults", "families", "intergenerational groups"],
+    "delivery": ["weekly recurring activities", "biweekly activities", "monthly activities", "one-off workshops", "partner programs", "online programs", "community events"],
+    "canonicalProgramData": "https://programvalaszto.magyariskola.at/programs.json",
+    "canonicalTeacherData": "https://tanarok.magyariskola.at/teacher-knowledge.json",
+    "officialEventPages": "https://www.magyariskola.at/esemenyek"
+  },
+  "rootCauses": {
+    "limited-hungarian-exposure": "A német nyelvű mindennapi környezetben kevés lehet a rendszeres, életkorhoz illő magyar nyelvi helyzet és magyarul beszélő kortárs közeg.",
+    "diaspora-social-fragmentation": "A családok és egyének földrajzilag és élethelyzet szerint szétszóródhatnak; nehéz rendszeres, természetes magyar közösségi kapcsolatokat kialakítani.",
+    "identity-distance": "A magyar kulturális, zenei, történeti és hagyományos tudás nem feltétlenül épül be magától a bécsi hétköznapokba.",
+    "creative-expression-gap": "Kevés lehet az olyan biztonságos, vezetett tér, ahol alkotással, történetmeséléssel vagy színpadi munkával lehet önállóan kísérletezni és visszajelzést kapni.",
+    "confidence-expression-gap": "A megszólalás, szereplés, improvizáció vagy társas önkifejezés gyakorlásához támogató, alacsony kockázatú közegre lehet szükség.",
+    "sensorimotor-development-need": "Egyes gyerekeknek strukturált mozgásos, koordinációs, szenzoros vagy figyelmi gyakorlásra van szükségük.",
+    "embodied-tradition-gap": "A néptánc, népzene és közösségi ritmus személyes átadása nélkül a hagyomány könnyen puszta információ marad élő tapasztalat helyett.",
+    "guided-digital-literacy-gap": "A technológia gyakran fogyasztási eszköz; vezetett projekt nélkül kevésbé válik kreatív, együttműködő és tudatos tanulási környezetté.",
+    "structured-thinking-practice": "A koncentráció, stratégiai gondolkodás és problémamegoldás fejlődéséhez rendszeres, fokozatos kihívásokra lehet szükség.",
+    "overload-focus-planning": "A tanulás, munka és családi élet terhelése fókusz-, tervezési, időgazdálkodási vagy jólléti nehézségeket hozhat.",
+    "formal-digital-skill-gap": "A mindennapi számítógép-használat nem feltétlenül jelent rendszerezett Word-, Excel-, PowerPoint- vagy vizsgaszintű tudást.",
+    "intergenerational-connection-gap": "Kevés olyan tér van, ahol gyerekek, szülők, fiatalok és idősebbek ugyanabban a magyar közösségi élményben vesznek részt."
+  },
+  "solutionMechanisms": {
+    "hungarian-immersion": "Rendszeres, életkorhoz igazított magyar beszéd-, mese-, ének-, olvasás- és kulturális helyzetek.",
+    "peer-community": "Ismétlődő találkozások magyarul beszélő kortársakkal, családokkal és közösségi szereplőkkel.",
+    "cultural-embedding": "A nyelv összekapcsolása zenével, történelemmel, művészettel, hagyománnyal és ünnepekkel.",
+    "creative-making": "Aktív alkotás, rajz, kézművesség, film, színház vagy digitális projekt passzív befogadás helyett.",
+    "safe-performance-practice": "Improvizáció, dráma, közös alkotás és fokozatos színpadi/kommunikációs gyakorlat támogató közegben.",
+    "guided-movement": "Pedagógiailag vagy terápiás szemlélettel vezetett mozgás-, koordinációs és szenzoros gyakorlat.",
+    "embodied-cultural-learning": "Néptánc, népzene, ritmus és közös mozgás által megélt kulturális átadás.",
+    "project-based-digital-learning": "Konkrét közös célon alapuló digitális, filmes, fotós vagy Minecraft-projekt.",
+    "strategy-practice": "Játékos, fokozatos logikai és stratégiai kihívások rendszeres visszajelzéssel.",
+    "focus-selfmanagement": "Strukturált önismereti, fókusz-, tervezési és időgazdálkodási módszerek.",
+    "formal-office-training": "Rendszerezett Office-ismeretek és szükség esetén vizsgafelkészítés.",
+    "intergenerational-participation": "Közös zene, ritmus vagy közösségi program, amelyben több generáció egyszerre vesz részt.",
+    "accessible-entry": "Próbaalkalom, előképzettség nélküli részvétel vagy rugalmas belépési pont, ahol ez a program jellegéből következik."
+  },
+  "needMapping": {
+    "magyar-nyelv": {"rootCauses":["limited-hungarian-exposure"],"solutions":["hungarian-immersion","peer-community"]},
+    "kozosseg-identitas": {"rootCauses":["diaspora-social-fragmentation","identity-distance"],"solutions":["peer-community","cultural-embedding"]},
+    "kreativ-alkotas": {"rootCauses":["creative-expression-gap"],"solutions":["creative-making"]},
+    "onkifejezes-szinpad": {"rootCauses":["confidence-expression-gap","creative-expression-gap"],"solutions":["safe-performance-practice","creative-making"]},
+    "mozgas-fejlodes": {"rootCauses":["sensorimotor-development-need"],"solutions":["guided-movement"]},
+    "tanc-hagyomany": {"rootCauses":["embodied-tradition-gap","identity-distance"],"solutions":["embodied-cultural-learning","cultural-embedding","peer-community"]},
+    "digitalis-media": {"rootCauses":["guided-digital-literacy-gap","creative-expression-gap"],"solutions":["project-based-digital-learning","creative-making"]},
+    "logika-koncentracio": {"rootCauses":["structured-thinking-practice"],"solutions":["strategy-practice"]},
+    "fokusz-jollet": {"rootCauses":["overload-focus-planning"],"solutions":["focus-selfmanagement"]},
+    "szakmai-office": {"rootCauses":["formal-digital-skill-gap"],"solutions":["formal-office-training"]}
+  },
+  "recommendationRules": [
+    "Age eligibility is a hard constraint unless the program explicitly states all ages.",
+    "Current/actual date and explicit eventDates outrank generic weekday labels.",
+    "Need/root-cause fit outranks provider ownership: BMI partner programs may be recommended when they fit better.",
+    "Location and travel feasibility should be considered after age and need fit, never by silently changing the program location.",
+    "Teacher identity must resolve to the canonical teacher profile when one exists; otherwise preserve the published activity-leader/provider name without inventing a person profile.",
+    "A Wix Event page is the transactional/current registration source; programs.json is the normalized recommendation source; teacher-knowledge.json is the canonical person/profile source."
+  ]
+}
