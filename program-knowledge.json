@@ -111,7 +111,7 @@
         "2027-06-21",
         "2027-06-28"
       ],
-      "primaryCategory6": "mozgas",
+      "primaryCategory6": "nyelv",
       "semantic": {
         "rootCauseIds": [
           "limited-hungarian-exposure",
@@ -219,7 +219,7 @@
         "2027-06-19",
         "2027-06-26"
       ],
-      "primaryCategory6": "alkotas",
+      "primaryCategory6": "nyelv",
       "semantic": {
         "rootCauseIds": [
           "limited-hungarian-exposure",
@@ -339,7 +339,7 @@
         "2027-06-24",
         "2027-07-01"
       ],
-      "primaryCategory6": "alkotas",
+      "primaryCategory6": "nyelv",
       "semantic": {
         "rootCauseIds": [
           "limited-hungarian-exposure",
@@ -455,7 +455,7 @@
         "2027-06-22",
         "2027-06-29"
       ],
-      "primaryCategory6": "hagyomany",
+      "primaryCategory6": "nyelv",
       "semantic": {
         "rootCauseIds": [
           "limited-hungarian-exposure",
@@ -558,7 +558,7 @@
         "2027-06-22",
         "2027-06-29"
       ],
-      "primaryCategory6": "hagyomany",
+      "primaryCategory6": "nyelv",
       "semantic": {
         "rootCauseIds": [
           "limited-hungarian-exposure",
@@ -664,7 +664,7 @@
         "2027-06-23",
         "2027-06-30"
       ],
-      "primaryCategory6": "alkotas",
+      "primaryCategory6": "nyelv",
       "semantic": {
         "rootCauseIds": [
           "limited-hungarian-exposure",
@@ -767,7 +767,7 @@
         "2027-06-19",
         "2027-06-26"
       ],
-      "primaryCategory6": "hagyomany",
+      "primaryCategory6": "nyelv",
       "semantic": {
         "rootCauseIds": [
           "limited-hungarian-exposure",
@@ -840,7 +840,7 @@
       "eventDates": [
         "2026-09-19"
       ],
-      "primaryCategory6": "hagyomany",
+      "primaryCategory6": "nyelv",
       "semantic": {
         "rootCauseIds": [
           "limited-hungarian-exposure",
@@ -1892,7 +1892,7 @@
         "2027-01-19",
         "2027-01-26"
       ],
-      "primaryCategory6": "alkotas",
+      "primaryCategory6": "hagyomany",
       "semantic": {
         "rootCauseIds": [
           "diaspora-social-fragmentation",
@@ -1985,7 +1985,7 @@
         "2027-06-26"
       ],
       "scheduleMode": "irregular",
-      "primaryCategory6": "alkotas",
+      "primaryCategory6": "mozgas",
       "semantic": {
         "rootCauseIds": [
           "embodied-tradition-gap",
