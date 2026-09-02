@@ -2663,7 +2663,8 @@
       "needs": [
         "magyar-nyelv",
         "kozosseg-identitas",
-        "mozgas-fejlodes"
+        "mozgas-fejlodes",
+        "tanc-hagyomany"
       ],
       "painPoint": "Kisgyermekkel olyan magyar nyelvű közös programot keresel Bécsben, ahol a zene, mondóka, ritmus, mozgás és az egymásra figyelés természetesen kapcsolódik össze.",
       "outcome": "Közös éneklés, mondókázás, mozgás, ritmikus játék, hangszeres felfedezés és rendszeres magyar nyelvű szülő–gyermek közösségi élmény.",
@@ -2707,25 +2708,29 @@
           "limited-hungarian-exposure",
           "diaspora-social-fragmentation",
           "identity-distance",
-          "sensorimotor-development-need"
+          "sensorimotor-development-need",
+          "embodied-tradition-gap"
         ],
         "rootCauses": [
           "A német nyelvű mindennapi környezetben kevés lehet a rendszeres, életkorhoz illő magyar nyelvi helyzet és magyarul beszélő kortárs közeg.",
           "A családok és egyének földrajzilag és élethelyzet szerint szétszóródhatnak; nehéz rendszeres, természetes magyar közösségi kapcsolatokat kialakítani.",
           "A magyar kulturális, zenei, történeti és hagyományos tudás nem feltétlenül épül be magától a bécsi hétköznapokba.",
-          "Egyes gyerekeknek strukturált mozgásos, koordinációs, szenzoros vagy figyelmi gyakorlásra van szükségük."
+          "Egyes gyerekeknek strukturált mozgásos, koordinációs, szenzoros vagy figyelmi gyakorlásra van szükségük.",
+          "A néptánc, népzene és közösségi ritmus személyes átadása nélkül a hagyomány könnyen puszta információ marad élő tapasztalat helyett."
         ],
         "solutionMechanismIds": [
           "hungarian-immersion",
           "peer-community",
           "cultural-embedding",
-          "guided-movement"
+          "guided-movement",
+          "embodied-cultural-learning"
         ],
         "solutionMechanisms": [
           "Rendszeres, életkorhoz igazított magyar beszéd-, mese-, ének-, olvasás- és kulturális helyzetek.",
           "Ismétlődő találkozások magyarul beszélő kortársakkal, családokkal és közösségi szereplőkkel.",
           "A nyelv összekapcsolása zenével, történelemmel, művészettel, hagyománnyal és ünnepekkel.",
-          "Pedagógiailag vagy terápiás szemlélettel vezetett mozgás-, koordinációs és szenzoros gyakorlat."
+          "Pedagógiailag vagy terápiás szemlélettel vezetett mozgás-, koordinációs és szenzoros gyakorlat.",
+          "Néptánc, népzene, ritmus és közös mozgás által megélt kulturális átadás."
         ],
         "ageBands": [
           "0–3",
