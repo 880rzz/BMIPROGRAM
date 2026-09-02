@@ -1,0 +1,39 @@
+name: Normalize BMI program entity consistency
+on:
+  push:
+    paths:
+      - '.github/workflows/cleanup-bmi-entity-consistency-20260902.yml'
+permissions:
+  contents: write
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Normalize canonical school entity
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          allowed={'.html','.json','.jsonld','.js','.txt','.md','.yml','.yaml','.py'}
+          for p in Path('.').rglob('*'):
+              if not p.is_file() or p.suffix.lower() not in allowed or '.git' in p.parts:
+                  continue
+              try: s=p.read_text(encoding='utf-8')
+              except UnicodeDecodeError: continue
+              old=s
+              s=s.replace('https://www.magyariskola.at/#org','https://www.magyariskola.at/#school')
+              if s!=old: p.write_text(s,encoding='utf-8')
+          # Regression checks on published machine-readable layer.
+          for name in ['index.html','foglalkozasok.html','korosztalyok.html','program-catalog.jsonld','program-knowledge.json','program-knowledge.jsonld','entity.jsonld','knowledge-index.json','llms.txt','llms-full.txt','ai.txt']:
+              p=Path(name)
+              if p.exists() and 'https://www.magyariskola.at/#org' in p.read_text(encoding='utf-8'):
+                  raise SystemExit(f'Legacy BMI #org remains in {name}')
+          PY
+      - name: Commit cleanup
+        run: |
+          git config user.name "BMI Entity Audit Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet && exit 0
+          git commit -m "Unify BMI program knowledge entity id"
+          git push
