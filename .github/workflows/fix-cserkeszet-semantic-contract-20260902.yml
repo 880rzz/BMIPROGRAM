@@ -1,0 +1,40 @@
+name: Fix Cserkeszet semantic contract 20260902
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-cserkeszet-semantic-contract-20260902.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Repair known semantic fields
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('zenebona-program.js');s=p.read_text(encoding='utf-8')
+          nap_old="napra.weekday='szerda';napra.weekdays=['szerda'];napra.pace='rendszeres';napra.when='Minden szerdán 17:00–18:00';"
+          if "napra.teacher='Varga Bernadette és Veres Tamás'" not in s:
+              s=s.replace(nap_old,nap_old+"\n  napra.teacher='Varga Bernadette és Veres Tamás';\n  if(!napra.location)napra.location='Bécsi Magyar Iskola, Schwedenplatz 2 / Laurenzerberg 5., 1010 Wien, Top 8';",1)
+          old="if(cserkeszet){cserkeszet.scheduleMode='irregular';cserkeszet.exactTodayEligible=false;}"
+          new="if(cserkeszet){cserkeszet.scheduleMode='irregular';cserkeszet.exactTodayEligible=false;cserkeszet.teacher='Póser-Piroska Ildikó';if(!cserkeszet.when)cserkeszet.when='Kéthetente szombatonként';if(!cserkeszet.location)cserkeszet.location='Cserkész Csapatotthon, Alliiertenstraße 2, 1020 Wien';}"
+          if old not in s: raise SystemExit('Cserkeszet runtime marker missing')
+          s=s.replace(old,new,1)
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Build semantic knowledge
+        run: node scripts/build-program-knowledge.mjs
+      - name: Validate 24000 recommendation states
+        run: node scripts/validate-matching.mjs
+      - name: Commit
+        run: |
+          git config user.name "BMI Ecosystem Audit Bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add zenebona-program.js program-knowledge.json program-knowledge.jsonld
+          git commit -m "Repair semantic contracts and build 28-program knowledge graph"
+          git push
