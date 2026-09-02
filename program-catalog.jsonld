@@ -1,0 +1,1069 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "EducationalOrganization",
+        "School"
+      ],
+      "@id": "https://www.magyariskola.at/#org",
+      "name": "Bécsi Magyar Iskola",
+      "alternateName": [
+        "BMI",
+        "Wiener Ungarische Schule"
+      ],
+      "url": "https://www.magyariskola.at/",
+      "foundingDate": "1987",
+      "description": "A Bécsi Magyar Iskolát 1987-ben alapították Bécsben; 2027-ben ünnepli fennállásának 40. évfordulóját.",
+      "sameAs": [
+        "https://hu.wikipedia.org/wiki/Bécsi_Magyar_Iskola"
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://programvalaszto.magyariskola.at/#programs",
+      "name": "Bécsi Magyar Iskola 2026/27 programkatalógus",
+      "numberOfItems": 26,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-borsofozde"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-ovoda"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-ovoda-baden"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-iskola-baden"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-aspern"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-seestadt"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-schweden-1"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-schweden-2"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-alapozo"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-rajztabla"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 11,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-varazsceruza"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 12,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-becscraft"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 13,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-kicsi-svung"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 14,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-mamut"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 15,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-gimi-svung"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 16,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-filmes"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 17,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-sakk"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 18,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-fecskeklub"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 19,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-vilagfa"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 20,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-napraforgocskak"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 21,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-cserkeszet"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 22,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-fotoklub"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 23,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-fokusz"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 24,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-kezdo-neptanc"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 25,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-mos"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 26,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-rekreacio"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-borsofozde",
+      "identifier": "borsofozde",
+      "name": "Borsófőzde | Schwedenplatz",
+      "url": "https://www.magyariskola.at/event-details/borsofozde-2026",
+      "description": "Zenés-mozgásos baba–mama közeg mondókákkal, énekkel és közösségi élménnyel. Kisgyermekkel olyan rendszeres magyar nyelvű közeget keresel, ahol a mondókák, zene és mozgás természetesen része a közös időnek. Életkornak megfelelő magyar nyelvi élmények, közös ritmus, mozgás és első közösségi kapcsolódások.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#org"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "learner",
+        "audienceType": "0–3 év"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "@id": "https://programvalaszto.magyariskola.at/#instance-borsofozde",
+        "name": "Borsófőzde | Schwedenplatz – 2026/27",
+        "description": "Minden hétfőn 10:00 órától · Schwedenplatz 2., 1010 Wien – 9-es terem · 40 € / hó · Első alkalom: 2026. szeptember 14.",
+        "courseMode": "onsite",
+        "location": {
+          "@type": "Place",
+          "name": "Schwedenplatz 2., 1010 Wien – 9-es terem"
+        },
+        "instructor": {
+          "@type": "Person",
+          "name": "Horányi Bori"
+        }
+      },
+      "keywords": "nyelv, mozgas"
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-ovoda",
+      "identifier": "ovoda",
+      "name": "Bécsi Magyar Óvoda | Schwedenplatz",
+      "url": "https://www.magyariskola.at/event-details/ovoda-2026",
+      "description": "Magyar nyelv, körjáték, mese és alkotás óvodásoknak támogató magyar közösségben. Óvodás gyermekednek kevés a rendszeres magyar kortársközeg, vagy szeretnéd, hogy játék közben is természetesen használja a magyar nyelvet. Magyar beszédhelyzetek, mese, körjáték, alkotás és stabil óvodás közösség.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#org"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "learner",
+        "audienceType": "3–6 év"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "@id": "https://programvalaszto.magyariskola.at/#instance-ovoda",
+        "name": "Bécsi Magyar Óvoda | Schwedenplatz – 2026/27",
+        "description": "Szombatonként 10:00–12:00 · Schwedenplatz 2/top 9, 1010 Wien · 150 € / félév · Új érdeklődőknek egy próbaóra lehetséges.",
+        "courseMode": "onsite",
+        "location": {
+          "@type": "Place",
+          "name": "Schwedenplatz 2/top 9, 1010 Wien"
+        },
+        "instructor": [
+          {
+            "@type": "Person",
+            "name": "Bajka Kinga Csengele"
+          },
+          {
+            "@type": "Person",
+            "name": "Noszkó Niki"
+          }
+        ]
+      },
+      "keywords": "nyelv, alkotas, mozgas"
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-ovoda-baden",
+      "identifier": "ovoda-baden",
+      "name": "Bécsi Magyar Óvoda | Baden",
+      "url": "https://www.magyariskola.at/event-details/ovoda-baden-2026",
+      "description": "Magyar nyelvű óvodás közösség Badenben játékkal, mesével és kulturális kapcsolódással. Baden környékén keresel óvodás gyermekednek rendszeres magyar nyelvű közösséget, hogy ne csak otthon találkozzon a magyar nyelvvel. Játékos magyar nyelvhasználat, mese, alkotás, mozgás és helyi magyar kortársközeg.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#org"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "learner",
+        "audienceType": "3–6 év"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "@id": "https://programvalaszto.magyariskola.at/#instance-ovoda-baden",
+        "name": "Bécsi Magyar Óvoda | Baden – 2026/27",
+        "description": "Csütörtökönként 16:00–18:00 · Friedrich-Schiller-Platz 1, 2500 Baden · 150 € / félév · Első alkalom: 2026. szeptember 17. · A jelentkezést követően próbaalkalom biztosított.",
+        "courseMode": "onsite",
+        "location": {
+          "@type": "Place",
+          "name": "Friedrich-Schiller-Platz 1, 2500 Baden"
+        },
+        "instructor": [
+          {
+            "@type": "Person",
+            "name": "Telenkó Éva"
+          },
+          {
+            "@type": "Person",
+            "name": "Makfalvi Rita"
+          }
+        ]
+      },
+      "keywords": "nyelv, alkotas, mozgas"
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-iskola-baden",
+      "identifier": "iskola-baden",
+      "name": "Magyar Iskola Badenben – „Ahol a magyar szó élménnyé válik”",
+      "url": "https://www.magyariskola.at/event-details/iskolabaden-2026",
+      "description": "Játékos, mesés magyar nyelvi foglalkozás 1. és 2. osztályos gyermekeknek Badenben. A gyermek német nyelvű iskolai környezetben tanul, és szeretnéd játékosan erősíteni a magyar szókincsét, beszédét és nyelvi biztonságát. Korosztályhoz illő magyar nyelvi gyakorlás, mesés feladatok és magyar kortárs közeg Badenben.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#org"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "learner",
+        "audienceType": "7–8 év / 1–2. osztály"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "@id": "https://programvalaszto.magyariskola.at/#instance-iskola-baden",
+        "name": "Magyar Iskola Badenben – „Ahol a magyar szó élménnyé válik” – 2026/27",
+        "description": "Minden kedden 16:00–17:30 · Johannesgasse 9, 2500 Baden · 60 € / hó vagy 300 € / félév · Első alkalom: 2026. szeptember 15. · Nyílt próbaalkalom: 2026. szeptember 8. 16:00.",
+        "courseMode": "onsite",
+        "location": {
+          "@type": "Place",
+          "name": "Johannesgasse 9, 2500 Baden"
+        },
+        "instructor": [
+          {
+            "@type": "Person",
+            "name": "Makfalvi Rita"
+          },
+          {
+            "@type": "Person",
+            "name": "beszédfejlesztő pedagógus"
+          }
+        ]
+      },
+      "keywords": "nyelv"
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-aspern",
+      "identifier": "aspern",
+      "name": "Magyar nyelv tanítás | Aspern",
+      "url": "https://www.magyariskola.at/event-details/magyaroktatas-kedd-2026",
+      "description": "Kisiskolások magyar nyelvi fejlesztése játékos, családias közegben Aspernben. Kisiskolás gyermekednek rendszeres magyar nyelvi gyakorlásra és magyarul beszélő kortársakra van szüksége Aspern környékén. Szókincs, beszéd, olvasási-írási készségekhez kapcsolódó játékos gyakorlás és magyar közösségi élmény.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#org"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "learner",
+        "audienceType": "6–10 év / 1–4. osztály"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "@id": "https://programvalaszto.magyariskola.at/#instance-aspern",
+        "name": "Magyar nyelv tanítás | Aspern – 2026/27",
+        "description": "Keddenként 15:30–17:00 · GTVS Wulzendorfstraße 1, 1220 Wien – zöld csoportszoba · 180 € / félév · Első alkalom: 2026. szeptember 29. · Van lehetőség próbaalkalomra.",
+        "courseMode": "onsite",
+        "location": {
+          "@type": "Place",
+          "name": "GTVS Wulzendorfstraße 1, 1220 Wien – zöld csoportszoba"
+        },
+        "instructor": {
+          "@type": "Person",
+          "name": "Schneider Erzsébet"
+        }
+      },
+      "keywords": "nyelv"
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-seestadt",
+      "identifier": "seestadt",
+      "name": "Magyar nyelv tanítás | Seestadt",
+      "url": "https://www.magyariskola.at/event-details/magyarnyelv-szerda-2026",
+      "description": "Magyar nyelv, játék, vers, ének és dramatizálás kisiskolásoknak Seestadtban. Seestadtban élő kisiskolásnak keresel olyan magyar közeget, ahol rendszeresen beszélhet, játszhat és tanulhat magyarul. Magyar szókincs, beszéd és szövegértés támogatása versekkel, énekkel, dramatizálással és közösségi helyzetekkel.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#org"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "learner",
+        "audienceType": "6–10 év / 1–4. osztály"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "@id": "https://programvalaszto.magyariskola.at/#instance-seestadt",
+        "name": "Magyar nyelv tanítás | Seestadt – 2026/27",
+        "description": "Szerdánként 16:00–17:30 · Bildungscampus könyvtár, Sonnenallee 116, 1220 Wien · 180 € / félév · Első alkalom: 2026. szeptember 30. · Van lehetőség próbaalkalomra.",
+        "courseMode": "onsite",
+        "location": {
+          "@type": "Place",
+          "name": "Bildungscampus könyvtár, Sonnenallee 116, 1220 Wien"
+        },
+        "instructor": {
+          "@type": "Person",
+          "name": "Dipl.-Päd. Schneider Erzsébet"
+        }
+      },
+      "keywords": "nyelv"
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-schweden-1",
+      "identifier": "schweden-1",
+      "name": "Magyar nyelv tanítás | Schwedenplatz | 1-es csoport",
+      "url": "https://www.magyariskola.at/event-details/magyarnyelv-schwedenplatz-1",
+      "description": "Magyar nyelv és kultúra 6–10 éveseknek, minden szombaton 10:00–12:00 között. 6–10 éves gyermekednek rendszeres, heti magyar nyelvi közegre van szüksége Bécs központjában. Minden szombati magyar nyelv- és kultúragyakorlás az életkorához illő kortárscsoportban.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#org"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "learner",
+        "audienceType": "6–10 év"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "@id": "https://programvalaszto.magyariskola.at/#instance-schweden-1",
+        "name": "Magyar nyelv tanítás | Schwedenplatz | 1-es csoport – 2026/27",
+        "description": "Minden szombaton 10:00–12:00 · Schwedenplatz 2/8., 1010 Wien · 180 € / félév · Első alkalom: 2026. szeptember 19. · Van lehetőség próbaalkalomra.",
+        "courseMode": "onsite",
+        "location": {
+          "@type": "Place",
+          "name": "Schwedenplatz 2/8., 1010 Wien"
+        },
+        "instructor": {
+          "@type": "Person",
+          "name": "Kiss Ágnes"
+        }
+      },
+      "keywords": "nyelv"
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-schweden-2",
+      "identifier": "schweden-2",
+      "name": "Magyar nyelv tanítás | Schwedenplatz | 2-es csoport",
+      "url": "https://www.magyariskola.at/event-details/magyarnyelv-schwedenplatz-2",
+      "description": "Magyar nyelv és kultúra 10–14 éveseknek, kéthetente szombaton 12:00–14:00 között. 10–14 éves gyermekednek vagy fiatalodnak korosztályához illő magyar nyelvi közeg kell, de a heti alkalomnál ritkább ritmus megfelelőbb. Kétheti magyar nyelv- és kultúragyakorlás hasonló korú kortársakkal.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#org"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "learner",
+        "audienceType": "10–14 év"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "@id": "https://programvalaszto.magyariskola.at/#instance-schweden-2",
+        "name": "Magyar nyelv tanítás | Schwedenplatz | 2-es csoport – 2026/27",
+        "description": "Kéthetente szombatonként 12:00–14:00 · Schwedenplatz 2/8., 1010 Wien · 180 € / félév · Első alkalom: 2026. szeptember 19. · Van lehetőség próbaalkalomra.",
+        "courseMode": "onsite",
+        "location": {
+          "@type": "Place",
+          "name": "Schwedenplatz 2/8., 1010 Wien"
+        },
+        "instructor": {
+          "@type": "Person",
+          "name": "Kiss Ágnes"
+        }
+      },
+      "keywords": "nyelv"
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-alapozo",
+      "identifier": "alapozo",
+      "name": "Alapozó Terápia | Schwedenplatz",
+      "url": "https://www.magyariskola.at/event-details/alapozoterapia-2026",
+      "description": "Kiscsoportos, mozgásalapú idegrendszeri fejlesztés 5–10 éves gyermekeknek. 5–10 éves gyermekednek strukturált mozgásos támogatást keresel a koordináció, figyelem és feladattartás erősítéséhez. Kiscsoportos, szakember által vezetett mozgásos gyakorlatok és szülőkonzultáció a fejlődési célok támogatására.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#org"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "learner",
+        "audienceType": "5–10 év"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "@id": "https://programvalaszto.magyariskola.at/#instance-alapozo",
+        "name": "Alapozó Terápia | Schwedenplatz – 2026/27",
+        "description": "Kedden és csütörtökön 13:30–15:00 · Schwedenplatz 2., 1010 Wien · 270 € / 9 alkalmas bérlet (8 gyermekfoglalkozás + 1 szülőkonzultáció) · Első alkalom: 2026. szeptember 15.",
+        "courseMode": "onsite",
+        "location": {
+          "@type": "Place",
+          "name": "Schwedenplatz 2., 1010 Wien"
+        },
+        "instructor": {
+          "@type": "Person",
+          "name": "Horányi Bori"
+        }
+      },
+      "keywords": "mozgas"
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-rajztabla",
+      "identifier": "rajztabla",
+      "name": "RAJZTÁBLA – Rajzfoglalkozás | Schwedenplatz",
+      "url": "https://www.magyariskola.at/event-details/rajztabla-2026",
+      "description": "Rajzi technika, kompozíció és árnyékolás 10–16 éveseknek, biztos vizuális alapokkal. A gyermek szeret rajzolni, de strukturált segítségre van szüksége a technika, arányok, perspektíva és vizuális gondolkodás fejlődéséhez. Biztosabb rajzi alapok, tudatosabb eszközhasználat, kompozíció, fény-árnyék és perspektíva.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#org"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "learner",
+        "audienceType": "10–16 év"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "@id": "https://programvalaszto.magyariskola.at/#instance-rajztabla",
+        "name": "RAJZTÁBLA – Rajzfoglalkozás | Schwedenplatz – 2026/27",
+        "description": "Minden hétfőn 16:30–18:00 · Schwedenplatz 2., 1010 Wien · 70 € / 4 alkalom · Első alkalom: 2026. szeptember 14.",
+        "courseMode": "onsite",
+        "location": {
+          "@type": "Place",
+          "name": "Schwedenplatz 2., 1010 Wien"
+        },
+        "instructor": {
+          "@type": "Person",
+          "name": "Boronkai Gabriella"
+        }
+      },
+      "keywords": "alkotas"
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-varazsceruza",
+      "identifier": "varazsceruza",
+      "name": "Varázsceruza | Schwedenplatz",
+      "url": "https://www.magyariskola.at/event-details/varazsceruza-2026",
+      "description": "Elmélyült kreatív alkotóműhely 9–14 éveseknek sokféle anyaggal és technikával. A gyermek szeret alkotni, és olyan nyugodt, magyar nyelvű műhelyt keresel, ahol többféle anyagot és technikát próbálhat ki. Kreatív önállóság, anyagismeret, elmélyült alkotás és közösségi élmény.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#org"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "learner",
+        "audienceType": "9–14 év"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "@id": "https://programvalaszto.magyariskola.at/#instance-varazsceruza",
+        "name": "Varázsceruza | Schwedenplatz – 2026/27",
+        "description": "Csütörtökönként 16:30–18:00 · Schwedenplatz 2/top 9, 1010 Wien · 60 € / hónap · Első alkalom: 2026. szeptember 17. · Van lehetőség próbaalkalomra.",
+        "courseMode": "onsite",
+        "location": {
+          "@type": "Place",
+          "name": "Schwedenplatz 2/top 9, 1010 Wien"
+        },
+        "instructor": {
+          "@type": "Person",
+          "name": "Bajka Kinga Csengele"
+        }
+      },
+      "keywords": "alkotas"
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-becscraft",
+      "identifier": "becscraft",
+      "name": "BÉCS-CRAFT Workshop | Schwedenplatz",
+      "url": "https://www.magyariskola.at/event-details/becscraft-2026",
+      "description": "Minecraft, építészet, történelem és helyszíni mérés egy közös bécsi projektben. A gyermeket a Minecraft és a digitális alkotás motiválja, és ezen keresztül szeretnéd közelebb hozni hozzá Bécs építészetét, történetét és a projektmunkát. Minecraft-alapú közös építés, helyszíni megfigyelés, mérés, történelmi és építészeti ismeretek.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#org"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "learner",
+        "audienceType": "6–15 év"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "@id": "https://programvalaszto.magyariskola.at/#instance-becscraft",
+        "name": "BÉCS-CRAFT Workshop | Schwedenplatz – 2026/27",
+        "description": "Hétfőnként 16:30–17:30 + havi helyszíni bejárás · Bécsi Magyar Iskola, Schwedenplatz 2. Top 8. · 50 € / 5 alkalom / hó · Első alkalom: 2026. szeptember 21.",
+        "courseMode": "onsite",
+        "location": {
+          "@type": "Place",
+          "name": "Bécsi Magyar Iskola, Schwedenplatz 2. Top 8."
+        },
+        "instructor": {
+          "@type": "Person",
+          "name": "Korchma Zsombor"
+        }
+      },
+      "keywords": "tech, alkotas"
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-kicsi-svung",
+      "identifier": "kicsi-svung",
+      "name": "Kicsi Svung – Dráma foglalkozás | Schwedenplatz",
+      "url": "https://www.magyariskola.at/event-details/kicsisvung-2026",
+      "description": "Színjátszás, improvizáció és magyar nyelvi önkifejezés 8–13 éves gyermekeknek. A gyermek szeretne bátrabban megszólalni, szerepelni vagy történeteket alkotni, és közben természetes magyar beszédhelyzetekre is szüksége van. Önbizalom, improvizáció, színpadi önkifejezés, együttműködés és aktív magyar nyelvhasználat.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#org"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "learner",
+        "audienceType": "8–13 év"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "@id": "https://programvalaszto.magyariskola.at/#instance-kicsi-svung",
+        "name": "Kicsi Svung – Dráma foglalkozás | Schwedenplatz – 2026/27",
+        "description": "Hétfőnként 16:30–18:00 · Schwedenplatz 2/top 9, 1010 Wien · 60 € / hó · Első alkalom: 2026. szeptember 14. · Nincs lehetőség próbaalkalomra.",
+        "courseMode": "onsite",
+        "location": {
+          "@type": "Place",
+          "name": "Schwedenplatz 2/top 9, 1010 Wien"
+        },
+        "instructor": {
+          "@type": "Person",
+          "name": "Bajka Kinga Csengele"
+        }
+      },
+      "keywords": "alkotas, nyelv"
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-mamut",
+      "identifier": "mamut",
+      "name": "Bécsi Magyar Musical Társulat (MaMUT) – Musical Stúdió",
+      "url": "https://www.magyariskola.at/event-details/mammut-2026",
+      "description": "Ének, tánc és színpadi játék saját musical-projektekben, magyar nyelvi közegben. A gyermek szeret énekelni, táncolni vagy szerepelni, és egy összetett színpadi közösségben szeretné kipróbálni magát. Ének, tánc, színpadi jelenlét, együttműködés és közös musical-projekt.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#org"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "learner",
+        "audienceType": "7–12 év"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "@id": "https://programvalaszto.magyariskola.at/#instance-mamut",
+        "name": "Bécsi Magyar Musical Társulat (MaMUT) – Musical Stúdió – 2026/27",
+        "description": "Csütörtökönként 16:30–18:00 · Bécsi Magyar Iskola, Schwedenplatz 2, Top 8–9 · 60 € / hó vagy 300 € / félév · Első alkalom: 2026. szeptember 10. – nyílt óra · Kezdőknek próbaalkalom / személyes találkozó kérhető.",
+        "courseMode": "onsite",
+        "location": {
+          "@type": "Place",
+          "name": "Bécsi Magyar Iskola, Schwedenplatz 2, Top 8–9"
+        },
+        "instructor": [
+          {
+            "@type": "Person",
+            "name": "Hierholcz Anna"
+          },
+          {
+            "@type": "Person",
+            "name": "Pecze Ádám"
+          }
+        ]
+      },
+      "keywords": "alkotas, mozgas"
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-gimi-svung",
+      "identifier": "gimi-svung",
+      "name": "Gimi Svung – Magyar nyelvű drámafoglalkozás | Schwedenplatz",
+      "url": "https://www.magyariskola.at/event-details/gimisvung-2026",
+      "description": "Improvizáció, drámaírás és közös színpadi alkotás 14–18 éveseknek magyar nyelven. A kamasz magyarul is szeretne önazonosan kommunikálni, kreatívan megszólalni és hasonló korú magyar fiatalokhoz kapcsolódni. Improvizáció, drámaírás, önkifejezés, közös alkotás és magyar kortársközösség.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#org"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "learner",
+        "audienceType": "14–18 év"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "@id": "https://programvalaszto.magyariskola.at/#instance-gimi-svung",
+        "name": "Gimi Svung – Magyar nyelvű drámafoglalkozás | Schwedenplatz – 2026/27",
+        "description": "Péntekenként 16:30–18:00 · Bécsi Magyar Iskola, 1010 Wien, Schwedenplatz 2/9. · 70 € / fő / 4 alkalom · Első alkalom: 2026. szeptember 18.",
+        "courseMode": "onsite",
+        "location": {
+          "@type": "Place",
+          "name": "Bécsi Magyar Iskola, 1010 Wien, Schwedenplatz 2/9."
+        },
+        "instructor": {
+          "@type": "Person",
+          "name": "Pohl Balázs"
+        }
+      },
+      "keywords": "alkotas, nyelv"
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-filmes",
+      "identifier": "filmes",
+      "name": "Filmes Műhely Workshop | Schwedenplatz",
+      "url": "https://www.magyariskola.at/event-details/filmesmuhely-2026",
+      "description": "Forgatókönyv, kamera, hang, rendezés és vágás egy teljes tanéves közös filmprojektben. A fiatal érdeklődik a filmkészítés iránt, de szeretné átlátni és kipróbálni a teljes folyamatot az ötlettől a vágásig, csapatban. Forgatókönyv, kamera, hang, rendezés, vágás és egy közösen elkészített filmprojekt tapasztalata.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#org"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "learner",
+        "audienceType": "13–17 év"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "@id": "https://programvalaszto.magyariskola.at/#instance-filmes",
+        "name": "Filmes Műhely Workshop | Schwedenplatz – 2026/27",
+        "description": "Minden szerdán 15:30–17:00 · Bécsi Magyar Iskola, Schwedenplatz – Nagyterem · 60 € / hó · Első alkalom: 2026. szeptember 23.",
+        "courseMode": "onsite",
+        "location": {
+          "@type": "Place",
+          "name": "Bécsi Magyar Iskola, Schwedenplatz – Nagyterem"
+        },
+        "instructor": {
+          "@type": "Person",
+          "name": "Dr. Trencsényi Klára DLA"
+        }
+      },
+      "keywords": "alkotas, tech"
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-sakk",
+      "identifier": "sakk",
+      "name": "Sakk és Gondolkodásfejlesztés | Schwedenplatz",
+      "url": "https://www.magyariskola.at/event-details/sakk-2026",
+      "description": "Sakkfeladványok, taktikai megnyitások és játszmák a logika, stratégiai gondolkodás és koncentráció fejlesztésére. Logikai kihívást, stratégiai gondolkodást és koncentrációt fejlesztő, játékos közeget keresel. Sakkfeladványok, megnyitások és játszmák révén tudatosabb tervezés, figyelem és stratégiai gondolkodás.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#org"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "learner",
+        "audienceType": "6+"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "@id": "https://programvalaszto.magyariskola.at/#instance-sakk",
+        "name": "Sakk és Gondolkodásfejlesztés | Schwedenplatz – 2026/27",
+        "description": "Havonta 1 alkalommal, szombatonként 13:00–15:00 · Bécsi Magyar Iskola, Schwedenplatz 2, Top 8 (TV-s terem) · 6–14 év: 20 € / fő / óra; 14 év felett: 25 € / fő / óra; próbaalkalom: 10 € · Első alkalom: 2026. szeptember 26.",
+        "courseMode": "onsite",
+        "location": {
+          "@type": "Place",
+          "name": "Bécsi Magyar Iskola, Schwedenplatz 2, Top 8 (TV-s terem)"
+        },
+        "instructor": {
+          "@type": "Person",
+          "name": "Fersztl Barnabás"
+        }
+      },
+      "keywords": "logika"
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-fecskeklub",
+      "identifier": "fecskeklub",
+      "name": "Fecske Klub | Schwedenplatz",
+      "url": "https://www.magyariskola.at/event-details/fecskeklub-2026",
+      "description": "Játékos, képekkel és rövid videókkal kísért magyar kultúrtörténeti felfedezés, beszélgetéssel és kreatív alkotással 8–14 éveseknek. A gyermek beszél magyarul, de szeretnéd élményszerűen közelebb hozni hozzá a magyar kultúrát és történelmet, nem tankönyvszerű formában. Kultúrtörténeti felfedezés képekkel, videókkal, beszélgetéssel és kreatív alkotással.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#org"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "learner",
+        "audienceType": "8–14 év"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "@id": "https://programvalaszto.magyariskola.at/#instance-fecskeklub",
+        "name": "Fecske Klub | Schwedenplatz – 2026/27",
+        "description": "Keddenként 16:30–18:00; 1 × 90 perc · Bécsi Magyar Iskola – Schwedenplatz, 1010 Bécs, Schwedenplatz 2/8. · 52 € / hó vagy 187 € / félév · Első alkalom: 2026. október 20. · Ingyenes próbaóra: 2026. október 13., 16:30–18:00",
+        "courseMode": "onsite",
+        "location": {
+          "@type": "Place",
+          "name": "Bécsi Magyar Iskola – Schwedenplatz, 1010 Bécs, Schwedenplatz 2/8."
+        },
+        "instructor": {
+          "@type": "Person",
+          "name": "Falusi Dóra"
+        }
+      },
+      "keywords": "kulturtortenet, nyelv, alkotas"
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-vilagfa",
+      "identifier": "vilagfa",
+      "name": "Világfa Sárkányai | Schwedenplatz",
+      "url": "https://taltosdob.magyariskola.at",
+      "description": "6–14 éves gyermek dobcsapat magyar néphagyománnyal, közös dobolással és történetekkel. A gyermek számára élő, közösségi formában szeretnéd átadni a magyar néphagyományt, ritmust, történeteket és együtt zenélést. Közös dobolás, néphagyomány, történetek, ritmusélmény és összetartó gyermekközösség.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#org"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "learner",
+        "audienceType": "6–14 év"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "@id": "https://programvalaszto.magyariskola.at/#instance-vilagfa",
+        "name": "Világfa Sárkányai | Schwedenplatz – 2026/27",
+        "description": "Havi 1 alkalom, jellemzően szombatonként 16:00-tól; az első félév szeptembertől februárig tart · Schwedenplatz 2. / Laurenzerberg 5., 1010 Wien · 70 € / fő / félév; a második félév szintén 70 € / fő · Első alkalom: 2026. szeptember 27. (vasárnap)",
+        "courseMode": "onsite",
+        "location": {
+          "@type": "Place",
+          "name": "Schwedenplatz 2. / Laurenzerberg 5., 1010 Wien"
+        },
+        "instructor": {
+          "@type": "Person",
+          "name": "Hupczik Andrea"
+        }
+      },
+      "keywords": "nyelv, mozgas, alkotas"
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-napraforgocskak",
+      "identifier": "napraforgocskak",
+      "name": "Napraforgócskák – Néptánc kicsiknek | Schwedenplatz",
+      "url": "https://napraforgok.at/r%C3%B3lunk#napraforgocskak",
+      "description": "Magyar gyermeknéptánc, zene és közösség 6–15 éveseknek a Napraforgók vezetésével. A gyermek szeret mozogni és zenére táncolni, miközben magyar közösséghez és népi kultúrához is szeretnéd kapcsolni. Magyar néptánc, ritmus, zenei élmény, mozgáskoordináció és közösségi kötődés.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#org"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "learner",
+        "audienceType": "6–15 év"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "@id": "https://programvalaszto.magyariskola.at/#instance-napraforgocskak",
+        "name": "Napraforgócskák – Néptánc kicsiknek | Schwedenplatz – 2026/27",
+        "description": "Szerdánként 17:00–18:00; kéthetente Badenben is van hosszabb alkalom · Bécsi Magyar Iskola, Schwedenplatz 2 / Laurenzerberg 5., 1010 Wien, Top 8",
+        "courseMode": "onsite",
+        "location": {
+          "@type": "Place",
+          "name": "Bécsi Magyar Iskola, Schwedenplatz 2 / Laurenzerberg 5., 1010 Wien, Top 8"
+        },
+        "instructor": []
+      },
+      "keywords": "mozgas, nyelv"
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-cserkeszet",
+      "identifier": "cserkeszet",
+      "name": "Cserkészet | Alliiertenstrasse",
+      "url": "https://cserkesz.at/cserkesz-raj/",
+      "description": "Kiscserkész, cserkész és vándor korosztály magyar közösségben, természetben és hagyományőrző programokon. Magyar kortársközösséget, természetközeli programokat, önállósodást és közös élményeket keresel a gyermeknek vagy fiatalnak. Korosztályos cserkészközösség, természetben szerzett tapasztalatok, együttműködés és magyar kulturális kötődés.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#org"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "learner",
+        "audienceType": "5–22 év: kiscserkész 5–10, cserkész 10–16, vándor 17–22"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "@id": "https://programvalaszto.magyariskola.at/#instance-cserkeszet",
+        "name": "Cserkészet | Alliiertenstrasse – 2026/27",
+        "description": "Kéthetente szombaton 16:00–19:00 · Alliiertenstrasse 2, 1020 Wien",
+        "courseMode": "onsite",
+        "location": {
+          "@type": "Place",
+          "name": "Alliiertenstrasse 2, 1020 Wien"
+        },
+        "instructor": []
+      },
+      "keywords": "nyelv, mozgas"
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-fotoklub",
+      "identifier": "fotoklub",
+      "name": "Láss a Mesterek Szemével: VIPACH Felnőtt Fotóklub | Schwedenplatz",
+      "url": "https://www.magyariskola.at/event-details/fotoklub-2026",
+      "description": "Fotográfiai látásmód, alkotás és technika felnőtteknek, művészeti és művészettörténeti vezetéssel. Szeretsz fotózni, de szeretnél tudatosabban látni, technikailag fejlődni és inspiráló alkotói közösséghez kapcsolódni. Fotográfiai látásmód, technikai fejlődés, művészeti kontextus, közös elemzés és alkotói gyakorlat.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#org"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "learner",
+        "audienceType": "18+"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "@id": "https://programvalaszto.magyariskola.at/#instance-fotoklub",
+        "name": "Láss a Mesterek Szemével: VIPACH Felnőtt Fotóklub | Schwedenplatz – 2026/27",
+        "description": "Csütörtökönként 18:30–20:30 · Schwedenplatz 2., 1010 Wien · 15 € / fő / alkalom",
+        "courseMode": "onsite",
+        "location": {
+          "@type": "Place",
+          "name": "Schwedenplatz 2., 1010 Wien"
+        },
+        "instructor": {
+          "@type": "Person",
+          "name": "Póser-Piroska Ildikó"
+        }
+      },
+      "keywords": "kulturtortenet, tech, alkotas"
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-fokusz",
+      "identifier": "fokusz",
+      "name": "FÓKUSZ-CSOPORT | Schwedenplatz",
+      "url": "https://www.magyariskola.at/event-details/fokuszcsoport-2026",
+      "description": "Homloklebeny-tréning fókuszhoz, tervezéshez, időgazdálkodáshoz és mentális egyensúlyhoz. Nehezen tartod a fókuszt, szeretnél tudatosabban tervezni, jobban gazdálkodni az időddel vagy kiegyensúlyozottabban szervezni a mindennapokat. Strukturált gyakorlatok a fókusz, tervezés, időgazdálkodás, érzelmi szabályozás és mentális egyensúly támogatására.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#org"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "learner",
+        "audienceType": "18+"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "@id": "https://programvalaszto.magyariskola.at/#instance-fokusz",
+        "name": "FÓKUSZ-CSOPORT | Schwedenplatz – 2026/27",
+        "description": "A résztvevőkkel közösen egyeztetett sávokban; 10 alkalom kéthetente, 75 perc / alkalom · Schwedenplatz 2., 1010 Wien · 300 € / 10 alkalom (+ igény szerint 1 egyéni konzultáció)",
+        "courseMode": "onsite",
+        "location": {
+          "@type": "Place",
+          "name": "Schwedenplatz 2., 1010 Wien"
+        },
+        "instructor": {
+          "@type": "Person",
+          "name": "Horányi Bori"
+        }
+      },
+      "keywords": "jollet"
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-kezdo-neptanc",
+      "identifier": "kezdo-neptanc",
+      "name": "Kezdő néptánc felnőtteknek | Schwedenplatz",
+      "url": "https://napraforgok.at/r%C3%B3lunk#kezdocsoport",
+      "description": "Belépő szintű magyar néptánc közösségi formában, előzetes tánctudás nélkül is. Felnőttként szeretnél mozogni, magyar közösséghez kapcsolódni és néptáncot tanulni úgy, hogy nincs szükség előzetes tánctudásra. Belépő szintű néptánctudás, rendszeres mozgás, zenei és kulturális élmény, felnőtt közösség.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#org"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "learner",
+        "audienceType": "18+"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "@id": "https://programvalaszto.magyariskola.at/#instance-kezdo-neptanc",
+        "name": "Kezdő néptánc felnőtteknek | Schwedenplatz – 2026/27",
+        "description": "Hétfőnként 19:00–21:00 · Bécsi Magyar Iskola, Schwedenplatz 2 / Laurenzerberg 5., 1010 Wien, Top 8",
+        "courseMode": "onsite",
+        "location": {
+          "@type": "Place",
+          "name": "Bécsi Magyar Iskola, Schwedenplatz 2 / Laurenzerberg 5., 1010 Wien, Top 8"
+        },
+        "instructor": [
+          {
+            "@type": "Person",
+            "name": "Sipos Tibor"
+          },
+          {
+            "@type": "Person",
+            "name": "Orbán Dalma"
+          }
+        ]
+      },
+      "keywords": "mozgas, nyelv"
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-mos",
+      "identifier": "mos",
+      "name": "Microsoft Office Specialist (MOS) felkészítő tanfolyam",
+      "url": "https://mos.magyariskola.at",
+      "description": "Magyar nyelvű, gyakorlati Word-, Excel- és PowerPoint-képzés, célzott felkészítéssel a Microsoft Office Specialist vizsgára. A munkához Word-, Excel- vagy PowerPoint-tudásra van szükséged, szeretnéd rendszerezni a gyakorlati ismereteidet, és fontos a hivatalosan igazolható MOS-minősítés. Gyakorlati Office-feladatok, próbavizsga, célzott felkészítés és a választott csomaghoz tartozó MOS-vizsga.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#org"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "learner",
+        "audienceType": "18+"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "@id": "https://programvalaszto.magyariskola.at/#instance-mos",
+        "name": "Microsoft Office Specialist (MOS) felkészítő tanfolyam – 2026/27",
+        "description": "Online órák hétfőtől péntekig 9:00–12:00 között; a csoportbeosztás jelentkezés után készül · Online és Bécsben · 690 €-tól; a csomagok tartalmazzák a megjelölt számú MOS vizsgát",
+        "courseMode": "online",
+        "location": {
+          "@type": "Place",
+          "name": "Online és Bécsben"
+        },
+        "instructor": {
+          "@type": "Person",
+          "name": "Hupczik Andrea"
+        }
+      },
+      "keywords": "tech"
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-rekreacio",
+      "identifier": "rekreacio",
+      "name": "ReKreáció – Kreatív Közösségi Kuckó | Schwedenplatz",
+      "url": "https://www.magyariskola.at/event-details/rekreacio-2026",
+      "description": "Kreatív, befogadó felnőtt közösségi workshop, ahol hétköznapi vagy feleslegessé vált tárgyakból új, esztétikus és használható alkotások születnek környezettudatos szemlélettel. Felnőttként kreatív közösséget keresel, szeretnél kiszakadni a hétköznapi rutinból, alkotni és új értéket adni hétköznapi vagy feleslegessé vált tárgyaknak. Közös alkotás, kreatív feltöltődés, újrahasznosító szemlélet és rendszeresen találkozó befogadó közösség.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#org"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "learner",
+        "audienceType": "18+"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "@id": "https://programvalaszto.magyariskola.at/#instance-rekreacio",
+        "name": "ReKreáció – Kreatív Közösségi Kuckó | Schwedenplatz – 2026/27",
+        "description": "Vasárnaponként, meghirdetett időpontokban 10:00–13:00 · Bécsi Magyar Iskola, 1010 Wien, Schwedenplatz 2. Top 8. · 20 € / alkalom · Első alkalom: 2026. október 4.",
+        "courseMode": "onsite",
+        "location": {
+          "@type": "Place",
+          "name": "Bécsi Magyar Iskola, 1010 Wien, Schwedenplatz 2. Top 8."
+        },
+        "instructor": {
+          "@type": "Person",
+          "name": "Egri Mónika – meseíró"
+        }
+      },
+      "keywords": "alkotas"
+    }
+  ]
+}
