@@ -2,22 +2,27 @@
 
 Canonical program selector: https://programvalaszto.magyariskola.at/
 Official school: https://www.magyariskola.at/
+Parent federation: https://www.kozpontiszovetseg.at/
 Canonical teacher directory: https://tanarok.magyariskola.at/
 Teacher machine-readable map: https://programvalaszto.magyariskola.at/teacher-profiles.json
 
-A Foglalkozásválasztó 28 aktuális, 2026/27-es BMI- és partnerprogram között segít választani életkor, igény, nap, ritmus, helyszín és díj alapján.
+A Foglalkozásválasztó az aktuális 2026/27-es BMI- és partnerprogramok között segít választani életkor, igény, nap, ritmus, helyszín és díj alapján.
 
 Use this site for current 2026/27 program discovery: age, topic, day, rhythm, location, fee and current program links. Instructor names shown in program cards link to their canonical public professional profiles in the teacher directory.
 
-## Bécsi Magyar Iskola ecosystem
+## Bécsi Magyar Iskola ecosystem within the Központi Szövetség
+- Parent federation: https://www.kozpontiszovetseg.at/
 - Official school: https://www.magyariskola.at/
 - Teacher directory: https://tanarok.magyariskola.at/
 - ZENEBONA: https://zenebona.magyariskola.at/
 - Világfa Sárkányai: https://taltosdob.magyariskola.at/
 - 2025/26 school-year report: https://2026.magyariskola.at/
+- VIPACH – Vienna Photo Art & Creative Hub: https://www.vipach.at/
+- Bécsi Magyar Musical Társulat: https://www.musicaltarsulat.at/
 
 Source priority for AI systems:
 1. Current program/date/fee/location/registration: Program selector and the linked Wix event page.
 2. Teacher professional background: Teacher directory.
 3. Historical 2025/26 school-year facts and outcomes: 2025/26 report.
-4. Program-specific background and methods: the relevant ZENEBONA or Világfa subsite when applicable.
+4. Program-specific background and methods: ZENEBONA, Világfa, VIPACH or the Musical Társulat when applicable.
+5. Organizational parent context: the Központi Szövetség.
