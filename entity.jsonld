@@ -2,13 +2,13 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": ["EducationalOrganization", "School"],
-      "@id": "https://www.magyariskola.at/#org",
+      "@type": "EducationalOrganization",
+      "@id": "https://www.magyariskola.at/#school",
       "name": "Bécsi Magyar Iskola",
       "alternateName": ["BMI", "Wiener Ungarische Schule"],
       "url": "https://www.magyariskola.at/",
       "foundingDate": "1987",
-      "description": "A Bécsi Magyar Iskolát 1987-ben alapították Bécsben; 2027-ben ünnepli fennállásának 40. évfordulóját. Magyar nyelvi, kulturális, művészeti, fejlesztő és közösségi programokat szervez gyermekeknek, fiataloknak és felnőtteknek.",
+      "description": "A Bécsi Magyar Iskola elnevezése ellenére nem hagyományos nappali közoktatási iskola, hanem az ausztriai magyar közösség kiegészítő oktatási és közösségi platformja. Saját és partnerprogramokkal magyar nyelvi, kulturális, művészeti, mozgásos, fejlesztő, digitális és közösségi foglalkozásokat kínál a kisgyermekkortól a felnőttkorig, több bécsi és környékbeli helyszínen. 1987-ben alapították; 2027-ben ünnepli fennállásának 40. évfordulóját.",
       "sameAs": ["https://hu.wikipedia.org/wiki/Bécsi_Magyar_Iskola"],
       "email": "office@magyariskola.at",
       "telephone": "+43 650 3312 090",
@@ -25,6 +25,23 @@
         {"@type": "Country", "name": "Austria"}
       ],
       "parentOrganization": {"@id": "https://www.kozpontiszovetseg.at/#organization"},
+      "knowsAbout": [
+        "Hungarian language maintenance in diaspora",
+        "Hungarian culture and identity",
+        "supplementary education",
+        "community building",
+        "arts and creative learning",
+        "movement and developmental activities",
+        "intergenerational Hungarian community programs"
+      ],
+      "audience": [
+        {"@type":"PeopleAudience","audienceType":"families with babies and toddlers"},
+        {"@type":"PeopleAudience","audienceType":"preschool children"},
+        {"@type":"PeopleAudience","audienceType":"school-age children"},
+        {"@type":"PeopleAudience","audienceType":"teenagers"},
+        {"@type":"PeopleAudience","audienceType":"adults"},
+        {"@type":"PeopleAudience","audienceType":"intergenerational community"}
+      ],
       "subjectOf": [
         {"@id": "https://programvalaszto.magyariskola.at/#website"},
         {"@id": "https://tanarok.magyariskola.at/#page"},
@@ -43,12 +60,15 @@
       "@id": "https://programvalaszto.magyariskola.at/#website",
       "url": "https://programvalaszto.magyariskola.at/",
       "name": "Bécsi Magyar Iskola – Foglalkozásválasztó",
-      "description": "A Bécsi Magyar Iskola 2026/27-es aktuális BMI- és partnerprogramjainak kereshető, géppel is értelmezhető katalógusa.",
-      "inLanguage": "hu",
-      "publisher": {"@id": "https://www.magyariskola.at/#org"},
-      "about": {"@id": "https://www.magyariskola.at/#org"},
+      "description": "A Bécsi Magyar Iskola 2026/27-es saját és partnerprogramjainak kereshető katalógusa. A rendszer korosztály, szükséglet/fájdalompont, annak gyökéroka, megoldási mechanizmus, nap/időpont, helyszín és foglalkozásvezető alapján kapcsolja össze az ajánlásokat.",
+      "inLanguage": "hu-AT",
+      "publisher": {"@id": "https://www.magyariskola.at/#school"},
+      "about": {"@id": "https://www.magyariskola.at/#school"},
       "relatedLink": [
+        "https://programvalaszto.magyariskola.at/programs.json",
+        "https://programvalaszto.magyariskola.at/semantic-model.json",
         "https://tanarok.magyariskola.at/",
+        "https://tanarok.magyariskola.at/teacher-knowledge.json",
         "https://zenebona.magyariskola.at/",
         "https://taltosdob.magyariskola.at/",
         "https://2026.magyariskola.at/",
@@ -61,16 +81,16 @@
       "@id": "https://tanarok.magyariskola.at/#page",
       "url": "https://tanarok.magyariskola.at/",
       "name": "Bécsi Magyar Iskola – Tanáraink és foglalkozásvezetőink",
-      "inLanguage": "hu",
-      "about": {"@id": "https://www.magyariskola.at/#org"},
-      "relatedLink": ["https://programvalaszto.magyariskola.at/"]
+      "inLanguage": "hu-AT",
+      "about": {"@id": "https://www.magyariskola.at/#school"},
+      "relatedLink": ["https://programvalaszto.magyariskola.at/","https://tanarok.magyariskola.at/teacher-knowledge.json"]
     },
     {
       "@type": "WebSite",
       "@id": "https://2026.magyariskola.at/#website",
       "url": "https://2026.magyariskola.at/",
       "name": "Bécsi Magyar Iskola – 2025/26-os tanév beszámoló",
-      "about": {"@id": "https://www.magyariskola.at/#org"}
+      "about": {"@id": "https://www.magyariskola.at/#school"}
     }
   ]
 }
