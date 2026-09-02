@@ -1,0 +1,12 @@
+file:///home/runner/work/BMIPROGRAM/BMIPROGRAM/scripts/build-program-knowledge.mjs:27
+for(const p of enriched){if(!p.painPoint||!p.outcome)throw new Error(`Missing painPoint/outcome: ${p.id}`);if(!p.semantic.rootCauseIds.length)throw new Error(`Missing root cause: ${p.id}`);if(!p.semantic.solutionMechanismIds.length)throw new Error(`Missing solution mechanism: ${p.id}`);if(!(p.minAge>=0&&p.maxAge>=p.minAge))throw new Error(`Invalid age range: ${p.id}`);if(!p.when||!p.location||!p.teacher)throw new Error(`Missing schedule/location/teacher: ${p.id}`)}
+                                                                                                                                                                                                                                                                                                                                                                                                                             ^
+
+Error: Missing schedule/location/teacher: napraforgocskak
+    at file:///home/runner/work/BMIPROGRAM/BMIPROGRAM/scripts/build-program-knowledge.mjs:27:414
+    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+
+Node.js v22.23.2
+exit_code=1
