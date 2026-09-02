@@ -1,0 +1,41 @@
+name: Unify BMI school schema id fixed 20260902
+on:
+  push:
+    paths:
+      - '.github/workflows/unify-school-schema-id-fixed-20260902.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replace legacy BMI org id with canonical school id
+        shell: python
+        run: |
+          from pathlib import Path
+          files=['index.html','foglalkozasok.html','korosztalyok.html','gyik.html','entity.jsonld','program-catalog.jsonld','.github/workflows/generate-program-machine-data-20260902.yml']
+          changed=[]
+          for name in files:
+              p=Path(name)
+              if not p.exists():
+                  continue
+              s=p.read_text(encoding='utf-8')
+              n=s.replace('https://www.magyariskola.at/#org','https://www.magyariskola.at/#school')
+              if n!=s:
+                  p.write_text(n,encoding='utf-8')
+                  changed.append(name)
+          print('changed:', changed)
+      - name: Commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "BMI Schema Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo 'No schema ID changes required.'
+            exit 0
+          fi
+          git commit -m "Unify BMI school schema id with Wix canonical graph"
+          git push
