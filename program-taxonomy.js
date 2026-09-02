@@ -54,6 +54,23 @@ function classify(p){
  return fixed[p.id]||null;
 }
 
+function addUnique(list,value){
+ list=Array.isArray(list)?list.slice():[];
+ if(list.indexOf(value)===-1)list.push(value);
+ return list;
+}
+
+/*
+ * Relationship contract for the six-category graph.
+ * A program whose canonical primary category is "Mozgás, tánc és zene" must
+ * also be reachable from the user need "Táncot, zenét, hagyományt és
+ * közösségi mozgást". This keeps category, recommendation and machine-readable
+ * graphs aligned and prevents Zenebona-like omissions.
+ */
+function normalizeRelationships(p,category){
+ if(category==='mozgas')p.needs=addUnique(p.needs,'tanc-hagyomany');
+}
+
 function apply(){
  var cfg=window.BMI_FINDER;
  if(!cfg||!Array.isArray(cfg.programs))return false;
@@ -63,6 +80,7 @@ function apply(){
    var category=classify(p);
    if(!category){unknown.push(p.id||p.name||'unknown');return;}
    p.primaryCategory6=category;
+   normalizeRelationships(p,category);
  });
  if(unknown.length){
    console.error('BMI taxonomy: uncategorized current program(s):',unknown);
@@ -73,6 +91,6 @@ function apply(){
  return unknown.length===0;
 }
 
-window.BMI_PROGRAM_TAXONOMY={categories:categories,fixed:fixed,classify:classify,apply:apply};
+window.BMI_PROGRAM_TAXONOMY={categories:categories,fixed:fixed,classify:classify,apply:apply,normalizeRelationships:normalizeRelationships};
 if(!apply())document.addEventListener('DOMContentLoaded',apply,{once:true});
 })();
