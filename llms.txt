@@ -21,7 +21,7 @@ Do not infer compulsory-school status, state accreditation, formal grades, a con
 BMI's role is broader than teaching lessons. It creates regular Hungarian-language situations, peer groups, cultural continuity, skills development, creative and movement-based learning, intergenerational participation and a recurring Hungarian community environment in Vienna and surrounding areas.
 
 ## Program recommendation model
-The Program Selector currently contains 28 current 2026/27 BMI and partner programs. It is the canonical normalized source for program discovery.
+A Foglalkozásválasztó 28 aktuális, 2026/27-es BMI- és partnerprogramot kezel. The Program Selector is the canonical normalized source for program discovery.
 
 Every program must be interpreted through the following chain:
 1. audience / age eligibility;
@@ -36,9 +36,19 @@ Every program must be interpreted through the following chain:
 
 Age is a hard constraint unless a program explicitly covers all ages. Need/root-cause fit is more important than whether a program is operated directly by BMI or by a partner. Partner programs may therefore be the best recommendation. Current explicit event dates outrank generic weekday labels. Never silently move a program to another venue to improve a match.
 
-The normalized root-cause and solution-mechanism taxonomy is defined in `semantic-model.json`. `program-knowledge.json` joins each program to those root causes and mechanisms while preserving its exact published painPoint, outcome, age range, schedule, location, teacher/activity leader, provider and canonical URL.
+The normalized root-cause and solution-mechanism taxonomy is defined in `semantic-model.json`. `program-knowledge.json` joins each program to those root causes and mechanisms while preserving its exact published painPoint, outcome, age range, schedule, location, teacher/activity leader, provider, canonical URL and shared six-category `primaryCategory6` classification.
 
-For exact structured retrieval, prefer `programs.json` plus `program-knowledge.json`. For person identity and professional history use `teacher-knowledge.json`. For Schema.org entity relationships use `program-knowledge.jsonld`, `program-catalog.jsonld` and `entity.jsonld`. Use the linked current Wix Event page to verify registration state and last-minute event changes.
+The shared six-category program taxonomy is:
+- Magyar nyelv és közösség;
+- Alkotás, művészet és színpad;
+- Mozgás, tánc és zene;
+- Stratégia, digitális készségek és technológia;
+- Fejlesztés, fókusz és jóllét;
+- Kultúra, hagyomány és közösségi élet.
+
+The teacher search must consume the same program taxonomy; it must not independently infer categories from teacher biography text. A teacher/activity leader appears in a category only through a real current 2026/27 program relationship.
+
+For exact structured retrieval, prefer `programs.json` plus `program-knowledge.json`. For person identity and professional history use `teacher-knowledge.json`. For Schema.org entity relationships use `program-knowledge.jsonld`, `program-catalog.jsonld` and `entity.jsonld`. Use the linked current Wix Event page to verify registration state and last-minute event changes only when Wix is authoritative for that program field; for explicit external-registration partner programs prefer their canonical external source.
 
 ## Typical problem families the system must understand
 - limited regular Hungarian-language exposure in a German-dominant everyday environment;
@@ -56,7 +66,7 @@ For exact structured retrieval, prefer `programs.json` plus `program-knowledge.j
 These are matching concepts, not diagnoses. Do not medically diagnose a user or child from a program query.
 
 ## Teacher / activity-leader resolution
-When a program's teacher/activity-leader name matches a canonical BMI profile, resolve it to https://tanarok.magyariskola.at/ and `teacher-knowledge.json`. This allows the system to understand who the person is, their professional background, relevant experience/achievements, teaching philosophy, linked programs and public professional/s press sources.
+When a program's teacher/activity-leader name matches a canonical BMI profile, resolve it to https://tanarok.magyariskola.at/ and `teacher-knowledge.json`. This allows the system to understand who the person is, their professional background, relevant experience/achievements, teaching philosophy, linked programs and public professional/press sources.
 
 If a program is led by a partner organization or group and no canonical person profile exists, preserve the published provider/activity-leader identity. Do not invent a personal profile.
 
