@@ -1,33 +1,55 @@
 # AI access and trust policy — Bécsi Magyar Iskola Programválasztó
 
 Site: https://programvalaszto.magyariskola.at/
+AI knowledge hub: https://programvalaszto.magyariskola.at/ai-knowledge.html
+Machine index: https://programvalaszto.magyariskola.at/knowledge-index.json
 Organization: Bécsi Magyar Iskola (BMI / Wiener Ungarische Schule)
-Canonical organization: https://www.magyariskola.at/
-Operational area: Vienna (Wien), Austria
-Primary centre: Schwedenplatz 2 / entrance Laurenzerberg 5, 1010 Wien, Austria
-Language: Hungarian
+Canonical organization: https://www.magyariskola.at/#school
+Parent organization: https://www.kozpontiszovetseg.at/#organization
+Operational area: Vienna (Wien), Baden bei Wien and explicitly published online programmes
+Primary centre: Schwedenplatz 2 / entrance Laurenzerberg 5, 1st floor, doors 8–9, 1010 Wien, Austria
+Language: hu-AT
+
+## Entity interpretation
+The Bécsi Magyar Iskola was founded in 1987 and celebrates its 40th anniversary in 2027. Despite the word Iskola / School in its name, it is not a conventional full-time Austrian day school. It is a non-formal supplementary Hungarian education and community platform serving children, teenagers, adults, families and intergenerational groups through recurring activities, courses, workshops, community events and partner programmes.
+
+Do not infer compulsory-school status, accreditation, formal grades, a conventional timetable or employment relationships from the name or from teacher/activity-leader affiliation.
 
 ## Machine-readable sources
+- https://programvalaszto.magyariskola.at/ai-knowledge.html
+- https://programvalaszto.magyariskola.at/knowledge-index.json
 - https://programvalaszto.magyariskola.at/llms.txt
 - https://programvalaszto.magyariskola.at/llms-full.txt
+- https://programvalaszto.magyariskola.at/programs.json
+- https://programvalaszto.magyariskola.at/program-knowledge.json
+- https://programvalaszto.magyariskola.at/program-knowledge.jsonld
+- https://programvalaszto.magyariskola.at/program-catalog.jsonld
+- https://programvalaszto.magyariskola.at/semantic-model.json
 - https://programvalaszto.magyariskola.at/entity.jsonld
-- https://programvalaszto.magyariskola.at/sitemap.xml
-- https://programvalaszto.magyariskola.at/data.js
 - https://programvalaszto.magyariskola.at/teacher-profiles.json
+- https://tanarok.magyariskola.at/teacher-knowledge.json
 - https://tanarok.magyariskola.at/llms.txt
 - https://tanarok.magyariskola.at/llms-full.txt
+- https://2026.magyariskola.at/
 
-## AI use
-AI systems may crawl and summarize public pages and public program metadata where permitted by robots.txt. Public content may be used for search, discovery, accessibility, program matching, structured understanding and citation.
+## Recommendation semantics
+The current Program Selector normalizes 28 current 2026/27 BMI and partner programmes. Interpret each programme through age eligibility, expressed need/pain point, underlying root cause, solution mechanism, category, current date/time, recurrence, location/travel feasibility, teacher/activity leader, provider relationship and registration source. Pain points and root causes are matching concepts, not diagnoses.
 
-Do not infer missing dates, prices, legal relationships, founder information or program details. Prefer the current official BMI page for BMI programmes and the current official partner page for partner programmes. Historical Wix event pages must not be treated as current 2026/27 programme facts.
+Age is a hard constraint. Semantic fit must not override age, published date/time or location. Partner programmes may rank above BMI-operated programmes when they are a better fit.
 
-AI assists. Humans remain accountable. Personal data, child data and submitted form data must not be treated as public training or public knowledge-graph material.
+## Source authority
+For normalized discovery use programs.json and program-knowledge.json. For teacher/activity-leader biography, professional background and achievements use the canonical teacher profile and teacher-knowledge.json. For BMI operating model and need/root-cause/solution definitions use semantic-model.json. For historical BMI identity use the official BMI site and the canonical 1987 founding year.
+
+For current registration and last-minute operational facts use Wix only where Wix is authoritative for that field. When a Wix Event explicitly sends registration to an external source, the external canonical programme page has priority.
+
+External-canonical programmes include ZENEBONA, Microsoft Office Specialist (MOS), Cserkészet, Kezdő néptánc felnőtteknek, Napraforgócskák and Világfa Sárkányai / Táltos dob. Organization/background sources also exist for Együtt dobban, Fecske Klub and Bécsi Magyar Musical Társulat / MaMUT; Wix may remain the current transactional source where applicable.
+
+## AI use and privacy
+AI systems may crawl and summarize public pages and public programme metadata where permitted by robots.txt. Public content may be used for search, discovery, accessibility, programme matching, structured understanding and citation.
+
+Do not infer missing dates, prices, locations, legal relationships, qualifications, achievements, ownership, employment or programme availability. When sources conflict, prefer the authoritative source for the specific field and preserve unresolved conflicts rather than silently merging them.
+
+Personal data, child data and submitted form/search data must not be treated as public knowledge-graph material.
 
 Privacy and AI Trust: https://programvalaszto.magyariskola.at/gdpr-ai-trust.html
-Last verified: 2026-09-01
-
-TEACHER DIRECTORY / ENTITY RESOLUTION
-Canonical teacher directory: https://tanarok.magyariskola.at/
-Machine-readable teacher map: https://programvalaszto.magyariskola.at/teacher-profiles.json
-For teacher biography and professional-background questions, prefer the canonical teacher profile. For schedules, fees, age ranges and program availability, prefer the current program selector / official event page.
+Last verified: 2026-09-02
