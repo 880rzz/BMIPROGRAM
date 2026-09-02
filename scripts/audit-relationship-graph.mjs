@@ -88,6 +88,7 @@ if(fs.existsSync('programs.json')){
   const gen=JSON.parse(read('programs.json'));
   const gp=Array.isArray(gen.programs)?gen.programs:[];
   assert(gp.length===28,`programs.json expected 28 programs, got ${gp.length}`);
+  assert(gen.identity?.school?.id==='https://www.magyariskola.at/#school','programs.json canonical school entity must be #school');
   const byId=new Map(gp.map(p=>[p.id,p]));
   for(const p of cfg.programs){
     const g=byId.get(p.id);
@@ -99,9 +100,13 @@ if(fs.existsSync('programs.json')){
   }
 }
 
+for(const file of ['index.html','foglalkozasok.html','korosztalyok.html','gyik.html','entity.jsonld','program-catalog.jsonld','program-knowledge.jsonld','programs.json','program-knowledge.json']){
+  if(fs.existsSync(file))assert(!read(file).includes('https://www.magyariskola.at/#org'),`Legacy #org entity remains in ${file}`);
+}
+
 if(fs.existsSync('teacher-program-audit.json')){
   const report=JSON.parse(read('teacher-program-audit.json'));
   assert(!Array.isArray(report.problems)||report.problems.length===0,`teacher-program-audit contains ${report.problems.length} problem(s)`);
 }
 
-console.log(`PASS relationship graph: ${cfg.programs.length} programs, ${needIds.size} needs, ${catIds.size} primary categories, canonical URLs and teacher edges consistent.`);
+console.log(`PASS relationship graph: ${cfg.programs.length} programs, ${needIds.size} needs, ${catIds.size} primary categories, canonical URLs, school entity and teacher edges consistent.`);
