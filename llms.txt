@@ -1,6 +1,8 @@
 # Bécsi Magyar Iskola – Foglalkozásválasztó
 
 Canonical program selector: https://programvalaszto.magyariskola.at/
+AI Knowledge Hub: https://programvalaszto.magyariskola.at/ai-knowledge.html
+Machine knowledge index: https://programvalaszto.magyariskola.at/knowledge-index.json
 Official BMI site: https://www.magyariskola.at/
 Parent federation: https://www.kozpontiszovetseg.at/
 Canonical teacher directory: https://tanarok.magyariskola.at/
