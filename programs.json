@@ -803,7 +803,9 @@
       "provider": "72. sz. Széchenyi István Cserkészcsapat",
       "relationship": "partner",
       "sourceType": "partneroldal 2026/27",
-      "why": "Kiscserkész, cserkész és vándor korosztály magyar közösségben, természetben és hagyományőrző programokon."
+      "why": "Kiscserkész, cserkész és vándor korosztály magyar közösségben, természetben és hagyományőrző programokon.",
+      "teacher": "Póser-Piroska Ildikó",
+      "teacherBackground": "A 72. sz. Széchenyi István Cserkészcsapat – Bécs csapatparancsnoka; ifjúsági közösségi vezető. Nem tanári munkakörként, hanem cserkészvezetői szerepben kapcsolódik a programhoz."
     },
     {
       "id": "fotoklub",
@@ -831,14 +833,14 @@
       "pace": "rendszeres",
       "when": "Csütörtökönként 18:30–20:30",
       "location": "Schwedenplatz 2., 1010 Wien",
-      "teacher": "Póser-Piroska Ildikó, csapatparancsnok",
-      "teacherBackground": "A 72. sz. Széchenyi István Cserkészcsapat – Bécs csapatparancsnoka; ifjúsági közösségi vezető.",
       "fee": "15 € / fő / alkalom",
       "url": "https://www.magyariskola.at/event-details/fotoklub-2026",
       "provider": "BMI",
       "relationship": "bmi",
       "sourceType": "Wix Events 2026/27",
-      "why": "Fotográfiai látásmód, alkotás és technika felnőtteknek, művészeti és művészettörténeti vezetéssel."
+      "why": "Fotográfiai látásmód, alkotás és technika felnőtteknek, művészeti és művészettörténeti vezetéssel.",
+      "teacher": "Bánhalmi Norbert és Balogh Dávid",
+      "teacherBackground": "Bánhalmi Norbert: fotóművész és vizuális brand stratéga; Balogh Dávid: művészettörténész. A VIPACH Felnőtt Fotóklub fotográfiai és művészettörténeti szemléletét közösen képviselik."
     },
     {
       "id": "fokusz",

@@ -13,11 +13,7 @@
         "Wiener Ungarische Schule"
       ],
       "url": "https://www.magyariskola.at/",
-      "foundingDate": "1987",
-      "description": "A Bécsi Magyar Iskolát 1987-ben alapították Bécsben; 2027-ben ünnepli fennállásának 40. évfordulóját.",
-      "sameAs": [
-        "https://hu.wikipedia.org/wiki/Bécsi_Magyar_Iskola"
-      ]
+      "foundingDate": "1987"
     },
     {
       "@type": "ItemList",
@@ -221,14 +217,13 @@
       },
       "audience": {
         "@type": "EducationalAudience",
-        "educationalRole": "learner",
         "audienceType": "0–3 év"
       },
       "hasCourseInstance": {
         "@type": "CourseInstance",
         "@id": "https://programvalaszto.magyariskola.at/#instance-borsofozde",
         "name": "Borsófőzde | Schwedenplatz – 2026/27",
-        "description": "Minden hétfőn 10:00 órától · Schwedenplatz 2., 1010 Wien – 9-es terem · 40 € / hó · Első alkalom: 2026. szeptember 14.",
+        "description": "Minden hétfőn 10:00 órától · Schwedenplatz 2., 1010 Wien – 9-es terem · 40 € / hó",
         "courseMode": "onsite",
         "location": {
           "@type": "Place",
@@ -253,14 +248,13 @@
       },
       "audience": {
         "@type": "EducationalAudience",
-        "educationalRole": "learner",
         "audienceType": "3–6 év"
       },
       "hasCourseInstance": {
         "@type": "CourseInstance",
         "@id": "https://programvalaszto.magyariskola.at/#instance-ovoda",
         "name": "Bécsi Magyar Óvoda | Schwedenplatz – 2026/27",
-        "description": "Szombatonként 10:00–12:00 · Schwedenplatz 2/top 9, 1010 Wien · 150 € / félév · Új érdeklődőknek egy próbaóra lehetséges.",
+        "description": "Szombatonként 10:00–12:00 · Schwedenplatz 2/top 9, 1010 Wien · 150 € / félév",
         "courseMode": "onsite",
         "location": {
           "@type": "Place",
@@ -291,14 +285,13 @@
       },
       "audience": {
         "@type": "EducationalAudience",
-        "educationalRole": "learner",
         "audienceType": "3–6 év"
       },
       "hasCourseInstance": {
         "@type": "CourseInstance",
         "@id": "https://programvalaszto.magyariskola.at/#instance-ovoda-baden",
         "name": "Bécsi Magyar Óvoda | Baden – 2026/27",
-        "description": "Csütörtökönként 16:00–18:00 · Friedrich-Schiller-Platz 1, 2500 Baden · 150 € / félév · Első alkalom: 2026. szeptember 17. · A jelentkezést követően próbaalkalom biztosított.",
+        "description": "Csütörtökönként 16:00–18:00 · Friedrich-Schiller-Platz 1, 2500 Baden · 150 € / félév",
         "courseMode": "onsite",
         "location": {
           "@type": "Place",
@@ -329,14 +322,13 @@
       },
       "audience": {
         "@type": "EducationalAudience",
-        "educationalRole": "learner",
         "audienceType": "7–8 év / 1–2. osztály"
       },
       "hasCourseInstance": {
         "@type": "CourseInstance",
         "@id": "https://programvalaszto.magyariskola.at/#instance-iskola-baden",
         "name": "Magyar Iskola Badenben – „Ahol a magyar szó élménnyé válik” – 2026/27",
-        "description": "Minden kedden 16:00–17:30 · Johannesgasse 9, 2500 Baden · 60 € / hó vagy 300 € / félév · Első alkalom: 2026. szeptember 15. · Nyílt próbaalkalom: 2026. szeptember 8. 16:00.",
+        "description": "Minden kedden 16:00–17:30 · Johannesgasse 9, 2500 Baden · 60 € / hó vagy 300 € / félév",
         "courseMode": "onsite",
         "location": {
           "@type": "Place",
@@ -367,14 +359,13 @@
       },
       "audience": {
         "@type": "EducationalAudience",
-        "educationalRole": "learner",
         "audienceType": "6–10 év / 1–4. osztály"
       },
       "hasCourseInstance": {
         "@type": "CourseInstance",
         "@id": "https://programvalaszto.magyariskola.at/#instance-aspern",
         "name": "Magyar nyelv tanítás | Aspern – 2026/27",
-        "description": "Keddenként 15:30–17:00 · GTVS Wulzendorfstraße 1, 1220 Wien – zöld csoportszoba · 180 € / félév · Első alkalom: 2026. szeptember 29. · Van lehetőség próbaalkalomra.",
+        "description": "Keddenként 15:30–17:00 · GTVS Wulzendorfstraße 1, 1220 Wien – zöld csoportszoba · 180 € / félév",
         "courseMode": "onsite",
         "location": {
           "@type": "Place",
@@ -399,14 +390,13 @@
       },
       "audience": {
         "@type": "EducationalAudience",
-        "educationalRole": "learner",
         "audienceType": "6–10 év / 1–4. osztály"
       },
       "hasCourseInstance": {
         "@type": "CourseInstance",
         "@id": "https://programvalaszto.magyariskola.at/#instance-seestadt",
         "name": "Magyar nyelv tanítás | Seestadt – 2026/27",
-        "description": "Szerdánként 16:00–17:30 · Bildungscampus könyvtár, Sonnenallee 116, 1220 Wien · 180 € / félév · Első alkalom: 2026. szeptember 30. · Van lehetőség próbaalkalomra.",
+        "description": "Szerdánként 16:00–17:30 · Bildungscampus könyvtár, Sonnenallee 116, 1220 Wien · 180 € / félév",
         "courseMode": "onsite",
         "location": {
           "@type": "Place",
@@ -431,14 +421,13 @@
       },
       "audience": {
         "@type": "EducationalAudience",
-        "educationalRole": "learner",
         "audienceType": "6–10 év"
       },
       "hasCourseInstance": {
         "@type": "CourseInstance",
         "@id": "https://programvalaszto.magyariskola.at/#instance-schweden-1",
         "name": "Magyar nyelv tanítás | Schwedenplatz | 1-es csoport – 2026/27",
-        "description": "Minden szombaton 10:00–12:00 · Schwedenplatz 2/8., 1010 Wien · 180 € / félév · Első alkalom: 2026. szeptember 19. · Van lehetőség próbaalkalomra.",
+        "description": "Minden szombaton 10:00–12:00 · Schwedenplatz 2/8., 1010 Wien · 180 € / félév",
         "courseMode": "onsite",
         "location": {
           "@type": "Place",
@@ -463,14 +452,13 @@
       },
       "audience": {
         "@type": "EducationalAudience",
-        "educationalRole": "learner",
         "audienceType": "10–14 év"
       },
       "hasCourseInstance": {
         "@type": "CourseInstance",
         "@id": "https://programvalaszto.magyariskola.at/#instance-schweden-2",
         "name": "Magyar nyelv tanítás | Schwedenplatz | 2-es csoport – 2026/27",
-        "description": "Kéthetente szombatonként 12:00–14:00 · Schwedenplatz 2/8., 1010 Wien · 180 € / félév · Első alkalom: 2026. szeptember 19. · Van lehetőség próbaalkalomra.",
+        "description": "Kéthetente szombatonként 12:00–14:00 · Schwedenplatz 2/8., 1010 Wien · 180 € / félév",
         "courseMode": "onsite",
         "location": {
           "@type": "Place",
@@ -495,14 +483,13 @@
       },
       "audience": {
         "@type": "EducationalAudience",
-        "educationalRole": "learner",
         "audienceType": "5–10 év"
       },
       "hasCourseInstance": {
         "@type": "CourseInstance",
         "@id": "https://programvalaszto.magyariskola.at/#instance-alapozo",
         "name": "Alapozó Terápia | Schwedenplatz – 2026/27",
-        "description": "Kedden és csütörtökön 13:30–15:00 · Schwedenplatz 2., 1010 Wien · 270 € / 9 alkalmas bérlet (8 gyermekfoglalkozás + 1 szülőkonzultáció) · Első alkalom: 2026. szeptember 15.",
+        "description": "Kedden és csütörtökön 13:30–15:00 · Schwedenplatz 2., 1010 Wien · 270 € / 9 alkalmas bérlet (8 gyermekfoglalkozás + 1 szülőkonzultáció)",
         "courseMode": "onsite",
         "location": {
           "@type": "Place",
@@ -527,14 +514,13 @@
       },
       "audience": {
         "@type": "EducationalAudience",
-        "educationalRole": "learner",
         "audienceType": "10–16 év"
       },
       "hasCourseInstance": {
         "@type": "CourseInstance",
         "@id": "https://programvalaszto.magyariskola.at/#instance-rajztabla",
         "name": "RAJZTÁBLA – Rajzfoglalkozás | Schwedenplatz – 2026/27",
-        "description": "Minden hétfőn 16:30–18:00 · Schwedenplatz 2., 1010 Wien · 70 € / 4 alkalom · Első alkalom: 2026. szeptember 14.",
+        "description": "Minden hétfőn 16:30–18:00 · Schwedenplatz 2., 1010 Wien · 70 € / 4 alkalom",
         "courseMode": "onsite",
         "location": {
           "@type": "Place",
@@ -559,14 +545,13 @@
       },
       "audience": {
         "@type": "EducationalAudience",
-        "educationalRole": "learner",
         "audienceType": "9–14 év"
       },
       "hasCourseInstance": {
         "@type": "CourseInstance",
         "@id": "https://programvalaszto.magyariskola.at/#instance-varazsceruza",
         "name": "Varázsceruza | Schwedenplatz – 2026/27",
-        "description": "Csütörtökönként 16:30–18:00 · Schwedenplatz 2/top 9, 1010 Wien · 60 € / hónap · Első alkalom: 2026. szeptember 17. · Van lehetőség próbaalkalomra.",
+        "description": "Csütörtökönként 16:30–18:00 · Schwedenplatz 2/top 9, 1010 Wien · 60 € / hónap",
         "courseMode": "onsite",
         "location": {
           "@type": "Place",
@@ -591,14 +576,13 @@
       },
       "audience": {
         "@type": "EducationalAudience",
-        "educationalRole": "learner",
         "audienceType": "6–15 év"
       },
       "hasCourseInstance": {
         "@type": "CourseInstance",
         "@id": "https://programvalaszto.magyariskola.at/#instance-becscraft",
         "name": "BÉCS-CRAFT Workshop | Schwedenplatz – 2026/27",
-        "description": "Hétfőnként 16:30–17:30 + havi helyszíni bejárás · Bécsi Magyar Iskola, Schwedenplatz 2. Top 8. · 50 € / 5 alkalom / hó · Első alkalom: 2026. szeptember 21.",
+        "description": "Hétfőnként 16:30–17:30 + havi helyszíni bejárás · Bécsi Magyar Iskola, Schwedenplatz 2. Top 8. · 50 € / 5 alkalom / hó",
         "courseMode": "onsite",
         "location": {
           "@type": "Place",
@@ -623,14 +607,13 @@
       },
       "audience": {
         "@type": "EducationalAudience",
-        "educationalRole": "learner",
         "audienceType": "8–13 év"
       },
       "hasCourseInstance": {
         "@type": "CourseInstance",
         "@id": "https://programvalaszto.magyariskola.at/#instance-kicsi-svung",
         "name": "Kicsi Svung – Dráma foglalkozás | Schwedenplatz – 2026/27",
-        "description": "Hétfőnként 16:30–18:00 · Schwedenplatz 2/top 9, 1010 Wien · 60 € / hó · Első alkalom: 2026. szeptember 14. · Nincs lehetőség próbaalkalomra.",
+        "description": "Hétfőnként 16:30–18:00 · Schwedenplatz 2/top 9, 1010 Wien · 60 € / hó",
         "courseMode": "onsite",
         "location": {
           "@type": "Place",
@@ -655,14 +638,13 @@
       },
       "audience": {
         "@type": "EducationalAudience",
-        "educationalRole": "learner",
         "audienceType": "7–12 év"
       },
       "hasCourseInstance": {
         "@type": "CourseInstance",
         "@id": "https://programvalaszto.magyariskola.at/#instance-mamut",
         "name": "Bécsi Magyar Musical Társulat (MaMUT) – Musical Stúdió – 2026/27",
-        "description": "Csütörtökönként 16:30–18:00 · Bécsi Magyar Iskola, Schwedenplatz 2, Top 8–9 · 60 € / hó vagy 300 € / félév · Első alkalom: 2026. szeptember 10. – nyílt óra · Kezdőknek próbaalkalom / személyes találkozó kérhető.",
+        "description": "Csütörtökönként 16:30–18:00 · Bécsi Magyar Iskola, Schwedenplatz 2, Top 8–9 · 60 € / hó vagy 300 € / félév",
         "courseMode": "onsite",
         "location": {
           "@type": "Place",
@@ -693,14 +675,13 @@
       },
       "audience": {
         "@type": "EducationalAudience",
-        "educationalRole": "learner",
         "audienceType": "14–18 év"
       },
       "hasCourseInstance": {
         "@type": "CourseInstance",
         "@id": "https://programvalaszto.magyariskola.at/#instance-gimi-svung",
         "name": "Gimi Svung – Magyar nyelvű drámafoglalkozás | Schwedenplatz – 2026/27",
-        "description": "Péntekenként 16:30–18:00 · Bécsi Magyar Iskola, 1010 Wien, Schwedenplatz 2/9. · 70 € / fő / 4 alkalom · Első alkalom: 2026. szeptember 18.",
+        "description": "Péntekenként 16:30–18:00 · Bécsi Magyar Iskola, 1010 Wien, Schwedenplatz 2/9. · 70 € / fő / 4 alkalom",
         "courseMode": "onsite",
         "location": {
           "@type": "Place",
@@ -725,14 +706,13 @@
       },
       "audience": {
         "@type": "EducationalAudience",
-        "educationalRole": "learner",
         "audienceType": "13–17 év"
       },
       "hasCourseInstance": {
         "@type": "CourseInstance",
         "@id": "https://programvalaszto.magyariskola.at/#instance-filmes",
         "name": "Filmes Műhely Workshop | Schwedenplatz – 2026/27",
-        "description": "Minden szerdán 15:30–17:00 · Bécsi Magyar Iskola, Schwedenplatz – Nagyterem · 60 € / hó · Első alkalom: 2026. szeptember 23.",
+        "description": "Minden szerdán 15:30–17:00 · Bécsi Magyar Iskola, Schwedenplatz – Nagyterem · 60 € / hó",
         "courseMode": "onsite",
         "location": {
           "@type": "Place",
@@ -757,14 +737,13 @@
       },
       "audience": {
         "@type": "EducationalAudience",
-        "educationalRole": "learner",
         "audienceType": "6+"
       },
       "hasCourseInstance": {
         "@type": "CourseInstance",
         "@id": "https://programvalaszto.magyariskola.at/#instance-sakk",
         "name": "Sakk és Gondolkodásfejlesztés | Schwedenplatz – 2026/27",
-        "description": "Havonta 1 alkalommal, szombatonként 13:00–15:00 · Bécsi Magyar Iskola, Schwedenplatz 2, Top 8 (TV-s terem) · 6–14 év: 20 € / fő / óra; 14 év felett: 25 € / fő / óra; próbaalkalom: 10 € · Első alkalom: 2026. szeptember 26.",
+        "description": "Havonta 1 alkalommal, szombatonként 13:00–15:00 · Bécsi Magyar Iskola, Schwedenplatz 2, Top 8 (TV-s terem) · 6–14 év: 20 € / fő / óra; 14 év felett: 25 € / fő / óra; próbaalkalom: 10 €",
         "courseMode": "onsite",
         "location": {
           "@type": "Place",
@@ -789,14 +768,13 @@
       },
       "audience": {
         "@type": "EducationalAudience",
-        "educationalRole": "learner",
         "audienceType": "8–14 év"
       },
       "hasCourseInstance": {
         "@type": "CourseInstance",
         "@id": "https://programvalaszto.magyariskola.at/#instance-fecskeklub",
         "name": "Fecske Klub | Schwedenplatz – 2026/27",
-        "description": "Keddenként 16:30–18:00; 1 × 90 perc · Bécsi Magyar Iskola – Schwedenplatz, 1010 Bécs, Schwedenplatz 2/8. · 52 € / hó vagy 187 € / félév · Első alkalom: 2026. október 20. · Ingyenes próbaóra: 2026. október 13., 16:30–18:00",
+        "description": "Keddenként 16:30–18:00; 1 × 90 perc · Bécsi Magyar Iskola – Schwedenplatz, 1010 Bécs, Schwedenplatz 2/8. · 52 € / hó vagy 187 € / félév",
         "courseMode": "onsite",
         "location": {
           "@type": "Place",
@@ -821,14 +799,13 @@
       },
       "audience": {
         "@type": "EducationalAudience",
-        "educationalRole": "learner",
         "audienceType": "6–14 év"
       },
       "hasCourseInstance": {
         "@type": "CourseInstance",
         "@id": "https://programvalaszto.magyariskola.at/#instance-vilagfa",
         "name": "Világfa Sárkányai | Schwedenplatz – 2026/27",
-        "description": "Havi 1 alkalom, jellemzően szombatonként 16:00-tól; az első félév szeptembertől februárig tart · Schwedenplatz 2. / Laurenzerberg 5., 1010 Wien · 70 € / fő / félév; a második félév szintén 70 € / fő · Első alkalom: 2026. szeptember 27. (vasárnap)",
+        "description": "Havi 1 alkalom, jellemzően szombatonként 16:00-tól; az első félév szeptembertől februárig tart · Schwedenplatz 2. / Laurenzerberg 5., 1010 Wien · 70 € / fő / félév; a második félév szintén 70 € / fő",
         "courseMode": "onsite",
         "location": {
           "@type": "Place",
@@ -853,7 +830,6 @@
       },
       "audience": {
         "@type": "EducationalAudience",
-        "educationalRole": "learner",
         "audienceType": "6–15 év"
       },
       "hasCourseInstance": {
@@ -882,7 +858,6 @@
       },
       "audience": {
         "@type": "EducationalAudience",
-        "educationalRole": "learner",
         "audienceType": "5–22 év: kiscserkész 5–10, cserkész 10–16, vándor 17–22"
       },
       "hasCourseInstance": {
@@ -895,7 +870,10 @@
           "@type": "Place",
           "name": "Alliiertenstrasse 2, 1020 Wien"
         },
-        "instructor": []
+        "instructor": {
+          "@type": "Person",
+          "name": "Póser-Piroska Ildikó"
+        }
       },
       "keywords": "nyelv, mozgas"
     },
@@ -911,7 +889,6 @@
       },
       "audience": {
         "@type": "EducationalAudience",
-        "educationalRole": "learner",
         "audienceType": "18+"
       },
       "hasCourseInstance": {
@@ -924,10 +901,16 @@
           "@type": "Place",
           "name": "Schwedenplatz 2., 1010 Wien"
         },
-        "instructor": {
-          "@type": "Person",
-          "name": "Póser-Piroska Ildikó"
-        }
+        "instructor": [
+          {
+            "@type": "Person",
+            "name": "Bánhalmi Norbert"
+          },
+          {
+            "@type": "Person",
+            "name": "Balogh Dávid"
+          }
+        ]
       },
       "keywords": "kulturtortenet, tech, alkotas"
     },
@@ -943,7 +926,6 @@
       },
       "audience": {
         "@type": "EducationalAudience",
-        "educationalRole": "learner",
         "audienceType": "18+"
       },
       "hasCourseInstance": {
@@ -975,7 +957,6 @@
       },
       "audience": {
         "@type": "EducationalAudience",
-        "educationalRole": "learner",
         "audienceType": "18+"
       },
       "hasCourseInstance": {
@@ -1013,7 +994,6 @@
       },
       "audience": {
         "@type": "EducationalAudience",
-        "educationalRole": "learner",
         "audienceType": "18+"
       },
       "hasCourseInstance": {
@@ -1045,14 +1025,13 @@
       },
       "audience": {
         "@type": "EducationalAudience",
-        "educationalRole": "learner",
         "audienceType": "18+"
       },
       "hasCourseInstance": {
         "@type": "CourseInstance",
         "@id": "https://programvalaszto.magyariskola.at/#instance-rekreacio",
         "name": "ReKreáció – Kreatív Közösségi Kuckó | Schwedenplatz – 2026/27",
-        "description": "Vasárnaponként, meghirdetett időpontokban 10:00–13:00 · Bécsi Magyar Iskola, 1010 Wien, Schwedenplatz 2. Top 8. · 20 € / alkalom · Első alkalom: 2026. október 4.",
+        "description": "Vasárnaponként, meghirdetett időpontokban 10:00–13:00 · Bécsi Magyar Iskola, 1010 Wien, Schwedenplatz 2. Top 8. · 20 € / alkalom",
         "courseMode": "onsite",
         "location": {
           "@type": "Place",

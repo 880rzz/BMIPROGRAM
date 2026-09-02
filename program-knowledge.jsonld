@@ -1478,7 +1478,11 @@
       "instructor": [
         {
           "@type": "Person",
-          "@id": "https://tanarok.magyariskola.at/#poser-piroska-ildiko"
+          "@id": "https://tanarok.magyariskola.at/#banhalmi-norbert"
+        },
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#balogh-david"
         }
       ]
     },
