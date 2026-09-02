@@ -7,21 +7,72 @@ var categories=[
  {id:'jollet',label:'Fejlesztés, fókusz és jóllét'},
  {id:'hagyomany',label:'Kultúra, hagyomány és közösségi élet'}
 ];
-function norm(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim()}
+
+/*
+ * 2026/27 canonical six-category taxonomy.
+ * Every current program has an explicit primary category. Do not infer the
+ * primary category from teacher biographies or incidental keywords.
+ */
 var fixed={
- 'becscraft':'logika','sakk':'logika','mos':'logika','fotoklub':'alkotas','filmes':'alkotas','gimi-svung':'alkotas','mamut':'alkotas','cserkeszet':'hagyomany','zenebona':'mozgas','egyutt-dobban':'mozgas','napraforgocskak':'mozgas','neptanc-felnott':'mozgas','alapozo':'jollet'
+ 'borsofozde':'nyelv',
+ 'ovoda':'nyelv',
+ 'ovoda-baden':'nyelv',
+ 'iskola-baden':'nyelv',
+ 'aspern':'nyelv',
+ 'seestadt':'nyelv',
+ 'schweden-1':'nyelv',
+ 'schweden-2':'nyelv',
+
+ 'rajztabla':'alkotas',
+ 'varazsceruza':'alkotas',
+ 'kicsi-svung':'alkotas',
+ 'gimi-svung':'alkotas',
+ 'mamut':'alkotas',
+ 'filmes':'alkotas',
+ 'fotoklub':'alkotas',
+ 'rekreacio':'alkotas',
+
+ 'zenebona':'mozgas',
+ 'vilagfa':'mozgas',
+ 'oromzene':'mozgas',
+ 'napraforgocskak':'mozgas',
+ 'kezdo-neptanc':'mozgas',
+
+ 'becscraft':'logika',
+ 'sakk':'logika',
+ 'mos':'logika',
+
+ 'alapozo':'jollet',
+ 'fokusz':'jollet',
+
+ 'cserkeszet':'hagyomany',
+ 'fecskeklub':'hagyomany'
 };
+
 function classify(p){
- if(p&&fixed[p.id])return fixed[p.id];
- var text=[p&&p.id,p&&p.name,p&&p.why,(p&&p.interests||[]).join(' '),(p&&p.needs||[]).join(' ')].map(norm).join(' ');
- if(/minecraft|sakk|office|\bmos\b|informat|technolog|digitalis|strateg/.test(text))return 'logika';
- if(/alapozo|terap|fokusz|jolet|onismer|pszich|mentalis|koncentracio/.test(text))return 'jollet';
- if(/foto|film|rajz|craft|alkot|musical|mamut|svung|drama|szinpad|szinhaz|vizual/.test(text))return 'alkotas';
- if(/neptanc|tanc|zene|zenebona|oromzene|dobcsapat|vilagfa|mozgas|joga|ritmus/.test(text))return 'mozgas';
- if(/cserkesz|hagyomany|kultur|identitas|kozossegepites|nepmuveszet|nephagyomany/.test(text))return 'hagyomany';
- return 'nyelv';
+ if(!p||!p.id)return null;
+ return fixed[p.id]||null;
 }
-function apply(){var cfg=window.BMI_FINDER;if(!cfg||!Array.isArray(cfg.programs))return false;cfg.categories6=categories;cfg.programs.forEach(function(p){p.primaryCategory6=classify(p)});return true}
-window.BMI_PROGRAM_TAXONOMY={categories:categories,classify:classify,apply:apply};
+
+function apply(){
+ var cfg=window.BMI_FINDER;
+ if(!cfg||!Array.isArray(cfg.programs))return false;
+ cfg.categories6=categories;
+ var unknown=[];
+ cfg.programs.forEach(function(p){
+   var category=classify(p);
+   if(!category){unknown.push(p.id||p.name||'unknown');return;}
+   p.primaryCategory6=category;
+ });
+ if(unknown.length){
+   console.error('BMI taxonomy: uncategorized current program(s):',unknown);
+   cfg.taxonomyIntegrity={ok:false,uncategorized:unknown.slice()};
+ }else{
+   cfg.taxonomyIntegrity={ok:true,programCount:cfg.programs.length,categoryCount:categories.length};
+ }
+ return unknown.length===0;
+}
+
+window.BMI_PROGRAM_TAXONOMY={categories:categories,fixed:fixed,classify:classify,apply:apply};
 if(!apply())document.addEventListener('DOMContentLoaded',apply,{once:true});
 })();
