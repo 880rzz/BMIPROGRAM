@@ -118,6 +118,8 @@ if(mos){mos.scheduleMode='arranged';mos.exactTodayEligible=false;mos.teacher='Hu
 var napra=findProgram('napraforgocskak');
 if(napra){
   napra.weekday='szerda';napra.weekdays=['szerda'];napra.pace='rendszeres';napra.when='Minden szerdán 17:00–18:00';
+  napra.teacher='Varga Bernadette és Veres Tamás';
+  if(!napra.location)napra.location='Bécsi Magyar Iskola, Schwedenplatz 2 / Laurenzerberg 5., 1010 Wien, Top 8';
   napra.eventDates=recurringDates(napra);
 }
 
@@ -144,7 +146,7 @@ if(sakk){
   if(!sakk.eventDates.length)sakk.exactTodayEligible=false;
 }
 var cserkeszet=findProgram('cserkeszet');
-if(cserkeszet){cserkeszet.scheduleMode='irregular';cserkeszet.exactTodayEligible=false;}
+if(cserkeszet){cserkeszet.scheduleMode='irregular';cserkeszet.exactTodayEligible=false;cserkeszet.teacher='Póser-Piroska Ildikó';if(!cserkeszet.when)cserkeszet.when='Kéthetente szombatonként';if(!cserkeszet.location)cserkeszet.location='Cserkész Csapatotthon, Alliiertenstraße 2, 1020 Wien';}
 
 var rekreacio=findProgram('rekreacio');
 if(rekreacio){

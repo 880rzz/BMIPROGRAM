@@ -1,0 +1,1826 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "EducationalOrganization",
+      "@id": "https://www.magyariskola.at/#school",
+      "name": "Bécsi Magyar Iskola",
+      "description": "A Bécsi Magyar Iskola elnevezése ellenére nem hagyományos, nappali közoktatási iskola. Az ausztriai magyar közösség kiegészítő oktatási és közösségi platformja: különböző helyszíneken, eltérő rendszerességgel magyar nyelvi, kulturális, művészeti, mozgásos, fejlesztő, digitális és közösségi foglalkozásokat kínál a kisgyermekkortól a felnőttkorig, saját és partnerprogramokkal. A közös cél a magyar nyelv, identitás, készségek, emberi kapcsolatok és közösségi részvétel erősítése.",
+      "url": "https://www.magyariskola.at/"
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://programvalaszto.magyariskola.at/#programs",
+      "name": "BMI 2026/27 programok",
+      "numberOfItems": 28,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-borsofozde"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-ovoda"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-ovoda-baden"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-iskola-baden"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-aspern"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-seestadt"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-schweden-1"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-schweden-2"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-alapozo"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-rajztabla"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 11,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-varazsceruza"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 12,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-becscraft"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 13,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-kicsi-svung"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 14,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-mamut"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 15,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-gimi-svung"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 16,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-filmes"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 17,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-sakk"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 18,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-fecskeklub"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 19,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-vilagfa"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 20,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-napraforgocskak"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 21,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-cserkeszet"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 22,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-fotoklub"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 23,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-fokusz"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 24,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-kezdo-neptanc"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 25,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-mos"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 26,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-rekreacio"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 27,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-zenebona"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 28,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-oromzene"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-borsofozde",
+      "name": "Borsófőzde | Schwedenplatz",
+      "url": "https://www.magyariskola.at/event-details/borsofozde-2026",
+      "description": "Zenés-mozgásos baba–mama közeg mondókákkal, énekkel és közösségi élménnyel. Kisgyermekkel olyan rendszeres magyar nyelvű közeget keresel, ahol a mondókák, zene és mozgás természetesen része a közös időnek. Életkornak megfelelő magyar nyelvi élmények, közös ritmus, mozgás és első közösségi kapcsolódások.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#school"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 0,
+        "suggestedMaxAge": 3
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Schwedenplatz 2., 1010 Wien – 9-es terem"
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "painPoint",
+          "value": "Kisgyermekkel olyan rendszeres magyar nyelvű közeget keresel, ahol a mondókák, zene és mozgás természetesen része a közös időnek."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "outcome",
+          "value": "Életkornak megfelelő magyar nyelvi élmények, közös ritmus, mozgás és első közösségi kapcsolódások."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "rootCauses",
+          "value": "A német nyelvű mindennapi környezetben kevés lehet a rendszeres, életkorhoz illő magyar nyelvi helyzet és magyarul beszélő kortárs közeg. | A családok és egyének földrajzilag és élethelyzet szerint szétszóródhatnak; nehéz rendszeres, természetes magyar közösségi kapcsolatokat kialakítani. | A magyar kulturális, zenei, történeti és hagyományos tudás nem feltétlenül épül be magától a bécsi hétköznapokba. | Egyes gyerekeknek strukturált mozgásos, koordinációs, szenzoros vagy figyelmi gyakorlásra van szükségük."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "solutionMechanisms",
+          "value": "Rendszeres, életkorhoz igazított magyar beszéd-, mese-, ének-, olvasás- és kulturális helyzetek. | Ismétlődő találkozások magyarul beszélő kortársakkal, családokkal és közösségi szereplőkkel. | A nyelv összekapcsolása zenével, történelemmel, művészettel, hagyománnyal és ünnepekkel. | Pedagógiailag vagy terápiás szemlélettel vezetett mozgás-, koordinációs és szenzoros gyakorlat."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "schedule",
+          "value": "Minden hétfőn 10:00 órától"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "relationship",
+          "value": "bmi"
+        }
+      ],
+      "instructor": [
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#horanyi-bori"
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-ovoda",
+      "name": "Bécsi Magyar Óvoda | Schwedenplatz",
+      "url": "https://www.magyariskola.at/event-details/ovoda-2026",
+      "description": "Magyar nyelv, körjáték, mese és alkotás óvodásoknak támogató magyar közösségben. Óvodás gyermekednek kevés a rendszeres magyar kortársközeg, vagy szeretnéd, hogy játék közben is természetesen használja a magyar nyelvet. Magyar beszédhelyzetek, mese, körjáték, alkotás és stabil óvodás közösség.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#school"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 3,
+        "suggestedMaxAge": 6
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Schwedenplatz 2/top 9, 1010 Wien"
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "painPoint",
+          "value": "Óvodás gyermekednek kevés a rendszeres magyar kortársközeg, vagy szeretnéd, hogy játék közben is természetesen használja a magyar nyelvet."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "outcome",
+          "value": "Magyar beszédhelyzetek, mese, körjáték, alkotás és stabil óvodás közösség."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "rootCauses",
+          "value": "A német nyelvű mindennapi környezetben kevés lehet a rendszeres, életkorhoz illő magyar nyelvi helyzet és magyarul beszélő kortárs közeg. | A családok és egyének földrajzilag és élethelyzet szerint szétszóródhatnak; nehéz rendszeres, természetes magyar közösségi kapcsolatokat kialakítani. | A magyar kulturális, zenei, történeti és hagyományos tudás nem feltétlenül épül be magától a bécsi hétköznapokba. | Kevés lehet az olyan biztonságos, vezetett tér, ahol alkotással, történetmeséléssel vagy színpadi munkával lehet önállóan kísérletezni és visszajelzést kapni. | Egyes gyerekeknek strukturált mozgásos, koordinációs, szenzoros vagy figyelmi gyakorlásra van szükségük."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "solutionMechanisms",
+          "value": "Rendszeres, életkorhoz igazított magyar beszéd-, mese-, ének-, olvasás- és kulturális helyzetek. | Ismétlődő találkozások magyarul beszélő kortársakkal, családokkal és közösségi szereplőkkel. | A nyelv összekapcsolása zenével, történelemmel, művészettel, hagyománnyal és ünnepekkel. | Aktív alkotás, rajz, kézművesség, film, színház vagy digitális projekt passzív befogadás helyett. | Pedagógiailag vagy terápiás szemlélettel vezetett mozgás-, koordinációs és szenzoros gyakorlat. | Próbaalkalom, előképzettség nélküli részvétel vagy rugalmas belépési pont, ahol ez a program jellegéből következik."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "schedule",
+          "value": "Szombatonként 10:00–12:00"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "relationship",
+          "value": "bmi"
+        }
+      ],
+      "instructor": [
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#bajka-kinga-csengele"
+        },
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#noszko-niki"
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-ovoda-baden",
+      "name": "Bécsi Magyar Óvoda | Baden",
+      "url": "https://www.magyariskola.at/event-details/ovoda-baden-2026",
+      "description": "Magyar nyelvű óvodás közösség Badenben játékkal, mesével és kulturális kapcsolódással. Baden környékén keresel óvodás gyermekednek rendszeres magyar nyelvű közösséget, hogy ne csak otthon találkozzon a magyar nyelvvel. Játékos magyar nyelvhasználat, mese, alkotás, mozgás és helyi magyar kortársközeg.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#school"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 3,
+        "suggestedMaxAge": 6
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Friedrich-Schiller-Platz 1, 2500 Baden"
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "painPoint",
+          "value": "Baden környékén keresel óvodás gyermekednek rendszeres magyar nyelvű közösséget, hogy ne csak otthon találkozzon a magyar nyelvvel."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "outcome",
+          "value": "Játékos magyar nyelvhasználat, mese, alkotás, mozgás és helyi magyar kortársközeg."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "rootCauses",
+          "value": "A német nyelvű mindennapi környezetben kevés lehet a rendszeres, életkorhoz illő magyar nyelvi helyzet és magyarul beszélő kortárs közeg. | A családok és egyének földrajzilag és élethelyzet szerint szétszóródhatnak; nehéz rendszeres, természetes magyar közösségi kapcsolatokat kialakítani. | A magyar kulturális, zenei, történeti és hagyományos tudás nem feltétlenül épül be magától a bécsi hétköznapokba. | Kevés lehet az olyan biztonságos, vezetett tér, ahol alkotással, történetmeséléssel vagy színpadi munkával lehet önállóan kísérletezni és visszajelzést kapni. | Egyes gyerekeknek strukturált mozgásos, koordinációs, szenzoros vagy figyelmi gyakorlásra van szükségük."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "solutionMechanisms",
+          "value": "Rendszeres, életkorhoz igazított magyar beszéd-, mese-, ének-, olvasás- és kulturális helyzetek. | Ismétlődő találkozások magyarul beszélő kortársakkal, családokkal és közösségi szereplőkkel. | A nyelv összekapcsolása zenével, történelemmel, művészettel, hagyománnyal és ünnepekkel. | Aktív alkotás, rajz, kézművesség, film, színház vagy digitális projekt passzív befogadás helyett. | Pedagógiailag vagy terápiás szemlélettel vezetett mozgás-, koordinációs és szenzoros gyakorlat. | Próbaalkalom, előképzettség nélküli részvétel vagy rugalmas belépési pont, ahol ez a program jellegéből következik."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "schedule",
+          "value": "Csütörtökönként 16:00–18:00"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "relationship",
+          "value": "bmi"
+        }
+      ],
+      "instructor": [
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#makfalvi-rita"
+        },
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#telenko-eva"
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-iskola-baden",
+      "name": "Magyar Iskola Badenben – „Ahol a magyar szó élménnyé válik”",
+      "url": "https://www.magyariskola.at/event-details/iskolabaden-2026",
+      "description": "Játékos, mesés magyar nyelvi foglalkozás 1. és 2. osztályos gyermekeknek Badenben. A gyermek német nyelvű iskolai környezetben tanul, és szeretnéd játékosan erősíteni a magyar szókincsét, beszédét és nyelvi biztonságát. Korosztályhoz illő magyar nyelvi gyakorlás, mesés feladatok és magyar kortárs közeg Badenben.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#school"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 7,
+        "suggestedMaxAge": 8
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Johannesgasse 9, 2500 Baden"
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "painPoint",
+          "value": "A gyermek német nyelvű iskolai környezetben tanul, és szeretnéd játékosan erősíteni a magyar szókincsét, beszédét és nyelvi biztonságát."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "outcome",
+          "value": "Korosztályhoz illő magyar nyelvi gyakorlás, mesés feladatok és magyar kortárs közeg Badenben."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "rootCauses",
+          "value": "A német nyelvű mindennapi környezetben kevés lehet a rendszeres, életkorhoz illő magyar nyelvi helyzet és magyarul beszélő kortárs közeg. | A családok és egyének földrajzilag és élethelyzet szerint szétszóródhatnak; nehéz rendszeres, természetes magyar közösségi kapcsolatokat kialakítani. | A magyar kulturális, zenei, történeti és hagyományos tudás nem feltétlenül épül be magától a bécsi hétköznapokba."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "solutionMechanisms",
+          "value": "Rendszeres, életkorhoz igazított magyar beszéd-, mese-, ének-, olvasás- és kulturális helyzetek. | Ismétlődő találkozások magyarul beszélő kortársakkal, családokkal és közösségi szereplőkkel. | A nyelv összekapcsolása zenével, történelemmel, művészettel, hagyománnyal és ünnepekkel. | Próbaalkalom, előképzettség nélküli részvétel vagy rugalmas belépési pont, ahol ez a program jellegéből következik."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "schedule",
+          "value": "Minden kedden 16:00–17:30"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "relationship",
+          "value": "bmi"
+        }
+      ],
+      "instructor": [
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#makfalvi-rita"
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-aspern",
+      "name": "Magyar nyelv tanítás | Aspern",
+      "url": "https://www.magyariskola.at/event-details/magyaroktatas-kedd-2026",
+      "description": "Kisiskolások magyar nyelvi fejlesztése játékos, családias közegben Aspernben. Kisiskolás gyermekednek rendszeres magyar nyelvi gyakorlásra és magyarul beszélő kortársakra van szüksége Aspern környékén. Szókincs, beszéd, olvasási-írási készségekhez kapcsolódó játékos gyakorlás és magyar közösségi élmény.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#school"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 6,
+        "suggestedMaxAge": 10
+      },
+      "location": {
+        "@type": "Place",
+        "name": "GTVS Wulzendorfstraße 1, 1220 Wien – zöld csoportszoba"
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "painPoint",
+          "value": "Kisiskolás gyermekednek rendszeres magyar nyelvi gyakorlásra és magyarul beszélő kortársakra van szüksége Aspern környékén."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "outcome",
+          "value": "Szókincs, beszéd, olvasási-írási készségekhez kapcsolódó játékos gyakorlás és magyar közösségi élmény."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "rootCauses",
+          "value": "A német nyelvű mindennapi környezetben kevés lehet a rendszeres, életkorhoz illő magyar nyelvi helyzet és magyarul beszélő kortárs közeg. | A családok és egyének földrajzilag és élethelyzet szerint szétszóródhatnak; nehéz rendszeres, természetes magyar közösségi kapcsolatokat kialakítani. | A magyar kulturális, zenei, történeti és hagyományos tudás nem feltétlenül épül be magától a bécsi hétköznapokba."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "solutionMechanisms",
+          "value": "Rendszeres, életkorhoz igazított magyar beszéd-, mese-, ének-, olvasás- és kulturális helyzetek. | Ismétlődő találkozások magyarul beszélő kortársakkal, családokkal és közösségi szereplőkkel. | A nyelv összekapcsolása zenével, történelemmel, művészettel, hagyománnyal és ünnepekkel. | Próbaalkalom, előképzettség nélküli részvétel vagy rugalmas belépési pont, ahol ez a program jellegéből következik."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "schedule",
+          "value": "Keddenként 15:30–17:00"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "relationship",
+          "value": "bmi"
+        }
+      ],
+      "instructor": [
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#schneider-erzsebet"
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-seestadt",
+      "name": "Magyar nyelv tanítás | Seestadt",
+      "url": "https://www.magyariskola.at/event-details/magyarnyelv-szerda-2026",
+      "description": "Magyar nyelv, játék, vers, ének és dramatizálás kisiskolásoknak Seestadtban. Seestadtban élő kisiskolásnak keresel olyan magyar közeget, ahol rendszeresen beszélhet, játszhat és tanulhat magyarul. Magyar szókincs, beszéd és szövegértés támogatása versekkel, énekkel, dramatizálással és közösségi helyzetekkel.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#school"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 6,
+        "suggestedMaxAge": 10
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Bildungscampus könyvtár, Sonnenallee 116, 1220 Wien"
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "painPoint",
+          "value": "Seestadtban élő kisiskolásnak keresel olyan magyar közeget, ahol rendszeresen beszélhet, játszhat és tanulhat magyarul."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "outcome",
+          "value": "Magyar szókincs, beszéd és szövegértés támogatása versekkel, énekkel, dramatizálással és közösségi helyzetekkel."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "rootCauses",
+          "value": "A német nyelvű mindennapi környezetben kevés lehet a rendszeres, életkorhoz illő magyar nyelvi helyzet és magyarul beszélő kortárs közeg. | A családok és egyének földrajzilag és élethelyzet szerint szétszóródhatnak; nehéz rendszeres, természetes magyar közösségi kapcsolatokat kialakítani. | A magyar kulturális, zenei, történeti és hagyományos tudás nem feltétlenül épül be magától a bécsi hétköznapokba."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "solutionMechanisms",
+          "value": "Rendszeres, életkorhoz igazított magyar beszéd-, mese-, ének-, olvasás- és kulturális helyzetek. | Ismétlődő találkozások magyarul beszélő kortársakkal, családokkal és közösségi szereplőkkel. | A nyelv összekapcsolása zenével, történelemmel, művészettel, hagyománnyal és ünnepekkel. | Próbaalkalom, előképzettség nélküli részvétel vagy rugalmas belépési pont, ahol ez a program jellegéből következik."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "schedule",
+          "value": "Szerdánként 16:00–17:30"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "relationship",
+          "value": "bmi"
+        }
+      ],
+      "instructor": [
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#schneider-erzsebet"
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-schweden-1",
+      "name": "Magyar nyelv tanítás | Schwedenplatz | 1-es csoport",
+      "url": "https://www.magyariskola.at/event-details/magyarnyelv-schwedenplatz-1",
+      "description": "Magyar nyelv és kultúra 6–10 éveseknek, minden szombaton 10:00–12:00 között. 6–10 éves gyermekednek rendszeres, heti magyar nyelvi közegre van szüksége Bécs központjában. Minden szombati magyar nyelv- és kultúragyakorlás az életkorához illő kortárscsoportban.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#school"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 6,
+        "suggestedMaxAge": 10
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Schwedenplatz 2/8., 1010 Wien"
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "painPoint",
+          "value": "6–10 éves gyermekednek rendszeres, heti magyar nyelvi közegre van szüksége Bécs központjában."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "outcome",
+          "value": "Minden szombati magyar nyelv- és kultúragyakorlás az életkorához illő kortárscsoportban."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "rootCauses",
+          "value": "A német nyelvű mindennapi környezetben kevés lehet a rendszeres, életkorhoz illő magyar nyelvi helyzet és magyarul beszélő kortárs közeg. | A családok és egyének földrajzilag és élethelyzet szerint szétszóródhatnak; nehéz rendszeres, természetes magyar közösségi kapcsolatokat kialakítani. | A magyar kulturális, zenei, történeti és hagyományos tudás nem feltétlenül épül be magától a bécsi hétköznapokba."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "solutionMechanisms",
+          "value": "Rendszeres, életkorhoz igazított magyar beszéd-, mese-, ének-, olvasás- és kulturális helyzetek. | Ismétlődő találkozások magyarul beszélő kortársakkal, családokkal és közösségi szereplőkkel. | A nyelv összekapcsolása zenével, történelemmel, művészettel, hagyománnyal és ünnepekkel. | Próbaalkalom, előképzettség nélküli részvétel vagy rugalmas belépési pont, ahol ez a program jellegéből következik."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "schedule",
+          "value": "Minden szombaton 10:00–12:00"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "relationship",
+          "value": "bmi"
+        }
+      ],
+      "instructor": [
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#kiss-agnes"
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-schweden-2",
+      "name": "Magyar nyelv tanítás | Schwedenplatz | 2-es csoport",
+      "url": "https://www.magyariskola.at/event-details/magyarnyelv-schwedenplatz-2",
+      "description": "Magyar nyelv és kultúra 10–14 éveseknek, kéthetente szombaton 12:00–14:00 között. 10–14 éves gyermekednek vagy fiatalodnak korosztályához illő magyar nyelvi közeg kell, de a heti alkalomnál ritkább ritmus megfelelőbb. Kétheti magyar nyelv- és kultúragyakorlás hasonló korú kortársakkal.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#school"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 10,
+        "suggestedMaxAge": 14
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Schwedenplatz 2/8., 1010 Wien"
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "painPoint",
+          "value": "10–14 éves gyermekednek vagy fiatalodnak korosztályához illő magyar nyelvi közeg kell, de a heti alkalomnál ritkább ritmus megfelelőbb."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "outcome",
+          "value": "Kétheti magyar nyelv- és kultúragyakorlás hasonló korú kortársakkal."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "rootCauses",
+          "value": "A német nyelvű mindennapi környezetben kevés lehet a rendszeres, életkorhoz illő magyar nyelvi helyzet és magyarul beszélő kortárs közeg. | A családok és egyének földrajzilag és élethelyzet szerint szétszóródhatnak; nehéz rendszeres, természetes magyar közösségi kapcsolatokat kialakítani. | A magyar kulturális, zenei, történeti és hagyományos tudás nem feltétlenül épül be magától a bécsi hétköznapokba."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "solutionMechanisms",
+          "value": "Rendszeres, életkorhoz igazított magyar beszéd-, mese-, ének-, olvasás- és kulturális helyzetek. | Ismétlődő találkozások magyarul beszélő kortársakkal, családokkal és közösségi szereplőkkel. | A nyelv összekapcsolása zenével, történelemmel, művészettel, hagyománnyal és ünnepekkel. | Próbaalkalom, előképzettség nélküli részvétel vagy rugalmas belépési pont, ahol ez a program jellegéből következik."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "schedule",
+          "value": "Kéthetente szombatonként 12:00–14:00"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "relationship",
+          "value": "bmi"
+        }
+      ],
+      "instructor": [
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#kiss-agnes"
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-alapozo",
+      "name": "Alapozó Terápia | Schwedenplatz",
+      "url": "https://www.magyariskola.at/event-details/alapozoterapia-2026",
+      "description": "Kiscsoportos, mozgásalapú idegrendszeri fejlesztés 5–10 éves gyermekeknek. 5–10 éves gyermekednek strukturált mozgásos támogatást keresel a koordináció, figyelem és feladattartás erősítéséhez. Kiscsoportos, szakember által vezetett mozgásos gyakorlatok és szülőkonzultáció a fejlődési célok támogatására.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#school"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 5,
+        "suggestedMaxAge": 10
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Schwedenplatz 2., 1010 Wien"
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "painPoint",
+          "value": "5–10 éves gyermekednek strukturált mozgásos támogatást keresel a koordináció, figyelem és feladattartás erősítéséhez."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "outcome",
+          "value": "Kiscsoportos, szakember által vezetett mozgásos gyakorlatok és szülőkonzultáció a fejlődési célok támogatására."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "rootCauses",
+          "value": "Egyes gyerekeknek strukturált mozgásos, koordinációs, szenzoros vagy figyelmi gyakorlásra van szükségük. | A koncentráció, stratégiai gondolkodás és problémamegoldás fejlődéséhez rendszeres, fokozatos kihívásokra lehet szükség."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "solutionMechanisms",
+          "value": "Pedagógiailag vagy terápiás szemlélettel vezetett mozgás-, koordinációs és szenzoros gyakorlat. | Játékos, fokozatos logikai és stratégiai kihívások rendszeres visszajelzéssel."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "schedule",
+          "value": "Kedden és csütörtökön 13:30–15:00"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "relationship",
+          "value": "bmi"
+        }
+      ],
+      "instructor": [
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#horanyi-bori"
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-rajztabla",
+      "name": "RAJZTÁBLA – Rajzfoglalkozás | Schwedenplatz",
+      "url": "https://www.magyariskola.at/event-details/rajztabla-2026",
+      "description": "Rajzi technika, kompozíció és árnyékolás 10–16 éveseknek, biztos vizuális alapokkal. A gyermek szeret rajzolni, de strukturált segítségre van szüksége a technika, arányok, perspektíva és vizuális gondolkodás fejlődéséhez. Biztosabb rajzi alapok, tudatosabb eszközhasználat, kompozíció, fény-árnyék és perspektíva.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#school"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 10,
+        "suggestedMaxAge": 16
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Schwedenplatz 2., 1010 Wien"
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "painPoint",
+          "value": "A gyermek szeret rajzolni, de strukturált segítségre van szüksége a technika, arányok, perspektíva és vizuális gondolkodás fejlődéséhez."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "outcome",
+          "value": "Biztosabb rajzi alapok, tudatosabb eszközhasználat, kompozíció, fény-árnyék és perspektíva."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "rootCauses",
+          "value": "Kevés lehet az olyan biztonságos, vezetett tér, ahol alkotással, történetmeséléssel vagy színpadi munkával lehet önállóan kísérletezni és visszajelzést kapni."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "solutionMechanisms",
+          "value": "Aktív alkotás, rajz, kézművesség, film, színház vagy digitális projekt passzív befogadás helyett."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "schedule",
+          "value": "Minden hétfőn 16:30–18:00"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "relationship",
+          "value": "bmi"
+        }
+      ],
+      "instructor": [
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#boronkai-gabriella"
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-varazsceruza",
+      "name": "Varázsceruza | Schwedenplatz",
+      "url": "https://www.magyariskola.at/event-details/varazsceruza-2026",
+      "description": "Elmélyült kreatív alkotóműhely 9–14 éveseknek sokféle anyaggal és technikával. A gyermek szeret alkotni, és olyan nyugodt, magyar nyelvű műhelyt keresel, ahol többféle anyagot és technikát próbálhat ki. Kreatív önállóság, anyagismeret, elmélyült alkotás és közösségi élmény.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#school"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 9,
+        "suggestedMaxAge": 14
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Schwedenplatz 2/top 9, 1010 Wien"
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "painPoint",
+          "value": "A gyermek szeret alkotni, és olyan nyugodt, magyar nyelvű műhelyt keresel, ahol többféle anyagot és technikát próbálhat ki."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "outcome",
+          "value": "Kreatív önállóság, anyagismeret, elmélyült alkotás és közösségi élmény."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "rootCauses",
+          "value": "Kevés lehet az olyan biztonságos, vezetett tér, ahol alkotással, történetmeséléssel vagy színpadi munkával lehet önállóan kísérletezni és visszajelzést kapni. | A családok és egyének földrajzilag és élethelyzet szerint szétszóródhatnak; nehéz rendszeres, természetes magyar közösségi kapcsolatokat kialakítani. | A magyar kulturális, zenei, történeti és hagyományos tudás nem feltétlenül épül be magától a bécsi hétköznapokba."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "solutionMechanisms",
+          "value": "Aktív alkotás, rajz, kézművesség, film, színház vagy digitális projekt passzív befogadás helyett. | Ismétlődő találkozások magyarul beszélő kortársakkal, családokkal és közösségi szereplőkkel. | A nyelv összekapcsolása zenével, történelemmel, művészettel, hagyománnyal és ünnepekkel. | Próbaalkalom, előképzettség nélküli részvétel vagy rugalmas belépési pont, ahol ez a program jellegéből következik."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "schedule",
+          "value": "Csütörtökönként 16:30–18:00"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "relationship",
+          "value": "bmi"
+        }
+      ],
+      "instructor": [
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#bajka-kinga-csengele"
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-becscraft",
+      "name": "BÉCS-CRAFT Workshop | Schwedenplatz",
+      "url": "https://www.magyariskola.at/event-details/becscraft-2026",
+      "description": "Minecraft, építészet, történelem és helyszíni mérés egy közös bécsi projektben. A gyermeket a Minecraft és a digitális alkotás motiválja, és ezen keresztül szeretnéd közelebb hozni hozzá Bécs építészetét, történetét és a projektmunkát. Minecraft-alapú közös építés, helyszíni megfigyelés, mérés, történelmi és építészeti ismeretek.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#school"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 6,
+        "suggestedMaxAge": 15
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Bécsi Magyar Iskola, Schwedenplatz 2. Top 8."
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "painPoint",
+          "value": "A gyermeket a Minecraft és a digitális alkotás motiválja, és ezen keresztül szeretnéd közelebb hozni hozzá Bécs építészetét, történetét és a projektmunkát."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "outcome",
+          "value": "Minecraft-alapú közös építés, helyszíni megfigyelés, mérés, történelmi és építészeti ismeretek."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "rootCauses",
+          "value": "A technológia gyakran fogyasztási eszköz; vezetett projekt nélkül kevésbé válik kreatív, együttműködő és tudatos tanulási környezetté. | Kevés lehet az olyan biztonságos, vezetett tér, ahol alkotással, történetmeséléssel vagy színpadi munkával lehet önállóan kísérletezni és visszajelzést kapni. | A családok és egyének földrajzilag és élethelyzet szerint szétszóródhatnak; nehéz rendszeres, természetes magyar közösségi kapcsolatokat kialakítani. | A magyar kulturális, zenei, történeti és hagyományos tudás nem feltétlenül épül be magától a bécsi hétköznapokba."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "solutionMechanisms",
+          "value": "Konkrét közös célon alapuló digitális, filmes, fotós vagy Minecraft-projekt. | Aktív alkotás, rajz, kézművesség, film, színház vagy digitális projekt passzív befogadás helyett. | Ismétlődő találkozások magyarul beszélő kortársakkal, családokkal és közösségi szereplőkkel. | A nyelv összekapcsolása zenével, történelemmel, művészettel, hagyománnyal és ünnepekkel."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "schedule",
+          "value": "Hétfőnként 16:30–17:30 + havi helyszíni bejárás"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "relationship",
+          "value": "bmi"
+        }
+      ],
+      "instructor": [
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#korchma-zsombor"
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-kicsi-svung",
+      "name": "Kicsi Svung – Dráma foglalkozás | Schwedenplatz",
+      "url": "https://www.magyariskola.at/event-details/kicsisvung-2026",
+      "description": "Színjátszás, improvizáció és magyar nyelvi önkifejezés 8–13 éves gyermekeknek. A gyermek szeretne bátrabban megszólalni, szerepelni vagy történeteket alkotni, és közben természetes magyar beszédhelyzetekre is szüksége van. Önbizalom, improvizáció, színpadi önkifejezés, együttműködés és aktív magyar nyelvhasználat.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#school"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 8,
+        "suggestedMaxAge": 13
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Schwedenplatz 2/top 9, 1010 Wien"
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "painPoint",
+          "value": "A gyermek szeretne bátrabban megszólalni, szerepelni vagy történeteket alkotni, és közben természetes magyar beszédhelyzetekre is szüksége van."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "outcome",
+          "value": "Önbizalom, improvizáció, színpadi önkifejezés, együttműködés és aktív magyar nyelvhasználat."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "rootCauses",
+          "value": "A megszólalás, szereplés, improvizáció vagy társas önkifejezés gyakorlásához támogató, alacsony kockázatú közegre lehet szükség. | Kevés lehet az olyan biztonságos, vezetett tér, ahol alkotással, történetmeséléssel vagy színpadi munkával lehet önállóan kísérletezni és visszajelzést kapni. | A német nyelvű mindennapi környezetben kevés lehet a rendszeres, életkorhoz illő magyar nyelvi helyzet és magyarul beszélő kortárs közeg. | A családok és egyének földrajzilag és élethelyzet szerint szétszóródhatnak; nehéz rendszeres, természetes magyar közösségi kapcsolatokat kialakítani. | A magyar kulturális, zenei, történeti és hagyományos tudás nem feltétlenül épül be magától a bécsi hétköznapokba."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "solutionMechanisms",
+          "value": "Improvizáció, dráma, közös alkotás és fokozatos színpadi/kommunikációs gyakorlat támogató közegben. | Aktív alkotás, rajz, kézművesség, film, színház vagy digitális projekt passzív befogadás helyett. | Rendszeres, életkorhoz igazított magyar beszéd-, mese-, ének-, olvasás- és kulturális helyzetek. | Ismétlődő találkozások magyarul beszélő kortársakkal, családokkal és közösségi szereplőkkel. | A nyelv összekapcsolása zenével, történelemmel, művészettel, hagyománnyal és ünnepekkel. | Próbaalkalom, előképzettség nélküli részvétel vagy rugalmas belépési pont, ahol ez a program jellegéből következik."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "schedule",
+          "value": "Hétfőnként 16:30–18:00"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "relationship",
+          "value": "bmi"
+        }
+      ],
+      "instructor": [
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#bajka-kinga-csengele"
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-mamut",
+      "name": "Bécsi Magyar Musical Társulat (MaMUT) – Musical Stúdió",
+      "url": "https://www.magyariskola.at/event-details/mammut-2026",
+      "description": "Ének, tánc és színpadi játék saját musical-projektekben, magyar nyelvi közegben. A gyermek szeret énekelni, táncolni vagy szerepelni, és egy összetett színpadi közösségben szeretné kipróbálni magát. Ének, tánc, színpadi jelenlét, együttműködés és közös musical-projekt.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#school"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 7,
+        "suggestedMaxAge": 12
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Bécsi Magyar Iskola, Schwedenplatz 2, Top 8–9"
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "painPoint",
+          "value": "A gyermek szeret énekelni, táncolni vagy szerepelni, és egy összetett színpadi közösségben szeretné kipróbálni magát."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "outcome",
+          "value": "Ének, tánc, színpadi jelenlét, együttműködés és közös musical-projekt."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "rootCauses",
+          "value": "A megszólalás, szereplés, improvizáció vagy társas önkifejezés gyakorlásához támogató, alacsony kockázatú közegre lehet szükség. | Kevés lehet az olyan biztonságos, vezetett tér, ahol alkotással, történetmeséléssel vagy színpadi munkával lehet önállóan kísérletezni és visszajelzést kapni. | A néptánc, népzene és közösségi ritmus személyes átadása nélkül a hagyomány könnyen puszta információ marad élő tapasztalat helyett. | A magyar kulturális, zenei, történeti és hagyományos tudás nem feltétlenül épül be magától a bécsi hétköznapokba. | A családok és egyének földrajzilag és élethelyzet szerint szétszóródhatnak; nehéz rendszeres, természetes magyar közösségi kapcsolatokat kialakítani."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "solutionMechanisms",
+          "value": "Improvizáció, dráma, közös alkotás és fokozatos színpadi/kommunikációs gyakorlat támogató közegben. | Aktív alkotás, rajz, kézművesség, film, színház vagy digitális projekt passzív befogadás helyett. | Néptánc, népzene, ritmus és közös mozgás által megélt kulturális átadás. | A nyelv összekapcsolása zenével, történelemmel, művészettel, hagyománnyal és ünnepekkel. | Ismétlődő találkozások magyarul beszélő kortársakkal, családokkal és közösségi szereplőkkel. | Próbaalkalom, előképzettség nélküli részvétel vagy rugalmas belépési pont, ahol ez a program jellegéből következik."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "schedule",
+          "value": "Csütörtökönként 16:30–18:00"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "relationship",
+          "value": "bmi"
+        }
+      ],
+      "instructor": [
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#hierholcz-anna"
+        },
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#pecze-adam"
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-gimi-svung",
+      "name": "Gimi Svung – Magyar nyelvű drámafoglalkozás | Schwedenplatz",
+      "url": "https://www.magyariskola.at/event-details/gimisvung-2026",
+      "description": "Improvizáció, drámaírás és közös színpadi alkotás 14–18 éveseknek magyar nyelven. A kamasz magyarul is szeretne önazonosan kommunikálni, kreatívan megszólalni és hasonló korú magyar fiatalokhoz kapcsolódni. Improvizáció, drámaírás, önkifejezés, közös alkotás és magyar kortársközösség.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#school"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 14,
+        "suggestedMaxAge": 18
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Bécsi Magyar Iskola, 1010 Wien, Schwedenplatz 2/9."
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "painPoint",
+          "value": "A kamasz magyarul is szeretne önazonosan kommunikálni, kreatívan megszólalni és hasonló korú magyar fiatalokhoz kapcsolódni."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "outcome",
+          "value": "Improvizáció, drámaírás, önkifejezés, közös alkotás és magyar kortársközösség."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "rootCauses",
+          "value": "A megszólalás, szereplés, improvizáció vagy társas önkifejezés gyakorlásához támogató, alacsony kockázatú közegre lehet szükség. | Kevés lehet az olyan biztonságos, vezetett tér, ahol alkotással, történetmeséléssel vagy színpadi munkával lehet önállóan kísérletezni és visszajelzést kapni. | A német nyelvű mindennapi környezetben kevés lehet a rendszeres, életkorhoz illő magyar nyelvi helyzet és magyarul beszélő kortárs közeg. | A családok és egyének földrajzilag és élethelyzet szerint szétszóródhatnak; nehéz rendszeres, természetes magyar közösségi kapcsolatokat kialakítani. | A magyar kulturális, zenei, történeti és hagyományos tudás nem feltétlenül épül be magától a bécsi hétköznapokba."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "solutionMechanisms",
+          "value": "Improvizáció, dráma, közös alkotás és fokozatos színpadi/kommunikációs gyakorlat támogató közegben. | Aktív alkotás, rajz, kézművesség, film, színház vagy digitális projekt passzív befogadás helyett. | Rendszeres, életkorhoz igazított magyar beszéd-, mese-, ének-, olvasás- és kulturális helyzetek. | Ismétlődő találkozások magyarul beszélő kortársakkal, családokkal és közösségi szereplőkkel. | A nyelv összekapcsolása zenével, történelemmel, művészettel, hagyománnyal és ünnepekkel."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "schedule",
+          "value": "Péntekenként 16:30–18:00"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "relationship",
+          "value": "bmi"
+        }
+      ],
+      "instructor": [
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#pohl-balazs"
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-filmes",
+      "name": "Filmes Műhely Workshop | Schwedenplatz",
+      "url": "https://www.magyariskola.at/event-details/filmesmuhely-2026",
+      "description": "Forgatókönyv, kamera, hang, rendezés és vágás egy teljes tanéves közös filmprojektben. A fiatal érdeklődik a filmkészítés iránt, de szeretné átlátni és kipróbálni a teljes folyamatot az ötlettől a vágásig, csapatban. Forgatókönyv, kamera, hang, rendezés, vágás és egy közösen elkészített filmprojekt tapasztalata.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#school"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 13,
+        "suggestedMaxAge": 17
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Bécsi Magyar Iskola, Schwedenplatz – Nagyterem"
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "painPoint",
+          "value": "A fiatal érdeklődik a filmkészítés iránt, de szeretné átlátni és kipróbálni a teljes folyamatot az ötlettől a vágásig, csapatban."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "outcome",
+          "value": "Forgatókönyv, kamera, hang, rendezés, vágás és egy közösen elkészített filmprojekt tapasztalata."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "rootCauses",
+          "value": "A technológia gyakran fogyasztási eszköz; vezetett projekt nélkül kevésbé válik kreatív, együttműködő és tudatos tanulási környezetté. | Kevés lehet az olyan biztonságos, vezetett tér, ahol alkotással, történetmeséléssel vagy színpadi munkával lehet önállóan kísérletezni és visszajelzést kapni. | A megszólalás, szereplés, improvizáció vagy társas önkifejezés gyakorlásához támogató, alacsony kockázatú közegre lehet szükség."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "solutionMechanisms",
+          "value": "Konkrét közös célon alapuló digitális, filmes, fotós vagy Minecraft-projekt. | Aktív alkotás, rajz, kézművesség, film, színház vagy digitális projekt passzív befogadás helyett. | Improvizáció, dráma, közös alkotás és fokozatos színpadi/kommunikációs gyakorlat támogató közegben. | Próbaalkalom, előképzettség nélküli részvétel vagy rugalmas belépési pont, ahol ez a program jellegéből következik."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "schedule",
+          "value": "Minden szerdán 15:30–17:00"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "relationship",
+          "value": "bmi"
+        }
+      ],
+      "instructor": [
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#trencsenyi-klara"
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-sakk",
+      "name": "Sakk és Gondolkodásfejlesztés | Schwedenplatz",
+      "url": "https://www.magyariskola.at/event-details/sakk-2026",
+      "description": "Sakkfeladványok, taktikai megnyitások és játszmák a logika, stratégiai gondolkodás és koncentráció fejlesztésére. Logikai kihívást, stratégiai gondolkodást és koncentrációt fejlesztő, játékos közeget keresel. Sakkfeladványok, megnyitások és játszmák révén tudatosabb tervezés, figyelem és stratégiai gondolkodás.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#school"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 6,
+        "suggestedMaxAge": 99
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Bécsi Magyar Iskola, Schwedenplatz 2, Top 8 (TV-s terem)"
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "painPoint",
+          "value": "Logikai kihívást, stratégiai gondolkodást és koncentrációt fejlesztő, játékos közeget keresel."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "outcome",
+          "value": "Sakkfeladványok, megnyitások és játszmák révén tudatosabb tervezés, figyelem és stratégiai gondolkodás."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "rootCauses",
+          "value": "A koncentráció, stratégiai gondolkodás és problémamegoldás fejlődéséhez rendszeres, fokozatos kihívásokra lehet szükség."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "solutionMechanisms",
+          "value": "Játékos, fokozatos logikai és stratégiai kihívások rendszeres visszajelzéssel."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "schedule",
+          "value": "Havonta 1 alkalommal, szombatonként 13:00–15:00"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "relationship",
+          "value": "bmi"
+        }
+      ],
+      "instructor": [
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#fersztl-barnabas"
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-fecskeklub",
+      "name": "Fecske Klub | Schwedenplatz",
+      "url": "https://www.magyariskola.at/event-details/fecskeklub-2026",
+      "description": "Játékos, képekkel és rövid videókkal kísért magyar kultúrtörténeti felfedezés, beszélgetéssel és kreatív alkotással 8–14 éveseknek. A gyermek beszél magyarul, de szeretnéd élményszerűen közelebb hozni hozzá a magyar kultúrát és történelmet, nem tankönyvszerű formában. Kultúrtörténeti felfedezés képekkel, videókkal, beszélgetéssel és kreatív alkotással.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#school"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 8,
+        "suggestedMaxAge": 14
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Bécsi Magyar Iskola – Schwedenplatz, 1010 Bécs, Schwedenplatz 2/8."
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "painPoint",
+          "value": "A gyermek beszél magyarul, de szeretnéd élményszerűen közelebb hozni hozzá a magyar kultúrát és történelmet, nem tankönyvszerű formában."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "outcome",
+          "value": "Kultúrtörténeti felfedezés képekkel, videókkal, beszélgetéssel és kreatív alkotással."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "rootCauses",
+          "value": "A családok és egyének földrajzilag és élethelyzet szerint szétszóródhatnak; nehéz rendszeres, természetes magyar közösségi kapcsolatokat kialakítani. | A magyar kulturális, zenei, történeti és hagyományos tudás nem feltétlenül épül be magától a bécsi hétköznapokba. | A német nyelvű mindennapi környezetben kevés lehet a rendszeres, életkorhoz illő magyar nyelvi helyzet és magyarul beszélő kortárs közeg. | Kevés lehet az olyan biztonságos, vezetett tér, ahol alkotással, történetmeséléssel vagy színpadi munkával lehet önállóan kísérletezni és visszajelzést kapni."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "solutionMechanisms",
+          "value": "Ismétlődő találkozások magyarul beszélő kortársakkal, családokkal és közösségi szereplőkkel. | A nyelv összekapcsolása zenével, történelemmel, művészettel, hagyománnyal és ünnepekkel. | Rendszeres, életkorhoz igazított magyar beszéd-, mese-, ének-, olvasás- és kulturális helyzetek. | Aktív alkotás, rajz, kézművesség, film, színház vagy digitális projekt passzív befogadás helyett. | Próbaalkalom, előképzettség nélküli részvétel vagy rugalmas belépési pont, ahol ez a program jellegéből következik."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "schedule",
+          "value": "Keddenként 16:30–18:00; 1 × 90 perc"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "relationship",
+          "value": "bmi"
+        }
+      ],
+      "instructor": [
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#falusi-dora"
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-vilagfa",
+      "name": "Világfa Sárkányai | Schwedenplatz",
+      "url": "https://taltosdob.magyariskola.at",
+      "description": "6–14 éves gyermek dobcsapat magyar néphagyománnyal, közös dobolással és történetekkel. A gyermek számára élő, közösségi formában szeretnéd átadni a magyar néphagyományt, ritmust, történeteket és együtt zenélést. Közös dobolás, néphagyomány, történetek, ritmusélmény és összetartó gyermekközösség.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#school"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 6,
+        "suggestedMaxAge": 14
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Schwedenplatz 2. / Laurenzerberg 5., 1010 Wien"
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "painPoint",
+          "value": "A gyermek számára élő, közösségi formában szeretnéd átadni a magyar néphagyományt, ritmust, történeteket és együtt zenélést."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "outcome",
+          "value": "Közös dobolás, néphagyomány, történetek, ritmusélmény és összetartó gyermekközösség."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "rootCauses",
+          "value": "A néptánc, népzene és közösségi ritmus személyes átadása nélkül a hagyomány könnyen puszta információ marad élő tapasztalat helyett. | A magyar kulturális, zenei, történeti és hagyományos tudás nem feltétlenül épül be magától a bécsi hétköznapokba. | A családok és egyének földrajzilag és élethelyzet szerint szétszóródhatnak; nehéz rendszeres, természetes magyar közösségi kapcsolatokat kialakítani. | Egyes gyerekeknek strukturált mozgásos, koordinációs, szenzoros vagy figyelmi gyakorlásra van szükségük."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "solutionMechanisms",
+          "value": "Néptánc, népzene, ritmus és közös mozgás által megélt kulturális átadás. | A nyelv összekapcsolása zenével, történelemmel, művészettel, hagyománnyal és ünnepekkel. | Ismétlődő találkozások magyarul beszélő kortársakkal, családokkal és közösségi szereplőkkel. | Pedagógiailag vagy terápiás szemlélettel vezetett mozgás-, koordinációs és szenzoros gyakorlat."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "schedule",
+          "value": "Havonta 1 alkalom 18:00-tól"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "relationship",
+          "value": "partner"
+        }
+      ],
+      "instructor": [
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#hupczik-andrea"
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-napraforgocskak",
+      "name": "Napraforgócskák – Néptánc kicsiknek | Schwedenplatz",
+      "url": "https://napraforgok.at/r%C3%B3lunk#napraforgocskak",
+      "description": "Magyar gyermeknéptánc, zene és közösség 6–15 éveseknek a Napraforgók vezetésével. A gyermek szeret mozogni és zenére táncolni, miközben magyar közösséghez és népi kultúrához is szeretnéd kapcsolni. Magyar néptánc, ritmus, zenei élmény, mozgáskoordináció és közösségi kötődés.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#school"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 6,
+        "suggestedMaxAge": 15
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Bécsi Magyar Iskola, Schwedenplatz 2 / Laurenzerberg 5., 1010 Wien, Top 8"
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "painPoint",
+          "value": "A gyermek szeret mozogni és zenére táncolni, miközben magyar közösséghez és népi kultúrához is szeretnéd kapcsolni."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "outcome",
+          "value": "Magyar néptánc, ritmus, zenei élmény, mozgáskoordináció és közösségi kötődés."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "rootCauses",
+          "value": "A néptánc, népzene és közösségi ritmus személyes átadása nélkül a hagyomány könnyen puszta információ marad élő tapasztalat helyett. | A magyar kulturális, zenei, történeti és hagyományos tudás nem feltétlenül épül be magától a bécsi hétköznapokba. | A családok és egyének földrajzilag és élethelyzet szerint szétszóródhatnak; nehéz rendszeres, természetes magyar közösségi kapcsolatokat kialakítani. | Egyes gyerekeknek strukturált mozgásos, koordinációs, szenzoros vagy figyelmi gyakorlásra van szükségük."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "solutionMechanisms",
+          "value": "Néptánc, népzene, ritmus és közös mozgás által megélt kulturális átadás. | A nyelv összekapcsolása zenével, történelemmel, művészettel, hagyománnyal és ünnepekkel. | Ismétlődő találkozások magyarul beszélő kortársakkal, családokkal és közösségi szereplőkkel. | Pedagógiailag vagy terápiás szemlélettel vezetett mozgás-, koordinációs és szenzoros gyakorlat."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "schedule",
+          "value": "Minden szerdán 17:00–18:00"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "relationship",
+          "value": "partner"
+        }
+      ],
+      "instructor": [
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#varga-bernadette"
+        },
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#veres-tamas"
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-cserkeszet",
+      "name": "Cserkészet | Alliiertenstrasse",
+      "url": "https://cserkesz.at/cserkesz-raj/",
+      "description": "Kiscserkész, cserkész és vándor korosztály magyar közösségben, természetben és hagyományőrző programokon. Magyar kortársközösséget, természetközeli programokat, önállósodást és közös élményeket keresel a gyermeknek vagy fiatalnak. Korosztályos cserkészközösség, természetben szerzett tapasztalatok, együttműködés és magyar kulturális kötődés.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#school"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 5,
+        "suggestedMaxAge": 22
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Alliiertenstrasse 2, 1020 Wien"
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "painPoint",
+          "value": "Magyar kortársközösséget, természetközeli programokat, önállósodást és közös élményeket keresel a gyermeknek vagy fiatalnak."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "outcome",
+          "value": "Korosztályos cserkészközösség, természetben szerzett tapasztalatok, együttműködés és magyar kulturális kötődés."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "rootCauses",
+          "value": "A családok és egyének földrajzilag és élethelyzet szerint szétszóródhatnak; nehéz rendszeres, természetes magyar közösségi kapcsolatokat kialakítani. | A magyar kulturális, zenei, történeti és hagyományos tudás nem feltétlenül épül be magától a bécsi hétköznapokba. | Egyes gyerekeknek strukturált mozgásos, koordinációs, szenzoros vagy figyelmi gyakorlásra van szükségük. | A néptánc, népzene és közösségi ritmus személyes átadása nélkül a hagyomány könnyen puszta információ marad élő tapasztalat helyett."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "solutionMechanisms",
+          "value": "Ismétlődő találkozások magyarul beszélő kortársakkal, családokkal és közösségi szereplőkkel. | A nyelv összekapcsolása zenével, történelemmel, művészettel, hagyománnyal és ünnepekkel. | Pedagógiailag vagy terápiás szemlélettel vezetett mozgás-, koordinációs és szenzoros gyakorlat. | Néptánc, népzene, ritmus és közös mozgás által megélt kulturális átadás."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "schedule",
+          "value": "Kéthetente szombaton 16:00–19:00"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "relationship",
+          "value": "partner"
+        }
+      ],
+      "instructor": [
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#poser-piroska-ildiko"
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-fotoklub",
+      "name": "Láss a Mesterek Szemével: VIPACH Felnőtt Fotóklub | Schwedenplatz",
+      "url": "https://www.magyariskola.at/event-details/fotoklub-2026",
+      "description": "Fotográfiai látásmód, alkotás és technika felnőtteknek, művészeti és művészettörténeti vezetéssel. Szeretsz fotózni, de szeretnél tudatosabban látni, technikailag fejlődni és inspiráló alkotói közösséghez kapcsolódni. Fotográfiai látásmód, technikai fejlődés, művészeti kontextus, közös elemzés és alkotói gyakorlat.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#school"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 18,
+        "suggestedMaxAge": 99
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Schwedenplatz 2., 1010 Wien"
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "painPoint",
+          "value": "Szeretsz fotózni, de szeretnél tudatosabban látni, technikailag fejlődni és inspiráló alkotói közösséghez kapcsolódni."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "outcome",
+          "value": "Fotográfiai látásmód, technikai fejlődés, művészeti kontextus, közös elemzés és alkotói gyakorlat."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "rootCauses",
+          "value": "A technológia gyakran fogyasztási eszköz; vezetett projekt nélkül kevésbé válik kreatív, együttműködő és tudatos tanulási környezetté. | Kevés lehet az olyan biztonságos, vezetett tér, ahol alkotással, történetmeséléssel vagy színpadi munkával lehet önállóan kísérletezni és visszajelzést kapni. | A családok és egyének földrajzilag és élethelyzet szerint szétszóródhatnak; nehéz rendszeres, természetes magyar közösségi kapcsolatokat kialakítani. | A magyar kulturális, zenei, történeti és hagyományos tudás nem feltétlenül épül be magától a bécsi hétköznapokba."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "solutionMechanisms",
+          "value": "Konkrét közös célon alapuló digitális, filmes, fotós vagy Minecraft-projekt. | Aktív alkotás, rajz, kézművesség, film, színház vagy digitális projekt passzív befogadás helyett. | Ismétlődő találkozások magyarul beszélő kortársakkal, családokkal és közösségi szereplőkkel. | A nyelv összekapcsolása zenével, történelemmel, művészettel, hagyománnyal és ünnepekkel."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "schedule",
+          "value": "Csütörtökönként 18:30–20:30"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "relationship",
+          "value": "bmi"
+        }
+      ],
+      "instructor": [
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#poser-piroska-ildiko"
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-fokusz",
+      "name": "FÓKUSZ-CSOPORT | Schwedenplatz",
+      "url": "https://www.magyariskola.at/event-details/fokuszcsoport-2026",
+      "description": "Homloklebeny-tréning fókuszhoz, tervezéshez, időgazdálkodáshoz és mentális egyensúlyhoz. Nehezen tartod a fókuszt, szeretnél tudatosabban tervezni, jobban gazdálkodni az időddel vagy kiegyensúlyozottabban szervezni a mindennapokat. Strukturált gyakorlatok a fókusz, tervezés, időgazdálkodás, érzelmi szabályozás és mentális egyensúly támogatására.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#school"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 18,
+        "suggestedMaxAge": 99
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Schwedenplatz 2., 1010 Wien"
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "painPoint",
+          "value": "Nehezen tartod a fókuszt, szeretnél tudatosabban tervezni, jobban gazdálkodni az időddel vagy kiegyensúlyozottabban szervezni a mindennapokat."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "outcome",
+          "value": "Strukturált gyakorlatok a fókusz, tervezés, időgazdálkodás, érzelmi szabályozás és mentális egyensúly támogatására."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "rootCauses",
+          "value": "A tanulás, munka és családi élet terhelése fókusz-, tervezési, időgazdálkodási vagy jólléti nehézségeket hozhat."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "solutionMechanisms",
+          "value": "Strukturált önismereti, fókusz-, tervezési és időgazdálkodási módszerek."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "schedule",
+          "value": "A résztvevőkkel közösen egyeztetett sávokban; 10 alkalom kéthetente, 75 perc / alkalom"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "relationship",
+          "value": "bmi-partner"
+        }
+      ],
+      "instructor": [
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#horanyi-bori"
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-kezdo-neptanc",
+      "name": "Kezdő néptánc felnőtteknek | Schwedenplatz",
+      "url": "https://napraforgok.at/r%C3%B3lunk#kezdocsoport",
+      "description": "Belépő szintű magyar néptánc közösségi formában, előzetes tánctudás nélkül is. Felnőttként szeretnél mozogni, magyar közösséghez kapcsolódni és néptáncot tanulni úgy, hogy nincs szükség előzetes tánctudásra. Belépő szintű néptánctudás, rendszeres mozgás, zenei és kulturális élmény, felnőtt közösség.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#school"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 18,
+        "suggestedMaxAge": 99
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Bécsi Magyar Iskola, Schwedenplatz 2 / Laurenzerberg 5., 1010 Wien, Top 8"
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "painPoint",
+          "value": "Felnőttként szeretnél mozogni, magyar közösséghez kapcsolódni és néptáncot tanulni úgy, hogy nincs szükség előzetes tánctudásra."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "outcome",
+          "value": "Belépő szintű néptánctudás, rendszeres mozgás, zenei és kulturális élmény, felnőtt közösség."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "rootCauses",
+          "value": "A néptánc, népzene és közösségi ritmus személyes átadása nélkül a hagyomány könnyen puszta információ marad élő tapasztalat helyett. | A magyar kulturális, zenei, történeti és hagyományos tudás nem feltétlenül épül be magától a bécsi hétköznapokba. | A családok és egyének földrajzilag és élethelyzet szerint szétszóródhatnak; nehéz rendszeres, természetes magyar közösségi kapcsolatokat kialakítani. | Egyes gyerekeknek strukturált mozgásos, koordinációs, szenzoros vagy figyelmi gyakorlásra van szükségük."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "solutionMechanisms",
+          "value": "Néptánc, népzene, ritmus és közös mozgás által megélt kulturális átadás. | A nyelv összekapcsolása zenével, történelemmel, művészettel, hagyománnyal és ünnepekkel. | Ismétlődő találkozások magyarul beszélő kortársakkal, családokkal és közösségi szereplőkkel. | Pedagógiailag vagy terápiás szemlélettel vezetett mozgás-, koordinációs és szenzoros gyakorlat."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "schedule",
+          "value": "Hétfőnként 19:00–21:00"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "relationship",
+          "value": "partner"
+        }
+      ],
+      "instructor": [
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#sipos-tibor"
+        },
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#orban-dalma"
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-mos",
+      "name": "Microsoft Office Specialist (MOS) felkészítő tanfolyam",
+      "url": "https://mos.magyariskola.at",
+      "description": "Magyar nyelvű, gyakorlati Word-, Excel- és PowerPoint-képzés, célzott felkészítéssel a Microsoft Office Specialist vizsgára. A munkához Word-, Excel- vagy PowerPoint-tudásra van szükséged, szeretnéd rendszerezni a gyakorlati ismereteidet, és fontos a hivatalosan igazolható MOS-minősítés. Gyakorlati Office-feladatok, próbavizsga, célzott felkészítés és a választott csomaghoz tartozó MOS-vizsga.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#school"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 18,
+        "suggestedMaxAge": 99
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Online és Bécsben"
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "painPoint",
+          "value": "A munkához Word-, Excel- vagy PowerPoint-tudásra van szükséged, szeretnéd rendszerezni a gyakorlati ismereteidet, és fontos a hivatalosan igazolható MOS-minősítés."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "outcome",
+          "value": "Gyakorlati Office-feladatok, próbavizsga, célzott felkészítés és a választott csomaghoz tartozó MOS-vizsga."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "rootCauses",
+          "value": "A mindennapi számítógép-használat nem feltétlenül jelent rendszerezett Word-, Excel-, PowerPoint- vagy vizsgaszintű tudást."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "solutionMechanisms",
+          "value": "Rendszerezett Office-ismeretek és szükség esetén vizsgafelkészítés."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "schedule",
+          "value": "Online órák hétfőtől péntekig 9:00–12:00 között; a csoportbeosztás jelentkezés után készül"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "relationship",
+          "value": "bmi-partner"
+        }
+      ],
+      "instructor": [
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#hupczik-andrea"
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-rekreacio",
+      "name": "ReKreáció – Kreatív Közösségi Kuckó | Schwedenplatz",
+      "url": "https://www.magyariskola.at/event-details/rekreacio-2026",
+      "description": "Kreatív, befogadó felnőtt közösségi workshop, ahol hétköznapi vagy feleslegessé vált tárgyakból új, esztétikus és használható alkotások születnek környezettudatos szemlélettel. Felnőttként kreatív közösséget keresel, szeretnél kiszakadni a hétköznapi rutinból, alkotni és új értéket adni hétköznapi vagy feleslegessé vált tárgyaknak. Közös alkotás, kreatív feltöltődés, újrahasznosító szemlélet és rendszeresen találkozó befogadó közösség.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#school"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 18,
+        "suggestedMaxAge": 99
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Bécsi Magyar Iskola, 1010 Wien, Schwedenplatz 2. Top 8."
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "painPoint",
+          "value": "Felnőttként kreatív közösséget keresel, szeretnél kiszakadni a hétköznapi rutinból, alkotni és új értéket adni hétköznapi vagy feleslegessé vált tárgyaknak."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "outcome",
+          "value": "Közös alkotás, kreatív feltöltődés, újrahasznosító szemlélet és rendszeresen találkozó befogadó közösség."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "rootCauses",
+          "value": "Kevés lehet az olyan biztonságos, vezetett tér, ahol alkotással, történetmeséléssel vagy színpadi munkával lehet önállóan kísérletezni és visszajelzést kapni. | A családok és egyének földrajzilag és élethelyzet szerint szétszóródhatnak; nehéz rendszeres, természetes magyar közösségi kapcsolatokat kialakítani. | A magyar kulturális, zenei, történeti és hagyományos tudás nem feltétlenül épül be magától a bécsi hétköznapokba."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "solutionMechanisms",
+          "value": "Aktív alkotás, rajz, kézművesség, film, színház vagy digitális projekt passzív befogadás helyett. | Ismétlődő találkozások magyarul beszélő kortársakkal, családokkal és közösségi szereplőkkel. | A nyelv összekapcsolása zenével, történelemmel, művészettel, hagyománnyal és ünnepekkel."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "schedule",
+          "value": "Vasárnaponként, meghirdetett időpontokban 10:00–13:00"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "relationship",
+          "value": "bmi-partner"
+        }
+      ],
+      "instructor": [
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#egri-monika"
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-zenebona",
+      "name": "Zenebona – Zene. Kapcsolódás. Öröm. | Hietzing",
+      "url": "https://zenebona.magyariskola.at",
+      "description": "Magyar nyelvű zenés szülő–gyermek foglalkozás 0–3 éveseknek énekléssel, mondókákkal, mozgással, ritmikus játékokkal és hangszeres felfedezéssel Hietzingben. Kisgyermekkel olyan magyar nyelvű közös programot keresel Bécsben, ahol a zene, mondóka, ritmus, mozgás és az egymásra figyelés természetesen kapcsolódik össze. Közös éneklés, mondókázás, mozgás, ritmikus játék, hangszeres felfedezés és rendszeres magyar nyelvű szülő–gyermek közösségi élmény.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#school"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 0,
+        "suggestedMaxAge": 3
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Zeneterápiás műhely, Fleschgasse 15/1/1, 1130 Wien, Hietzing"
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "painPoint",
+          "value": "Kisgyermekkel olyan magyar nyelvű közös programot keresel Bécsben, ahol a zene, mondóka, ritmus, mozgás és az egymásra figyelés természetesen kapcsolódik össze."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "outcome",
+          "value": "Közös éneklés, mondókázás, mozgás, ritmikus játék, hangszeres felfedezés és rendszeres magyar nyelvű szülő–gyermek közösségi élmény."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "rootCauses",
+          "value": "A német nyelvű mindennapi környezetben kevés lehet a rendszeres, életkorhoz illő magyar nyelvi helyzet és magyarul beszélő kortárs közeg. | A családok és egyének földrajzilag és élethelyzet szerint szétszóródhatnak; nehéz rendszeres, természetes magyar közösségi kapcsolatokat kialakítani. | A magyar kulturális, zenei, történeti és hagyományos tudás nem feltétlenül épül be magától a bécsi hétköznapokba. | Egyes gyerekeknek strukturált mozgásos, koordinációs, szenzoros vagy figyelmi gyakorlásra van szükségük."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "solutionMechanisms",
+          "value": "Rendszeres, életkorhoz igazított magyar beszéd-, mese-, ének-, olvasás- és kulturális helyzetek. | Ismétlődő találkozások magyarul beszélő kortársakkal, családokkal és közösségi szereplőkkel. | A nyelv összekapcsolása zenével, történelemmel, művészettel, hagyománnyal és ünnepekkel. | Pedagógiailag vagy terápiás szemlélettel vezetett mozgás-, koordinációs és szenzoros gyakorlat."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "schedule",
+          "value": "Szerdánként 10:00–11:15; érkezés 9:45-től, maradás 11:30-ig"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "relationship",
+          "value": "bmi-partner"
+        }
+      ],
+      "instructor": [
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#dapin-hajnalka-judit"
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-oromzene",
+      "name": "Együtt dobban Bécs – Közös örömzene | Schwedenplatz",
+      "url": "https://www.magyariskola.at/event-details/oromzene-2026",
+      "description": "Közös dobolás, éneklés és magyar dallamok minden korosztálynak. Havi egy alkalom 18:00-tól; zenei vagy dobos előképzettség nem szükséges, saját hangszer hozható. Olyan bécsi magyar közösségi programot keresel, ahol gyermekek, fiatalok, szülők és felnőttek együtt kapcsolódhatnak, és a zenéléshez nem kell előképzettség. Közös dobolás, éneklés, magyar dallamok, generációkat összekötő közösségi élmény és felszabadult örömzenélés teljesítménykényszer nélkül.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#school"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 0,
+        "suggestedMaxAge": 99
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Bécsi Magyar Iskola, Schwedenplatz 2. / Laurenzerberg 5., 1010 Wien"
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "painPoint",
+          "value": "Olyan bécsi magyar közösségi programot keresel, ahol gyermekek, fiatalok, szülők és felnőttek együtt kapcsolódhatnak, és a zenéléshez nem kell előképzettség."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "outcome",
+          "value": "Közös dobolás, éneklés, magyar dallamok, generációkat összekötő közösségi élmény és felszabadult örömzenélés teljesítménykényszer nélkül."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "rootCauses",
+          "value": "A családok és egyének földrajzilag és élethelyzet szerint szétszóródhatnak; nehéz rendszeres, természetes magyar közösségi kapcsolatokat kialakítani. | A magyar kulturális, zenei, történeti és hagyományos tudás nem feltétlenül épül be magától a bécsi hétköznapokba. | A néptánc, népzene és közösségi ritmus személyes átadása nélkül a hagyomány könnyen puszta információ marad élő tapasztalat helyett. | Egyes gyerekeknek strukturált mozgásos, koordinációs, szenzoros vagy figyelmi gyakorlásra van szükségük. | Kevés olyan tér van, ahol gyerekek, szülők, fiatalok és idősebbek ugyanabban a magyar közösségi élményben vesznek részt."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "solutionMechanisms",
+          "value": "Ismétlődő találkozások magyarul beszélő kortársakkal, családokkal és közösségi szereplőkkel. | A nyelv összekapcsolása zenével, történelemmel, művészettel, hagyománnyal és ünnepekkel. | Néptánc, népzene, ritmus és közös mozgás által megélt kulturális átadás. | Pedagógiailag vagy terápiás szemlélettel vezetett mozgás-, koordinációs és szenzoros gyakorlat. | Közös zene, ritmus vagy közösségi program, amelyben több generáció egyszerre vesz részt. | Próbaalkalom, előképzettség nélküli részvétel vagy rugalmas belépési pont, ahol ez a program jellegéből következik."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "schedule",
+          "value": "Havonta 1 alkalom 18:00-tól"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "relationship",
+          "value": "bmi-partner"
+        }
+      ]
+    }
+  ]
+}
