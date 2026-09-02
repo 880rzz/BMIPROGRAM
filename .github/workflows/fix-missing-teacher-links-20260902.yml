@@ -1,0 +1,45 @@
+name: Fix missing teacher links 20260902
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-missing-teacher-links-20260902.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add known missing teacher assignments
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+          p=Path('data.js')
+          s=p.read_text(encoding='utf-8')
+
+          def set_teacher(pid, teacher):
+              nonlocal_s = None
+              global s
+              pat = r'(\{id:"'+re.escape(pid)+r'".*?)(,fee:)'
+              m = re.search(pat, s, re.S)
+              if not m:
+                  raise SystemExit(f'program not found: {pid}')
+              prefix = re.sub(r',teacher:"[^"]*"','',m.group(1))
+              prefix += ',teacher:"'+teacher+'"'
+              s = s[:m.start()] + prefix + m.group(2) + s[m.end():]
+
+          set_teacher('napraforgocskak','Varga Bernadette és Veres Tamás')
+          set_teacher('mos','Hupczik Andrea')
+          p.write_text(s,encoding='utf-8')
+      - name: Commit
+        run: |
+          git config user.name "BMI Program Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data.js
+          git diff --cached --quiet && exit 0
+          git commit -m "Link known teachers to Napraforgocskak and MOS"
+          git push
