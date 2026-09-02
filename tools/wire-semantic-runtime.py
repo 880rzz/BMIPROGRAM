@@ -8,9 +8,11 @@ if 'semantic-runtime.js' not in s:
     m = re.search(r'(<script src="zenebona-program\.js\?v=[^"]+"></script>)', s)
     if not m:
         raise SystemExit('partner registry script anchor not found')
-    tag = '<script src="semantic-runtime.js?v=20260902-1"></script>'
+    tag = '<script src="semantic-runtime.js?v=20260902-2"></script>'
     s = s[:m.end()] + tag + s[m.end():]
-s = re.sub(r'app\.js\?v=[^"\']+', 'app.js?v=20260902-semantic-v1', s)
+else:
+    s = re.sub(r'semantic-runtime\.js\?v=[^"\']+', 'semantic-runtime.js?v=20260902-2', s)
+s = re.sub(r'app\.js\?v=[^"\']+', 'app.js?v=20260902-semantic-v2', s)
 p.write_text(s, encoding='utf-8')
 
 p = Path('app.js')
@@ -29,7 +31,8 @@ function semanticFit(p){
  if(!window.BMI_SEMANTIC)return{rootHits:[],solutionHits:[],bonus:0};
  var wanted=selectedSemantic(),ps={roots:p.semanticRootCauses||[],solutions:p.semanticSolutions||[]};
  var rootHits=window.BMI_SEMANTIC.overlap(wanted.roots,ps.roots),solutionHits=window.BMI_SEMANTIC.overlap(wanted.solutions,ps.solutions);
- return{rootHits:rootHits,solutionHits:solutionHits,bonus:Math.min(8,rootHits.length*3+solutionHits.length)}
+ return{rootHits:rootHits,solutionHits:solutionHits,bonus:Math.min(8,rootHits.length*3+solutionHits.length)};
+}
 function semanticReason(p){
  var f=semanticFit(p);if(!f.rootHits.length&&!f.solutionHits.length)return'';
  var bits=[];
