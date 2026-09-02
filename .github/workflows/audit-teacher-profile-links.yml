@@ -1,0 +1,43 @@
+name: Audit teacher profile links
+
+on:
+  push:
+    paths:
+      - '.github/workflows/audit-teacher-profile-links.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Audit program teacher names against teacher profile aliases
+        shell: python
+        run: |
+          from pathlib import Path
+          import re, json
+
+          linkjs = Path('teacher-links.js').read_text(encoding='utf-8')
+          m = re.search(r'var map=(\{.*?\});', linkjs, re.S)
+          if not m:
+              raise SystemExit('teacher map not found')
+          aliases = set(json.loads(m.group(1)).keys())
+
+          src = Path('data.js').read_text(encoding='utf-8') + '\n' + Path('zenebona-program.js').read_text(encoding='utf-8')
+          programs=[]
+          for pm in re.finditer(r'\{id:"([^"]+)".*?name:"([^"]+)".*?(?=\},\n|\}\);|\}\n)', src, re.S):
+              block=pm.group(0)
+              tm=re.search(r'teacher:"([^"]*)"', block)
+              programs.append((pm.group(1),pm.group(2),tm.group(1) if tm else ''))
+
+          def linked_parts(t):
+              return [a for a in aliases if a in t]
+
+          print('TOTAL_PROGRAMS', len(programs))
+          print('--- AUDIT ---')
+          for pid,name,teacher in programs:
+              hits=linked_parts(teacher)
+              status='LINKED' if hits else ('NO_TEACHER' if not teacher else 'UNLINKED')
+              print(f'{status}\t{pid}\t{name}\t{teacher}\tALIASES={" | ".join(sorted(hits))}')
