@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "2026-09-02-v1",
+  "schemaVersion": "2026-09-02-v2",
   "schoolYear": "2026/2027",
   "school": {
     "id": "https://www.magyariskola.at/#school",
@@ -34,8 +34,34 @@
     "canonicalTeacherData": "https://tanarok.magyariskola.at/teacher-knowledge.json",
     "officialEventPages": "https://www.magyariskola.at/esemenyek"
   },
+  "categories6": [
+    {
+      "id": "nyelv",
+      "label": "Magyar nyelv és közösség"
+    },
+    {
+      "id": "alkotas",
+      "label": "Alkotás, művészet és színpad"
+    },
+    {
+      "id": "mozgas",
+      "label": "Mozgás, tánc és zene"
+    },
+    {
+      "id": "logika",
+      "label": "Stratégia, digitális készségek és technológia"
+    },
+    {
+      "id": "jollet",
+      "label": "Fejlesztés, fókusz és jóllét"
+    },
+    {
+      "id": "hagyomany",
+      "label": "Kultúra, hagyomány és közösségi élet"
+    }
+  ],
   "sourcePriority": {
-    "recommendation": "data.js + zenebona-program.js normalized into program-knowledge.json",
+    "recommendation": "data.js + zenebona-program.js + explicit program-taxonomy.js normalized into program-knowledge.json",
     "teacher": "https://tanarok.magyariskola.at/teacher-knowledge.json",
     "registration": "current Wix Event page or explicit partner canonical page"
   },
