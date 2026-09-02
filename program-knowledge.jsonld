@@ -1382,7 +1382,7 @@
         {
           "@type": "PropertyValue",
           "name": "schedule",
-          "value": "Havonta 1 alkalom 18:00-tól"
+          "value": "Havonta 1 alkalom 16:00–18:00; utána 18:00-tól Közös örömzene"
         },
         {
           "@type": "PropertyValue",
@@ -1952,7 +1952,7 @@
         {
           "@type": "PropertyValue",
           "name": "schedule",
-          "value": "Havonta 1 alkalom 18:00-tól"
+          "value": "Minden Világfa Sárkányai / Táltos dob napon 18:00-tól"
         },
         {
           "@type": "PropertyValue",
@@ -1963,6 +1963,12 @@
           "@type": "PropertyValue",
           "name": "primaryCategory6",
           "value": "mozgas"
+        }
+      ],
+      "instructor": [
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#hupczik-andrea"
         }
       ]
     }

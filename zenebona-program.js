@@ -35,7 +35,7 @@ if(!cfg.programs.some(function(p){return p.id==='oromzene'})){
     eventDates:["2026-09-27","2026-10-24","2026-11-28","2027-01-16","2027-02-13","2027-03-13","2027-04-17","2027-05-22"],
     tentativeEventDates:["2027-06-19","2027-06-26"],
     location:"Bécsi Magyar Iskola, Schwedenplatz 2. / Laurenzerberg 5., 1010 Wien",routeLocation:"Schwedenplatz 2, 1010 Wien, Austria",language:"Magyar",
-    teacher:"Regélő Fehér Táltos Hagyományőrző Egyesület Dobcsapata",teacherContact:"Hupczik Andrea · +43 670 6539011 · taltosdob@gmail.com",
+    teacher:"Hupczik Andrea",teacherContact:"+43 670 6539011 · taltosdob@gmail.com",teacherBackground:"Informatikatanár és hagyományőrző közösségi szervező; az Együtt dobban Bécs / Közös örömzene foglalkozásvezetője és helyi kapcsolattartója.",
     fee:"5 € / fő; a közvetlenül előtte zajló gyermek dobos foglalkozás résztvevőinek ingyenes",capacity:"10–30 fő",duration:"1,5 óra",
     firstDate:"2026. szeptember 27., vasárnap 18:00",url:"https://www.magyariskola.at/event-details/oromzene-2026",
     provider:"Regélő Fehér Táltos Hagyományőrző Egyesület",relationship:"bmi-partner",sourceType:"Wix Events 2026/27 · BMI Partner Program",
@@ -126,12 +126,12 @@ if(napra){
 var sharedDates=['2026-09-27','2026-10-24','2026-11-28','2027-01-16','2027-02-13','2027-03-13','2027-04-17','2027-05-22'];
 var vilagfa=findProgram('vilagfa');
 if(vilagfa){
-  vilagfa.weekday='szombat';vilagfa.weekdays=['szombat','vasarnap'];vilagfa.when='Havonta 1 alkalom 18:00-tól';
+  vilagfa.weekday='szombat';vilagfa.weekdays=['szombat','vasarnap'];vilagfa.when='Havonta 1 alkalom 16:00–18:00; utána 18:00-tól Közös örömzene';
   vilagfa.period='2026/27-es tanév; alkalmak: 09.27. · 10.24. · 11.28. · 01.16. · 02.13. · 03.13. · 04.17. · 05.22.; évzáró: 06.19. / 06.26., egyeztetés alatt';
-  vilagfa.eventDates=sharedDates.slice();vilagfa.tentativeEventDates=['2027-06-19','2027-06-26'];vilagfa.firstDate='2026. szeptember 27., vasárnap 18:00';vilagfa.scheduleMode='irregular';
+  vilagfa.eventDates=sharedDates.slice();vilagfa.tentativeEventDates=['2027-06-19','2027-06-26'];vilagfa.firstDate='2026. szeptember 27., vasárnap 16:00';vilagfa.scheduleMode='irregular';
 }
 var orom=findProgram('oromzene');
-if(orom){orom.eventDates=sharedDates.slice();orom.tentativeEventDates=['2027-06-19','2027-06-26'];orom.when='Havonta 1 alkalom 18:00-tól';orom.scheduleMode='irregular';}
+if(orom){orom.eventDates=sharedDates.slice();orom.tentativeEventDates=['2027-06-19','2027-06-26'];orom.when='Minden Világfa Sárkányai / Táltos dob napon 18:00-tól';orom.scheduleMode='irregular';orom.teacher='Hupczik Andrea';orom.teacherContact='+43 670 6539011 · taltosdob@gmail.com';orom.teacherBackground='Informatikatanár és hagyományőrző közösségi szervező; az Együtt dobban Bécs / Közös örömzene foglalkozásvezetője.';orom.linkedProgramId='vilagfa';orom.scheduleRule='same-date-as-vilagfa-at-18:00';orom.permanentWixEvent='https://www.magyariskola.at/event-details/oromzene-2026';}
 
 var schweden2=findProgram('schweden-2');
 if(schweden2){

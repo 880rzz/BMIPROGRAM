@@ -1957,12 +1957,12 @@
         "vasarnap"
       ],
       "pace": "rugalmas",
-      "when": "Havonta 1 alkalom 18:00-tól",
+      "when": "Havonta 1 alkalom 16:00–18:00; utána 18:00-tól Közös örömzene",
       "location": "Schwedenplatz 2. / Laurenzerberg 5., 1010 Wien",
       "teacher": "Hupczik Andrea",
       "fee": "70 € / fő / félév; a második félév szintén 70 € / fő",
       "enrollment": "Bármikor be lehet csatlakozni.",
-      "firstDate": "2026. szeptember 27., vasárnap 18:00",
+      "firstDate": "2026. szeptember 27., vasárnap 16:00",
       "url": "https://taltosdob.magyariskola.at",
       "provider": "Regélő Fehér Táltos Hagyományőrző Egyesület",
       "relationship": "partner",
@@ -2736,7 +2736,7 @@
         "vasarnap"
       ],
       "pace": "rugalmas",
-      "when": "Havonta 1 alkalom 18:00-tól",
+      "when": "Minden Világfa Sárkányai / Táltos dob napon 18:00-tól",
       "period": "2026/27-es tanév; alkalmak: 2026.09.27.; 2026.10.24.; 2026.11.28.; 2027.01.16.; 2027.02.13.; 2027.03.13.; 2027.04.17.; 2027.05.22.; évzáró: 2027.06.19. vagy 06.26., egyeztetés alatt",
       "eventDates": [
         "2026-09-27",
@@ -2755,8 +2755,9 @@
       "location": "Bécsi Magyar Iskola, Schwedenplatz 2. / Laurenzerberg 5., 1010 Wien",
       "routeLocation": "Schwedenplatz 2, 1010 Wien, Austria",
       "language": "Magyar",
-      "teacher": "Regélő Fehér Táltos Hagyományőrző Egyesület Dobcsapata",
-      "teacherContact": "Hupczik Andrea · +43 670 6539011 · taltosdob@gmail.com",
+      "teacher": "Hupczik Andrea",
+      "teacherContact": "+43 670 6539011 · taltosdob@gmail.com",
+      "teacherBackground": "Informatikatanár és hagyományőrző közösségi szervező; az Együtt dobban Bécs / Közös örömzene foglalkozásvezetője.",
       "fee": "5 € / fő; a közvetlenül előtte zajló gyermek dobos foglalkozás résztvevőinek ingyenes",
       "capacity": "10–30 fő",
       "duration": "1,5 óra",
@@ -2767,6 +2768,9 @@
       "sourceType": "Wix Events 2026/27 · BMI Partner Program",
       "why": "Közös dobolás, éneklés és magyar dallamok minden korosztálynak. Havi egy alkalom 18:00-tól; zenei vagy dobos előképzettség nem szükséges, saját hangszer hozható.",
       "scheduleMode": "irregular",
+      "linkedProgramId": "vilagfa",
+      "scheduleRule": "same-date-as-vilagfa-at-18:00",
+      "permanentWixEvent": "https://www.magyariskola.at/event-details/oromzene-2026",
       "primaryCategory6": "mozgas",
       "semantic": {
         "rootCauseIds": [
@@ -2807,7 +2811,9 @@
           "teenagers",
           "adults"
         ],
-        "teacherProfileUrls": [],
+        "teacherProfileUrls": [
+          "https://tanarok.magyariskola.at/#hupczik-andrea"
+        ],
         "canonicalScheduleSource": "https://www.magyariskola.at/event-details/oromzene-2026",
         "normalizedRecommendationSource": "https://programvalaszto.magyariskola.at/program-knowledge.json"
       }
