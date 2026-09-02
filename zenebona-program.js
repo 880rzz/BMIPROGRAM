@@ -113,16 +113,70 @@ var fokus=findProgram('fokusz');
 if(fokus){fokus.scheduleMode='appointment';fokus.weekday=null;fokus.weekdays=[];fokus.exactTodayEligible=false;}
 
 var mos=findProgram('mos');
-if(mos){
-  mos.scheduleMode='arranged';
-  mos.exactTodayEligible=false;
-  mos.teacher='Hupczik Andrea';
-  mos.teacherBackground='Informatikatanár; a Microsoft Office Specialist képzés foglalkozásvezetője.';
-}
+if(mos){mos.scheduleMode='arranged';mos.exactTodayEligible=false;mos.teacher='Hupczik Andrea';mos.teacherBackground='Informatikatanár; a Microsoft Office Specialist képzés foglalkozásvezetője.';}
 
 var napra=findProgram('napraforgocskak');
 if(napra){
   napra.weekday='szerda';napra.weekdays=['szerda'];napra.pace='rendszeres';napra.when='Minden szerdán 17:00–18:00';
+  napra.eventDates=recurringDates(napra);
 }
 
+var sharedDates=['2026-09-27','2026-10-24','2026-11-28','2027-01-16','2027-02-13','2027-03-13','2027-04-17','2027-05-22'];
+var vilagfa=findProgram('vilagfa');
+if(vilagfa){
+  vilagfa.weekday='szombat';vilagfa.weekdays=['szombat','vasarnap'];vilagfa.when='Havonta 1 alkalom 18:00-tól';
+  vilagfa.period='2026/27-es tanév; alkalmak: 09.27. · 10.24. · 11.28. · 01.16. · 02.13. · 03.13. · 04.17. · 05.22.; évzáró: 06.19. / 06.26., egyeztetés alatt';
+  vilagfa.eventDates=sharedDates.slice();vilagfa.tentativeEventDates=['2027-06-19','2027-06-26'];vilagfa.firstDate='2026. szeptember 27., vasárnap 18:00';vilagfa.scheduleMode='irregular';
+}
+var orom=findProgram('oromzene');
+if(orom){orom.eventDates=sharedDates.slice();orom.tentativeEventDates=['2027-06-19','2027-06-26'];orom.when='Havonta 1 alkalom 18:00-tól';orom.scheduleMode='irregular';}
+
+var schweden2=findProgram('schweden-2');
+if(schweden2){
+  schweden2.scheduleMode='irregular';
+  var schweden2First=parseFirstDate(schweden2);schweden2.eventDates=schweden2First?[schweden2First]:[];
+  if(!schweden2.eventDates.length)schweden2.exactTodayEligible=false;
+}
+var sakk=findProgram('sakk');
+if(sakk){
+  sakk.scheduleMode='irregular';
+  var sakkFirst=parseFirstDate(sakk);sakk.eventDates=sakkFirst?[sakkFirst]:[];
+  if(!sakk.eventDates.length)sakk.exactTodayEligible=false;
+}
+var cserkeszet=findProgram('cserkeszet');
+if(cserkeszet){cserkeszet.scheduleMode='irregular';cserkeszet.exactTodayEligible=false;}
+
+var rekreacio=findProgram('rekreacio');
+if(rekreacio){
+  rekreacio.scheduleMode='irregular';
+  rekreacio.eventDates=['2026-10-04','2026-10-18','2026-11-15','2026-11-29','2026-12-13'];
+  rekreacio.blockedEventDates=['2026-11-15'];
+}
+
+/* Only truly weekly courses receive generated dates. Irregular wording can never expand to every matching weekday. */
+cfg.programs.forEach(function(p){
+  if(Array.isArray(p.eventDates)&&p.eventDates.length)return;
+  if(p.scheduleMode==='appointment'||p.scheduleMode==='arranged'||p.scheduleMode==='irregular')return;
+  if(!isWeeklySchedule(p))return;
+  var end=p.id==='fecskeklub'?'2027-01-26':null;
+  p.eventDates=recurringDates(p,end);
+});
+
+/* Remaining irregular programs without concrete dates are explicitly prevented from becoming “Még ma” exact matches. */
+cfg.programs.forEach(function(p){
+  if(p.scheduleMode==='appointment'||p.scheduleMode==='arranged')return;
+  if(!isIrregularSchedule(p))return;
+  if(Array.isArray(p.eventDates)&&p.eventDates.length)return;
+  p.scheduleMode='irregular';p.exactTodayEligible=false;
+});
+
+var partnerIds=['zenebona','oromzene','mos','fokusz','rekreacio'];
+var partners=partnerIds.map(findProgram).filter(Boolean);
+if(typeof document==='undefined'||!partners.length||document.getElementById('partner-programok'))return;
+function esc(s){return String(s||'').replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c]})}
+function card(p){return '<article class="tile partner-program-card"><span class="partner-badge">BMI Partner Program</span><b>'+esc(p.name)+'</b><span>'+esc(p.why||p.outcome||'')+'</span><div class="partner-meta">'+(p.ageText?'<small><strong>Korosztály:</strong> '+esc(p.ageText)+'</small>':'')+(p.when?'<small><strong>Időpont:</strong> '+esc(p.when)+'</small>':'')+(p.location?'<small><strong>Helyszín:</strong> '+esc(p.location)+'</small>':'')+(p.fee?'<small><strong>Díj:</strong> '+esc(p.fee)+'</small>':'')+'</div><a class="btn ghost partner-link" href="'+esc(p.url)+'" target="_blank" rel="noopener">Részletek</a></article>'}
+var section=document.createElement('section');section.className='section tint';section.id='partner-programok';section.innerHTML='<div class="wrap"><div class="section-head"><div class="kicker">BMI Partner Programok</div><h2>Partnerprogramjaink <span class="headline-accent">egy helyen.</span></h2><p>A Bécsi Magyar Iskola saját foglalkozásai mellett olyan partnerprogramokat is ajánlunk, amelyek jól kiegészítik a közösségi, szakmai és fejlesztő kínálatot.</p></div><div class="tiles partner-program-grid">'+partners.map(card).join('')+'</div></div>';
+var aboutSections=document.querySelectorAll('main > section.section'),anchor=null;for(var i=0;i<aboutSections.length;i++){if(aboutSections[i].querySelector('.kicker')&&aboutSections[i].querySelector('.kicker').textContent.indexOf('A Bécsi Magyar Iskoláról')!==-1){anchor=aboutSections[i];break}}
+if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(section,anchor)}else{var main=document.querySelector('main');if(main)main.appendChild(section)}
+if(!document.getElementById('partner-program-styles')){var style=document.createElement('style');style.id='partner-program-styles';style.textContent='.partner-program-grid{align-items:stretch}.partner-program-card{display:flex;flex-direction:column;gap:.8rem}.partner-program-card>b{font-size:1.05rem}.partner-program-card>span:not(.partner-badge){line-height:1.5}.partner-badge{display:inline-flex;align-self:flex-start;font-size:.72rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:.3rem .55rem;border-radius:999px;background:rgba(245,184,66,.16)}.partner-meta{display:grid;gap:.35rem;margin-top:auto}.partner-meta small{display:block;line-height:1.45}.partner-link{align-self:flex-start;margin-top:.35rem}@media(max-width:760px){.partner-program-grid{grid-template-columns:1fr!important}}';document.head.appendChild(style)}
 })();
