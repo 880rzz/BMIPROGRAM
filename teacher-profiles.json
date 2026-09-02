@@ -2,97 +2,30 @@
   "canonical": "https://tanarok.magyariskola.at/",
   "organization": "https://www.magyariskola.at/",
   "profiles": [
-    {
-      "name": "Bajka Kinga Csengele",
-      "url": "https://tanarok.magyariskola.at/#bajka-kinga-csengele"
-    },
-    {
-      "name": "Horányi Bori",
-      "url": "https://tanarok.magyariskola.at/#horanyi-bori"
-    },
-    {
-      "name": "Dipl.-Päd. Schneider Erzsébet",
-      "url": "https://tanarok.magyariskola.at/#schneider-erzsebet"
-    },
-    {
-      "name": "Makfalvi Rita",
-      "url": "https://tanarok.magyariskola.at/#makfalvi-rita"
-    },
-    {
-      "name": "Fersztl Barnabás",
-      "url": "https://tanarok.magyariskola.at/#fersztl-barnabas"
-    },
-    {
-      "name": "Noszkó Niki",
-      "url": "https://tanarok.magyariskola.at/#noszko-niki"
-    },
-    {
-      "name": "Kiss Ágnes",
-      "url": "https://tanarok.magyariskola.at/#kiss-agnes"
-    },
-    {
-      "name": "Boronkai Gabriella",
-      "url": "https://tanarok.magyariskola.at/#boronkai-gabriella"
-    },
-    {
-      "name": "Korchma Zsombor",
-      "url": "https://tanarok.magyariskola.at/#korchma-zsombor"
-    },
-    {
-      "name": "Hierholcz Anna",
-      "url": "https://tanarok.magyariskola.at/#hierholcz-anna"
-    },
-    {
-      "name": "Pecze Ádám",
-      "url": "https://tanarok.magyariskola.at/#pecze-adam"
-    },
-    {
-      "name": "Dr. Trencsényi Klára DLA",
-      "url": "https://tanarok.magyariskola.at/#trencsenyi-klara"
-    },
-    {
-      "name": "Falusi Dóra",
-      "url": "https://tanarok.magyariskola.at/#falusi-dora"
-    },
-    {
-      "name": "Hupczik Andrea",
-      "url": "https://tanarok.magyariskola.at/#hupczik-andrea"
-    },
-    {
-      "name": "Telenkó Éva",
-      "url": "https://tanarok.magyariskola.at/#telenko-eva"
-    },
-    {
-      "name": "Varga Bernadette",
-      "url": "https://tanarok.magyariskola.at/#varga-bernadette"
-    },
-    {
-      "name": "Veres Tamás",
-      "url": "https://tanarok.magyariskola.at/#veres-tamas"
-    },
-    {
-      "name": "Bánhalmi Norbert",
-      "url": "https://tanarok.magyariskola.at/#banhalmi-norbert"
-    },
-    {
-      "name": "Balogh Dávid",
-      "url": "https://tanarok.magyariskola.at/#balogh-david"
-    },
-    {
-      "name": "Sipos Tibor",
-      "url": "https://tanarok.magyariskola.at/#sipos-tibor"
-    },
-    {
-      "name": "Orbán Dalma",
-      "url": "https://tanarok.magyariskola.at/#orban-dalma"
-    },
-    {
-      "name": "Egri Mónika",
-      "url": "https://tanarok.magyariskola.at/#egri-monika"
-    },
-    {
-      "name": "Mag. Dapin Hajnalka Judit",
-      "url": "https://tanarok.magyariskola.at/#dapin-hajnalka-judit"
-    }
+    {"name":"Bajka Kinga Csengele","url":"https://tanarok.magyariskola.at/#bajka-kinga-csengele"},
+    {"name":"Horányi Bori","url":"https://tanarok.magyariskola.at/#horanyi-bori"},
+    {"name":"Dipl.-Päd. Schneider Erzsébet","url":"https://tanarok.magyariskola.at/#schneider-erzsebet"},
+    {"name":"Makfalvi Rita","url":"https://tanarok.magyariskola.at/#makfalvi-rita"},
+    {"name":"Fersztl Barnabás","url":"https://tanarok.magyariskola.at/#fersztl-barnabas"},
+    {"name":"Noszkó Niki","url":"https://tanarok.magyariskola.at/#noszko-niki"},
+    {"name":"Kiss Ágnes","url":"https://tanarok.magyariskola.at/#kiss-agnes"},
+    {"name":"Boronkai Gabriella","url":"https://tanarok.magyariskola.at/#boronkai-gabriella"},
+    {"name":"Korchma Zsombor","url":"https://tanarok.magyariskola.at/#korchma-zsombor"},
+    {"name":"Hierholcz Anna","url":"https://tanarok.magyariskola.at/#hierholcz-anna"},
+    {"name":"Pecze Ádám","url":"https://tanarok.magyariskola.at/#pecze-adam"},
+    {"name":"Dr. Trencsényi Klára DLA","url":"https://tanarok.magyariskola.at/#trencsenyi-klara"},
+    {"name":"Falusi Dóra","url":"https://tanarok.magyariskola.at/#falusi-dora"},
+    {"name":"Hupczik Andrea","url":"https://tanarok.magyariskola.at/#hupczik-andrea"},
+    {"name":"Pohl Balázs","url":"https://tanarok.magyariskola.at/#pohl-balazs"},
+    {"name":"Póser-Piroska Ildikó","url":"https://tanarok.magyariskola.at/#poser-piroska-ildiko"},
+    {"name":"Telenkó Éva","url":"https://tanarok.magyariskola.at/#telenko-eva"},
+    {"name":"Varga Bernadette","url":"https://tanarok.magyariskola.at/#varga-bernadette"},
+    {"name":"Veres Tamás","url":"https://tanarok.magyariskola.at/#veres-tamas"},
+    {"name":"Bánhalmi Norbert","url":"https://tanarok.magyariskola.at/#banhalmi-norbert"},
+    {"name":"Balogh Dávid","url":"https://tanarok.magyariskola.at/#balogh-david"},
+    {"name":"Sipos Tibor","url":"https://tanarok.magyariskola.at/#sipos-tibor"},
+    {"name":"Orbán Dalma","url":"https://tanarok.magyariskola.at/#orban-dalma"},
+    {"name":"Egri Mónika","url":"https://tanarok.magyariskola.at/#egri-monika"},
+    {"name":"Mag. Dapin Hajnalka Judit","url":"https://tanarok.magyariskola.at/#dapin-hajnalka-judit"}
   ]
 }
