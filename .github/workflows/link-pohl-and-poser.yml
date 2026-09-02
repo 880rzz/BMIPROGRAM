@@ -1,0 +1,52 @@
+name: Link Pohl and Poser to programs
+
+on:
+  push:
+    paths:
+      - '.github/workflows/link-pohl-and-poser.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update program assignments and profile map
+        shell: python
+        run: |
+          from pathlib import Path
+          import re,json
+          p=Path('data.js'); s=p.read_text(encoding='utf-8')
+          def set_teacher(pid, teacher, background=None):
+              global s
+              pat=r'(\{id:"'+re.escape(pid)+r'".*?)(,fee:)'
+              m=re.search(pat,s,re.S)
+              if not m: raise SystemExit(f'program not found: {pid}')
+              prefix=re.sub(r',teacher:"[^"]*"','',m.group(1))
+              prefix=re.sub(r',teacherBackground:"[^"]*"','',prefix)
+              prefix+=',teacher:"'+teacher+'"'
+              if background: prefix+=',teacherBackground:"'+background+'"'
+              s=s[:m.start()]+prefix+m.group(2)+s[m.end():]
+          set_teacher('gimi-svung','Pohl Balázs','Drámapedagógus; a SVUNG – Bécsi Magyar Színház művészeti vezetője.')
+          set_teacher('cserkeszet','Póser-Piroska Ildikó','Csapatparancsnok; a 72. sz. Széchenyi István Cserkészcsapat – Bécs vezetője. Nem tanári szerepkör.')
+          p.write_text(s,encoding='utf-8')
+          tp=Path('teacher-links.js'); t=tp.read_text(encoding='utf-8')
+          if '"Pohl Balázs":"pohl-balazs"' not in t:
+              t=t.replace('"Hupczik Andrea":"hupczik-andrea",','"Hupczik Andrea":"hupczik-andrea","Pohl Balázs":"pohl-balazs","Póser-Piroska Ildikó":"poser-piroska-ildiko",')
+          tp.write_text(t,encoding='utf-8')
+          jp=Path('teacher-profiles.json'); d=json.loads(jp.read_text(encoding='utf-8'))
+          arr=d if isinstance(d,list) else d.get('teachers',[])
+          names={x.get('name') for x in arr}
+          for name,slug in [('Pohl Balázs','pohl-balazs'),('Póser-Piroska Ildikó','poser-piroska-ildiko')]:
+              if name not in names: arr.append({'name':name,'url':'https://tanarok.magyariskola.at/#'+slug})
+          jp.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+      - name: Commit
+        run: |
+          git config user.name "BMI Program Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data.js teacher-links.js teacher-profiles.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Link Pohl Balazs and Poser-Piroska Ildiko to programs"
+          git push
