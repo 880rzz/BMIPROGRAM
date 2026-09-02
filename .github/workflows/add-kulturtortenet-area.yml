@@ -1,0 +1,46 @@
+name: Add kulturtortenet area
+
+on:
+  push:
+    paths:
+      - '.github/workflows/add-kulturtortenet-area.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add culture-history interest to relevant programs
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+          p=Path('data.js')
+          s=p.read_text(encoding='utf-8')
+          if '{id:"kulturtortenet",label:"Kultúrtörténet"}' not in s:
+              anchor='{id:"alkotas",label:"Alkotás, művészet, színpad"},'
+              if anchor not in s: raise SystemExit('interest anchor missing')
+              s=s.replace(anchor,anchor+'\n    {id:"kulturtortenet",label:"Kultúrtörténet"},',1)
+          def add_interest(pid):
+              global s
+              pat=r'(\{id:"'+re.escape(pid)+r'".*?interests:\[)([^\]]*)(\])'
+              m=re.search(pat,s,re.S)
+              if not m: raise SystemExit('program not found: '+pid)
+              vals=m.group(2)
+              if '"kulturtortenet"' not in vals:
+                  vals='"kulturtortenet",'+vals
+                  s=s[:m.start()]+m.group(1)+vals+m.group(3)+s[m.end():]
+          add_interest('fecskeklub')
+          add_interest('fotoklub')
+          p.write_text(s,encoding='utf-8')
+      - name: Commit
+        run: |
+          git config user.name "BMI Program Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data.js
+          git diff --cached --quiet && exit 0
+          git commit -m "Add kulturtortenet area to Fecske Klub and Fotoklub"
+          git push
