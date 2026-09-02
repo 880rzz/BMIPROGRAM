@@ -14,17 +14,24 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 #locationForm .choice-grid[role="group"]{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:10px!important;width:100%!important}
 #locationForm .choice-grid[role="group"] [data-mode]{width:100%!important;min-width:0!important;min-height:52px!important;white-space:nowrap!important;text-align:center!important;justify-content:center!important}
 
+/* Apple-style result hierarchy: content first, cards clearly separated from surrounding copy. */
+#wizard .result-grid{gap:24px!important;margin-top:28px!important;align-items:start}
+#wizard .result-card{padding:28px!important;border:1px solid rgba(29,29,31,.12)!important;border-radius:24px!important;background:#fff!important;box-shadow:0 1px 0 rgba(0,0,0,.02),0 12px 34px rgba(0,0,0,.045)!important;overflow:hidden!important}
+#wizard .result-card>b:first-of-type,#wizard .result-card>strong:first-of-type{margin-top:0!important}
+#wizard .result-card+.result-card{margin-top:0!important}
+#wizard .result-card>.result-when{margin:8px 0 18px!important;line-height:1.5!important}
+
 /* Persistent result-card information hierarchy. */
-#wizard .result-card>.result-meta{margin:0!important;padding:10px 0!important;line-height:1.55!important;border-bottom:1px solid rgba(29,29,31,.08)!important}
-#wizard .result-card>.result-meta:first-of-type{margin-top:14px!important;border-top:1px solid rgba(29,29,31,.08)!important}
+#wizard .result-card>.result-meta{margin:0!important;padding:14px 0!important;line-height:1.55!important;border-bottom:1px solid rgba(29,29,31,.08)!important}
+#wizard .result-card>.result-meta:first-of-type{margin-top:18px!important;border-top:1px solid rgba(29,29,31,.08)!important}
 #wizard .result-card>.result-meta strong{display:inline;font-weight:700}
-#wizard .result-card>.result-travel{margin-top:22px!important;margin-bottom:24px!important}
-#wizard .result-card>.result-reason{margin:26px 0 0!important;padding:20px!important;border-top:1px solid rgba(29,29,31,.12)!important;border-bottom:1px solid rgba(29,29,31,.08)!important;border-radius:14px!important;background:rgba(248,248,250,.9)!important;line-height:1.62!important}
+#wizard .result-card>.result-travel{margin-top:26px!important;margin-bottom:28px!important;padding-top:2px!important}
+#wizard .result-card>.result-reason{margin:30px 0 0!important;padding:20px!important;border-top:1px solid rgba(29,29,31,.12)!important;border-bottom:1px solid rgba(29,29,31,.08)!important;border-radius:16px!important;background:rgba(248,248,250,.9)!important;line-height:1.62!important}
 #wizard .result-card>.result-reason strong{display:block!important;margin:0 0 10px!important;font-size:.78rem!important;line-height:1.25!important;letter-spacing:.06em!important;text-transform:uppercase!important;color:#1d1d1f!important}
-#wizard .route-map-shell,#wizard .route-map-wrap,#wizard [data-route-map]{margin-top:22px!important}
+#wizard .route-map-shell,#wizard .route-map-wrap,#wizard [data-route-map]{margin-top:24px!important}
 
 /* Unified actions: equal controls. Short labels may share two columns; if one label is long, both become equal full-width rows. */
-#wizard .result-action-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px!important;margin:24px 0 0!important;padding:0!important;align-items:stretch}
+#wizard .result-action-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px!important;margin:28px 0 0!important;padding:0!important;align-items:stretch}
 #wizard .result-action-grid.has-long-action{grid-template-columns:minmax(0,1fr)!important}
 #wizard .result-action-grid>*{margin:0!important;min-width:0!important;width:100%!important}
 #wizard .result-action-grid .btn{display:flex!important;align-items:center!important;justify-content:center!important;width:100%!important;min-width:0!important;min-height:54px!important;height:54px!important;padding:0 16px!important;margin:0!important;box-sizing:border-box!important;text-align:center!important;line-height:1!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
@@ -33,28 +40,28 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 
 @media(max-width:760px){
   #wizard{scroll-margin-top:86px}
-  #wizard .result-grid{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:24px!important;width:100%!important}
-  #wizard .result-card{width:100%!important;max-width:100%!important;overflow:visible!important}
-  #wizard .result-card>.result-meta{padding:12px 0!important;line-height:1.58!important}
-  #wizard .result-card>.result-travel{margin-top:24px!important;margin-bottom:26px!important}
-  #wizard .result-card>.result-reason{margin-top:28px!important;padding:18px!important;line-height:1.64!important}
-  #wizard .result-travel.travel-data-panel{margin:18px 0 24px!important;padding:16px!important;border-radius:14px!important}
-  #wizard .travel-panel-head{display:block!important;margin-bottom:14px!important}
+  #wizard .result-grid{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:28px!important;width:100%!important;margin-top:30px!important}
+  #wizard .result-card{width:100%!important;max-width:100%!important;overflow:hidden!important;padding:24px 22px!important;border-radius:24px!important}
+  #wizard .result-card>.result-meta{padding:14px 0!important;line-height:1.58!important}
+  #wizard .result-card>.result-travel{margin-top:26px!important;margin-bottom:28px!important}
+  #wizard .result-card>.result-reason{margin-top:30px!important;padding:18px!important;line-height:1.64!important}
+  #wizard .result-travel.travel-data-panel{margin:20px 0 26px!important;padding:18px!important;border-radius:16px!important;background:#f5f5f7!important;border:1px solid rgba(29,29,31,.08)!important}
+  #wizard .travel-panel-head{display:block!important;margin-bottom:16px!important}
   #wizard .travel-panel-source{text-align:left!important;max-width:none!important;margin-top:5px!important;line-height:1.45!important}
   #wizard .travel-metrics{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:12px!important}
   #wizard .travel-metric,#wizard .travel-metric:last-child{grid-column:auto!important;width:100%!important;padding:14px!important}
   #wizard .travel-mode-row{align-items:flex-start!important;justify-content:flex-start!important;gap:10px!important;padding-top:16px!important}
   #wizard .travel-note{margin-top:12px!important;line-height:1.58!important}
-  #wizard .result-action-grid{gap:10px!important;margin-top:24px!important}
+  #wizard .result-action-grid{gap:10px!important;margin-top:26px!important}
   #wizard .result-action-grid .btn{min-height:52px!important;height:52px!important;padding:0 12px!important;font-size:.96rem!important}
   #locationForm .choice-grid[role="group"]{grid-template-columns:minmax(0,1fr)!important}
 }
 @media(max-width:430px){
   #wizard{scroll-margin-top:78px}
   #wizard .wizard-card{padding-left:0!important;padding-right:0!important}
-  #wizard .result-card{padding-left:0!important;padding-right:0!important}
-  #wizard .result-card>.result-meta{padding-left:2px!important;padding-right:2px!important}
+  #wizard .result-card{padding-left:20px!important;padding-right:20px!important;margin-left:0!important;margin-right:0!important}
+  #wizard .result-card>.result-meta{padding-left:0!important;padding-right:0!important}
   #wizard .result-travel.travel-data-panel{width:100%!important;margin-left:0!important;margin-right:0!important}
-  #wizard .result-card>.result-reason{border-radius:12px!important;padding:16px!important}
+  #wizard .result-card>.result-reason{border-radius:14px!important;padding:16px!important}
   #wizard .result-action-grid{grid-template-columns:minmax(0,1fr)!important}
 }
