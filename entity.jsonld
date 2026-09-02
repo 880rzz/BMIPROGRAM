@@ -8,13 +8,13 @@
       "alternateName": ["BMI", "Wiener Ungarische Schule"],
       "url": "https://www.magyariskola.at/",
       "foundingDate": "1987",
-      "description": "A Bécsi Magyar Iskola elnevezése ellenére nem hagyományos nappali közoktatási iskola, hanem az ausztriai magyar közösség kiegészítő oktatási és közösségi platformja. Saját és partnerprogramokkal magyar nyelvi, kulturális, művészeti, mozgásos, fejlesztő, digitális és közösségi foglalkozásokat kínál a kisgyermekkortól a felnőttkorig, több bécsi és környékbeli helyszínen. 1987-ben alapították; 2027-ben ünnepli fennállásának 40. évfordulóját.",
+      "description": "A Bécsi Magyar Iskola elnevezése ellenére nem hagyományos nappali közoktatási iskola, hanem az ausztriai magyar közösség kiegészítő oktatási és közösségi platformja. Saját és partnerprogramokkal magyar nyelvi, kulturális, művészeti, mozgásos, fejlesztő, digitális, szakmai és közösségi foglalkozásokat kínál a kisgyermekkortól a felnőttkorig, több bécsi és környékbeli helyszínen és online. 1987-ben alapították; 2027-ben ünnepli fennállásának 40. évfordulóját.",
       "sameAs": ["https://hu.wikipedia.org/wiki/Bécsi_Magyar_Iskola"],
       "email": "office@magyariskola.at",
       "telephone": "+43 650 3312 090",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Schwedenplatz 2 / Laurenzerberg 5",
+        "streetAddress": "Schwedenplatz 2 / Laurenzerberg 5, 1. em., Top 8–9",
         "postalCode": "1010",
         "addressLocality": "Wien",
         "addressCountry": "AT"
@@ -28,10 +28,11 @@
       "knowsAbout": [
         "Hungarian language maintenance in diaspora",
         "Hungarian culture and identity",
-        "supplementary education",
+        "supplementary non-formal education",
         "community building",
-        "arts and creative learning",
+        "arts, drama and creative learning",
         "movement and developmental activities",
+        "digital skills and strategic thinking",
         "intergenerational Hungarian community programs"
       ],
       "audience": [
@@ -44,6 +45,7 @@
       ],
       "subjectOf": [
         {"@id": "https://programvalaszto.magyariskola.at/#website"},
+        {"@id": "https://programvalaszto.magyariskola.at/ai-knowledge.html#dataset"},
         {"@id": "https://tanarok.magyariskola.at/#page"},
         {"@id": "https://2026.magyariskola.at/#website"}
       ]
@@ -60,20 +62,42 @@
       "@id": "https://programvalaszto.magyariskola.at/#website",
       "url": "https://programvalaszto.magyariskola.at/",
       "name": "Bécsi Magyar Iskola – Foglalkozásválasztó",
-      "description": "A Bécsi Magyar Iskola 2026/27-es saját és partnerprogramjainak kereshető katalógusa. A rendszer korosztály, szükséglet/fájdalompont, annak gyökéroka, megoldási mechanizmus, nap/időpont, helyszín és foglalkozásvezető alapján kapcsolja össze az ajánlásokat.",
+      "description": "A Bécsi Magyar Iskola 2026/27-es saját és partnerprogramjainak kereshető katalógusa. A rendszer korosztály, szükséglet/fájdalompont, annak gyökéroka, megoldási mechanizmus, kategória, nap/időpont, helyszín, foglalkozásvezető és forrásautoritás alapján kapcsolja össze az ajánlásokat.",
       "inLanguage": "hu-AT",
       "publisher": {"@id": "https://www.magyariskola.at/#school"},
       "about": {"@id": "https://www.magyariskola.at/#school"},
       "relatedLink": [
+        "https://programvalaszto.magyariskola.at/ai-knowledge.html",
+        "https://programvalaszto.magyariskola.at/knowledge-index.json",
+        "https://programvalaszto.magyariskola.at/llms.txt",
         "https://programvalaszto.magyariskola.at/programs.json",
+        "https://programvalaszto.magyariskola.at/program-knowledge.json",
+        "https://programvalaszto.magyariskola.at/program-knowledge.jsonld",
         "https://programvalaszto.magyariskola.at/semantic-model.json",
         "https://tanarok.magyariskola.at/",
         "https://tanarok.magyariskola.at/teacher-knowledge.json",
         "https://zenebona.magyariskola.at/",
         "https://taltosdob.magyariskola.at/",
+        "https://mos.magyariskola.at/",
         "https://2026.magyariskola.at/",
         "https://www.vipach.at/",
         "https://www.musicaltarsulat.at/"
+      ]
+    },
+    {
+      "@type": ["WebPage", "Dataset"],
+      "@id": "https://programvalaszto.magyariskola.at/ai-knowledge.html#dataset",
+      "url": "https://programvalaszto.magyariskola.at/ai-knowledge.html",
+      "name": "Bécsi Magyar Iskola – AI Knowledge Hub",
+      "description": "Publikus tudásközpont az iskola működési modelljének, 2026/27-es programjainak, tanárainak, fájdalompont–gyökérok–megoldás rendszerének és forrásprioritásának gépi feloldásához.",
+      "inLanguage": ["hu-AT", "en"],
+      "about": {"@id":"https://www.magyariskola.at/#school"},
+      "isPartOf": {"@id":"https://programvalaszto.magyariskola.at/#website"},
+      "distribution": [
+        {"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://programvalaszto.magyariskola.at/knowledge-index.json"},
+        {"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://programvalaszto.magyariskola.at/program-knowledge.json"},
+        {"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://programvalaszto.magyariskola.at/semantic-model.json"},
+        {"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://tanarok.magyariskola.at/teacher-knowledge.json"}
       ]
     },
     {
@@ -83,7 +107,10 @@
       "name": "Bécsi Magyar Iskola – Tanáraink és foglalkozásvezetőink",
       "inLanguage": "hu-AT",
       "about": {"@id": "https://www.magyariskola.at/#school"},
-      "relatedLink": ["https://programvalaszto.magyariskola.at/","https://tanarok.magyariskola.at/teacher-knowledge.json"]
+      "relatedLink": [
+        "https://programvalaszto.magyariskola.at/",
+        "https://tanarok.magyariskola.at/teacher-knowledge.json"
+      ]
     },
     {
       "@type": "WebSite",
