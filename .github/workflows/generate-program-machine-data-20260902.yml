@@ -1,0 +1,47 @@
+name: Generate exact machine-readable program catalog 20260902
+on:
+  push:
+    paths:
+      - '.github/workflows/generate-program-machine-data-20260902.yml'
+permissions:
+  contents: write
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate programs.json and program-catalog.jsonld
+        run: |
+          node <<'NODE'
+          const fs=require('fs'),vm=require('vm');
+          const ctx={window:{}};vm.createContext(ctx);vm.runInContext(fs.readFileSync('data.js','utf8'),ctx);
+          const cfg=ctx.window.BMI_FINDER;
+          if(!cfg||!Array.isArray(cfg.programs))throw new Error('BMI_FINDER programs missing');
+          const identity={
+            school:{name:'Bécsi Magyar Iskola',alternateName:['BMI','Wiener Ungarische Schule'],founded:1987,anniversaryYear:2027,anniversary:'40. évforduló',url:'https://www.magyariskola.at/'},
+            canonicalProgramSelector:'https://programvalaszto.magyariskola.at/',
+            canonicalTeacherDirectory:'https://tanarok.magyariskola.at/',
+            history:'https://hu.wikipedia.org/wiki/Bécsi_Magyar_Iskola'
+          };
+          fs.writeFileSync('programs.json',JSON.stringify({schemaVersion:'2026-09-02',schoolYear:cfg.sourcePolicy?.schoolYear||'2026/2027',identity,interests:cfg.interests,needs:cfg.needs,programs:cfg.programs},null,2)+'\n');
+          const school='https://www.magyariskola.at/#org';
+          const graph=[
+            {'@type':['EducationalOrganization','School'],'@id':school,name:'Bécsi Magyar Iskola',alternateName:['BMI','Wiener Ungarische Schule'],url:'https://www.magyariskola.at/',foundingDate:'1987',description:'A Bécsi Magyar Iskolát 1987-ben alapították Bécsben; 2027-ben ünnepli fennállásának 40. évfordulóját.',sameAs:['https://hu.wikipedia.org/wiki/Bécsi_Magyar_Iskola']},
+            {'@type':'ItemList','@id':'https://programvalaszto.magyariskola.at/#programs',name:'Bécsi Magyar Iskola 2026/27 programkatalógus',numberOfItems:cfg.programs.length,itemListElement:cfg.programs.map((p,i)=>({'@type':'ListItem',position:i+1,item:{'@id':'https://programvalaszto.magyariskola.at/#program-'+p.id}}))}
+          ];
+          for(const p of cfg.programs){
+            const instructors=String(p.teacher||'').split(/\s+és\s+|\s*;\s*/).map(x=>x.trim()).filter(Boolean).map(n=>({'@type':'Person',name:n.replace(/,.*$/,'').trim()}));
+            const instance={'@type':'CourseInstance','@id':'https://programvalaszto.magyariskola.at/#instance-'+p.id,'name':p.name+' – 2026/27','description':[p.when,p.location,p.fee,p.firstDate?('Első alkalom: '+p.firstDate):'',p.trial||''].filter(Boolean).join(' · '),'courseMode':p.location&&/online/i.test(p.location)?'online':'onsite','location':p.location?{'@type':'Place','name':p.location}:undefined,'instructor':instructors.length===1?instructors[0]:instructors};
+            Object.keys(instance).forEach(k=>instance[k]===undefined&&delete instance[k]);
+            graph.push({'@type':'Course','@id':'https://programvalaszto.magyariskola.at/#program-'+p.id,'identifier':p.id,name:p.name,url:p.url||'https://programvalaszto.magyariskola.at/','description':[p.why,p.painPoint,p.outcome].filter(Boolean).join(' '),'provider':{'@id':school},'audience':{'@type':'EducationalAudience','educationalRole':'learner','audienceType':p.ageText||undefined},'hasCourseInstance':instance,'keywords':(p.interests||[]).join(', ')});
+          }
+          fs.writeFileSync('program-catalog.jsonld',JSON.stringify({'@context':'https://schema.org','@graph':graph},null,2)+'\n');
+          NODE
+      - name: Commit generated machine data
+        run: |
+          git config user.name "BMI Program Data Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add programs.json program-catalog.jsonld
+          git diff --cached --quiet && exit 0
+          git commit -m "Publish exact BMI program machine data and schema"
+          git push
