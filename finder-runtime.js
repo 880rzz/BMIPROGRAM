@@ -43,11 +43,22 @@ if(cfg&&Array.isArray(cfg.programs)){
     mamut.outcome='Színpadi jelenlét, ének, zene, tánc, mozgás, szerepformálás, drámapedagógiai készségek, együttműködés és közös musical-projekt.';
     mamut.painPoint='A gyermek szeret énekelni, táncolni vagy szerepelni, és egy összetett musical- és drámapedagógiai foglalkozásban szeretné kipróbálni magát.';
   }
+
+  var zenebona=cfg.programs.find(function(x){return x.id==='zenebona'});
+  if(zenebona){
+    zenebona.categories=addUnique(zenebona.categories,'enek');
+    zenebona.categories=addUnique(zenebona.categories,'zene');
+    zenebona.categories=addUnique(zenebona.categories,'tanc');
+    zenebona.pedagogyTags=addUnique(zenebona.pedagogyTags,'közös éneklés');
+    zenebona.pedagogyTags=addUnique(zenebona.pedagogyTags,'ritmus és zene');
+    zenebona.pedagogyTags=addUnique(zenebona.pedagogyTags,'szülő–gyermek mozgás');
+    zenebona.needs=addUnique(zenebona.needs,'tanc-hagyomany');
+  }
 }
 
 function addScript(src,key,onload){if(document.querySelector('script[data-'+key+']')){if(onload)onload();return}var s=document.createElement('script');s.src=src;s.defer=true;s.dataset[key]='1';if(onload)s.onload=onload;document.head.appendChild(s)}
 function addStyle(src,key){if(document.querySelector('link[data-'+key+']'))return;var l=document.createElement('link');l.rel='stylesheet';l.href=src;l.dataset[key]='1';document.head.appendChild(l)}
-addStyle('wizard-responsive.css?v=20260830-runtime-v2','wizardResponsive');
+addStyle('wizard-responsive.css?v=20260902-apple-results-v1','wizardResponsive');
 addScript('wizard-anchor.js?v=20260830-runtime-v2','wizardAnchor');
 addScript('result-actions.js?v=20260830-runtime-v2','resultActions');
 addScript('routes-config.js?v=20260830-runtime-v2','routesConfig',function(){
