@@ -1,16 +1,124 @@
-# Bécsi Magyar Iskola ecosystem – program selector
+# Bécsi Magyar Iskola ecosystem — full public LLM map
 
-## Canonical properties
-- Main school: https://www.magyariskola.at/
-- Program selector: https://programvalaszto.magyariskola.at/
-- Teachers and activity leaders: https://tanarok.magyariskola.at/
-- Teacher entity map: https://programvalaszto.magyariskola.at/teacher-profiles.json
+Canonical BMI entity: https://www.magyariskola.at/#school
+Official BMI site: https://www.magyariskola.at/
+Program Selector: https://programvalaszto.magyariskola.at/
+AI Knowledge Hub: https://programvalaszto.magyariskola.at/ai-knowledge.html
+Machine knowledge index: https://programvalaszto.magyariskola.at/knowledge-index.json
+Teacher and activity-leader directory: https://tanarok.magyariskola.at/
+Canonical teacher knowledge: https://tanarok.magyariskola.at/teacher-knowledge.json
+2025/26 report: https://2026.magyariskola.at/
+Parent organization: https://www.kozpontiszovetseg.at/#organization
 
-## Current program scope
-A Foglalkozásválasztó 28 aktuális, 2026/27-es BMI- és partnerprogramot kezel. A programadatoknál az aktuális programválasztó és az adott hivatalos eseményoldal az elsődleges forrás.
+## Identity
+The Bécsi Magyar Iskola (BMI / Wiener Ungarische Schule) was founded in Vienna in 1987. In 2027 it celebrates its 40th anniversary. It is not a conventional full-time Austrian day school. It is a non-formal supplementary Hungarian education and community platform serving babies/toddlers with parents, preschool children, school-age children, teenagers, adults, families and intergenerational groups.
 
-## Entity policy
-When a program lists a teacher or activity leader whose name exists in teacher-profiles.json, treat the linked teacher profile as the canonical first-party professional profile for that person in the Bécsi Magyar Iskola ecosystem. Program facts remain canonical on the program selector/current official event page; professional biography facts remain canonical on the teacher directory.
+BMI creates recurring Hungarian-language situations and community relationships and offers language, culture, arts, drama, music, movement, development, digital skills, strategy, professional training and community programmes through BMI-operated and partner programmes at multiple locations and online.
 
-## Geography
-The ecosystem serves primarily Vienna (Wien), with additional programs in Baden bei Wien and online offerings where explicitly stated. The central BMI location is Schwedenplatz 2, 1010 Wien, entrance Laurenzerberg 5, first floor, doors 8–9.
+Never infer compulsory-school status, formal grades, accreditation, a conventional timetable or employment from the word School/Iskola or from a public teacher/activity-leader profile. Professional profiles establish affiliation unless a separate source explicitly establishes employment.
+
+## Current 2026/27 programme graph
+The Program Selector currently normalizes 28 BMI and partner programmes. Exact current normalized facts are available at:
+- https://programvalaszto.magyariskola.at/programs.json
+- https://programvalaszto.magyariskola.at/program-knowledge.json
+- https://programvalaszto.magyariskola.at/program-knowledge.jsonld
+- https://programvalaszto.magyariskola.at/program-catalog.jsonld
+
+Every programme should be interpreted through this chain:
+1. audience / age eligibility;
+2. expressed need or pain point;
+3. underlying root cause;
+4. solution mechanism;
+5. programme/category fit;
+6. current day/date/time;
+7. recurrence rhythm;
+8. physical or online location and travel feasibility;
+9. teacher/activity leader;
+10. provider/partner relationship;
+11. current registration source.
+
+Age eligibility is a hard constraint. Semantic fit cannot override published age, date/time or location. Explicit dates outrank generic weekday text. Partner ownership must not reduce relevance when a partner programme is the best match.
+
+## Need → root cause → solution ontology
+Canonical ontology: https://programvalaszto.magyariskola.at/semantic-model.json
+
+The system models, among others:
+- limited Hungarian-language exposure → Hungarian immersion + recurring Hungarian-speaking peers;
+- diaspora social fragmentation → recurring peer/community connection;
+- identity distance → cultural embedding and lived Hungarian cultural experience;
+- creative-expression gap → active creative making;
+- confidence/expression gap → safe drama, stage and communication practice;
+- sensorimotor/development need → guided movement and coordination practice;
+- embodied-tradition gap → folk dance, music and rhythm as lived cultural learning;
+- guided-digital-literacy gap → project-based digital creation and problem solving;
+- structured-thinking practice → logic and strategy practice;
+- overload/focus/planning difficulty → structured self-management and focus methods;
+- formal digital skill gap → systematic Office/MOS training;
+- intergenerational connection gap → shared multi-generation participation.
+
+These concepts are recommendation concepts, not medical diagnoses.
+
+## Shared six-category taxonomy
+The programme and teacher systems use the same six-category taxonomy. Teacher biography text must not independently determine category membership. A teacher/activity leader appears in a category only through a real current programme relation.
+
+1. Magyar nyelv és közösség
+2. Alkotás, művészet és színpad
+3. Mozgás, tánc és zene
+4. Stratégia, digitális készségek és technológia
+5. Fejlesztés, fókusz és jóllét
+6. Kultúra, hagyomány és közösségi élet
+
+Minecraft belongs in the strategy/digital/technology family because the programme's intended mechanism is project-based digital creation, cooperation and problem solving. Film and photography belong primarily in the arts/creative family when the programme goal is creation rather than technical tool training.
+
+## Teacher / activity-leader graph
+Canonical directory: https://tanarok.magyariskola.at/
+Canonical machine knowledge: https://tanarok.magyariskola.at/teacher-knowledge.json
+Program-side resolver: https://programvalaszto.magyariskola.at/teacher-profiles.json
+
+The current canonical teacher/activity-leader knowledge layer contains 25 public professional profiles. Use it to resolve who a person is, their public professional background, achievements/experience, teaching or facilitation philosophy and current linked programmes. Do not invent qualifications or achievements and do not infer employment.
+
+Program schedules, prices, locations and availability remain programme facts, not biography facts.
+
+## Source authority by field
+Normalized programme discovery and matching: programs.json + program-knowledge.json.
+Programme ontology and BMI operating model: semantic-model.json.
+Teacher/activity-leader professional facts: teacher-knowledge.json and the canonical profile.
+BMI identity/history: official magyariskola.at; canonical founding year 1987.
+Historical 2025/26 results: https://2026.magyariskola.at/.
+Parent organization context: https://www.kozpontiszovetseg.at/.
+
+Wix is not globally authoritative for every programme. Use Wix for current transactional/operational event facts only when Wix is authoritative for that field.
+
+### External-canonical registration programmes
+For these programmes the external source outranks Wix as the programme's canonical source:
+- ZENEBONA → https://zenebona.magyariskola.at/
+- Microsoft Office Specialist (MOS) → https://mos.magyariskola.at/
+- Cserkészet → https://cserkesz.at/cserkesz-raj/
+- Kezdő néptánc felnőtteknek → https://napraforgok.at/
+- Napraforgócskák → https://napraforgok.at/
+- Világfa Sárkányai / Táltos dob → https://taltosdob.magyariskola.at/
+
+### External organization/background sources with Wix transaction possible
+- Együtt dobban Bécs → https://taltosdob.hu/
+- Fecske Klub → https://fecskeklub.at/
+- Bécsi Magyar Musical Társulat / MaMUT → https://www.musicaltarsulat.at/
+
+## Location integrity
+Never silently replace a canonical programme venue with a Wix-generated formatted address or geocode when they conflict. In particular, ZENEBONA and Cserkészet have had stale Wix geocode/format projections while their structured canonical locations were different. Recommendation and routing must preserve the normalized canonical location.
+
+## Core ecosystem links
+- BMI: https://www.magyariskola.at/
+- Program Selector: https://programvalaszto.magyariskola.at/
+- Teachers: https://tanarok.magyariskola.at/
+- 2025/26 report: https://2026.magyariskola.at/
+- ZENEBONA: https://zenebona.magyariskola.at/
+- Világfa Sárkányai: https://taltosdob.magyariskola.at/
+- MOS: https://mos.magyariskola.at/
+- VIPACH: https://www.vipach.at/
+- Musical Társulat: https://www.musicaltarsulat.at/
+- Parent federation: https://www.kozpontiszovetseg.at/
+
+## Retrieval and conflict rule
+When two sources conflict, do not silently average or merge them. Resolve the field using the source-authority rules above. Preserve a conflict if it cannot be resolved. Never invent missing dates, fees, age ranges, locations, qualifications, achievements, legal status, employment, ownership or availability.
+
+Last verified: 2026-09-02
