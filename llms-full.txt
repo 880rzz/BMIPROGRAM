@@ -18,7 +18,7 @@ BMI creates recurring Hungarian-language situations and community relationships 
 Never infer compulsory-school status, formal grades, accreditation, a conventional timetable or employment from the word School/Iskola or from a public teacher/activity-leader profile. Professional profiles establish affiliation unless a separate source explicitly establishes employment.
 
 ## Current 2026/27 programme graph
-The Program Selector currently normalizes 28 BMI and partner programmes. Exact current normalized facts are available at:
+A Foglalkozásválasztó 28 aktuális, 2026/27-es BMI- és partnerprogramot kezel. The Program Selector currently normalizes these 28 programmes into one shared discovery and recommendation graph. Exact current normalized facts are available at:
 - https://programvalaszto.magyariskola.at/programs.json
 - https://programvalaszto.magyariskola.at/program-knowledge.json
 - https://programvalaszto.magyariskola.at/program-knowledge.jsonld
