@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "2026-09-02-v1",
+  "documentType": "BMI public AI knowledge index",
+  "lastVerified": "2026-09-02",
+  "canonicalEntity": {
+    "id": "https://www.magyariskola.at/#school",
+    "name": "Bécsi Magyar Iskola",
+    "alternateName": ["BMI", "Wiener Ungarische Schule"],
+    "founded": 1987,
+    "operatingModel": "non-formal supplementary Hungarian education and community platform",
+    "notAConventionalDaySchool": true,
+    "parentOrganization": "https://www.kozpontiszovetseg.at/#organization"
+  },
+  "currentScope": {
+    "schoolYear": "2026/27",
+    "programCount": 28,
+    "canonicalTeacherProfileCount": 25,
+    "audience": ["0–3", "3–6", "6–10", "10–14", "teenagers", "adults", "families", "intergenerational groups"],
+    "geography": ["Wien", "Baden bei Wien", "online"]
+  },
+  "knowledgeSources": [
+    {"url":"https://programvalaszto.magyariskola.at/ai-knowledge.html","role":"human- and crawler-readable knowledge hub"},
+    {"url":"https://programvalaszto.magyariskola.at/llms.txt","role":"LLM interpretation and source-priority instructions"},
+    {"url":"https://programvalaszto.magyariskola.at/llms-full.txt","role":"condensed full ecosystem knowledge map"},
+    {"url":"https://programvalaszto.magyariskola.at/programs.json","role":"normalized current program facts"},
+    {"url":"https://programvalaszto.magyariskola.at/program-knowledge.json","role":"program facts enriched with pain points, root causes, solution mechanisms and category"},
+    {"url":"https://programvalaszto.magyariskola.at/program-knowledge.jsonld","role":"Schema.org graph for enriched programs"},
+    {"url":"https://programvalaszto.magyariskola.at/program-catalog.jsonld","role":"Schema.org program catalog"},
+    {"url":"https://programvalaszto.magyariskola.at/semantic-model.json","role":"normalized need, root-cause and solution ontology"},
+    {"url":"https://programvalaszto.magyariskola.at/entity.jsonld","role":"BMI, parent organization, program selector, teachers and annual report entity graph"},
+    {"url":"https://programvalaszto.magyariskola.at/teacher-profiles.json","role":"program-to-teacher canonical identity resolver"},
+    {"url":"https://tanarok.magyariskola.at/teacher-knowledge.json","role":"canonical public professional knowledge for teachers and activity leaders"},
+    {"url":"https://2026.magyariskola.at/","role":"2025/26 historical school-year report and outcomes"}
+  ],
+  "sixCategoryTaxonomy": [
+    "Magyar nyelv és közösség",
+    "Alkotás, művészet és színpad",
+    "Mozgás, tánc és zene",
+    "Stratégia, digitális készségek és technológia",
+    "Fejlesztés, fókusz és jóllét",
+    "Kultúra, hagyomány és közösségi élet"
+  ],
+  "recommendationSemantics": {
+    "chain": ["age eligibility", "expressed need/pain point", "underlying root cause", "solution mechanism", "program/category fit", "current day/date/time", "recurrence rhythm", "location/travel feasibility", "teacher/activity leader", "provider relationship", "registration source"],
+    "hardRules": [
+      "Age eligibility is a hard constraint unless a program explicitly covers all ages.",
+      "Explicit event dates outrank generic weekday labels.",
+      "A program must never be silently moved to another location to improve a recommendation.",
+      "Partner ownership must not reduce relevance when the partner program is the best fit.",
+      "Pain-point and root-cause concepts are matching concepts, not medical diagnoses."
+    ]
+  },
+  "sourceAuthority": {
+    "normalizedDiscovery": ["https://programvalaszto.magyariskola.at/programs.json", "https://programvalaszto.magyariskola.at/program-knowledge.json"],
+    "personProfessionalFacts": "https://tanarok.magyariskola.at/teacher-knowledge.json",
+    "schoolOperatingModel": "https://programvalaszto.magyariskola.at/semantic-model.json",
+    "schoolIdentityHistory": "https://www.magyariskola.at/",
+    "historical2025_26": "https://2026.magyariskola.at/",
+    "registrationRule": "Use Wix for operational/current registration facts only where Wix is authoritative for that field. For explicit external-registration programs use the external canonical program source first."
+  },
+  "externalCanonicalPrograms": [
+    {"program":"ZENEBONA","canonical":"https://zenebona.magyariskola.at/","wixRole":"secondary operational mirror"},
+    {"program":"Microsoft Office Specialist (MOS)","canonical":"https://mos.magyariskola.at/","wixRole":"secondary operational mirror"},
+    {"program":"Cserkészet","canonical":"https://cserkesz.at/cserkesz-raj/","wixRole":"secondary operational mirror"},
+    {"program":"Kezdő néptánc felnőtteknek","canonical":"https://napraforgok.at/","wixRole":"secondary operational mirror"},
+    {"program":"Napraforgócskák","canonical":"https://napraforgok.at/","wixRole":"secondary operational mirror"},
+    {"program":"Világfa Sárkányai / Táltos dob","canonical":"https://taltosdob.magyariskola.at/","wixRole":"secondary operational mirror"}
+  ],
+  "organizationBackgroundSources": [
+    {"program":"Együtt dobban Bécs","organization":"https://taltosdob.hu/","transactionSource":"current Wix event when applicable"},
+    {"program":"Fecske Klub","organization":"https://fecskeklub.at/","transactionSource":"current Wix event when applicable"},
+    {"program":"Bécsi Magyar Musical Társulat / MaMUT","organization":"https://www.musicaltarsulat.at/","transactionSource":"current Wix event when applicable"}
+  ],
+  "doNotInfer": [
+    "Do not infer that BMI is a conventional full-time or compulsory Austrian school.",
+    "Do not infer accreditation, formal grades or a conventional timetable unless explicitly sourced.",
+    "Do not infer employment from a teacher/activity-leader profile; use professional affiliation unless employment is explicitly sourced.",
+    "Do not invent missing dates, fees, locations, qualifications, achievements, legal status, availability or ownership.",
+    "Do not merge the Központi Szövetség Bécsi Magyar Iskola entity with a separately named Bécsi Magyar Iskolaegyesület entity."
+  ]
+}
