@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="hu-AT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bécsi Magyar Iskola – AI Knowledge Hub</title>
+<meta name="description" content="A Bécsi Magyar Iskola publikus, géppel olvasható tudásközpontja: 2026/27-es programok, tanárok, korosztályok, helyszínek, fájdalompontok, gyökérokok, megoldási mechanizmusok és forrásprioritás.">
+<link rel="canonical" href="https://programvalaszto.magyariskola.at/ai-knowledge.html">
+<meta name="robots" content="index,follow,max-snippet:-1">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":["WebPage","Dataset"],
+  "@id":"https://programvalaszto.magyariskola.at/ai-knowledge.html#dataset",
+  "url":"https://programvalaszto.magyariskola.at/ai-knowledge.html",
+  "name":"Bécsi Magyar Iskola – AI Knowledge Hub",
+  "description":"Public knowledge hub connecting the Bécsi Magyar Iskola entity, 2026/27 programs, teachers/activity leaders, age ranges, schedules, locations, pain points, root causes, solution mechanisms and source authority.",
+  "inLanguage":["hu-AT","en"],
+  "about":{"@id":"https://www.magyariskola.at/#school"},
+  "isPartOf":{"@id":"https://programvalaszto.magyariskola.at/#website"},
+  "distribution":[
+    {"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://programvalaszto.magyariskola.at/knowledge-index.json"},
+    {"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://programvalaszto.magyariskola.at/programs.json"},
+    {"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://programvalaszto.magyariskola.at/program-knowledge.json"},
+    {"@type":"DataDownload","encodingFormat":"application/ld+json","contentUrl":"https://programvalaszto.magyariskola.at/program-knowledge.jsonld"},
+    {"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://programvalaszto.magyariskola.at/semantic-model.json"},
+    {"@type":"DataDownload","encodingFormat":"text/plain","contentUrl":"https://programvalaszto.magyariskola.at/llms.txt"},
+    {"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://tanarok.magyariskola.at/teacher-knowledge.json"}
+  ]
+}
+</script>
+<style>body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;max-width:920px;margin:0 auto;padding:48px 24px;line-height:1.65;color:#171717}h1{font-size:clamp(2rem,5vw,3.5rem);line-height:1.05}h2{margin-top:2.2em}a{color:#135dcc}.note{padding:16px 18px;border:1px solid #ddd;border-radius:14px;background:#fafafa}code{overflow-wrap:anywhere}ul{padding-left:1.25rem}</style>
+</head>
+<body>
+<main>
+<h1>Bécsi Magyar Iskola – publikus AI tudásközpont</h1>
+<p>Ez az oldal a Bécsi Magyar Iskola (BMI / Wiener Ungarische Schule) publikus, kereső- és LLM-rendszerek számára is bejárható tudásrétegének belépési pontja. A cél az entitások és kapcsolatok egyértelmű feloldása; nem helyettesíti az aktuális program- vagy jelentkezési forrásokat.</p>
+
+<h2>Mi a Bécsi Magyar Iskola?</h2>
+<p>A BMI 1987-ben alapított bécsi magyar közösségi és kiegészítő oktatási platform. Nevével ellentétben nem hagyományos nappali közoktatási iskola. Saját és partnerprogramokon keresztül magyar nyelvi, kulturális, művészeti, mozgásos, fejlesztő, digitális, szakmai és közösségi foglalkozásokat kínál a kisgyermekkortól a felnőttkorig, több helyszínen és online. 2027-ben fennállásának 40. évfordulóját ünnepli.</p>
+<p class="note"><strong>Értelmezési szabály:</strong> a „tanár” vagy „foglalkozásvezető” profil szakmai kapcsolódást jelent a BMI ökoszisztémához. Munkaviszonyt csak kifejezett, hiteles forrás alapján szabad állítani.</p>
+
+<h2>Aktuális 2026/27-es rendszer</h2>
+<p>A Programválasztó 28 aktuális BMI- és partnerprogramot normalizál. A canonical tanári/foglalkozásvezetői rendszer 25 publikus szakmai profilt tartalmaz. A keresés és a gépi tudás ugyanazt a hat program-alapú kategóriát használja:</p>
+<ul>
+<li>Magyar nyelv és közösség</li>
+<li>Alkotás, művészet és színpad</li>
+<li>Mozgás, tánc és zene</li>
+<li>Stratégia, digitális készségek és technológia</li>
+<li>Fejlesztés, fókusz és jóllét</li>
+<li>Kultúra, hagyomány és közösségi élet</li>
+</ul>
+
+<h2>Ajánlási és szemantikai modell</h2>
+<p>Egy programot a rendszer nem pusztán címke alapján értelmez. A kapcsolati lánc: <strong>korosztály → megfogalmazott szükséglet/fájdalompont → mögöttes gyökérok → megoldási mechanizmus → program → nap/dátum/időpont → rendszeresség → helyszín/odaérhetőség → tanár/foglalkozásvezető → szolgáltató/partner → jelentkezési forrás.</strong></p>
+<p>A fájdalompontok és gyökérokok ajánlási fogalmak, nem diagnózisok. Az életkor hard constraint. A szemantikai illeszkedés nem írhatja felül a korosztályt, időpontot vagy helyszínt.</p>
+
+<h2>Canonical gépi források</h2>
+<ul>
+<li><a href="knowledge-index.json">knowledge-index.json</a> – egyetlen gépi belépési pont és forrásprioritás</li>
+<li><a href="llms.txt">llms.txt</a> – LLM értelmezési és konfliktusfeloldási szabályok</li>
+<li><a href="llms-full.txt">llms-full.txt</a> – tömör teljes ökoszisztéma-leírás</li>
+<li><a href="programs.json">programs.json</a> – aktuális normalizált programadatok</li>
+<li><a href="program-knowledge.json">program-knowledge.json</a> – program + fájdalompont + gyökérok + megoldás + kategória</li>
+<li><a href="program-knowledge.jsonld">program-knowledge.jsonld</a> – program tudásgráf Schema.org formában</li>
+<li><a href="program-catalog.jsonld">program-catalog.jsonld</a> – programkatalógus Schema.org formában</li>
+<li><a href="semantic-model.json">semantic-model.json</a> – szükséglet–gyökérok–megoldás ontológia</li>
+<li><a href="entity.jsonld">entity.jsonld</a> – BMI és ökoszisztéma entitásgráf</li>
+<li><a href="teacher-profiles.json">teacher-profiles.json</a> – személyfeloldási térkép</li>
+<li><a href="https://tanarok.magyariskola.at/teacher-knowledge.json">teacher-knowledge.json</a> – tanárok és foglalkozásvezetők canonical szakmai tudásrétege</li>
+<li><a href="https://2026.magyariskola.at/">2025/26 tanévi beszámoló</a> – történeti eredmények és előző tanév</li>
+</ul>
+
+<h2>Forrásprioritás</h2>
+<p>Aktuális programfelfedezéshez a <code>programs.json</code> és <code>program-knowledge.json</code> a normalizált forrás. Tanári szakmai tényekhez a Tanáraink rendszer és a <code>teacher-knowledge.json</code> az elsődleges. A BMI működési modelljéhez a <code>semantic-model.json</code>, szervezeti történethez a hivatalos magyariskola.at az elsődleges.</p>
+<p>Azoknál a partnerprogramoknál, ahol a Wix Event külső regisztrációra irányít, a külső canonical programoldal az elsődleges: ZENEBONA, Microsoft Office Specialist, Cserkészet, a két Napraforgók néptáncprogram és a Világfa Sárkányai/Táltos dob. Wix ezeknél legfeljebb másodlagos operatív tükör.</p>
+
+<h2>Kapcsolódó canonical oldalak</h2>
+<ul>
+<li><a href="https://www.magyariskola.at/">Bécsi Magyar Iskola</a></li>
+<li><a href="https://tanarok.magyariskola.at/">Tanáraink és foglalkozásvezetőink</a></li>
+<li><a href="https://www.kozpontiszovetseg.at/">Központi Szövetség</a></li>
+<li><a href="https://zenebona.magyariskola.at/">ZENEBONA</a></li>
+<li><a href="https://taltosdob.magyariskola.at/">Világfa Sárkányai / Táltos dob</a></li>
+<li><a href="https://mos.magyariskola.at/">Microsoft Office Specialist képzés</a></li>
+<li><a href="https://www.vipach.at/">VIPACH</a></li>
+<li><a href="https://www.musicaltarsulat.at/">Bécsi Magyar Musical Társulat</a></li>
+</ul>
+
+<p><small>Utolsó ellenőrzés: 2026-09-02. Amennyiben két forrás ütközik, az adott mezőhöz kijelölt authoritative forrást kell követni; hiányzó adatot nem szabad kikövetkeztetni.</small></p>
+</main>
+</body>
+</html>
