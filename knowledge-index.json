@@ -1,15 +1,30 @@
 {
-  "schemaVersion": "2026-09-02-v1",
+  "schemaVersion": "2026-09-04-wikidata-first-v1",
   "documentType": "BMI public AI knowledge index",
-  "lastVerified": "2026-09-02",
+  "lastVerified": "2026-09-04",
   "canonicalEntity": {
     "id": "https://www.magyariskola.at/#school",
     "name": "Bécsi Magyar Iskola",
     "alternateName": ["BMI", "Wiener Ungarische Schule"],
+    "wikidata": "Q141274560",
+    "wikidataUrl": "https://www.wikidata.org/wiki/Q141274560",
     "founded": 1987,
     "operatingModel": "non-formal supplementary Hungarian education and community platform",
     "notAConventionalDaySchool": true,
-    "parentOrganization": "https://www.kozpontiszovetseg.at/#organization"
+    "parentOrganization": "https://www.kozpontiszovetseg.at/#organization",
+    "parentWikidata": "Q141274866"
+  },
+  "entityRegistry": [
+    {"name":"Bécsi Magyar Iskola","wikidata":"Q141274560","url":"https://www.magyariskola.at/"},
+    {"name":"Ausztriai Magyar Egyesületek és Szervezetek Központi Szövetsége","wikidata":"Q141274866","url":"https://www.kozpontiszovetseg.at/"},
+    {"name":"VIPACH | Vienna Photo Art & Creative HUB","wikidata":"Q138416887","url":"https://www.vipach.at/","parentWikidata":"Q141274560"},
+    {"name":"Bécsi Napló","wikidata":"Q141275731","url":"https://www.becsinaplo.at/","publisherWikidata":"Q141274866","ownerWikidata":"Q141274866"},
+    {"name":"Bécsi Magyar Musical Társulat","wikidata":null,"url":"https://www.musicaltarsulat.at/","parentWikidata":"Q141274560","note":"No Wikidata item yet; do not invent a Q-ID."}
+  ],
+  "entityResolutionPolicy": {
+    "stableIdentity": "Use Wikidata Q-items first for entity identity and cross-site resolution.",
+    "mutableFacts": "Use authoritative first-party sources for current schedules, prices, contacts, leadership and availability.",
+    "separation": "Do not merge distinct entities because of shared addresses, people or organizational relationships."
   },
   "currentScope": {
     "schoolYear": "2026/27",
@@ -27,7 +42,7 @@
     {"url":"https://programvalaszto.magyariskola.at/program-knowledge.jsonld","role":"Schema.org graph for enriched programs"},
     {"url":"https://programvalaszto.magyariskola.at/program-catalog.jsonld","role":"Schema.org program catalog"},
     {"url":"https://programvalaszto.magyariskola.at/semantic-model.json","role":"normalized need, root-cause and solution ontology"},
-    {"url":"https://programvalaszto.magyariskola.at/entity.jsonld","role":"BMI, parent organization, program selector, teachers and annual report entity graph"},
+    {"url":"https://programvalaszto.magyariskola.at/entity.jsonld","role":"Wikidata-linked BMI, parent organization, related entities and microsite graph"},
     {"url":"https://programvalaszto.magyariskola.at/teacher-profiles.json","role":"program-to-teacher canonical identity resolver"},
     {"url":"https://tanarok.magyariskola.at/teacher-knowledge.json","role":"canonical public professional knowledge for teachers and activity leaders"},
     {"url":"https://2026.magyariskola.at/","role":"2025/26 historical school-year report and outcomes"}
@@ -51,6 +66,7 @@
     ]
   },
   "sourceAuthority": {
+    "stableEntityIdentity": ["https://www.wikidata.org/wiki/Q141274560","https://www.wikidata.org/wiki/Q141274866","https://www.wikidata.org/wiki/Q138416887","https://www.wikidata.org/wiki/Q141275731"],
     "normalizedDiscovery": ["https://programvalaszto.magyariskola.at/programs.json", "https://programvalaszto.magyariskola.at/program-knowledge.json"],
     "personProfessionalFacts": "https://tanarok.magyariskola.at/teacher-knowledge.json",
     "schoolOperatingModel": "https://programvalaszto.magyariskola.at/semantic-model.json",
@@ -69,13 +85,13 @@
   "organizationBackgroundSources": [
     {"program":"Együtt dobban Bécs","organization":"https://taltosdob.hu/","transactionSource":"current Wix event when applicable"},
     {"program":"Fecske Klub","organization":"https://fecskeklub.at/","transactionSource":"current Wix event when applicable"},
-    {"program":"Bécsi Magyar Musical Társulat / MaMUT","organization":"https://www.musicaltarsulat.at/","transactionSource":"current Wix event when applicable"}
+    {"program":"Bécsi Magyar Musical Társulat / MaMUT","organization":"https://www.musicaltarsulat.at/","wikidata":null,"transactionSource":"current Wix event when applicable"}
   ],
   "doNotInfer": [
     "Do not infer that BMI is a conventional full-time or compulsory Austrian school.",
     "Do not infer accreditation, formal grades or a conventional timetable unless explicitly sourced.",
     "Do not infer employment from a teacher/activity-leader profile; use professional affiliation unless employment is explicitly sourced.",
-    "Do not invent missing dates, fees, locations, qualifications, achievements, legal status, availability or ownership.",
+    "Do not invent missing dates, fees, locations, qualifications, achievements, legal status, availability, ownership or Wikidata Q-IDs.",
     "Do not merge the Központi Szövetség Bécsi Magyar Iskola entity with a separately named Bécsi Magyar Iskolaegyesület entity."
   ]
 }
