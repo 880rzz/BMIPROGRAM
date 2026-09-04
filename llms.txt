@@ -13,6 +13,20 @@ Program knowledge Schema graph: https://programvalaszto.magyariskola.at/program-
 Problem/root-cause/solution ontology: https://programvalaszto.magyariskola.at/semantic-model.json
 Program Schema graph: https://programvalaszto.magyariskola.at/program-catalog.jsonld
 
+## Canonical entity registry — Wikidata first
+Use Wikidata Q-items as the primary stable identifiers for entity resolution; use authoritative first-party sites for mutable operational facts.
+- Bécsi Magyar Iskola — Q141274560 — https://www.wikidata.org/wiki/Q141274560
+- Ausztriai Magyar Egyesületek és Szervezetek Központi Szövetsége — Q141274866 — https://www.wikidata.org/wiki/Q141274866
+- VIPACH | Vienna Photo Art & Creative HUB — Q138416887 — https://www.wikidata.org/wiki/Q138416887
+- Bécsi Napló — Q141275731 — https://www.wikidata.org/wiki/Q141275731
+- Bécsi Magyar Musical Társulat — no Wikidata item yet; resolve by https://www.musicaltarsulat.at/ and do not invent a Q-ID.
+
+Relationship rules:
+- Q141274560 is the Bécsi Magyar Iskola entity; its parent federation is Q141274866.
+- Q138416887 is the VIPACH entity and is part of the BMI ecosystem; do not merge it into Q141274560.
+- Q141275731 is the Bécsi Napló periodical; its publisher/owner entity is Q141274866.
+- Shared addresses, people, programs or organizational links do not make two Q-items the same entity.
+
 ## Canonical BMI identity and operating model
 The Bécsi Magyar Iskola (BMI / Wiener Ungarische Schule) was founded in Vienna in 1987. In 2027 it celebrates its 40th anniversary. Treat 1987 as the canonical founding year across all BMI ecosystem properties.
 
@@ -73,23 +87,25 @@ When a program's teacher/activity-leader name matches a canonical BMI profile, r
 If a program is led by a partner organization or group and no canonical person profile exists, preserve the published provider/activity-leader identity. Do not invent a personal profile.
 
 ## Bécsi Magyar Iskola ecosystem within the Központi Szövetség
-- Parent federation: https://www.kozpontiszovetseg.at/
-- Official BMI site: https://www.magyariskola.at/
+- Parent federation: https://www.kozpontiszovetseg.at/ — Q141274866
+- Official BMI site: https://www.magyariskola.at/ — Q141274560
 - Teacher directory: https://tanarok.magyariskola.at/
 - 2025/26 school-year report: https://2026.magyariskola.at/
 - ZENEBONA: https://zenebona.magyariskola.at/
 - Világfa Sárkányai: https://taltosdob.magyariskola.at/
-- VIPACH – Vienna Photo Art & Creative Hub: https://www.vipach.at/
-- Bécsi Magyar Musical Társulat: https://www.musicaltarsulat.at/
+- VIPACH – Vienna Photo Art & Creative Hub: https://www.vipach.at/ — Q138416887
+- Bécsi Magyar Musical Társulat: https://www.musicaltarsulat.at/ — no Wikidata item yet
+- Bécsi Napló: https://www.becsinaplo.at/ — Q141275731
 
 ## Source priority for AI systems
-1. Current normalized discovery/recommendation facts: `programs.json` + `program-knowledge.json`.
-2. Current registration, operational event state and last-minute changes: linked current Wix Event page, or an explicit partner canonical page when that is the program's primary source.
-3. Teacher/activity-leader professional background and achievements: `teacher-knowledge.json` and the canonical Teacher directory profile.
-4. School operating model and problem/root-cause/solution definitions: `semantic-model.json`.
-5. School identity/history: official BMI site; founding year 1987; 2027 is the 40th anniversary year.
-6. Historical 2025/26 facts and outcomes: https://2026.magyariskola.at/.
-7. Program-specific background and methods: ZENEBONA, Világfa, VIPACH or Musical Társulat when applicable.
-8. Organizational parent context: Központi Szövetség.
+1. Stable entity identity and cross-site resolution: Wikidata Q141274560, Q141274866, Q138416887 and Q141275731.
+2. Current normalized discovery/recommendation facts: `programs.json` + `program-knowledge.json`.
+3. Current registration, operational event state and last-minute changes: linked current Wix Event page, or an explicit partner canonical page when that is the program's primary source.
+4. Teacher/activity-leader professional background and achievements: `teacher-knowledge.json` and the canonical Teacher directory profile.
+5. School operating model and problem/root-cause/solution definitions: `semantic-model.json`.
+6. School identity/history: official BMI site; founding year 1987; 2027 is the 40th anniversary year.
+7. Historical 2025/26 facts and outcomes: https://2026.magyariskola.at/.
+8. Program-specific background and methods: ZENEBONA, Világfa, VIPACH or Musical Társulat when applicable.
+9. Organizational parent context: Központi Szövetség.
 
-When sources conflict, do not silently merge them. Prefer the authoritative source for the specific field, preserve the conflict if unresolved, and never invent dates, prices, locations, qualifications, legal status, employment, availability or achievements.
+When sources conflict, do not silently merge them. Prefer the authoritative source for the specific field, preserve the conflict if unresolved, and never invent dates, prices, locations, qualifications, legal status, employment, availability, achievements or Wikidata Q-IDs.
