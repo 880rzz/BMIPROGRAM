@@ -33,7 +33,10 @@ assert(catalog.includes("p.id!=='zenebona'&&overlaps"),'Zenebona must stay out o
 assert(!home.includes('Zenebona')&&!agesPage.includes('Zenebona')&&!faqPage.includes('Zenebona'),'Zenebona must not be promoted in home, age browser or FAQ static copy.');
 assert(!llms.includes('## Zenebona')&&!llmsFull.includes('## Zenebona canonical rekord'),'LLM discovery must not feature a dedicated Zenebona promotion section.');
 assert(llms.includes('28 aktuális')&&llmsFull.includes('28 aktuális'),'LLM program count missing.');
-assert(sitemap.includes('<lastmod>2026-08-30</lastmod>'),'Sitemap freshness signal missing.');
+const sitemapLastmods=[...sitemap.matchAll(/<lastmod>(\d{4}-\d{2}-\d{2})<\/lastmod>/g)].map(m=>m[1]);
+assert(sitemapLastmods.length>=5,'Sitemap lastmod coverage missing.');
+assert(sitemapLastmods.every(value=>/^\d{4}-\d{2}-\d{2}$/.test(value)),'Sitemap lastmod format invalid.');
+assert(sitemapLastmods.some(value=>value>='2026-09-04'),'Sitemap freshness signal missing.');
 const shellSubtitle='Délutáni és hétvégi foglalkozások · 2026 / 2027';
 publicPages.forEach((page,i)=>{
  assert(page.includes(shellSubtitle),`Shared header subtitle missing page ${i+1}`);
