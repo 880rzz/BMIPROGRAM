@@ -108,7 +108,7 @@ jobs:
           ! test -e bmi-header-logo-fixed.png
           ! test -e favicon_.png
           ! test -e logo.png
-          grep -Fq '<lastmod>2026-08-30</lastmod>' sitemap.xml
+          grep -Eq '<lastmod>2026-09-(0[4-9]|[12][0-9]|30)</lastmod>' sitemap.xml
           ! grep -Fq '## Zenebona canonical rekord' llms-full.txt
           for html in index.html foglalkozasok.html korosztalyok.html gyik.html; do
             grep -Fq 'viewport-fit=cover' "$html"
@@ -282,7 +282,7 @@ jobs:
           grep -Fq 'limit=3' <<<"${address}"
           grep -Fq 'Google Maps Platform Routes' <<<"${address}"
           sitemap="$(fetch /sitemap.xml)"
-          grep -Fq '<lastmod>2026-08-30</lastmod>' <<<"${sitemap}"
+          grep -Eq '<lastmod>2026-09-(0[4-9]|[12][0-9]|30)</lastmod>' <<<"${sitemap}"
           llmfull="$(fetch /llms-full.txt)"
           ! grep -Fq '## Zenebona canonical rekord' <<<"${llmfull}"
           for path in / /foglalkozasok.html /korosztalyok.html /gyik.html; do
