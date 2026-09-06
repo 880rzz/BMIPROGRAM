@@ -43,7 +43,7 @@ publicPages.forEach((page,i)=>{
  assert(page.includes('hero-identity')&&page.includes('hero-school-name')&&page.includes('hero-founded'),`Shared hero identity missing page ${i+1}`);
  assert(page.includes('<div class="hero-mark"><img src="bmi_blue_round_rgb_logo.svg"'),`Hero source shell missing page ${i+1}`);
  ['Foglalkozásválasztó','Összes foglalkozás','Korosztályok','Kérdések','1987–2027 · 40 éves BMI','Tanévbeszámoló'].forEach(label=>assert(page.includes(label),`Shared navigation item ${label} missing page ${i+1}`));
- assert(page.includes('whatsapp-widget.js?v='),`WhatsApp missing page ${i+1}`);
+ assert(page.includes('whatsapp-widget.js?v='),`Hungarian education menu runtime missing page ${i+1}`);
  assert(page.includes('marketing@kozpontiszovetseg.at'),`Error email missing page ${i+1}`);
  assert(page.includes('Be Smart Kids Club csapata'),`Credit missing page ${i+1}`);
  assert(page.includes('https://business.vipach.at'),`VIPACH missing page ${i+1}`);
@@ -52,8 +52,11 @@ publicPages.forEach((page,i)=>{
 assert(home.includes('finder-runtime.js?v='),'Finder runtime must be loaded directly by homepage.');
 assert(faqPage.includes('Gyűjt-e statisztikát')&&faqPage.includes('Hogyan működik a térkép és az útvonal?'),'FAQ privacy operating model missing.');
 assert(faqPage.includes('Photon/Komoot')&&faqPage.includes('Google Maps Platform Routes'),'FAQ provider disclosure missing.');
-assert(whatsapp.includes('bmi-whatsapp-widget')&&!whatsapp.includes('transit-routing.js')&&!whatsapp.includes('wizard-responsive.css'),'WhatsApp must be independent from finder runtime.');
-assert(whatsapp.includes("img.src='bmi-header-logo.png'")&&!whatsapp.includes("img.src='bmi_blue_round_rgb_logo.svg'"),'WhatsApp/runtime must restore the original BMI hero logo.');
+assert(whatsapp.includes('bmi-language-widget')&&whatsapp.includes('Magyar nyelvű oktatás')&&!whatsapp.includes('transit-routing.js')&&!whatsapp.includes('wizard-responsive.css'),'Hungarian education menu must be independent from finder runtime.');
+['iskola-baden','aspern','seestadt','schweden-1','schweden-2'].forEach(id=>assert(whatsapp.includes(id),`Featured Hungarian language group missing: ${id}`));
+assert(whatsapp.includes('Bécs 1. kerület · Schwedenplatz')&&whatsapp.includes('Bécs · Aspern')&&whatsapp.includes('Bécs · Seestadt')&&whatsapp.includes("place:'Baden'"),'Location grouping missing from Hungarian education menu.');
+assert(whatsapp.includes('https://www.magyariskola.at/magyar-nyelv-oktatás-bécs'),'Canonical Hungarian language landing page missing from floating menu.');
+assert(whatsapp.includes("img.src='bmi-hero-original.png'")&&!whatsapp.includes("img.src='bmi_blue_round_rgb_logo.svg'"),'Language/runtime must restore the original BMI hero logo.');
 assert(whatsapp.includes('opcionális térképes és pontos útvonal-hozzájárulással')&&whatsapp.includes('Google Maps Platform Routes'),'Consent-aware precise-routing trust copy missing.');
 assert(finderRuntime.includes('wizard-responsive.css?v=')&&finderRuntime.includes('wizard-anchor.js?v=')&&finderRuntime.includes('result-actions.js?v=')&&finderRuntime.includes('routes-config.js?v=')&&finderRuntime.includes('transit-routing.js?v=')&&finderRuntime.includes('google-routes.js?v=')&&finderRuntime.includes('result-travel-polish.js?v='),'Finder runtime loaders missing.');
 assert(sharedCss.includes('.hero-identity')&&sharedCss.includes('.site-head .head-in')&&sharedCss.includes('.hero h1')&&sharedCss.includes('text-wrap:balance'),'Unified responsive shell/heading polish missing from shared stylesheet.');
@@ -73,4 +76,4 @@ assert(actions.includes('result-action-grid')&&actions.includes('has-long-action
 assert(uxRules.includes('Functional block hierarchy')&&uxRules.includes('Mobile scaling')&&uxRules.includes('Action buttons')&&uxRules.includes('Privacy and trust')&&uxRules.includes('Release protection'),'Persistent UX/privacy rules missing.');
 assert(wizardAnchor.includes("observer.observe(root,{childList:true,subtree:false})"),'Wizard anchor must observe direct view replacements only.');
 assert(wizardAnchor.includes('scrollToCurrentBlock')&&wizardAnchor.includes('.site-head'),'Wizard anchor/header offset missing.');
-console.log('PASS: default-private finder with explicit map/routing consent, original BMI hero logo runtime and browser gate, max-three address suggestions, real map, optional Google Routes precision, three-mode desktop selector and equal no-wrap actions.');
+console.log('PASS: default-private finder with Hungarian education floating menu, explicit map/routing consent, original BMI hero logo runtime, max-three address suggestions, real map, optional Google Routes precision and responsive result actions.');
