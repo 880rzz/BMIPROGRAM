@@ -2,12 +2,13 @@
 'use strict';
 var ID='bmi-language-widget',PANEL_ID='bmi-language-panel',STYLE_ID='bmi-language-widget-style';
 var LANDING='https://www.magyariskola.at/magyar-nyelv-oktatás-bécs';
+var FEATURED_PROGRAM_IDS=['iskola-baden','aspern','seestadt','schweden-1','schweden-2'];
 var PROGRAMS=[
- {place:'Bécs 1. kerület · Schwedenplatz',name:'Magyar nyelv · 1. csoport',age:'6–10 év',when:'Szombat 10:00–12:00',url:'https://www.magyariskola.at/event-details/magyarnyelv-schwedenplatz-1'},
- {place:'Bécs 1. kerület · Schwedenplatz',name:'Magyar nyelv · 2. csoport',age:'10–14 év',when:'Kéthetente szombat 12:00–14:00',url:'https://www.magyariskola.at/event-details/magyarnyelv-schwedenplatz-2'},
- {place:'Bécs · Aspern',name:'Magyar nyelv · Aspern',age:'6–10 év',when:'Kedd 15:30–17:00',url:'https://www.magyariskola.at/event-details/magyaroktatas-kedd-2026'},
- {place:'Bécs · Seestadt',name:'Magyar nyelv · Seestadt',age:'6–10 év',when:'Szerda 16:00–17:30',url:'https://www.magyariskola.at/event-details/magyarnyelv-szerda-2026'},
- {place:'Baden',name:'Magyar Iskola Badenben',age:'7–8 év · 1–2. osztály',when:'Kedd 16:00–17:30',url:'https://www.magyariskola.at/event-details/iskolabaden-2026'}
+ {id:'schweden-1',place:'Bécs 1. kerület · Schwedenplatz',name:'Magyar nyelv · 1. csoport',age:'6–10 év',when:'Szombat 10:00–12:00',url:'https://www.magyariskola.at/event-details/magyarnyelv-schwedenplatz-1'},
+ {id:'schweden-2',place:'Bécs 1. kerület · Schwedenplatz',name:'Magyar nyelv · 2. csoport',age:'10–14 év',when:'Kéthetente szombat 12:00–14:00',url:'https://www.magyariskola.at/event-details/magyarnyelv-schwedenplatz-2'},
+ {id:'aspern',place:'Bécs · Aspern',name:'Magyar nyelv · Aspern',age:'6–10 év',when:'Kedd 15:30–17:00',url:'https://www.magyariskola.at/event-details/magyaroktatas-kedd-2026'},
+ {id:'seestadt',place:'Bécs · Seestadt',name:'Magyar nyelv · Seestadt',age:'6–10 év',when:'Szerda 16:00–17:30',url:'https://www.magyariskola.at/event-details/magyarnyelv-szerda-2026'},
+ {id:'iskola-baden',place:'Baden',name:'Magyar Iskola Badenben',age:'7–8 év · 1–2. osztály',when:'Kedd 16:00–17:30',url:'https://www.magyariskola.at/event-details/iskolabaden-2026'}
 ];
 var fav=document.querySelector('link[rel="icon"]');if(!fav){fav=document.createElement('link');fav.rel='icon';document.head.appendChild(fav)}fav.type='image/png';fav.href='bmi-butterfly-favicon.png?v=20260830';
 var style=document.getElementById(STYLE_ID);if(!style){style=document.createElement('style');style.id=STYLE_ID;style.textContent=''
