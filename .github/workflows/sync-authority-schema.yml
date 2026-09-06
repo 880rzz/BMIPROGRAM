@@ -34,6 +34,14 @@ jobs:
               elif '</head>' in s:
                   n=s.replace('</head>',block+'\n</head>',1)
               else: continue
+
+              # Google Search no longer uses Dataset rich results. Keep the
+              # knowledge hub as a WebPage while retaining its machine-readable
+              # downloads, avoiding Dataset enhancement warnings for creator,
+              # license and isPartOf in Search Console.
+              n=n.replace('"@type": ["WebPage", "Dataset"]','"@type": "WebPage"')
+              n=n.replace('"@type":["WebPage","Dataset"]','"@type":"WebPage"')
+
               if n!=s: p.write_text(n,encoding='utf-8'); changed.append(str(p))
           print('updated',len(changed),'HTML files'); [print(f) for f in changed]
           PY
@@ -43,5 +51,5 @@ jobs:
           git config user.name "ecosystem-schema-bot"
           git config user.email "actions@users.noreply.github.com"
           git add -A
-          git commit -m "Sync Wikidata/Wikipedia/Rólunk authority schema across HTML"
+          git commit -m "Sync authority schema and normalize Google markup"
           git push
