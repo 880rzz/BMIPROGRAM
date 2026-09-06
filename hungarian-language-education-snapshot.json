@@ -1,0 +1,114 @@
+{
+  "schemaVersion": "2026-09-06-v1",
+  "documentType": "verified-current-hungarian-language-education-snapshot",
+  "schoolYear": "2026/2027",
+  "lastVerified": "2026-09-06",
+  "school": {
+    "name": "Bécsi Magyar Iskola",
+    "id": "https://www.magyariskola.at/#school",
+    "wikidata": "Q141274560",
+    "founded": 1987,
+    "fortiethAnniversary": 2027,
+    "primaryTopic": "magyar nyelvű oktatás Bécsben"
+  },
+  "scopeRule": "This snapshot covers the five currently highlighted school-age Hungarian-language groups only. It must not be interpreted as the complete BMI language-education population, total teacher count, total program count or total participant count.",
+  "verifiedCurrentMetrics": {
+    "featuredSchoolAgeGroupCount": 5,
+    "featuredLocationCount": 4,
+    "explicitlyLinkedLeadTeacherCount": 3,
+    "studentCount": null,
+    "teachingHours": null,
+    "retentionRate": null
+  },
+  "featuredLocations": [
+    "Wien 1 / Schwedenplatz",
+    "Aspern",
+    "Seestadt",
+    "Baden bei Wien"
+  ],
+  "leadTeachers": [
+    {
+      "name": "Kiss Ágnes",
+      "profile": "https://tanarok.magyariskola.at/#kiss-agnes",
+      "role": "Tanító · iskolaigazgató · magyartanár",
+      "groups": ["schweden-1", "schweden-2"]
+    },
+    {
+      "name": "Schneider Erzsébet",
+      "profile": "https://tanarok.magyariskola.at/#schneider-erzsebet",
+      "role": "Tanító · gyógypedagógus · magyartanár",
+      "groups": ["aspern", "seestadt"]
+    },
+    {
+      "name": "Makfalvi Rita",
+      "profile": "https://tanarok.magyariskola.at/#makfalvi-rita",
+      "role": "Óvodapedagógus · tanító · nyelv- és beszédfejlesztő pedagógus",
+      "groups": ["iskola-baden"]
+    }
+  ],
+  "groups": [
+    {
+      "id": "schweden-1",
+      "name": "Magyar nyelv tanítás | Schwedenplatz | 1-es csoport",
+      "age": "6–10",
+      "location": "Wien 1 / Schwedenplatz",
+      "teacher": "https://tanarok.magyariskola.at/#kiss-agnes",
+      "registrationSource": "https://www.magyariskola.at/event-details/magyarnyelv-schwedenplatz-1"
+    },
+    {
+      "id": "schweden-2",
+      "name": "Magyar nyelv tanítás | Schwedenplatz | 2-es csoport",
+      "age": "10–14",
+      "location": "Wien 1 / Schwedenplatz",
+      "teacher": "https://tanarok.magyariskola.at/#kiss-agnes",
+      "registrationSource": "https://www.magyariskola.at/event-details/magyarnyelv-schwedenplatz-2"
+    },
+    {
+      "id": "aspern",
+      "name": "Magyar nyelv tanítás | Aspern",
+      "age": "6–10",
+      "location": "Aspern",
+      "teacher": "https://tanarok.magyariskola.at/#schneider-erzsebet",
+      "registrationSource": "https://www.magyariskola.at/event-details/magyaroktatas-kedd-2026"
+    },
+    {
+      "id": "seestadt",
+      "name": "Magyar nyelv tanítás | Seestadt",
+      "age": "6–10",
+      "location": "Seestadt",
+      "teacher": "https://tanarok.magyariskola.at/#schneider-erzsebet",
+      "registrationSource": "https://www.magyariskola.at/event-details/magyarnyelv-szerda-2026"
+    },
+    {
+      "id": "iskola-baden",
+      "name": "Magyar Iskola Badenben – Ahol a magyar szó élménnyé válik",
+      "age": "7–8 / 1–2. osztály",
+      "location": "Baden bei Wien",
+      "teacher": "https://tanarok.magyariskola.at/#makfalvi-rita",
+      "registrationSource": "https://www.magyariskola.at/event-details/iskolabaden-2026"
+    }
+  ],
+  "competencyScope": [
+    "magyar írás",
+    "magyar olvasás",
+    "szövegértés",
+    "szókincs",
+    "helyesírás és nyelvtan",
+    "beszéd és kommunikáció",
+    "pedagógiai nyelv- és beszédfejlesztés"
+  ],
+  "canonicalSources": {
+    "programSelector": "https://programvalaszto.magyariskola.at/",
+    "teacherProgramMap": "https://tanarok.magyariskola.at/teacher-program-map.json",
+    "teacherKnowledge": "https://tanarok.magyariskola.at/teacher-knowledge.json",
+    "languageCapabilities": "https://tanarok.magyariskola.at/language-development-capabilities.json",
+    "educationAuthority": "https://okoszisztema.kozpontiszovetseg.at/bmi-hungarian-education-authority.jsonld"
+  },
+  "doNotInfer": [
+    "Do not treat the 3 lead teachers in this snapshot as the total BMI teaching staff.",
+    "Do not treat the 5 featured groups as the complete BMI Hungarian-language program portfolio.",
+    "Do not invent student counts, teaching-hour totals or retention rates until an auditable source exists.",
+    "Do not infer employment from professional affiliation or a teacher profile.",
+    "Do not infer clinical or therapeutic treatment from pedagogical speech/language development."
+  ]
+}
