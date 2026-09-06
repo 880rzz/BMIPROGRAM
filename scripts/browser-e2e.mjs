@@ -25,6 +25,9 @@ for (const path of pages) {
     const heroLogoRect = heroLogo?.getBoundingClientRect();
     const heroLogoStyle = heroLogo ? getComputedStyle(heroLogo) : null;
     const heroLogoSrc = heroLogo?.getAttribute('src') || '';
+    const languageButton = document.querySelector('#bmi-language-widget');
+    const languagePanel = document.querySelector('#bmi-language-panel');
+    const languagePrograms = languagePanel ? [...languagePanel.querySelectorAll('.bmi-lang-program')] : [];
     return {
       brand: document.querySelector('.site-head .brand')?.textContent?.replace(/\s+/g,' ').trim() || '',
       menu: !!document.querySelector('#menuBtn'),
@@ -34,12 +37,16 @@ for (const path of pages) {
       heroLogoNatural: heroLogo ? {width:heroLogo.naturalWidth,height:heroLogo.naturalHeight,complete:heroLogo.complete} : null,
       heroLogoBox: heroLogoRect ? {width:heroLogoRect.width,height:heroLogoRect.height} : null,
       overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
-      wa: !!document.querySelector('#bmi-whatsapp-widget'),
+      languageMenu: !!languageButton && !!languagePanel,
+      languageCount: languagePrograms.length,
+      languageText: languageButton?.textContent?.replace(/\s+/g,' ').trim() || '',
+      languagePlaces: languagePanel?.textContent?.replace(/\s+/g,' ').trim() || '',
       trust: document.querySelector('.footer-trust')?.textContent?.replace(/\s+/g,' ').trim() || '',
       storage: {local: localStorage.length, session: sessionStorage.length, cookie: document.cookie}
     };
   });
-  if (!shell.brand.includes('Bécsi Magyar Iskola') || !shell.menu || !shell.hero || !shell.heroLogo || shell.overflow > 2 || !shell.wa || errors.length) {
+  const languageOk = shell.languageMenu && shell.languageCount === 5 && /Magyar nyelvű oktatás/.test(shell.languageText) && /Schwedenplatz/.test(shell.languagePlaces) && /Aspern/.test(shell.languagePlaces) && /Seestadt/.test(shell.languagePlaces) && /Baden/.test(shell.languagePlaces);
+  if (!shell.brand.includes('Bécsi Magyar Iskola') || !shell.menu || !shell.hero || !shell.heroLogo || shell.overflow > 2 || !languageOk || errors.length) {
     console.error('E2E_FAIL', path, {shell, errors}); failed = true;
   }
   if (!/Privát működés/.test(shell.trust) || shell.storage.local !== 0 || shell.storage.session !== 0 || shell.storage.cookie) {
@@ -67,4 +74,4 @@ for (const path of pages) {
 }
 await browser.close();
 if (failed) process.exit(1);
-console.log('PASS: mobile browser E2E, true original BMI hero artwork loaded and visible, zero automatic third-party requests, zero client storage/cookies, trust disclosure, WhatsApp and finder runtime.');
+console.log('PASS: mobile browser E2E, original BMI hero artwork, five-program Hungarian-language floating menu, zero automatic third-party requests, zero client storage/cookies, trust disclosure and finder runtime.');
