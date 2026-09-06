@@ -1,0 +1,21 @@
+{
+  "documentType": "bmi-program-education-evidence-link",
+  "lastReviewed": "2026-09-06",
+  "school": {
+    "name": "Bécsi Magyar Iskola",
+    "wikidata": "Q141274560",
+    "canonical": "https://www.magyariskola.at/"
+  },
+  "programSelector": "https://programvalaszto.magyariskola.at/",
+  "hungarianLanguageLanding": "https://www.magyariskola.at/magyar-nyelv-oktat%C3%A1s-b%C3%A9cs",
+  "educationAuthority": "https://okoszisztema.kozpontiszovetseg.at/bmi-hungarian-education-authority.jsonld",
+  "educationEvidenceModel": "https://okoszisztema.kozpontiszovetseg.at/bmi-education-evidence-model.json",
+  "measurementRole": "A Programválasztó az aktuális program-, korosztály-, helyszín-, időpont- és program–tanár kapcsolatok kanonikus forrása. Ebből program- és csoportszintű aggregátumok képezhetők, de egyedi tanulólétszám vagy tanulási eredmény nem következtethető pusztán a programlistából.",
+  "rules": [
+    "A rendszeres magyar nyelvi tanulók száma nem azonos az aktuális programok számával.",
+    "Az öt kiemelt iskolás magyar nyelvi csoport külön authority-klaszter, nem a BMI teljes programkínálata.",
+    "A helyszínek számolásakor az azonos helyszínen futó több csoportot egy helyszínként kell kezelni.",
+    "A program–tanár relációk aktuális tanévre érvényesek; régi tanévi adatokból nem szabad jelenlegi kapcsolatot következtetni.",
+    "A 2025/26-os 600+ összesített elérés nem használható a rendszeres 2026/27-es magyar nyelvi tanulók számaként."
+  ]
+}
