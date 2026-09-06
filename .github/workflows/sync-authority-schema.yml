@@ -21,6 +21,8 @@ jobs:
         run: |
           python3 - <<'PY'
           from pathlib import Path
+          import re
+
           source = Path('entity.jsonld').read_text(encoding='utf-8').strip()
           start = '<!-- ecosystem-authority-schema:start -->'
           end = '<!-- ecosystem-authority-schema:end -->'
@@ -36,11 +38,17 @@ jobs:
               else: continue
 
               # Google Search no longer uses Dataset rich results. Keep the
-              # knowledge hub as a WebPage while retaining its machine-readable
-              # downloads, avoiding Dataset enhancement warnings for creator,
-              # license and isPartOf in Search Console.
+              # knowledge hub as a WebPage, avoiding Dataset enhancement
+              # warnings for creator, license and isPartOf in Search Console.
               n=n.replace('"@type": ["WebPage", "Dataset"]','"@type": "WebPage"')
               n=n.replace('"@type":["WebPage","Dataset"]','"@type":"WebPage"')
+
+              # distribution is a Dataset-specific property. The actual
+              # download links remain visible in the page body and machine
+              # knowledge files, so remove only the obsolete HTML JSON-LD
+              # enhancement block from the dedicated AI knowledge page.
+              if p.name == 'ai-knowledge.html':
+                  n=re.sub(r',\n  "distribution":\[.*?\n  \]\n}', '\n}', n, count=1, flags=re.S)
 
               if n!=s: p.write_text(n,encoding='utf-8'); changed.append(str(p))
           print('updated',len(changed),'HTML files'); [print(f) for f in changed]
