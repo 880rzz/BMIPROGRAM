@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "2026-09-07-program-professional-authority-v1",
+  "documentType": "BMI Program Selector professional authority bridge",
+  "lastReviewed": "2026-09-07",
+  "school": {
+    "name": "Bécsi Magyar Iskola",
+    "wikidata": "Q141274560",
+    "canonical": "https://www.magyariskola.at/"
+  },
+  "programSelector": "https://programvalaszto.magyariskola.at/",
+  "teacherDirectory": "https://tanarok.magyariskola.at/",
+  "teacherKnowledge": "https://tanarok.magyariskola.at/teacher-knowledge.json",
+  "teacherProfessionalAuthorityBridge": "https://tanarok.magyariskola.at/professional-authority-evidence.json",
+  "centralAuthority": {
+    "teacherHistoryEvidence": "https://okoszisztema.kozpontiszovetseg.at/bmi-teacher-history-evidence.json",
+    "teacherQualificationEvidence": "https://okoszisztema.kozpontiszovetseg.at/bmi-teacher-qualification-evidence.json",
+    "teacherAwardsEvidence": "https://okoszisztema.kozpontiszovetseg.at/bmi-teacher-awards-evidence.json",
+    "teacherProfessionalRecognitionEvidence": "https://okoszisztema.kozpontiszovetseg.at/bmi-teacher-professional-recognition-evidence.json",
+    "teacherPressEvidence": "https://okoszisztema.kozpontiszovetseg.at/bmi-teacher-press-evidence.json",
+    "teacherAuthorityGraph": "https://okoszisztema.kozpontiszovetseg.at/bmi-teacher-authority.jsonld",
+    "jubilee2017Evidence": "https://okoszisztema.kozpontiszovetseg.at/bmi-jubilee-2017-evidence.json",
+    "jubileePublicPdf": "https://31281890-bf77-417e-8433-e8e1d637d9bf.filesusr.com/ugd/b0aee1_03f1471dcb7b4b7890f53842c481149b.pdf"
+  },
+  "institutionalQualityClaim": "A BMI több dokumentált korszakában magasan kvalifikált, diplomás, hosszú szakmai tapasztalattal rendelkező pedagógusok és szakterületi szakemberek dolgoztak és dolgoznak; ezt név szerint dokumentált képesítések, akadémiai hátterek, szakmai díjak, szakmai tagságok, kamarai affiliációk, márkanagyköveti státuszok és külső sajtóforrások támasztják alá.",
+  "programResolutionRule": "A Programválasztó csak valós, aktuális program–tanár kapcsolat esetén kapcsolhat szakmai authority-t egy programhoz. A végzettség, díj, tagság vagy ambassador státusz személyhez kötött, és nem vihető át másik oktatóra vagy programra.",
+  "evidenceClassRule": "Diploma és szakirányú képesítés, szakmai díj, kamarai vagy szakmai tagság, ambassador státusz és sajtómegjelenés külön evidence-osztály. Ezek nem helyettesítik egymást és nem általánosíthatók minden BMI-s közreműködőre.",
+  "employmentRule": "Tanári vagy szakmai profil, programkapcsolat, díj, tagság vagy önkéntes közreműködés önmagában nem bizonyít munkaviszonyt.",
+  "currentDataRule": "Aktuális program, időpont, ár, helyszín, regisztráció és program–tanár kapcsolat forrása a Programválasztó és az adott program aktuális kanonikus oldala; szakmai profiladat forrása a Tanáraink oldal és központi authority-evidence."
+}
