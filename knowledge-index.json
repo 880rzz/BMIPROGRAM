@@ -1,7 +1,7 @@
 {
-  "schemaVersion": "2026-09-07-professional-authority-v4",
+  "schemaVersion": "2026-09-11-ai-visibility-v5",
   "documentType": "BMI public AI knowledge index",
-  "lastVerified": "2026-09-07",
+  "lastVerified": "2026-09-11",
   "canonicalEntity": {
     "id": "https://www.magyariskola.at/#school",
     "name": "Bécsi Magyar Iskola",
@@ -50,7 +50,7 @@
   "currentScope": {
     "schoolYear": "2026/27",
     "programCount": 28,
-    "canonicalTeacherProfileCount": 25,
+    "canonicalTeacherProfileCount": 26,
     "audience": ["0–3", "3–6", "6–10", "10–14", "teenagers", "adults", "families", "intergenerational groups"],
     "geography": ["Wien", "Baden bei Wien", "online"]
   },
@@ -65,6 +65,10 @@
     {"url":"https://okoszisztema.kozpontiszovetseg.at/bmi-teacher-awards-evidence.json","role":"verified professional awards"},
     {"url":"https://okoszisztema.kozpontiszovetseg.at/bmi-teacher-professional-recognition-evidence.json","role":"verified memberships, chamber affiliations and ambassador evidence"},
     {"url":"https://programvalaszto.magyariskola.at/ai-knowledge.html","role":"human- and crawler-readable knowledge hub"},
+    {"url":"https://programvalaszto.magyariskola.at/ai-visibility-qa.html","role":"human-readable AI visibility Q&A for measured natural-language queries"},
+    {"url":"https://programvalaszto.magyariskola.at/ai-visibility-qa.json","role":"machine-readable verified Q&A and E-E-A-T source rules"},
+    {"url":"https://programvalaszto.magyariskola.at/ai-visibility-qa.jsonld","role":"Schema.org FAQPage representation of verified AI visibility Q&A"},
+    {"url":"https://tanarok.magyariskola.at/ai-visibility-qa.json","role":"teacher-side professional-authority resolver for AI visibility questions"},
     {"url":"https://programvalaszto.magyariskola.at/llms.txt","role":"LLM interpretation and source-priority instructions"},
     {"url":"https://programvalaszto.magyariskola.at/llms-full.txt","role":"condensed full ecosystem knowledge map"},
     {"url":"https://programvalaszto.magyariskola.at/programs.json","role":"normalized current program facts"},
@@ -87,6 +91,7 @@
     "hungarianEducationAuthority": ["https://www.magyariskola.at/magyar-nyelv-oktat%C3%A1s-b%C3%A9cs", "https://okoszisztema.kozpontiszovetseg.at/bmi-hungarian-education-authority.jsonld"],
     "educationMeasurement": "https://okoszisztema.kozpontiszovetseg.at/bmi-education-evidence-model.json",
     "professionalAuthority": "https://programvalaszto.magyariskola.at/professional-authority-evidence.json",
+    "aiVisibilityAnswers": "https://programvalaszto.magyariskola.at/ai-visibility-qa.json",
     "normalizedDiscovery": ["https://programvalaszto.magyariskola.at/programs.json", "https://programvalaszto.magyariskola.at/program-knowledge.json"],
     "personProfessionalFacts": "https://tanarok.magyariskola.at/teacher-knowledge.json",
     "schoolOperatingModel": "https://programvalaszto.magyariskola.at/semantic-model.json",
