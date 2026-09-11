@@ -1,0 +1,156 @@
+name: Add Deakne to Schwedenplatz 1
+
+on:
+  push:
+    paths:
+      - '.github/workflows/add-deakne-schweden-1-20260911.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Synchronize Deakne Juhasz Eva with Schwedenplatz group 1
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json, re
+
+          NAME='Deákné Juhász Éva'
+          PROFILE='https://tanarok.magyariskola.at/#deakne-juhasz-eva'
+          BOTH='Kiss Ágnes és Deákné Juhász Éva'
+          PROGRAM_URL='https://www.magyariskola.at/event-details/magyarnyelv-schwedenplatz-1'
+
+          # Canonical normalized program data.
+          p=Path('programs.json')
+          doc=json.loads(p.read_text(encoding='utf-8'))
+          prog=next(x for x in doc['programs'] if x['id']=='schweden-1')
+          prog['teacher']=BOTH
+          prog['teacherProfileUrls']=[
+              'https://tanarok.magyariskola.at/#kiss-agnes', PROFILE
+          ]
+          prog['teacherRelationship']='Kiss Ágnes és Deákné Juhász Éva váltótársak; Deákné Juhász Éva az 1-es csoportban kapcsolódik a foglalkozásokhoz.'
+          p.write_text(json.dumps(doc,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+
+          # Runtime registry used by the selector. Change only the schweden-1 object.
+          p=Path('data.js'); s=p.read_text(encoding='utf-8')
+          marker="id:'schweden-1'" if "id:'schweden-1'" in s else 'id:"schweden-1"'
+          pos=s.find(marker)
+          assert pos!=-1, 'schweden-1 missing from data.js'
+          nextpos=s.find("id:'schweden-2'",pos)
+          if nextpos==-1: nextpos=s.find('id:"schweden-2"',pos)
+          assert nextpos!=-1, 'schweden-2 marker missing from data.js'
+          block=s[pos:nextpos]
+          block2,n=re.subn(r"teacher\s*:\s*(['\"])Kiss Ágnes\1", "teacher:'Kiss Ágnes és Deákné Juhász Éva'", block, count=1)
+          assert n==1, 'teacher field for schweden-1 not found in data.js'
+          s=s[:pos]+block2+s[nextpos:]
+          p.write_text(s,encoding='utf-8')
+
+          # Canonical profile list used for teacher links/audits.
+          p=Path('teacher-profiles.json'); tdoc=json.loads(p.read_text(encoding='utf-8'))
+          arr=tdoc if isinstance(tdoc,list) else tdoc.get('profiles',tdoc.get('teachers'))
+          assert isinstance(arr,list)
+          if not any(x.get('url')==PROFILE for x in arr): arr.append({'name':NAME,'url':PROFILE})
+          p.write_text(json.dumps(tdoc,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+
+          # Hungarian-language education snapshot: keep Kiss as primary backwards-compatible field,
+          # add explicit multi-teacher relation and a lead-teacher record for Eva.
+          p=Path('hungarian-language-education-snapshot.json'); h=json.loads(p.read_text(encoding='utf-8'))
+          leads=h.get('leadTeachers',[])
+          if not any(x.get('profile')==PROFILE for x in leads):
+              leads.append({'name':NAME,'profile':PROFILE,'role':'Ének-zene tanár · tanító · hangszeres pedagógus','groups':['schweden-1'],'relationship':'Kiss Ágnes váltótársa a Schwedenplatz 1-es csoportban'})
+          g=next(x for x in h['groups'] if x['id']=='schweden-1')
+          g['teachers']=['https://tanarok.magyariskola.at/#kiss-agnes',PROFILE]
+          g['teacherNames']=['Kiss Ágnes',NAME]
+          g['teacherRelationship']='váltótársak'
+          p.write_text(json.dumps(h,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+
+          # Newsletter / visible teacher-link runtime mapping.
+          p=Path('hirlevel/index.html'); hs=p.read_text(encoding='utf-8')
+          old='"schweden-1":[[\'Kiss Ágnes\',\'kiss-agnes\']]'
+          new='"schweden-1":[[\'Kiss Ágnes\',\'kiss-agnes\'],[\'Deákné Juhász Éva\',\'deakne-juhasz-eva\']]'
+          assert old in hs or new in hs, 'schweden-1 teacher mapping missing from hirlevel'
+          hs=hs.replace(old,new,1)
+          p.write_text(hs,encoding='utf-8')
+
+          # Teach the semantic builder the canonical profile slug.
+          p=Path('scripts/build-program-knowledge.mjs'); bs=p.read_text(encoding='utf-8')
+          needle="'kiss agnes':'kiss-agnes'"
+          insert="'kiss agnes':'kiss-agnes','deakne juhasz eva':'deakne-juhasz-eva'"
+          assert needle in bs or "'deakne juhasz eva':'deakne-juhasz-eva'" in bs
+          if "'deakne juhasz eva':'deakne-juhasz-eva'" not in bs: bs=bs.replace(needle,insert,1)
+          p.write_text(bs,encoding='utf-8')
+
+          # Relationship audit: 26 profiles and an explicit contract for Schwedenplatz 1.
+          p=Path('scripts/audit-teacher-program-links.mjs'); aus=p.read_text(encoding='utf-8')
+          contract="  {match:{url:'https://www.magyariskola.at/event-details/magyarnyelv-schwedenplatz-1'},names:['Kiss Ágnes','Deákné Juhász Éva']},\n"
+          anchor="const relationshipContracts=[\n"
+          if PROGRAM_URL not in aus: aus=aus.replace(anchor,anchor+contract,1)
+          aus=aus.replace('profiles.length!==25','profiles.length!==26').replace('Expected 25 canonical teacher/activity-leader profiles','Expected 26 canonical teacher/activity-leader profiles')
+          p.write_text(aus,encoding='utf-8')
+
+          # LLM-facing narrative.
+          p=Path('llms-full.txt'); ls=p.read_text(encoding='utf-8')
+          old='Schneider Erzsébet and Kiss Ágnes lead current Hungarian-language groups; resolve each person\'s exact qualifications from their own canonical profile rather than transferring credentials between teachers.'
+          new='Schneider Erzsébet and Kiss Ágnes lead current Hungarian-language groups. Deákné Juhász Éva is Kiss Ágnes’s alternating co-teacher in the Schwedenplatz 1 group (schweden-1); resolve each person’s exact qualifications from their own canonical profile rather than transferring credentials between teachers.'
+          if old in ls: ls=ls.replace(old,new,1)
+          elif 'Deákné Juhász Éva is Kiss Ágnes’s alternating co-teacher' not in ls: ls += '\n'+new+'\n'
+          p.write_text(ls,encoding='utf-8')
+
+          # Existing standalone catalog JSON-LD also needs the two instructors.
+          p=Path('program-catalog.jsonld'); cat=json.loads(p.read_text(encoding='utf-8'))
+          graph=cat.get('@graph',[])
+          course=next((x for x in graph if x.get('@id')=='https://programvalaszto.magyariskola.at/#program-schweden-1'),None)
+          assert course is not None, 'schweden-1 missing from program-catalog.jsonld'
+          course['instructor']=[
+              {'@type':'Person','@id':'https://tanarok.magyariskola.at/#kiss-agnes','name':'Kiss Ágnes'},
+              {'@type':'Person','@id':PROFILE,'name':NAME}
+          ]
+          p.write_text(json.dumps(cat,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          PY
+
+      - name: Rebuild semantic program knowledge
+        run: node scripts/build-program-knowledge.mjs
+
+      - name: Rebuild and validate teacher-program relationships
+        run: node scripts/audit-teacher-program-links.mjs
+
+      - name: Validate matching and copy contracts
+        run: |
+          node scripts/validate-matching.mjs
+          node scripts/validate-copy.mjs
+
+      - name: Assert Schwedenplatz 1 co-teacher integration
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const programs=JSON.parse(fs.readFileSync('programs.json','utf8')).programs;
+          const p=programs.find(x=>x.id==='schweden-1');
+          if(!p||!p.teacher.includes('Kiss Ágnes')||!p.teacher.includes('Deákné Juhász Éva')) throw new Error('programs.json teacher relation missing');
+          const k=JSON.parse(fs.readFileSync('program-knowledge.json','utf8')).programs.find(x=>x.id==='schweden-1');
+          const urls=k?.semantic?.teacherProfileUrls||[];
+          if(!urls.includes('https://tanarok.magyariskola.at/#kiss-agnes')||!urls.includes('https://tanarok.magyariskola.at/#deakne-juhasz-eva')) throw new Error('machine teacher links missing');
+          const audit=JSON.parse(fs.readFileSync('teacher-program-audit.json','utf8'));
+          const eva=audit.teachers.find(x=>x.name==='Deákné Juhász Éva');
+          if(!eva?.programs?.some(x=>x.id==='schweden-1')) throw new Error('teacher-program audit relation missing');
+          console.log('PASS: Schwedenplatz 1 = Kiss Ágnes + Deákné Juhász Éva, both canonical profile links present.');
+          NODE
+
+      - name: Commit synchronized program relationship
+        run: |
+          git config user.name "BMI Program Sync Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data.js programs.json teacher-profiles.json hungarian-language-education-snapshot.json hirlevel/index.html scripts/build-program-knowledge.mjs scripts/audit-teacher-program-links.mjs llms-full.txt program-catalog.jsonld program-knowledge.json program-knowledge.jsonld teacher-program-audit.json
+          if git diff --cached --quiet; then
+            echo "No changes needed"
+          else
+            git commit -m "Add Deakne Juhasz Eva as Schwedenplatz 1 co-teacher"
+            git push
+          fi
