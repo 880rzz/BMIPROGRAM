@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-02T12:47:40.002Z",
+  "generatedAt": "2026-09-11T17:39:19.519Z",
   "runtimeProgramCount": 28,
-  "teacherProfileCount": 25,
-  "explicitRelationshipContracts": 15,
+  "teacherProfileCount": 26,
+  "explicitRelationshipContracts": 16,
   "sourcePolicyNote": "External registration/canonical program pages remain authoritative where configured; Wix relationship links are used here only to validate person-program connections.",
   "problems": [],
   "teachers": [
@@ -391,6 +391,19 @@
           "url": "https://zenebona.magyariskola.at",
           "sourceType": "saját programoldal 2026/27",
           "relationship": "bmi-partner"
+        }
+      ]
+    },
+    {
+      "name": "Deákné Juhász Éva",
+      "url": "https://tanarok.magyariskola.at/#deakne-juhasz-eva",
+      "programs": [
+        {
+          "id": "schweden-1",
+          "name": "Magyar nyelv tanítás | Schwedenplatz | 1-es csoport",
+          "url": "https://www.magyariskola.at/event-details/magyarnyelv-schwedenplatz-1",
+          "sourceType": "Wix Events 2026/27",
+          "relationship": "bmi"
         }
       ]
     }

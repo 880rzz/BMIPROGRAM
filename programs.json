@@ -578,7 +578,7 @@
       "pace": "rendszeres",
       "when": "Minden szombaton 10:00–12:00",
       "location": "Schwedenplatz 2/8., 1010 Wien",
-      "teacher": "Kiss Ágnes",
+      "teacher": "Kiss Ágnes és Deákné Juhász Éva",
       "fee": "180 € / félév",
       "firstDate": "2026. szeptember 19.",
       "trial": "Van lehetőség próbaalkalomra.",
@@ -622,7 +622,12 @@
         "2027-06-19",
         "2027-06-26"
       ],
-      "primaryCategory6": "nyelv"
+      "primaryCategory6": "nyelv",
+      "teacherProfileUrls": [
+        "https://tanarok.magyariskola.at/#kiss-agnes",
+        "https://tanarok.magyariskola.at/#deakne-juhasz-eva"
+      ],
+      "teacherRelationship": "Kiss Ágnes és Deákné Juhász Éva váltótársak; Deákné Juhász Éva az 1-es csoportban kapcsolódik a foglalkozásokhoz."
     },
     {
       "id": "schweden-2",

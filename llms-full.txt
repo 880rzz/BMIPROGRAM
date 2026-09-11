@@ -118,7 +118,7 @@ Program-side resolver: https://programvalaszto.magyariskola.at/teacher-profiles.
 
 The current canonical teacher/activity-leader knowledge layer contains 25 public professional profiles. Use it to resolve who a person is, their public professional background, achievements/experience, teaching or facilitation philosophy and current linked programmes. Do not invent qualifications or achievements and do not infer employment.
 
-For Hungarian-language education, Makfalvi Rita is represented in current programme data as an óvodapedagógus, tanító, nyelv- és beszédfejlesztő pedagógus. Schneider Erzsébet and Kiss Ágnes lead current Hungarian-language groups; resolve each person's exact qualifications from their own canonical profile rather than transferring credentials between teachers.
+For Hungarian-language education, Makfalvi Rita is represented in current programme data as an óvodapedagógus, tanító, nyelv- és beszédfejlesztő pedagógus. Schneider Erzsébet and Kiss Ágnes lead current Hungarian-language groups. Deákné Juhász Éva is Kiss Ágnes’s alternating co-teacher in the Schwedenplatz 1 group (schweden-1); resolve each person’s exact qualifications from their own canonical profile rather than transferring credentials between teachers.
 
 Program schedules, prices, locations and availability remain programme facts, not biography facts.
 

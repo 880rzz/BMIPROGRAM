@@ -749,7 +749,7 @@
       "pace": "rendszeres",
       "when": "Minden szombaton 10:00–12:00",
       "location": "Schwedenplatz 2/8., 1010 Wien",
-      "teacher": "Kiss Ágnes",
+      "teacher": "Kiss Ágnes és Deákné Juhász Éva",
       "fee": "180 € / félév",
       "firstDate": "2026. szeptember 19.",
       "trial": "Van lehetőség próbaalkalomra.",
@@ -823,7 +823,8 @@
           "10–14"
         ],
         "teacherProfileUrls": [
-          "https://tanarok.magyariskola.at/#kiss-agnes"
+          "https://tanarok.magyariskola.at/#kiss-agnes",
+          "https://tanarok.magyariskola.at/#deakne-juhasz-eva"
         ],
         "canonicalScheduleSource": "https://www.magyariskola.at/event-details/magyarnyelv-schwedenplatz-1",
         "normalizedRecommendationSource": "https://programvalaszto.magyariskola.at/program-knowledge.json"

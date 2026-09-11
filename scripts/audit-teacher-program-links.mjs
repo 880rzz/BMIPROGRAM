@@ -12,6 +12,7 @@ if(!cfg||!Array.isArray(cfg.programs)) throw new Error('BMI_FINDER programs miss
 // This validates person↔program relationships only. It does NOT make Wix the canonical
 // schedule/content source for externally registered programs.
 const relationshipContracts=[
+  {match:{url:'https://www.magyariskola.at/event-details/magyarnyelv-schwedenplatz-1'},names:['Kiss Ágnes','Deákné Juhász Éva']},
   {match:{url:'https://www.magyariskola.at/event-details/alapozoterapia-2026'},names:['Horányi Bori']},
   {match:{url:'https://www.magyariskola.at/event-details/becscraft-2026'},names:['Korchma Zsombor']},
   {match:{url:'https://www.magyariskola.at/event-details/ovoda-baden-2026'},names:['Telenkó Éva','Makfalvi Rita']},
@@ -54,7 +55,7 @@ else {
 
 const profileDoc=JSON.parse(fs.readFileSync('teacher-profiles.json','utf8'));
 const profiles=Array.isArray(profileDoc)?profileDoc:(profileDoc.profiles||profileDoc.teachers||[]);
-if(profiles.length!==25) problems.push(`Expected 25 canonical teacher/activity-leader profiles, got ${profiles.length}`);
+if(profiles.length!==26) problems.push(`Expected 26 canonical teacher/activity-leader profiles, got ${profiles.length}`);
 
 function aliasesFor(profile){
   const base=profile.name;

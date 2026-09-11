@@ -460,7 +460,19 @@
           "name": "Kiss Ágnes"
         }
       },
-      "keywords": "nyelv, nyelv, magyar-nyelv, kozosseg-identitas"
+      "keywords": "nyelv, nyelv, magyar-nyelv, kozosseg-identitas",
+      "instructor": [
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#kiss-agnes",
+          "name": "Kiss Ágnes"
+        },
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#deakne-juhasz-eva",
+          "name": "Deákné Juhász Éva"
+        }
+      ]
     },
     {
       "@type": "Course",

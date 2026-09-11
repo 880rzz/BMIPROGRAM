@@ -31,19 +31,36 @@
       "name": "Kiss Ágnes",
       "profile": "https://tanarok.magyariskola.at/#kiss-agnes",
       "role": "Tanító · iskolaigazgató · magyartanár",
-      "groups": ["schweden-1", "schweden-2"]
+      "groups": [
+        "schweden-1",
+        "schweden-2"
+      ]
     },
     {
       "name": "Schneider Erzsébet",
       "profile": "https://tanarok.magyariskola.at/#schneider-erzsebet",
       "role": "Tanító · gyógypedagógus · magyartanár",
-      "groups": ["aspern", "seestadt"]
+      "groups": [
+        "aspern",
+        "seestadt"
+      ]
     },
     {
       "name": "Makfalvi Rita",
       "profile": "https://tanarok.magyariskola.at/#makfalvi-rita",
       "role": "Óvodapedagógus · tanító · nyelv- és beszédfejlesztő pedagógus",
-      "groups": ["iskola-baden"]
+      "groups": [
+        "iskola-baden"
+      ]
+    },
+    {
+      "name": "Deákné Juhász Éva",
+      "profile": "https://tanarok.magyariskola.at/#deakne-juhasz-eva",
+      "role": "Ének-zene tanár · tanító · hangszeres pedagógus",
+      "groups": [
+        "schweden-1"
+      ],
+      "relationship": "Kiss Ágnes váltótársa a Schwedenplatz 1-es csoportban"
     }
   ],
   "groups": [
@@ -53,7 +70,16 @@
       "age": "6–10",
       "location": "Wien 1 / Schwedenplatz",
       "teacher": "https://tanarok.magyariskola.at/#kiss-agnes",
-      "registrationSource": "https://www.magyariskola.at/event-details/magyarnyelv-schwedenplatz-1"
+      "registrationSource": "https://www.magyariskola.at/event-details/magyarnyelv-schwedenplatz-1",
+      "teachers": [
+        "https://tanarok.magyariskola.at/#kiss-agnes",
+        "https://tanarok.magyariskola.at/#deakne-juhasz-eva"
+      ],
+      "teacherNames": [
+        "Kiss Ágnes",
+        "Deákné Juhász Éva"
+      ],
+      "teacherRelationship": "váltótársak"
     },
     {
       "id": "schweden-2",

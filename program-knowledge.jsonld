@@ -651,6 +651,10 @@
         {
           "@type": "Person",
           "@id": "https://tanarok.magyariskola.at/#kiss-agnes"
+        },
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#deakne-juhasz-eva"
         }
       ]
     },
