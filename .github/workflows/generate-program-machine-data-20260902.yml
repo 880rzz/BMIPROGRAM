@@ -67,3 +67,5 @@ jobs:
           git diff --cached --quiet && exit 0
           git commit -m "Synchronize complete BMI relationship graph"
           git push
+
+# 2026-09-17: retrigger machine-data regeneration after Alapozo canonical schedule correction.
