@@ -455,24 +455,18 @@
           "@type": "Place",
           "name": "Schwedenplatz 2/8., 1010 Wien"
         },
-        "instructor": {
-          "@type": "Person",
-          "name": "Kiss Ágnes"
-        }
+        "instructor": [
+          {
+            "@type": "Person",
+            "name": "Kiss Ágnes"
+          },
+          {
+            "@type": "Person",
+            "name": "Deákné Juhász Éva"
+          }
+        ]
       },
-      "keywords": "nyelv, nyelv, magyar-nyelv, kozosseg-identitas",
-      "instructor": [
-        {
-          "@type": "Person",
-          "@id": "https://tanarok.magyariskola.at/#kiss-agnes",
-          "name": "Kiss Ágnes"
-        },
-        {
-          "@type": "Person",
-          "@id": "https://tanarok.magyariskola.at/#deakne-juhasz-eva",
-          "name": "Deákné Juhász Éva"
-        }
-      ]
+      "keywords": "nyelv, nyelv, magyar-nyelv, kozosseg-identitas"
     },
     {
       "@type": "Course",
@@ -525,7 +519,7 @@
         "@type": "CourseInstance",
         "@id": "https://programvalaszto.magyariskola.at/#instance-alapozo",
         "name": "Alapozó Terápia | Schwedenplatz – 2026/27",
-        "description": "Kedden és csütörtökön 13:30–15:00 · Schwedenplatz 2., 1010 Wien · 270 € / 9 alkalmas bérlet (8 gyermekfoglalkozás + 1 szülőkonzultáció) · Első alkalom: 2026. szeptember 15.",
+        "description": "Keddenként 13:30-tól · Schwedenplatz 2., 1010 Wien · 35 € / alkalom; 140 € / hó · Első alkalom: 2026. szeptember 15.",
         "courseMode": "onsite",
         "location": {
           "@type": "Place",
