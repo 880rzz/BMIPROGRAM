@@ -615,7 +615,7 @@
         "@type": "CourseInstance",
         "@id": "https://programvalaszto.magyariskola.at/#instance-becscraft",
         "name": "BÉCS-CRAFT Workshop | Schwedenplatz – 2026/27",
-        "description": "Hétfőnként 16:30–17:30 + havi helyszíni bejárás · Bécsi Magyar Iskola, Schwedenplatz 2. Top 8. · 50 € / 5 alkalom / hó · Első alkalom: 2026. szeptember 21.",
+        "description": "Hétfőnként 16:30–17:30 + havi helyszíni bejárás · Bécsi Magyar Iskola, Schwedenplatz 2. Top 8. · 50 € / 5 alkalom / hó · Első alkalom: 2026. október 5.",
         "courseMode": "onsite",
         "location": {
           "@type": "Place",
