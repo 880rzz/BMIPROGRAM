@@ -1,0 +1,53 @@
+name: Patch Alapozo schedule source
+on:
+  push:
+    branches:
+      - fix/alapozo-schedule-2026-09-17
+    paths:
+      - '.github/workflows/patch-alapozo-20260917.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch canonical Alapozo source
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('data.js')
+          s=p.read_text(encoding='utf-8')
+          lines=s.splitlines()
+          hits=[i for i,line in enumerate(lines) if '{id:"alapozo"' in line]
+          if len(hits)!=1:
+              raise SystemExit(f'Expected exactly one alapozo record, found {len(hits)}')
+          i=hits[0]
+          line=lines[i]
+          replacements={
+              'weekdays:["kedd","csutortok"]':'weekdays:["kedd"]',
+              'when:"Kedden és csütörtökön 13:30–15:00"':'when:"Keddenként 13:30-tól"',
+              'fee:"270 € / 9 alkalmas bérlet (8 gyermekfoglalkozás + 1 szülőkonzultáció)"':'fee:"35 € / alkalom; 140 € / hó"'
+          }
+          for old,new in replacements.items():
+              if old not in line:
+                  raise SystemExit(f'Expected source fragment missing: {old}')
+              line=line.replace(old,new,1)
+          lines[i]=line
+          out='\n'.join(lines)+'\n'
+          p.write_text(out,encoding='utf-8')
+          verify=p.read_text(encoding='utf-8')
+          alapozo=[x for x in verify.splitlines() if '{id:"alapozo"' in x][0]
+          required=['weekdays:["kedd"]','when:"Keddenként 13:30-tól"','fee:"35 € / alkalom; 140 € / hó"']
+          forbidden=['weekdays:["kedd","csutortok"]','Kedden és csütörtökön 13:30–15:00','270 € / 9 alkalmas bérlet']
+          if not all(x in alapozo for x in required) or any(x in alapozo for x in forbidden):
+              raise SystemExit('Alapozo source verification failed')
+          PY
+      - name: Commit canonical source patch and remove one-off workflow
+        run: |
+          git config user.name "BMI Program Data Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data.js
+          git rm .github/workflows/patch-alapozo-20260917.yml
+          git commit -m "Update Alapozo Tuesday schedule and fees"
+          git push
