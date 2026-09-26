@@ -48,7 +48,7 @@ These rules are release constraints, not optional visual preferences.
 
 ## Privacy and trust
 
-- The public application must not use analytics, tracking pixels, advertising pixels, behavioral telemetry or session recording.
+- Google Analytics 4 may load only after an explicit, page-scoped analytics choice. No analytics request or cookie may occur before acceptance. Advertising pixels, behavioral telemetry beyond standard page views, and session recording remain prohibited.
 - The application must not write user choices, age, address, location or usage data to cookies, `localStorage` or `sessionStorage`.
 - Finder selections and optional location data may exist only in the current page's in-memory JavaScript state and must disappear on reload.
 - No automatic browser request may send address, coordinates, selections or usage information to a third-party origin.
