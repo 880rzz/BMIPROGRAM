@@ -26,4 +26,6 @@
   <url><loc>https://programvalaszto.magyariskola.at/rolunk-authority.json</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://programvalaszto.magyariskola.at/education-evidence.json</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://programvalaszto.magyariskola.at/gdpr-ai-trust.html</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
-  <url><loc>https://programvalaszto.magyariskola.at/de/</loc><lastmod>2026-09-29</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>\n  <url><loc>https://programvalaszto.magyariskola.at/en/</loc><lastmod>2026-09-29</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>\n</urlset>
+  <url><loc>https://programvalaszto.magyariskola.at/de/</loc><lastmod>2026-09-29</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>\n  <url><loc>https://programvalaszto.magyariskola.at/en/</loc><lastmod>2026-09-29</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>\n  <url><loc>https://programvalaszto.magyariskola.at/de/programs.html</loc><lastmod>2026-09-29</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://programvalaszto.magyariskola.at/en/programs.html</loc><lastmod>2026-09-29</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+</urlset>
