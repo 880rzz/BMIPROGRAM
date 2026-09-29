@@ -749,7 +749,7 @@
         "@type": "CourseInstance",
         "@id": "https://programvalaszto.magyariskola.at/#instance-filmes",
         "name": "Filmes Műhely Workshop | Schwedenplatz – 2026/27",
-        "description": "Minden szerdán 15:30–17:00 · Bécsi Magyar Iskola, Schwedenplatz – Nagyterem · 60 € / hó · Első alkalom: 2026. szeptember 23.",
+        "description": "Minden kedden 15:30–17:00 · Bécsi Magyar Iskola, Schwedenplatz – Nagyterem · 60 € / hó · Első alkalom: 2026. szeptember 23.",
         "courseMode": "onsite",
         "location": {
           "@type": "Place",
