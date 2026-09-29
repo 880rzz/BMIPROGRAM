@@ -1,6 +1,9 @@
 (function(){
 'use strict';
-var base='https://tanarok.magyariskola.at/#';
+var dl=(document.documentElement.lang||'hu').toLowerCase();
+var lp=dl.indexOf('de')===0?'de/':(dl.indexOf('en')===0?'en/':'');
+var base='https://tanarok.magyariskola.at/'+lp+'#';
+var ariaSuffix=dl.indexOf('de')===0?' – Pädagog:innenprofil':(dl.indexOf('en')===0?' – teacher profile':' – tanári profil');
 var map={"Bajka Kinga Csengele":"bajka-kinga-csengele","Horányi Bori":"horanyi-bori","Dipl.-Päd. Schneider Erzsébet":"schneider-erzsebet","Schneider Erzsébet":"schneider-erzsebet","Makfalvi Rita":"makfalvi-rita","Fersztl Barnabás":"fersztl-barnabas","Noszkó Niki":"noszko-niki","Kiss Ágnes":"kiss-agnes","Boronkai Gabriella":"boronkai-gabriella","Korchma Zsombor":"korchma-zsombor","Hierholcz Anna":"hierholcz-anna","Pecze Ádám":"pecze-adam","Dr. Trencsényi Klára DLA":"trencsenyi-klara","Trencsényi Klára":"trencsenyi-klara","Falusi Dóra":"falusi-dora","Hupczik Andrea":"hupczik-andrea","Pohl Balázs":"pohl-balazs","Póser-Piroska Ildikó":"poser-piroska-ildiko","Telenkó Éva":"telenko-eva","Varga Bernadette":"varga-bernadette","Veres Tamás":"veres-tamas","Bánhalmi Norbert":"banhalmi-norbert","Balogh Dávid":"balogh-david","Sipos Tibor":"sipos-tibor","Orbán Dalma":"orban-dalma","Egri Mónika":"egri-monika","Mag. Dapin Hajnalka Judit":"dapin-hajnalka-judit","Dapin Hajnalka Judit":"dapin-hajnalka-judit"};
 var aliases=Object.keys(map).sort(function(a,b){return b.length-a.length});
 var skip={A:1,SCRIPT:1,STYLE:1,NOSCRIPT:1,TEXTAREA:1,INPUT:1,OPTION:1,SELECT:1};
@@ -12,7 +15,7 @@ function linkTextNode(node){
   hits.sort(function(a,b){return a.i-b.i||b.n.length-a.n.length});
   var chosen=[],end=-1;hits.forEach(function(h){if(h.i>=end){chosen.push(h);end=h.i+h.n.length;}});
   var frag=document.createDocumentFragment(),pos=0;
-  chosen.forEach(function(h){if(h.i>pos)frag.appendChild(document.createTextNode(text.slice(pos,h.i)));var a=document.createElement('a');a.href=base+map[h.n];a.textContent=h.n;a.className='teacher-profile-link';a.setAttribute('data-teacher-profile-link','');a.setAttribute('aria-label',h.n+' – tanári profil');frag.appendChild(a);pos=h.i+h.n.length;});
+  chosen.forEach(function(h){if(h.i>pos)frag.appendChild(document.createTextNode(text.slice(pos,h.i)));var a=document.createElement('a');a.href=base+map[h.n];a.textContent=h.n;a.className='teacher-profile-link';a.setAttribute('data-teacher-profile-link','');a.setAttribute('aria-label',h.n+ariaSuffix);frag.appendChild(a);pos=h.i+h.n.length;});
   if(pos<text.length)frag.appendChild(document.createTextNode(text.slice(pos)));
   node.parentNode.replaceChild(frag,node);
 }
