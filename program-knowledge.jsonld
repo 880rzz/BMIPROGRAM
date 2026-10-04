@@ -12,7 +12,7 @@
       "@type": "ItemList",
       "@id": "https://programvalaszto.magyariskola.at/#programs",
       "name": "BMI 2026/27 programok",
-      "numberOfItems": 28,
+      "numberOfItems": 29,
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -200,12 +200,19 @@
           "@type": "ListItem",
           "position": 27,
           "item": {
-            "@id": "https://programvalaszto.magyariskola.at/#program-zenebona"
+            "@id": "https://programvalaszto.magyariskola.at/#program-zongoraoktatas"
           }
         },
         {
           "@type": "ListItem",
           "position": 28,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-zenebona"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 29,
           "item": {
             "@id": "https://programvalaszto.magyariskola.at/#program-oromzene"
           }
@@ -1849,6 +1856,68 @@
         {
           "@type": "Person",
           "@id": "https://tanarok.magyariskola.at/#egri-monika"
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-zongoraoktatas",
+      "name": "Zongoraoktatás Kapolcsi-Szabó Leventével | Schwedenplatz",
+      "url": "https://www.magyariskola.at/event-details/zongoraoktatas-schwedenplatz",
+      "description": "Személyre szabott egyéni zongoraoktatás Bécsben 7 éves kortól felnőttkorig, kezdőknek, újrakezdőknek és haladóknak, klasszikus, jazz, pop és rock repertoárral. Szeretnél Bécsben személyre szabott zongoraoktatást, ahol a tananyag nem sablonos, hanem a saját céljaidhoz, zenei ízlésedhez és előzetes tudásodhoz igazodik. Egyéni fejlesztési terv, biztosabb hangszeres alapok, repertoár- és zenei készségfejlődés klasszikus, jazz, pop vagy rock stílusban, türelmes és felszabadult tanulási környezetben.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#school"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 7,
+        "suggestedMaxAge": 99
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Bécsi Magyar Iskola, Schwedenplatz 2, Top 9, kisterem, 1010 Wien"
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "painPoint",
+          "value": "Szeretnél Bécsben személyre szabott zongoraoktatást, ahol a tananyag nem sablonos, hanem a saját céljaidhoz, zenei ízlésedhez és előzetes tudásodhoz igazodik."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "outcome",
+          "value": "Egyéni fejlesztési terv, biztosabb hangszeres alapok, repertoár- és zenei készségfejlődés klasszikus, jazz, pop vagy rock stílusban, türelmes és felszabadult tanulási környezetben."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "rootCauses",
+          "value": "Kevés lehet az olyan biztonságos, vezetett tér, ahol alkotással, történetmeséléssel vagy színpadi munkával lehet önállóan kísérletezni és visszajelzést kapni. | A megszólalás, szereplés, improvizáció vagy társas önkifejezés gyakorlásához támogató, alacsony kockázatú közegre lehet szükség."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "solutionMechanisms",
+          "value": "Aktív alkotás, rajz, kézművesség, film, színház vagy digitális projekt passzív befogadás helyett. | Improvizáció, dráma, közös alkotás és fokozatos színpadi/kommunikációs gyakorlat támogató közegben."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "schedule",
+          "value": "Hétfőn 14:00–16:00 és szerdán 14:30–16:30; egyéni 60 perces időpontok előzetes egyeztetéssel"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "relationship",
+          "value": "bmi"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "primaryCategory6",
+          "value": "alkotas"
+        }
+      ],
+      "instructor": [
+        {
+          "@type": "Person",
+          "@id": "https://tanarok.magyariskola.at/#kapolcsi-szabo-levente"
         }
       ]
     },
