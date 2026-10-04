@@ -32,7 +32,7 @@ assert(zen.includes('https://zenebona.magyariskola.at')&&zen.includes('https://w
 assert(catalog.includes("p.id!=='zenebona'&&overlaps"),'Zenebona must stay out of age browser.');
 assert(!home.includes('Zenebona')&&!agesPage.includes('Zenebona')&&!faqPage.includes('Zenebona'),'Zenebona must not be promoted in home, age browser or FAQ static copy.');
 assert(!llms.includes('## Zenebona')&&!llmsFull.includes('## Zenebona canonical rekord'),'LLM discovery must not feature a dedicated Zenebona promotion section.');
-assert(llms.includes('28 aktuális')&&llmsFull.includes('28 aktuális'),'LLM program count missing.');
+assert(llms.includes('29 aktuális')&&llmsFull.includes('29 aktuális'),'LLM program count missing.');
 const sitemapLastmods=[...sitemap.matchAll(/<lastmod>(\d{4}-\d{2}-\d{2})<\/lastmod>/g)].map(m=>m[1]);
 assert(sitemapLastmods.length>=5,'Sitemap lastmod coverage missing.');
 assert(sitemapLastmods.every(value=>/^\d{4}-\d{2}-\d{2}$/.test(value)),'Sitemap lastmod format invalid.');
