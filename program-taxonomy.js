@@ -31,6 +31,7 @@ var fixed={
  'filmes':'alkotas',
  'fotoklub':'alkotas',
  'rekreacio':'alkotas',
+ 'zongoraoktatas':'alkotas',
 
  'zenebona':'mozgas',
  'vilagfa':'mozgas',
@@ -92,5 +93,5 @@ function apply(){
 }
 
 window.BMI_PROGRAM_TAXONOMY={categories:categories,fixed:fixed,classify:classify,apply:apply,normalizeRelationships:normalizeRelationships};
-if(!apply())document.addEventListener('DOMContentLoaded',apply,{once:true});
+if(!apply()&&typeof document!=='undefined')document.addEventListener('DOMContentLoaded',apply,{once:true});
 })();
