@@ -9,7 +9,7 @@ var categories=[
 ];
 
 /*
- * 2026/27 canonical six-category taxonomy.
+ * 2026/27 canonical six-category taxonomy · 29-program registry.
  * Every current program has an explicit primary category. Do not infer the
  * primary category from teacher biographies or incidental keywords.
  */
