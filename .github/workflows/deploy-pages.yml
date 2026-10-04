@@ -160,7 +160,7 @@ jobs:
           BMIPROGRAM_RELEASE=${release_id}
           GIT_SHA=${GITHUB_SHA}
           SCHOOL_YEAR=2026/2027
-          PROGRAM_COUNT=28
+          PROGRAM_COUNT=29
           SOURCE_POLICY=canonical-current-2026-27-only
           PRIVACY=default-private-explicit-map-routing-consent-no-analytics-no-tracking-no-client-storage
           ROUTING_PRECISION=${precision_status}
@@ -168,7 +168,7 @@ jobs:
           BUILT_AT=${built_at}
           EOF
           cat > _site/version.json <<EOF
-          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":28,"sourcePolicy":"canonical-current-2026-27-only","privacy":"default-private-explicit-map-routing-consent-no-analytics-no-tracking-no-client-storage","routingPrecision":"${precision_status}","recommender":"age-hard-multineed-multiday-multipace-consent-location-routing-three-mode-ranges-google-routes-fallback-real-map-mobile-anchor-spacious-actions-ios-browser-e2e","builtAt":"${built_at}"}
+          {"release":"${release_id}","gitSha":"${GITHUB_SHA}","schoolYear":"2026/2027","programCount":29,"sourcePolicy":"canonical-current-2026-27-only","privacy":"default-private-explicit-map-routing-consent-no-analytics-no-tracking-no-client-storage","routingPrecision":"${precision_status}","recommender":"age-hard-multineed-multiday-multipace-consent-location-routing-three-mode-ranges-google-routes-fallback-real-map-mobile-anchor-spacious-actions-ios-browser-e2e","builtAt":"${built_at}"}
           EOF
           test -f _site/index.html
           test -f _site/app.js
@@ -185,7 +185,7 @@ jobs:
           test -f _site/recommendation-polish.css
           test -f _site/whatsapp-widget.js
           test "$(cat _site/CNAME)" = "programvalaszto.magyariskola.at"
-          grep -Fq 'PROGRAM_COUNT=28' _site/release.txt
+          grep -Fq 'PROGRAM_COUNT=29' _site/release.txt
           grep -Fq 'PRIVACY=default-private-explicit-map-routing-consent-no-analytics-no-tracking-no-client-storage' _site/release.txt
           grep -Fq 'ROUTING_PRECISION=' _site/release.txt
           grep -Fq 'privacy-runtime.js?v=' _site/index.html
@@ -245,7 +245,7 @@ jobs:
             sleep 10
           done
           grep -Fq "GIT_SHA=${expected_sha}" <<<"${release}"
-          grep -Fq 'PROGRAM_COUNT=28' <<<"${release}"
+          grep -Fq 'PROGRAM_COUNT=29' <<<"${release}"
           grep -Fq 'PRIVACY=default-private-explicit-map-routing-consent-no-analytics-no-tracking-no-client-storage' <<<"${release}"
           grep -Fq 'ROUTING_PRECISION=' <<<"${release}"
           home="$(fetch /)"
