@@ -9,7 +9,7 @@ const cfg=ctx.window.BMI_FINDER;
 assert(cfg&&Array.isArray(cfg.programs),'program registry missing');
 if(!cfg||!Array.isArray(cfg.programs))process.exit(1);
 const programs=cfg.programs,byId=id=>programs.find(p=>p.id===id);
-assert(programs.length===28,`expected exactly 28 activities, got ${programs.length}`);
+assert(programs.length===29,`expected exactly 29 activities, got ${programs.length}`);
 assert(new Set(programs.map(p=>p.id)).size===programs.length,'activity IDs must be unique');
 assert(new Set(programs.map(p=>p.url)).size===programs.length,'canonical activity URLs must be unique');
 assert(cfg.sourcePolicy?.schoolYear==='2026/2027','school year must be 2026/2027');
