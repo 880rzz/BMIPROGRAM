@@ -76,7 +76,7 @@ const teacherContracts={
   'kezdo-neptanc':['sipos tibor','orban dalma'],
   cserkeszet:['poser-piroska ildiko'],
   fotoklub:['banhalmi norbert','balogh david'],
-  zongoraoktatas:['kapolcsi szabo levente']
+  zongoraoktatas:['kapolcsi-szabo levente']
 };
 for(const [id,names] of Object.entries(teacherContracts)){
   const p=cfg.programs.find(x=>x.id===id);
