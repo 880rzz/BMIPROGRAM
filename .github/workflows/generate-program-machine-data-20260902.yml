@@ -23,7 +23,7 @@ jobs:
           vm.runInContext(fs.readFileSync('zenebona-program.js','utf8'),ctx,{filename:'zenebona-program.js'});
           vm.runInContext(fs.readFileSync('program-taxonomy.js','utf8'),ctx,{filename:'program-taxonomy.js'});
           const cfg=ctx.window.BMI_FINDER,taxonomy=ctx.window.BMI_PROGRAM_TAXONOMY;
-          if(!cfg||!Array.isArray(cfg.programs)||cfg.programs.length!==28)throw new Error('Expected exact 28-program runtime registry');
+          if(!cfg||!Array.isArray(cfg.programs)||cfg.programs.length!==29)throw new Error('Expected exact 29-program runtime registry');
           if(!taxonomy||!taxonomy.apply||!taxonomy.apply())throw new Error('Six-category taxonomy normalization failed');
           const identity={
             school:{id:'https://www.magyariskola.at/#school',name:'Bécsi Magyar Iskola',alternateName:['BMI','Wiener Ungarische Schule'],founded:1987,anniversaryYear:2027,anniversary:'40. évforduló',url:'https://www.magyariskola.at/'},

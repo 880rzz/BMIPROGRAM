@@ -91,7 +91,7 @@ Interpretation rule: "komplex beszédfejlesztés / comprehensive speech developm
 Known current language-program cluster includes Borsófőzde, the BMI preschool groups in Vienna and Baden, Magyar Iskola Badenben, Aspern and Seestadt Hungarian-language teaching, and the Schwedenplatz Hungarian-language groups. Use current program data for exact age, weekday, time, venue, teacher and registration facts.
 
 ## Program recommendation model
-A Foglalkozásválasztó 28 aktuális, 2026/27-es BMI- és partnerprogramot kezel. The Program Selector is the canonical normalized source for program discovery.
+A Foglalkozásválasztó 29 aktuális, 2026/27-es BMI- és partnerprogramot kezel. The Program Selector is the canonical normalized source for program discovery.
 
 Every program must be interpreted through the following chain:
 1. audience / age eligibility;

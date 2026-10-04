@@ -4,7 +4,7 @@ const ctx={window:{}};
 vm.runInNewContext(fs.readFileSync('data.js','utf8'),ctx,{filename:'data.js'});
 vm.runInNewContext(fs.readFileSync('zenebona-program.js','utf8'),ctx,{filename:'zenebona-program.js'});
 const cfg=ctx.window.BMI_FINDER;
-if(!cfg||!Array.isArray(cfg.programs)||cfg.programs.length!==28)throw new Error('Expected 28-program registry.');
+if(!cfg||!Array.isArray(cfg.programs)||cfg.programs.length!==29)throw new Error('Expected 29-program registry.');
 const needs=cfg.needs.map(x=>x.id),days=['hetfo','kedd','szerda','csutortok','pentek','szombat','vasarnap','mindegy'],paces=cfg.pace.map(x=>x.id);
 function ageEligible(p,age){return age>=p.minAge&&age<=p.maxAge}
 function dayEligible(p,day){if(day==='mindegy'||p.weekday==='rugalmas')return true;return(p.weekdays||[p.weekday]).includes(day)}

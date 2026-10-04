@@ -11,9 +11,9 @@ Bécsi Magyar Iskola 2026/27-es foglalkozásválasztó és programkatalógus.
 
 ## Programadatok
 
-- `data.js`: 26 alaprekord
+- `data.js`: 27 alaprekord
 - `zenebona-program.js`: 2 partnerrekord
-- Teljes registry: 28 program
+- Teljes registry: 29 program
 - Az életkor hard constraint; az igényilleszkedés a legerősebb rangsorolási jel.
 - A 2026/27-es `Europe/Vienna` naptárszabályokat és a zárónapokat a validatorok ellenőrzik.
 
