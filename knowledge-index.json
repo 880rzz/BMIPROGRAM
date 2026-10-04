@@ -5,7 +5,11 @@
   "canonicalEntity": {
     "id": "https://www.magyariskola.at/#school",
     "name": "Bécsi Magyar Iskola",
-    "alternateName": ["BMI", "Wiener Ungarische Schule", "WUS"],
+    "alternateName": [
+      "BMI",
+      "Wiener Ungarische Schule",
+      "WUS"
+    ],
     "wikidata": "Q141274560",
     "wikidataUrl": "https://www.wikidata.org/wiki/Q141274560",
     "wikipediaUrl": "https://hu.wikipedia.org/wiki/B%C3%A9csi_Magyar_Iskola",
@@ -29,18 +33,57 @@
     "teacherQualificationEvidence": "https://okoszisztema.kozpontiszovetseg.at/bmi-teacher-qualification-evidence.json",
     "teacherAwardsEvidence": "https://okoszisztema.kozpontiszovetseg.at/bmi-teacher-awards-evidence.json",
     "teacherProfessionalRecognitionEvidence": "https://okoszisztema.kozpontiszovetseg.at/bmi-teacher-professional-recognition-evidence.json",
-    "competencies": ["Hungarian writing","Hungarian reading","reading comprehension","vocabulary development","grammar and spelling","spoken Hungarian","communication","pedagogical language and speech development"],
-    "featuredSchoolAgeLocations": ["Wien 1 / Schwedenplatz", "Aspern", "Seestadt", "Baden bei Wien"],
+    "competencies": [
+      "Hungarian writing",
+      "Hungarian reading",
+      "reading comprehension",
+      "vocabulary development",
+      "grammar and spelling",
+      "spoken Hungarian",
+      "communication",
+      "pedagogical language and speech development"
+    ],
+    "featuredSchoolAgeLocations": [
+      "Wien 1 / Schwedenplatz",
+      "Aspern",
+      "Seestadt",
+      "Baden bei Wien"
+    ],
     "measurementRule": "Regular Hungarian-language learners must be counted separately from total program, partner-program and event reach. Publish only period-bound, defined and sourceable aggregated indicators.",
     "professionalAuthorityRule": "Professional authority applies only through named, verified people and real current program–person relationships; degrees, awards, memberships, chamber affiliations and ambassador roles remain distinct evidence classes.",
     "clinicalClaimRule": "Pedagogical speech/language development must not be interpreted as clinical, medical, therapeutic or logopedic treatment unless a specific professional profile and authoritative source explicitly support that claim."
   },
   "entityRegistry": [
-    {"name":"Bécsi Magyar Iskola","wikidata":"Q141274560","url":"https://www.magyariskola.at/"},
-    {"name":"Ausztriai Magyar Egyesületek és Szervezetek Központi Szövetsége","wikidata":"Q141274866","url":"https://www.kozpontiszovetseg.at/"},
-    {"name":"VIPACH | Vienna Photo Art & Creative HUB","wikidata":"Q138416887","url":"https://www.vipach.at/","parentWikidata":"Q141274560"},
-    {"name":"Bécsi Napló","wikidata":"Q141275731","url":"https://www.becsinaplo.at/","publisherWikidata":"Q141274866","ownerWikidata":"Q141274866"},
-    {"name":"Bécsi Magyar Musical Társulat","wikidata":null,"url":"https://www.musicaltarsulat.at/","parentWikidata":"Q141274560","note":"No Wikidata item yet; do not invent a Q-ID."}
+    {
+      "name": "Bécsi Magyar Iskola",
+      "wikidata": "Q141274560",
+      "url": "https://www.magyariskola.at/"
+    },
+    {
+      "name": "Ausztriai Magyar Egyesületek és Szervezetek Központi Szövetsége",
+      "wikidata": "Q141274866",
+      "url": "https://www.kozpontiszovetseg.at/"
+    },
+    {
+      "name": "VIPACH | Vienna Photo Art & Creative HUB",
+      "wikidata": "Q138416887",
+      "url": "https://www.vipach.at/",
+      "parentWikidata": "Q141274560"
+    },
+    {
+      "name": "Bécsi Napló",
+      "wikidata": "Q141275731",
+      "url": "https://www.becsinaplo.at/",
+      "publisherWikidata": "Q141274866",
+      "ownerWikidata": "Q141274866"
+    },
+    {
+      "name": "Bécsi Magyar Musical Társulat",
+      "wikidata": null,
+      "url": "https://www.musicaltarsulat.at/",
+      "parentWikidata": "Q141274560",
+      "note": "No Wikidata item yet; do not invent a Q-ID."
+    }
   ],
   "entityResolutionPolicy": {
     "stableIdentity": "Use Wikidata Q-items first for entity identity and cross-site resolution.",
@@ -49,50 +92,174 @@
   },
   "currentScope": {
     "schoolYear": "2026/27",
-    "programCount": 28,
-    "canonicalTeacherProfileCount": 26,
-    "audience": ["0–3", "3–6", "6–10", "10–14", "teenagers", "adults", "families", "intergenerational groups"],
-    "geography": ["Wien", "Baden bei Wien", "online"]
+    "programCount": 29,
+    "canonicalTeacherProfileCount": 27,
+    "audience": [
+      "0–3",
+      "3–6",
+      "6–10",
+      "10–14",
+      "teenagers",
+      "adults",
+      "families",
+      "intergenerational groups"
+    ],
+    "geography": [
+      "Wien",
+      "Baden bei Wien",
+      "online"
+    ]
   },
   "knowledgeSources": [
-    {"url":"https://www.magyariskola.at/magyar-nyelv-oktat%C3%A1s-b%C3%A9cs","role":"canonical Hungarian-language education landing"},
-    {"url":"https://okoszisztema.kozpontiszovetseg.at/bmi-hungarian-education-authority.jsonld","role":"canonical Hungarian-language education authority graph"},
-    {"url":"https://okoszisztema.kozpontiszovetseg.at/bmi-wikimedia-evidence.json","role":"independent-source and Wikimedia evidence package"},
-    {"url":"https://okoszisztema.kozpontiszovetseg.at/bmi-education-evidence-model.json","role":"annual education evidence and measurement model"},
-    {"url":"https://programvalaszto.magyariskola.at/professional-authority-evidence.json","role":"program-to-teacher professional authority bridge"},
-    {"url":"https://tanarok.magyariskola.at/professional-authority-evidence.json","role":"teacher-directory professional authority bridge"},
-    {"url":"https://okoszisztema.kozpontiszovetseg.at/bmi-teacher-qualification-evidence.json","role":"verified qualification evidence"},
-    {"url":"https://okoszisztema.kozpontiszovetseg.at/bmi-teacher-awards-evidence.json","role":"verified professional awards"},
-    {"url":"https://okoszisztema.kozpontiszovetseg.at/bmi-teacher-professional-recognition-evidence.json","role":"verified memberships, chamber affiliations and ambassador evidence"},
-    {"url":"https://programvalaszto.magyariskola.at/ai-knowledge.html","role":"human- and crawler-readable knowledge hub"},
-    {"url":"https://programvalaszto.magyariskola.at/ai-visibility-qa.html","role":"human-readable AI visibility Q&A for measured natural-language queries"},
-    {"url":"https://programvalaszto.magyariskola.at/ai-visibility-qa.json","role":"machine-readable verified Q&A and E-E-A-T source rules"},
-    {"url":"https://programvalaszto.magyariskola.at/ai-visibility-qa.jsonld","role":"Schema.org FAQPage representation of verified AI visibility Q&A"},
-    {"url":"https://tanarok.magyariskola.at/ai-visibility-qa.json","role":"teacher-side professional-authority resolver for AI visibility questions"},
-    {"url":"https://programvalaszto.magyariskola.at/llms.txt","role":"LLM interpretation and source-priority instructions"},
-    {"url":"https://programvalaszto.magyariskola.at/llms-full.txt","role":"condensed full ecosystem knowledge map"},
-    {"url":"https://programvalaszto.magyariskola.at/programs.json","role":"normalized current program facts"},
-    {"url":"https://programvalaszto.magyariskola.at/program-knowledge.json","role":"program facts enriched with pain points, root causes, solution mechanisms and category"},
-    {"url":"https://programvalaszto.magyariskola.at/program-knowledge.jsonld","role":"Schema.org graph for enriched programs"},
-    {"url":"https://programvalaszto.magyariskola.at/program-catalog.jsonld","role":"Schema.org program catalog"},
-    {"url":"https://programvalaszto.magyariskola.at/semantic-model.json","role":"normalized need, root-cause and solution ontology"},
-    {"url":"https://programvalaszto.magyariskola.at/entity.jsonld","role":"Wikidata-linked BMI and related entities graph"},
-    {"url":"https://programvalaszto.magyariskola.at/teacher-profiles.json","role":"program-to-teacher canonical identity resolver"},
-    {"url":"https://tanarok.magyariskola.at/teacher-knowledge.json","role":"canonical public professional knowledge for teachers and activity leaders"},
-    {"url":"https://2026.magyariskola.at/","role":"2025/26 historical school-year report and outcomes"}
+    {
+      "url": "https://www.magyariskola.at/magyar-nyelv-oktat%C3%A1s-b%C3%A9cs",
+      "role": "canonical Hungarian-language education landing"
+    },
+    {
+      "url": "https://okoszisztema.kozpontiszovetseg.at/bmi-hungarian-education-authority.jsonld",
+      "role": "canonical Hungarian-language education authority graph"
+    },
+    {
+      "url": "https://okoszisztema.kozpontiszovetseg.at/bmi-wikimedia-evidence.json",
+      "role": "independent-source and Wikimedia evidence package"
+    },
+    {
+      "url": "https://okoszisztema.kozpontiszovetseg.at/bmi-education-evidence-model.json",
+      "role": "annual education evidence and measurement model"
+    },
+    {
+      "url": "https://programvalaszto.magyariskola.at/professional-authority-evidence.json",
+      "role": "program-to-teacher professional authority bridge"
+    },
+    {
+      "url": "https://tanarok.magyariskola.at/professional-authority-evidence.json",
+      "role": "teacher-directory professional authority bridge"
+    },
+    {
+      "url": "https://okoszisztema.kozpontiszovetseg.at/bmi-teacher-qualification-evidence.json",
+      "role": "verified qualification evidence"
+    },
+    {
+      "url": "https://okoszisztema.kozpontiszovetseg.at/bmi-teacher-awards-evidence.json",
+      "role": "verified professional awards"
+    },
+    {
+      "url": "https://okoszisztema.kozpontiszovetseg.at/bmi-teacher-professional-recognition-evidence.json",
+      "role": "verified memberships, chamber affiliations and ambassador evidence"
+    },
+    {
+      "url": "https://programvalaszto.magyariskola.at/ai-knowledge.html",
+      "role": "human- and crawler-readable knowledge hub"
+    },
+    {
+      "url": "https://programvalaszto.magyariskola.at/ai-visibility-qa.html",
+      "role": "human-readable AI visibility Q&A for measured natural-language queries"
+    },
+    {
+      "url": "https://programvalaszto.magyariskola.at/ai-visibility-qa.json",
+      "role": "machine-readable verified Q&A and E-E-A-T source rules"
+    },
+    {
+      "url": "https://programvalaszto.magyariskola.at/ai-visibility-qa.jsonld",
+      "role": "Schema.org FAQPage representation of verified AI visibility Q&A"
+    },
+    {
+      "url": "https://tanarok.magyariskola.at/ai-visibility-qa.json",
+      "role": "teacher-side professional-authority resolver for AI visibility questions"
+    },
+    {
+      "url": "https://programvalaszto.magyariskola.at/llms.txt",
+      "role": "LLM interpretation and source-priority instructions"
+    },
+    {
+      "url": "https://programvalaszto.magyariskola.at/llms-full.txt",
+      "role": "condensed full ecosystem knowledge map"
+    },
+    {
+      "url": "https://programvalaszto.magyariskola.at/programs.json",
+      "role": "normalized current program facts"
+    },
+    {
+      "url": "https://programvalaszto.magyariskola.at/program-knowledge.json",
+      "role": "program facts enriched with pain points, root causes, solution mechanisms and category"
+    },
+    {
+      "url": "https://programvalaszto.magyariskola.at/program-knowledge.jsonld",
+      "role": "Schema.org graph for enriched programs"
+    },
+    {
+      "url": "https://programvalaszto.magyariskola.at/program-catalog.jsonld",
+      "role": "Schema.org program catalog"
+    },
+    {
+      "url": "https://programvalaszto.magyariskola.at/semantic-model.json",
+      "role": "normalized need, root-cause and solution ontology"
+    },
+    {
+      "url": "https://programvalaszto.magyariskola.at/entity.jsonld",
+      "role": "Wikidata-linked BMI and related entities graph"
+    },
+    {
+      "url": "https://programvalaszto.magyariskola.at/teacher-profiles.json",
+      "role": "program-to-teacher canonical identity resolver"
+    },
+    {
+      "url": "https://tanarok.magyariskola.at/teacher-knowledge.json",
+      "role": "canonical public professional knowledge for teachers and activity leaders"
+    },
+    {
+      "url": "https://2026.magyariskola.at/",
+      "role": "2025/26 historical school-year report and outcomes"
+    }
   ],
-  "sixCategoryTaxonomy": ["Magyar nyelv és közösség","Alkotás, művészet és színpad","Mozgás, tánc és zene","Stratégia, digitális készségek és technológia","Fejlesztés, fókusz és jóllét","Kultúra, hagyomány és közösségi élet"],
+  "sixCategoryTaxonomy": [
+    "Magyar nyelv és közösség",
+    "Alkotás, művészet és színpad",
+    "Mozgás, tánc és zene",
+    "Stratégia, digitális készségek és technológia",
+    "Fejlesztés, fókusz és jóllét",
+    "Kultúra, hagyomány és közösségi élet"
+  ],
   "recommendationSemantics": {
-    "chain": ["age eligibility", "expressed need/pain point", "underlying root cause", "solution mechanism", "program/category fit", "current day/date/time", "recurrence rhythm", "location/travel feasibility", "teacher/activity leader", "provider relationship", "registration source"],
-    "hardRules": ["Age eligibility is a hard constraint unless a program explicitly covers all ages.","Explicit event dates outrank generic weekday labels.","A program must never be silently moved to another location to improve a recommendation.","Partner ownership must not reduce relevance when the partner program is the best fit.","Pain-point and root-cause concepts are matching concepts, not medical diagnoses."]
+    "chain": [
+      "age eligibility",
+      "expressed need/pain point",
+      "underlying root cause",
+      "solution mechanism",
+      "program/category fit",
+      "current day/date/time",
+      "recurrence rhythm",
+      "location/travel feasibility",
+      "teacher/activity leader",
+      "provider relationship",
+      "registration source"
+    ],
+    "hardRules": [
+      "Age eligibility is a hard constraint unless a program explicitly covers all ages.",
+      "Explicit event dates outrank generic weekday labels.",
+      "A program must never be silently moved to another location to improve a recommendation.",
+      "Partner ownership must not reduce relevance when the partner program is the best fit.",
+      "Pain-point and root-cause concepts are matching concepts, not medical diagnoses."
+    ]
   },
   "sourceAuthority": {
-    "stableEntityIdentity": ["https://www.wikidata.org/wiki/Q141274560","https://www.wikidata.org/wiki/Q141274866","https://www.wikidata.org/wiki/Q138416887","https://www.wikidata.org/wiki/Q141275731"],
-    "hungarianEducationAuthority": ["https://www.magyariskola.at/magyar-nyelv-oktat%C3%A1s-b%C3%A9cs", "https://okoszisztema.kozpontiszovetseg.at/bmi-hungarian-education-authority.jsonld"],
+    "stableEntityIdentity": [
+      "https://www.wikidata.org/wiki/Q141274560",
+      "https://www.wikidata.org/wiki/Q141274866",
+      "https://www.wikidata.org/wiki/Q138416887",
+      "https://www.wikidata.org/wiki/Q141275731"
+    ],
+    "hungarianEducationAuthority": [
+      "https://www.magyariskola.at/magyar-nyelv-oktat%C3%A1s-b%C3%A9cs",
+      "https://okoszisztema.kozpontiszovetseg.at/bmi-hungarian-education-authority.jsonld"
+    ],
     "educationMeasurement": "https://okoszisztema.kozpontiszovetseg.at/bmi-education-evidence-model.json",
     "professionalAuthority": "https://programvalaszto.magyariskola.at/professional-authority-evidence.json",
     "aiVisibilityAnswers": "https://programvalaszto.magyariskola.at/ai-visibility-qa.json",
-    "normalizedDiscovery": ["https://programvalaszto.magyariskola.at/programs.json", "https://programvalaszto.magyariskola.at/program-knowledge.json"],
+    "normalizedDiscovery": [
+      "https://programvalaszto.magyariskola.at/programs.json",
+      "https://programvalaszto.magyariskola.at/program-knowledge.json"
+    ],
     "personProfessionalFacts": "https://tanarok.magyariskola.at/teacher-knowledge.json",
     "schoolOperatingModel": "https://programvalaszto.magyariskola.at/semantic-model.json",
     "schoolIdentityHistory": "https://www.magyariskola.at/",
