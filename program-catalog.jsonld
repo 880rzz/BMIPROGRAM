@@ -20,7 +20,7 @@
       "@type": "ItemList",
       "@id": "https://programvalaszto.magyariskola.at/#programs",
       "name": "Bécsi Magyar Iskola 2026/27 programkatalógus",
-      "numberOfItems": 28,
+      "numberOfItems": 29,
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -208,12 +208,19 @@
           "@type": "ListItem",
           "position": 27,
           "item": {
-            "@id": "https://programvalaszto.magyariskola.at/#program-zenebona"
+            "@id": "https://programvalaszto.magyariskola.at/#program-zongoraoktatas"
           }
         },
         {
           "@type": "ListItem",
           "position": 28,
+          "item": {
+            "@id": "https://programvalaszto.magyariskola.at/#program-zenebona"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 29,
           "item": {
             "@id": "https://programvalaszto.magyariskola.at/#program-oromzene"
           }
@@ -1099,6 +1106,38 @@
         }
       },
       "keywords": "alkotas, alkotas, kreativ-alkotas, kozosseg-identitas"
+    },
+    {
+      "@type": "Course",
+      "@id": "https://programvalaszto.magyariskola.at/#program-zongoraoktatas",
+      "identifier": "zongoraoktatas",
+      "name": "Zongoraoktatás Kapolcsi-Szabó Leventével | Schwedenplatz",
+      "url": "https://www.magyariskola.at/event-details/zongoraoktatas-schwedenplatz",
+      "description": "Személyre szabott egyéni zongoraoktatás Bécsben 7 éves kortól felnőttkorig, kezdőknek, újrakezdőknek és haladóknak, klasszikus, jazz, pop és rock repertoárral. Szeretnél Bécsben személyre szabott zongoraoktatást, ahol a tananyag nem sablonos, hanem a saját céljaidhoz, zenei ízlésedhez és előzetes tudásodhoz igazodik. Egyéni fejlesztési terv, biztosabb hangszeres alapok, repertoár- és zenei készségfejlődés klasszikus, jazz, pop vagy rock stílusban, türelmes és felszabadult tanulási környezetben.",
+      "provider": {
+        "@id": "https://www.magyariskola.at/#school"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "learner",
+        "audienceType": "7 éves kortól · gyerekeknek és felnőtteknek"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "@id": "https://programvalaszto.magyariskola.at/#instance-zongoraoktatas",
+        "name": "Zongoraoktatás Kapolcsi-Szabó Leventével | Schwedenplatz – 2026/27",
+        "description": "Hétfőn 14:00–16:00 és szerdán 14:30–16:30; egyéni 60 perces időpontok előzetes egyeztetéssel · Bécsi Magyar Iskola, Schwedenplatz 2, Top 9, kisterem, 1010 Wien · 45 € / 60 perc; 5 alkalmas bérlet 210 €; a bérlet 2 hónapig érvényes · Első alkalom: 2026. október 5.",
+        "courseMode": "onsite",
+        "location": {
+          "@type": "Place",
+          "name": "Bécsi Magyar Iskola, Schwedenplatz 2, Top 9, kisterem, 1010 Wien"
+        },
+        "instructor": {
+          "@type": "Person",
+          "name": "Kapolcsi-Szabó Levente"
+        }
+      },
+      "keywords": "alkotas, alkotas, kreativ-alkotas, onkifejezes-szinpad"
     },
     {
       "@type": "Course",
