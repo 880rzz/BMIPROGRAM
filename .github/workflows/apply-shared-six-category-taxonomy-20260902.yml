@@ -34,10 +34,10 @@ jobs:
           node scripts/build-program-knowledge.mjs
           node - <<'NODE'
           const k=require('./program-knowledge.json');
-          if(k.programs.length!==28) throw new Error('Expected 28 programs');
+          if(k.programs.length!==29) throw new Error('Expected 29 programs');
           const valid=new Set(['nyelv','alkotas','mozgas','logika','jollet','hagyomany']);
           for(const p of k.programs) if(!valid.has(p.primaryCategory6)) throw new Error('Missing/invalid category '+p.id);
-          console.log('OK: 28/28 programs have shared six-category taxonomy');
+          console.log('OK: 29/29 programs have shared six-category taxonomy');
           NODE
       - name: Commit
         run: |
