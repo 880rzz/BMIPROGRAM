@@ -65,7 +65,7 @@
     "teacher": "https://tanarok.magyariskola.at/teacher-knowledge.json",
     "registration": "current Wix Event page or explicit partner canonical page"
   },
-  "programCount": 28,
+  "programCount": 29,
   "programs": [
     {
       "id": "borsofozde",
@@ -2807,6 +2807,77 @@
           "https://tanarok.magyariskola.at/#hupczik-andrea"
         ],
         "canonicalScheduleSource": "https://www.magyariskola.at/event-details/oromzene-2026",
+        "normalizedRecommendationSource": "https://programvalaszto.magyariskola.at/program-knowledge.json"
+      }
+    },
+    {
+      "id": "zongoraoktatas",
+      "name": "Zongoraoktatás Kapolcsi-Szabó Leventével | Schwedenplatz",
+      "minAge": 7,
+      "maxAge": 99,
+      "ageText": "7 éves kortól · gyerekeknek és felnőtteknek",
+      "interests": [
+        "alkotas"
+      ],
+      "needs": [
+        "kreativ-alkotas",
+        "onkifejezes-szinpad"
+      ],
+      "painPoint": "Szeretnél Bécsben személyre szabott zongoraoktatást, ahol a tananyag nem sablonos, hanem a saját céljaidhoz, zenei ízlésedhez és előzetes tudásodhoz igazodik.",
+      "outcome": "Egyéni fejlesztési terv, biztosabb hangszeres alapok, repertoár- és zenei készségfejlődés klasszikus, jazz, pop vagy rock stílusban, türelmes és felszabadult tanulási környezetben.",
+      "day": "hetkoznap",
+      "weekday": "hetfo",
+      "weekdays": [
+        "hetfo",
+        "szerda"
+      ],
+      "pace": "rendszeres",
+      "when": "Hétfőn 14:00–16:00 és szerdán 14:30–16:30; egyéni 60 perces időpontok előzetes egyeztetéssel",
+      "period": "2026/27-es tanév; előre jelzett szünetek: 2026.10.14., 11.02., 11.11., 11.16., 11.18.; téli szünet: 2026.12.19.–2027.01.03.",
+      "location": "Bécsi Magyar Iskola, Schwedenplatz 2, Top 9, kisterem, 1010 Wien",
+      "routeLocation": "Schwedenplatz 2, 1010 Wien, Austria",
+      "language": "Elsősorban magyar; angol nyelven is",
+      "teacher": "Kapolcsi-Szabó Levente",
+      "teacherContact": "+36 30 459 0366 · kapsz.lewee@gmail.com",
+      "teacherBackground": "Jazz-zongorista és zongoratanár; több oktatási intézményben szerzett tanítási tapasztalattal, jelenleg a Bartók Konzervatóriumban is tanít; aktív előadóművész több jazz-formációban.",
+      "fee": "45 € / 60 perc; 5 alkalmas bérlet 210 €; a bérlet 2 hónapig érvényes",
+      "firstDate": "2026. október 5.",
+      "url": "https://www.magyariskola.at/event-details/zongoraoktatas-schwedenplatz",
+      "provider": "Bécsi Magyar Iskola",
+      "relationship": "bmi",
+      "sourceType": "Wix Events 2026/27",
+      "why": "Személyre szabott egyéni zongoraoktatás Bécsben 7 éves kortól felnőttkorig, kezdőknek, újrakezdőknek és haladóknak, klasszikus, jazz, pop és rock repertoárral.",
+      "cancellationPolicy": "A lefoglalt óra legkésőbb 24 órával korábban mondható le vagy módosítható. Későbbi lemondás vagy meg nem jelenés esetén az alkalom felhasználtnak minősül. Ha az óra a tanár miatt marad el, új időpont egyeztethető, és szükség esetén a bérlet érvényessége meghosszabbodik.",
+      "primaryCategory6": "alkotas",
+      "semantic": {
+        "rootCauseIds": [
+          "creative-expression-gap",
+          "confidence-expression-gap"
+        ],
+        "rootCauses": [
+          "A hangszeres zenei fejlődéshez rendszeres, személyre szabott gyakorlás és olyan pedagógiai tér kell, ahol a növendék a saját céljai és zenei érdeklődése mentén haladhat.",
+          "A zenei önkifejezés és az önbizalom fejlődését segíti, ha a tanuló biztonságos, türelmes környezetben próbálkozhat és kap egyéni szakmai visszajelzést."
+        ],
+        "solutionMechanismIds": [
+          "creative-making",
+          "safe-performance-practice",
+          "accessible-entry"
+        ],
+        "solutionMechanisms": [
+          "Irányított, egyéni zenei alkotó- és hangszeres gyakorlat a növendék szintjéhez és érdeklődéséhez igazítva.",
+          "Biztonságos gyakorlási helyzet, amelyben a hibázás, ismétlés és fokozatos önállósodás a tanulási folyamat része.",
+          "Kezdők, újrakezdők és haladók számára is használható belépési pont, előzetes szinthez igazított tanulási tervvel."
+        ],
+        "ageBands": [
+          "6–10",
+          "10–14",
+          "teenagers",
+          "adults"
+        ],
+        "teacherProfileUrls": [
+          "https://tanarok.magyariskola.at/#kapolcsi-szabo-levente"
+        ],
+        "canonicalScheduleSource": "https://www.magyariskola.at/event-details/zongoraoktatas-schwedenplatz",
         "normalizedRecommendationSource": "https://programvalaszto.magyariskola.at/program-knowledge.json"
       }
     }
