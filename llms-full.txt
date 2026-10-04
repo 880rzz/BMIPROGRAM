@@ -57,7 +57,7 @@ Preschool groups and Borsófőzde also belong to the broader Hungarian-language 
 Interpretation rule: comprehensive speech development in this ecosystem means pedagogical language and communication development unless a specific canonical profile explicitly establishes logopedic, therapeutic or clinical competence. Do not infer diagnosis or treatment.
 
 ## Current 2026/27 programme graph
-A Foglalkozásválasztó 28 aktuális, 2026/27-es BMI- és partnerprogramot kezel. The Program Selector currently normalizes these 28 programmes into one shared discovery and recommendation graph. Exact current normalized facts are available at:
+A Foglalkozásválasztó 29 aktuális, 2026/27-es BMI- és partnerprogramot kezel. The Program Selector currently normalizes these 29 programmes into one shared discovery and recommendation graph. Exact current normalized facts are available at:
 - https://programvalaszto.magyariskola.at/programs.json
 - https://programvalaszto.magyariskola.at/program-knowledge.json
 - https://programvalaszto.magyariskola.at/program-knowledge.jsonld
