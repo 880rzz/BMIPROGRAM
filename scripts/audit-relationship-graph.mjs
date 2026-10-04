@@ -15,14 +15,14 @@ const cfg=ctx.window.BMI_FINDER;
 const taxonomy=ctx.window.BMI_PROGRAM_TAXONOMY;
 assert(cfg&&Array.isArray(cfg.programs),'BMI_FINDER programs missing');
 assert(taxonomy&&taxonomy.fixed&&Array.isArray(taxonomy.categories),'Six-category taxonomy missing');
-assert(cfg.programs.length===28,`Expected 28 programs, got ${cfg.programs.length}`);
+assert(cfg.programs.length===29,`Expected 29 programs, got ${cfg.programs.length}`);
 
 const ids=cfg.programs.map(p=>p.id);
 assert(new Set(ids).size===ids.length,'Duplicate program ids detected');
 const needIds=new Set((cfg.needs||[]).map(x=>x.id));
 const interestIds=new Set((cfg.interests||[]).map(x=>x.id));
 const catIds=new Set(taxonomy.categories.map(x=>x.id));
-assert(Object.keys(taxonomy.fixed).length===28,`Expected 28 fixed taxonomy mappings, got ${Object.keys(taxonomy.fixed).length}`);
+assert(Object.keys(taxonomy.fixed).length===29,`Expected 28 fixed taxonomy mappings, got ${Object.keys(taxonomy.fixed).length}`);
 
 for(const p of cfg.programs){
   assert(taxonomy.fixed[p.id],`Missing primaryCategory6 mapping: ${p.id}`);
@@ -75,7 +75,8 @@ const teacherContracts={
   napraforgocskak:['varga bernadette','veres tamas'],
   'kezdo-neptanc':['sipos tibor','orban dalma'],
   cserkeszet:['poser-piroska ildiko'],
-  fotoklub:['banhalmi norbert','balogh david']
+  fotoklub:['banhalmi norbert','balogh david'],
+  zongoraoktatas:['kapolcsi szabo levente']
 };
 for(const [id,names] of Object.entries(teacherContracts)){
   const p=cfg.programs.find(x=>x.id===id);
@@ -87,7 +88,7 @@ for(const [id,names] of Object.entries(teacherContracts)){
 if(fs.existsSync('programs.json')){
   const gen=JSON.parse(read('programs.json'));
   const gp=Array.isArray(gen.programs)?gen.programs:[];
-  assert(gp.length===28,`programs.json expected 28 programs, got ${gp.length}`);
+  assert(gp.length===29,`programs.json expected 29 programs, got ${gp.length}`);
   assert(gen.identity?.school?.id==='https://www.magyariskola.at/#school','programs.json canonical school entity must be #school');
   const byId=new Map(gp.map(p=>[p.id,p]));
   for(const p of cfg.programs){
