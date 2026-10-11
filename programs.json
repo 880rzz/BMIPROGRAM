@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "2026-09-02-v3",
+  "schemaVersion": "2026-10-11-merged-taltosdob",
   "schoolYear": "2026/2027",
   "identity": {
     "school": {
@@ -1338,10 +1338,10 @@
     },
     {
       "id": "vilagfa",
-      "name": "Világfa Sárkányai | Schwedenplatz",
-      "minAge": 6,
-      "maxAge": 14,
-      "ageText": "6–14 év",
+      "name": "Táltos dob és örömzene | Schwedenplatz",
+      "minAge": 3,
+      "maxAge": 99,
+      "ageText": "3 éves kortól minden korosztálynak",
       "interests": [
         "nyelv",
         "mozgas",
@@ -1352,8 +1352,8 @@
         "kozosseg-identitas",
         "mozgas-fejlodes"
       ],
-      "painPoint": "A gyermek számára élő, közösségi formában szeretnéd átadni a magyar néphagyományt, ritmust, történeteket és együtt zenélést.",
-      "outcome": "Közös dobolás, néphagyomány, történetek, ritmusélmény és összetartó gyermekközösség.",
+      "painPoint": "Közös, generációkat összekötő dobolást és örömzenét keresel Bécsben, előképzettség nélkül.",
+      "outcome": "Táltosdob-oktatás és közös örömzene egyetlen kétórás foglalkozásban, gyermekeknek és felnőtteknek.",
       "day": "szombat",
       "weekday": "szombat",
       "weekdays": [
@@ -1361,33 +1361,23 @@
         "vasarnap"
       ],
       "pace": "rugalmas",
-      "when": "Havonta 1 alkalom 16:00–18:00; utána 18:00-tól Közös örömzene",
+      "when": "Következő alkalom: 2026. október 24., 16:00–18:00",
       "location": "Schwedenplatz 2. / Laurenzerberg 5., 1010 Wien",
       "teacher": "Hupczik Andrea",
-      "fee": "70 € / fő / félév; a második félév szintén 70 € / fő",
+      "fee": "15 € / fő / alkalom; családonként (maximum 4 fő) összesen 15 € / alkalom",
       "enrollment": "Bármikor be lehet csatlakozni.",
-      "firstDate": "2026. szeptember 27., vasárnap 16:00",
-      "url": "https://taltosdob.magyariskola.at",
+      "firstDate": "2026. október 24., szombat 16:00–18:00",
+      "url": "https://www.magyariskola.at/event-details/taltos-dob-es-oromzene-schwedenplatz",
       "provider": "Regélő Fehér Táltos Hagyományőrző Egyesület",
       "relationship": "partner",
-      "sourceType": "2026/27 saját programoldal",
-      "why": "6–14 éves gyermek dobcsapat magyar néphagyománnyal, közös dobolással és történetekkel.",
+      "sourceType": "Aktuális Wix Events – egyesített Táltos dob és örömzene",
+      "why": "Egyesített táltosdob-oktatás és örömzene 3 éves kortól mindenkinek, 15 € egyénileg vagy legfeljebb négyfős családnak.",
       "routeLocation": "Schwedenplatz 2, 1010 Wien, Austria",
-      "period": "2026/27-es tanév; alkalmak: 09.27. · 10.24. · 11.28. · 01.16. · 02.13. · 03.13. · 04.17. · 05.22.; évzáró: 06.19. / 06.26., egyeztetés alatt",
+      "period": "Következő megerősített alkalom: 2026. október 24. 16:00–18:00; későbbi időpontok ellenőrizendők",
       "eventDates": [
-        "2026-09-27",
-        "2026-10-24",
-        "2026-11-28",
-        "2027-01-16",
-        "2027-02-13",
-        "2027-03-13",
-        "2027-04-17",
-        "2027-05-22"
+        "2026-10-24"
       ],
-      "tentativeEventDates": [
-        "2027-06-19",
-        "2027-06-26"
-      ],
+      "tentativeEventDates": [],
       "scheduleMode": "irregular",
       "primaryCategory6": "mozgas"
     },
@@ -1858,67 +1848,6 @@
       "relationship": "bmi-partner",
       "sourceType": "saját programoldal 2026/27",
       "why": "Magyar nyelvű zenés szülő–gyermek foglalkozás 0–3 éveseknek énekléssel, mondókákkal, mozgással, ritmikus játékokkal és hangszeres felfedezéssel Hietzingben.",
-      "primaryCategory6": "mozgas"
-    },
-    {
-      "id": "oromzene",
-      "name": "Együtt dobban Bécs – Közös örömzene | Schwedenplatz",
-      "minAge": 0,
-      "maxAge": 99,
-      "ageText": "Minden korosztály – kicsik és nagyok",
-      "interests": [
-        "nyelv",
-        "mozgas"
-      ],
-      "needs": [
-        "kozosseg-identitas",
-        "tanc-hagyomany",
-        "mozgas-fejlodes"
-      ],
-      "painPoint": "Olyan bécsi magyar közösségi programot keresel, ahol gyermekek, fiatalok, szülők és felnőttek együtt kapcsolódhatnak, és a zenéléshez nem kell előképzettség.",
-      "outcome": "Közös dobolás, éneklés, magyar dallamok, generációkat összekötő közösségi élmény és felszabadult örömzenélés teljesítménykényszer nélkül.",
-      "day": "szombat",
-      "weekday": "szombat",
-      "weekdays": [
-        "szombat",
-        "vasarnap"
-      ],
-      "pace": "rugalmas",
-      "when": "Minden Világfa Sárkányai / Táltos dob napon 18:00-tól",
-      "period": "2026/27-es tanév; alkalmak: 2026.09.27.; 2026.10.24.; 2026.11.28.; 2027.01.16.; 2027.02.13.; 2027.03.13.; 2027.04.17.; 2027.05.22.; évzáró: 2027.06.19. vagy 06.26., egyeztetés alatt",
-      "eventDates": [
-        "2026-09-27",
-        "2026-10-24",
-        "2026-11-28",
-        "2027-01-16",
-        "2027-02-13",
-        "2027-03-13",
-        "2027-04-17",
-        "2027-05-22"
-      ],
-      "tentativeEventDates": [
-        "2027-06-19",
-        "2027-06-26"
-      ],
-      "location": "Bécsi Magyar Iskola, Schwedenplatz 2. / Laurenzerberg 5., 1010 Wien",
-      "routeLocation": "Schwedenplatz 2, 1010 Wien, Austria",
-      "language": "Magyar",
-      "teacher": "Hupczik Andrea",
-      "teacherContact": "+43 670 6539011 · taltosdob@gmail.com",
-      "teacherBackground": "Informatikatanár és hagyományőrző közösségi szervező; az Együtt dobban Bécs / Közös örömzene foglalkozásvezetője.",
-      "fee": "5 € / fő; a közvetlenül előtte zajló gyermek dobos foglalkozás résztvevőinek ingyenes",
-      "capacity": "10–30 fő",
-      "duration": "1,5 óra",
-      "firstDate": "2026. szeptember 27., vasárnap 18:00",
-      "url": "https://www.magyariskola.at/event-details/oromzene-2026",
-      "provider": "Regélő Fehér Táltos Hagyományőrző Egyesület",
-      "relationship": "bmi-partner",
-      "sourceType": "Wix Events 2026/27 · BMI Partner Program",
-      "why": "Közös dobolás, éneklés és magyar dallamok minden korosztálynak. Havi egy alkalom 18:00-tól; zenei vagy dobos előképzettség nem szükséges, saját hangszer hozható.",
-      "scheduleMode": "irregular",
-      "linkedProgramId": "vilagfa",
-      "scheduleRule": "same-date-as-vilagfa-at-18:00",
-      "permanentWixEvent": "https://www.magyariskola.at/event-details/oromzene-2026",
       "primaryCategory6": "mozgas"
     }
   ]
