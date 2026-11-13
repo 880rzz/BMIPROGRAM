@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "2026-10-11-merged-taltosdob",
+  "schemaVersion": "2026-11-13-events",
   "schoolYear": "2026/2027",
   "identity": {
     "school": {
@@ -1849,6 +1849,86 @@
       "sourceType": "saját programoldal 2026/27",
       "why": "Magyar nyelvű zenés szülő–gyermek foglalkozás 0–3 éveseknek énekléssel, mondókákkal, mozgással, ritmikus játékokkal és hangszeres felfedezéssel Hietzingben.",
       "primaryCategory6": "mozgas"
+    },
+    {
+      "id": "hangolodj-onmagadra-zeneterapia-2026-11-29",
+      "name": "HANGOLÓDJ ÖNMAGADRA! | Zeneterápiás önismereti csoport",
+      "minAge": 18,
+      "maxAge": 99,
+      "ageText": "18+",
+      "interests": [
+        "jollet",
+        "mozgas"
+      ],
+      "needs": [
+        "fokusz-jollet",
+        "kozosseg-identitas"
+      ],
+      "painPoint": "Szeretnél közelebb kerülni önmagadhoz, mélyebben megérteni az érzéseidet és biztonságos közegben dolgozni a belső folyamataiddal.",
+      "outcome": "Önismereti tapasztalatok zenei eszközökkel, aktív és receptív zeneterápiás gyakorlatokkal; előzetes zenei tudás nem szükséges.",
+      "day": "vasarnap",
+      "weekday": "vasarnap",
+      "weekdays": [
+        "vasarnap"
+      ],
+      "pace": "egyszeri",
+      "when": "2026. november 29.",
+      "location": "Bécsi Magyar Iskola, Schwedenplatz 2., 1010 Wien – bejárat Laurenzerberg 5., 1. emelet, 8–9. ajtó",
+      "teacher": "Dapin Hajnalka Judit",
+      "fee": "150 €; BMI-tanároknak 100 €",
+      "firstDate": "2026. november 29.",
+      "url": "https://www.magyariskola.at/event-details/hangolodj-onmagadra",
+      "provider": "Bécsi Magyar Iskola",
+      "relationship": "bmi",
+      "sourceType": "Wix Events 2026/27",
+      "why": "Különleges önismereti utazás zenei eszközökkel, aktív és receptív zeneterápiás módszerekkel.",
+      "routeLocation": "Schwedenplatz 2, 1010 Wien, Austria",
+      "eventDates": [
+        "2026-11-29"
+      ],
+      "image": "https://raw.githubusercontent.com/880rzz/bmihirlevel/main/assets/events/zeneterapia.svg",
+      "primaryCategory6": "jollet"
+    },
+    {
+      "id": "kicsi-svung-narnia-nyomaban-2026-12-06",
+      "name": "Kicsi Svung bemutatja – Narnia Nyomában",
+      "minAge": 8,
+      "maxAge": 13,
+      "ageText": "8–13 év",
+      "interests": [
+        "alkotas",
+        "kulturtortenet"
+      ],
+      "needs": [
+        "onkifejezes-szinpad",
+        "kreativ-alkotas"
+      ],
+      "painPoint": "A gyermek színházi, mesés és közösségi élményen keresztül szeretne magyarul alkotni és szerepelni.",
+      "outcome": "Mesés színpadi élmény, közös játék, kreatív rajzolás és közösségi kapcsolódás Narniában.",
+      "day": "vasarnap",
+      "weekday": "vasarnap",
+      "weekdays": [
+        "vasarnap",
+        "hetfo"
+      ],
+      "pace": "egyszeri",
+      "when": "2026. december 6. 17:00 és december 7. 18:00",
+      "location": "Bécsi Magyar Iskola, Schwedenplatz 2 / Top 8–9, 1010 Wien",
+      "teacher": "Kicsi Svung",
+      "fee": "5 €",
+      "firstDate": "2026. december 6.",
+      "url": "https://www.magyariskola.at/event-details/kicsi-svung-bemutatja-narnia-nyomaban",
+      "provider": "Kicsi Svung / Bécsi Magyar Iskola",
+      "relationship": "partner",
+      "sourceType": "Wix Events 2026/27",
+      "why": "Gyermekeknek szóló mesés színházi program, amelyben a krétarajzok nyomán megnyílik a kapu Narniába.",
+      "routeLocation": "Schwedenplatz 2, 1010 Wien, Austria",
+      "eventDates": [
+        "2026-12-06",
+        "2026-12-07"
+      ],
+      "image": "https://raw.githubusercontent.com/880rzz/bmihirlevel/main/assets/events/narnia-nyomaban.svg",
+      "primaryCategory6": "alkotas"
     }
   ]
 }
