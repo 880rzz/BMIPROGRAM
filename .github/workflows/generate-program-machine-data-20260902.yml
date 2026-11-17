@@ -41,7 +41,10 @@ jobs:
           ];
           const additional=eventIds.map(id=>prior.programs.find(p=>p.id===id));
           if(additional.some(p=>!p))throw new Error('Curated Wix event missing from published program register');
-          const full=[...cfg.programs,...additional];
+          // Keep the official external program URL and its separate Wix event registration URL.
+          const full=[...cfg.programs.map(p=>p.id==='vilagfa'
+            ? {...p,eventUrl:'https://www.magyariskola.at/event-details/taltos-dob-es-oromzene-schwedenplatz'}
+            : p),...additional];
           if(full.length!==31||new Set(full.map(p=>p.id)).size!==31)throw new Error('Program catalog must preserve 29 core plus 2 event entries');
           fs.writeFileSync('programs.json',JSON.stringify({schemaVersion:'2026-09-02-v3',schoolYear:cfg.sourcePolicy?.schoolYear||'2026/2027',identity,categories6:taxonomy.categories,interests:cfg.interests,needs:cfg.needs,programs:full},null,2)+'\n');
           const school='https://www.magyariskola.at/#organization';
