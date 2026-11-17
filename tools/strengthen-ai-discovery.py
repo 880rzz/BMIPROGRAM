@@ -4,7 +4,7 @@ import json
 # Main HTML discovery and entity-ID consistency.
 p = Path('index.html')
 s = p.read_text(encoding='utf-8')
-s = s.replace('https://www.magyariskola.at/#org', 'https://www.magyariskola.at/#school')
+s = s.replace('https://www.magyariskola.at/#org', 'https://www.magyariskola.at/#organization')
 head_marker = '</head>'
 discovery = '''<link rel="alternate" type="text/plain" href="https://programvalaszto.magyariskola.at/llms.txt" title="LLM knowledge instructions">
 <link rel="alternate" type="application/json" href="https://programvalaszto.magyariskola.at/knowledge-index.json" title="BMI machine knowledge index">
