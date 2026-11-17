@@ -89,7 +89,7 @@ if(fs.existsSync('programs.json')){
   const gen=JSON.parse(read('programs.json'));
   const gp=Array.isArray(gen.programs)?gen.programs:[];
   assert(gp.length===29,`programs.json expected 29 programs, got ${gp.length}`);
-  assert(gen.identity?.school?.id==='https://www.magyariskola.at/#school','programs.json canonical school entity must be #school');
+  assert(gen.identity?.school?.id==='https://www.magyariskola.at/#organization','programs.json canonical school entity must be #school');
   const byId=new Map(gp.map(p=>[p.id,p]));
   for(const p of cfg.programs){
     const g=byId.get(p.id);
