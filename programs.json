@@ -1367,7 +1367,7 @@
       "fee": "15 € / fő / alkalom; családonként (maximum 4 fő) összesen 15 € / alkalom",
       "enrollment": "Bármikor be lehet csatlakozni.",
       "firstDate": "2026. november 28., szombat 12:40–14:30",
-      "url": "https://www.magyariskola.at/event-details/taltos-dob-es-oromzene-schwedenplatz",
+      "url": "https://taltosdob.magyariskola.at",
       "provider": "Regélő Fehér Táltos Hagyományőrző Egyesület",
       "relationship": "partner",
       "sourceType": "Aktuális Wix Events – egyesített Táltos dob és örömzene",
@@ -1379,7 +1379,8 @@
       ],
       "tentativeEventDates": [],
       "scheduleMode": "irregular",
-      "primaryCategory6": "mozgas"
+      "primaryCategory6": "mozgas",
+      "eventUrl": "https://www.magyariskola.at/event-details/taltos-dob-es-oromzene-schwedenplatz"
     },
     {
       "id": "napraforgocskak",
