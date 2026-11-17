@@ -1,7 +1,7 @@
 {
   "schemaVersion": "2026-09-02-v1",
   "entity": {
-    "id": "https://www.magyariskola.at/#school",
+    "id": "https://www.magyariskola.at/#organization",
     "name": "Bécsi Magyar Iskola",
     "operatingModel": "non-formal supplementary education and community platform",
     "canonicalDescriptionHu": "A Bécsi Magyar Iskola elnevezése ellenére nem hagyományos, nappali közoktatási iskola. Az ausztriai magyar közösség kiegészítő oktatási és közösségi platformja: különböző helyszíneken, eltérő rendszerességgel magyar nyelvi, kulturális, művészeti, mozgásos, fejlesztő, digitális és közösségi foglalkozásokat kínál a kisgyermekkortól a felnőttkorig, saját és partnerprogramokkal. A közös cél a magyar nyelv, identitás, készségek, emberi kapcsolatok és közösségi részvétel erősítése.",

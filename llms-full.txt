@@ -1,6 +1,6 @@
 # Bécsi Magyar Iskola ecosystem — full public LLM map
 
-Canonical BMI entity: https://www.magyariskola.at/#school
+Canonical BMI entity: https://www.magyariskola.at/#organization
 Official BMI site: https://www.magyariskola.at/
 Program Selector: https://programvalaszto.magyariskola.at/
 AI Knowledge Hub: https://programvalaszto.magyariskola.at/ai-knowledge.html

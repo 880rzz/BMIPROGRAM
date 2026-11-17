@@ -1,14 +1,15 @@
 name: Generate exact machine-readable program catalog
 on:
-  push:
+  pull_request:
     paths:
       - 'data.js'
       - 'zenebona-program.js'
       - 'program-taxonomy.js'
+      - 'scripts/build-program-knowledge.mjs'
       - '.github/workflows/generate-program-machine-data-20260902.yml'
   workflow_dispatch:
 permissions:
-  contents: write
+  contents: read
 jobs:
   generate:
     runs-on: ubuntu-latest
@@ -26,13 +27,27 @@ jobs:
           if(!cfg||!Array.isArray(cfg.programs)||cfg.programs.length!==29)throw new Error('Expected exact 29-program runtime registry');
           if(!taxonomy||!taxonomy.apply||!taxonomy.apply())throw new Error('Six-category taxonomy normalization failed');
           const identity={
-            school:{id:'https://www.magyariskola.at/#school',name:'Bécsi Magyar Iskola',alternateName:['BMI','Wiener Ungarische Schule'],founded:1987,anniversaryYear:2027,anniversary:'40. évforduló',url:'https://www.magyariskola.at/'},
+            school:{id:'https://www.magyariskola.at/#organization',name:'Bécsi Magyar Iskola',alternateName:['BMI','Wiener Ungarische Schule'],founded:1987,anniversaryYear:2027,anniversary:'40. évforduló',url:'https://www.magyariskola.at/'},
             canonicalProgramSelector:'https://programvalaszto.magyariskola.at/',
             canonicalTeacherDirectory:'https://tanarok.magyariskola.at/',
             history:'https://hu.wikipedia.org/wiki/Bécsi_Magyar_Iskola'
           };
-          fs.writeFileSync('programs.json',JSON.stringify({schemaVersion:'2026-09-02-v3',schoolYear:cfg.sourcePolicy?.schoolYear||'2026/2027',identity,categories6:taxonomy.categories,interests:cfg.interests,needs:cfg.needs,programs:cfg.programs},null,2)+'\n');
-          const school='https://www.magyariskola.at/#school';
+          // The canonical runtime contains 29 programs. Two separately verified Wix
+          // events are curated in programs.json; preserve them during regeneration.
+          const prior=JSON.parse(fs.readFileSync('programs.json','utf8'));
+          const eventIds=[
+            'hangolodj-onmagadra-zeneterapia-2026-11-29',
+            'kicsi-svung-narnia-nyomaban-2026-12-06'
+          ];
+          const additional=eventIds.map(id=>prior.programs.find(p=>p.id===id));
+          if(additional.some(p=>!p))throw new Error('Curated Wix event missing from published program register');
+          // Keep the official external program URL and its separate Wix event registration URL.
+          const full=[...cfg.programs.map(p=>p.id==='vilagfa'
+            ? {...p,eventUrl:'https://www.magyariskola.at/event-details/taltos-dob-es-oromzene-schwedenplatz'}
+            : p),...additional];
+          if(full.length!==31||new Set(full.map(p=>p.id)).size!==31)throw new Error('Program catalog must preserve 29 core plus 2 event entries');
+          fs.writeFileSync('programs.json',JSON.stringify({schemaVersion:'2026-09-02-v3',schoolYear:cfg.sourcePolicy?.schoolYear||'2026/2027',identity,categories6:taxonomy.categories,interests:cfg.interests,needs:cfg.needs,programs:full},null,2)+'\n');
+          const school='https://www.magyariskola.at/#organization';
           const graph=[
             {'@type':'EducationalOrganization','@id':school,name:'Bécsi Magyar Iskola',alternateName:['BMI','Wiener Ungarische Schule'],url:'https://www.magyariskola.at/',foundingDate:'1987',description:'A Bécsi Magyar Iskolát 1987-ben alapították Bécsben; 2027-ben ünnepli fennállásának 40. évfordulóját.',sameAs:['https://hu.wikipedia.org/wiki/Bécsi_Magyar_Iskola']},
             {'@type':'ItemList','@id':'https://programvalaszto.magyariskola.at/#programs',name:'Bécsi Magyar Iskola 2026/27 programkatalógus',numberOfItems:cfg.programs.length,itemListElement:cfg.programs.map((p,i)=>({'@type':'ListItem',position:i+1,item:{'@id':'https://programvalaszto.magyariskola.at/#program-'+p.id}}))}
@@ -47,23 +62,8 @@ jobs:
           NODE
           node scripts/build-program-knowledge.mjs
           node scripts/audit-relationship-graph.mjs
-      - name: Normalize canonical school entity in published structured files
+      - name: Check generated schema and disallow the old school ID
         run: |
-          python - <<'PY'
-          from pathlib import Path
-          for name in ['index.html','foglalkozasok.html','korosztalyok.html','gyik.html','entity.jsonld','program-catalog.jsonld','program-knowledge.jsonld','programs.json','program-knowledge.json']:
-              p=Path(name)
-              if p.exists():
-                  s=p.read_text(encoding='utf-8')
-                  n=s.replace('https://www.magyariskola.at/#org','https://www.magyariskola.at/#school')
-                  if n!=s:p.write_text(n,encoding='utf-8')
-          PY
-          ! grep -R --include='*.html' --include='*.json' --include='*.jsonld' -F 'https://www.magyariskola.at/#org' index.html foglalkozasok.html korosztalyok.html gyik.html entity.jsonld program-catalog.jsonld program-knowledge.jsonld programs.json program-knowledge.json
-      - name: Commit generated machine data
-        run: |
-          git config user.name "BMI Program Data Bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add programs.json program-catalog.jsonld program-knowledge.json program-knowledge.jsonld index.html foglalkozasok.html korosztalyok.html gyik.html entity.jsonld
-          git diff --cached --quiet && exit 0
-          git commit -m "Synchronize complete BMI relationship graph"
-          git push
+          node scripts/verify-federation-schema.mjs
+          node scripts/audit-relationship-graph.mjs
+          git diff --stat -- programs.json program-catalog.jsonld program-knowledge.json program-knowledge.jsonld

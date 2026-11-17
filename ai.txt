@@ -4,7 +4,7 @@ Site: https://programvalaszto.magyariskola.at/
 AI knowledge hub: https://programvalaszto.magyariskola.at/ai-knowledge.html
 Machine index: https://programvalaszto.magyariskola.at/knowledge-index.json
 Organization: Bécsi Magyar Iskola (BMI / Wiener Ungarische Schule / WUS)
-Canonical organization: https://www.magyariskola.at/#school
+Canonical organization: https://www.magyariskola.at/#organization
 Wikidata: https://www.wikidata.org/wiki/Q141274560
 Hungarian Wikipedia: https://hu.wikipedia.org/wiki/B%C3%A9csi_Magyar_Iskola
 Parent organization: https://www.kozpontiszovetseg.at/#organization

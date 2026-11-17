@@ -88,21 +88,30 @@ for(const [id,names] of Object.entries(teacherContracts)){
 if(fs.existsSync('programs.json')){
   const gen=JSON.parse(read('programs.json'));
   const gp=Array.isArray(gen.programs)?gen.programs:[];
-  assert(gp.length===29,`programs.json expected 29 programs, got ${gp.length}`);
-  assert(gen.identity?.school?.id==='https://www.magyariskola.at/#school','programs.json canonical school entity must be #school');
+  assert(gp.length===31,`programs.json must preserve 29 runtime programs and 2 verified Wix events, got ${gp.length}`);
+  assert(gen.identity?.school?.id==='https://www.magyariskola.at/#organization','programs.json canonical school entity must be #organization');
   const byId=new Map(gp.map(p=>[p.id,p]));
+  const extraIds = ['hangolodj-onmagadra-zeneterapia-2026-11-29','kicsi-svung-narnia-nyomaban-2026-12-06'];
+  const runtimeIds = new Set(cfg.programs.map(p=>p.id));
+  const extras = gp.filter(p=>!runtimeIds.has(p.id)).map(p=>p.id).sort();
+  assert(JSON.stringify(extras)===JSON.stringify([...extraIds].sort()),'Missing or unexpected event programs in published catalog');
+  assert(new Set(gp.map(p=>p.id)).size===31,'Duplicate program IDs in machine catalog');
   for(const p of cfg.programs){
     const g=byId.get(p.id);
     assert(g,`programs.json missing ${p.id}`);
     assert(g.primaryCategory6===taxonomy.fixed[p.id],`Generated taxonomy drift on ${p.id}`);
     const a=[...(p.needs||[])].sort().join('|'),b=[...(g.needs||[])].sort().join('|');
     assert(a===b,`Generated need-edge drift on ${p.id}: runtime=[${a}] generated=[${b}]`);
-    assert(g.url===p.url,`Generated canonical URL drift on ${p.id}`);
+    assert(g.url === p.url, `Generated canonical URL drift on ${p.id}`);
+    if (p.id === 'vilagfa') {
+      assert(g.eventUrl === 'https://www.magyariskola.at/event-details/taltos-dob-es-oromzene-schwedenplatz',
+        'Világfa Wix registration event URL missing or changed');
+    }
   }
 }
 
 for(const file of ['index.html','foglalkozasok.html','korosztalyok.html','gyik.html','entity.jsonld','program-catalog.jsonld','program-knowledge.jsonld','programs.json','program-knowledge.json']){
-  if(fs.existsSync(file))assert(!read(file).includes('https://www.magyariskola.at/#org'),`Legacy #org entity remains in ${file}`);
+  if(fs.existsSync(file))assert(!/https:\/\/www\.magyariskola\.at\/#org(?!anization)/.test(read(file)),`Legacy #org entity remains in ${file}`);
 }
 
 if(fs.existsSync('teacher-program-audit.json')){

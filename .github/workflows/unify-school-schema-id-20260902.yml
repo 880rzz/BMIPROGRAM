@@ -1,31 +1,16 @@
-name: Unify BMI school schema id 20260902
+name: Legacy BMI schema migration – read-only verification (unify-school-schema-id-20260902)
+# Historical September 2026 workflow rewrote #organization back to the old #school
+# identifier and committed rewritten pages. Disabled as an automatic writer.
 on:
-  push:
-    paths:
-      - '.github/workflows/unify-school-schema-id-20260902.yml'
+  workflow_dispatch:
 permissions:
-  contents: write
+  contents: read
 jobs:
-  patch:
+  verify:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Replace legacy BMI org id with canonical school id
+      - name: Verify canonical graph without modifying tracked sources
         run: |
-          python - <<'PY'
-          from pathlib import Path
-          files=['index.html','foglalkozasok.html','korosztalyok.html','gyik.html','entity.jsonld','program-catalog.jsonld','.github/workflows/generate-program-machine-data-20260902.yml']
-          for name in files:
-              p=Path(name)
-              if not p.exists(): continue
-              s=p.read_text(encoding='utf-8').replace('https://www.magyariskola.at/#org','https://www.magyariskola.at/#school')
-              p.write_text(s,encoding='utf-8')
-          PY
-      - name: Commit
-        run: |
-          git config user.name "BMI Schema Bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add index.html foglalkozasok.html korosztalyok.html gyik.html entity.jsonld program-catalog.jsonld .github/workflows/generate-program-machine-data-20260902.yml
-          git diff --cached --quiet && exit 0
-          git commit -m "Unify BMI school schema id with Wix canonical graph"
-          git push
+          node scripts/audit-relationship-graph.mjs
+          node scripts/verify-federation-schema.mjs

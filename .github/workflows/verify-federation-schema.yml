@@ -1,0 +1,35 @@
+name: Federation schema identity regression
+on:
+  pull_request:
+    paths:
+      - '**/*.html'
+      - '**/*.json'
+      - '**/*.jsonld'
+      - 'scripts/**'
+      - 'tools/**'
+      - 'ai.txt'
+      - 'llms-full.txt'
+      - '.github/workflows/**'
+  push:
+    branches: [main]
+    paths:
+      - '**/*.html'
+      - '**/*.json'
+      - '**/*.jsonld'
+      - 'scripts/**'
+      - 'tools/**'
+      - 'ai.txt'
+      - 'llms-full.txt'
+      - '.github/workflows/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  identity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify canonical BMI ID on all three language paths and machine knowledge
+        run: node scripts/verify-federation-schema.mjs
+      - name: Verify existing program relationship contract
+        run: node scripts/audit-relationship-graph.mjs

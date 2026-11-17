@@ -6,7 +6,7 @@
   "inLanguage": "hu-AT",
   "provider": {
     "@type": "EducationalOrganization",
-    "@id": "https://www.magyariskola.at/#school",
+    "@id": "https://www.magyariskola.at/#organization",
     "name": "Bécsi Magyar Iskola",
     "url": "https://www.magyariskola.at/"
   },

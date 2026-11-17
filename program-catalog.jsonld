@@ -3,7 +3,7 @@
   "@graph": [
     {
       "@type": "EducationalOrganization",
-      "@id": "https://www.magyariskola.at/#school",
+      "@id": "https://www.magyariskola.at/#organization",
       "name": "Bécsi Magyar Iskola",
       "alternateName": [
         "BMI",
@@ -235,7 +235,7 @@
       "url": "https://www.magyariskola.at/event-details/borsofozde-2026",
       "description": "Zenés-mozgásos baba–mama közeg mondókákkal, énekkel és közösségi élménnyel. Kisgyermekkel olyan rendszeres magyar nyelvű közeget keresel, ahol a mondókák, zene és mozgás természetesen része a közös időnek. Életkornak megfelelő magyar nyelvi élmények, közös ritmus, mozgás és első közösségi kapcsolódások.",
       "provider": {
-        "@id": "https://www.magyariskola.at/#school"
+        "@id": "https://www.magyariskola.at/#organization"
       },
       "audience": {
         "@type": "EducationalAudience",
@@ -267,7 +267,7 @@
       "url": "https://www.magyariskola.at/event-details/ovoda-2026",
       "description": "Magyar nyelv, körjáték, mese és alkotás óvodásoknak támogató magyar közösségben. Óvodás gyermekednek kevés a rendszeres magyar kortársközeg, vagy szeretnéd, hogy játék közben is természetesen használja a magyar nyelvet. Magyar beszédhelyzetek, mese, körjáték, alkotás és stabil óvodás közösség.",
       "provider": {
-        "@id": "https://www.magyariskola.at/#school"
+        "@id": "https://www.magyariskola.at/#organization"
       },
       "audience": {
         "@type": "EducationalAudience",
@@ -305,7 +305,7 @@
       "url": "https://www.magyariskola.at/event-details/ovoda-baden-2026",
       "description": "Magyar nyelvű óvodás közösség Badenben játékkal, mesével és kulturális kapcsolódással. Baden környékén keresel óvodás gyermekednek rendszeres magyar nyelvű közösséget, hogy ne csak otthon találkozzon a magyar nyelvvel. Játékos magyar nyelvhasználat, mese, alkotás, mozgás és helyi magyar kortársközeg.",
       "provider": {
-        "@id": "https://www.magyariskola.at/#school"
+        "@id": "https://www.magyariskola.at/#organization"
       },
       "audience": {
         "@type": "EducationalAudience",
@@ -343,7 +343,7 @@
       "url": "https://www.magyariskola.at/event-details/iskolabaden-2026",
       "description": "Játékos, mesés magyar nyelvi foglalkozás 1. és 2. osztályos gyermekeknek Badenben. A gyermek német nyelvű iskolai környezetben tanul, és szeretnéd játékosan erősíteni a magyar szókincsét, beszédét és nyelvi biztonságát. Korosztályhoz illő magyar nyelvi gyakorlás, mesés feladatok és magyar kortárs közeg Badenben.",
       "provider": {
-        "@id": "https://www.magyariskola.at/#school"
+        "@id": "https://www.magyariskola.at/#organization"
       },
       "audience": {
         "@type": "EducationalAudience",
@@ -381,7 +381,7 @@
       "url": "https://www.magyariskola.at/event-details/magyaroktatas-kedd-2026",
       "description": "Kisiskolások magyar nyelvi fejlesztése játékos, családias közegben Aspernben. Kisiskolás gyermekednek rendszeres magyar nyelvi gyakorlásra és magyarul beszélő kortársakra van szüksége Aspern környékén. Szókincs, beszéd, olvasási-írási készségekhez kapcsolódó játékos gyakorlás és magyar közösségi élmény.",
       "provider": {
-        "@id": "https://www.magyariskola.at/#school"
+        "@id": "https://www.magyariskola.at/#organization"
       },
       "audience": {
         "@type": "EducationalAudience",
@@ -413,7 +413,7 @@
       "url": "https://www.magyariskola.at/event-details/magyarnyelv-szerda-2026",
       "description": "Magyar nyelv, játék, vers, ének és dramatizálás kisiskolásoknak Seestadtban. Seestadtban élő kisiskolásnak keresel olyan magyar közeget, ahol rendszeresen beszélhet, játszhat és tanulhat magyarul. Magyar szókincs, beszéd és szövegértés támogatása versekkel, énekkel, dramatizálással és közösségi helyzetekkel.",
       "provider": {
-        "@id": "https://www.magyariskola.at/#school"
+        "@id": "https://www.magyariskola.at/#organization"
       },
       "audience": {
         "@type": "EducationalAudience",
@@ -445,7 +445,7 @@
       "url": "https://www.magyariskola.at/event-details/magyarnyelv-schwedenplatz-1",
       "description": "Magyar nyelv és kultúra 6–10 éveseknek, minden szombaton 10:00–12:00 között. 6–10 éves gyermekednek rendszeres, heti magyar nyelvi közegre van szüksége Bécs központjában. Minden szombati magyar nyelv- és kultúragyakorlás az életkorához illő kortárscsoportban.",
       "provider": {
-        "@id": "https://www.magyariskola.at/#school"
+        "@id": "https://www.magyariskola.at/#organization"
       },
       "audience": {
         "@type": "EducationalAudience",
@@ -483,7 +483,7 @@
       "url": "https://www.magyariskola.at/event-details/magyarnyelv-schwedenplatz-2",
       "description": "Magyar nyelv és kultúra 10–14 éveseknek, kéthetente szombaton 12:00–14:00 között. 10–14 éves gyermekednek vagy fiatalodnak korosztályához illő magyar nyelvi közeg kell, de a heti alkalomnál ritkább ritmus megfelelőbb. Kétheti magyar nyelv- és kultúragyakorlás hasonló korú kortársakkal.",
       "provider": {
-        "@id": "https://www.magyariskola.at/#school"
+        "@id": "https://www.magyariskola.at/#organization"
       },
       "audience": {
         "@type": "EducationalAudience",
@@ -515,7 +515,7 @@
       "url": "https://www.magyariskola.at/event-details/alapozoterapia-2026",
       "description": "Kiscsoportos, mozgásalapú idegrendszeri fejlesztés 5–10 éves gyermekeknek. 5–10 éves gyermekednek strukturált mozgásos támogatást keresel a koordináció, figyelem és feladattartás erősítéséhez. Kiscsoportos, szakember által vezetett mozgásos gyakorlatok és szülőkonzultáció a fejlődési célok támogatására.",
       "provider": {
-        "@id": "https://www.magyariskola.at/#school"
+        "@id": "https://www.magyariskola.at/#organization"
       },
       "audience": {
         "@type": "EducationalAudience",
@@ -547,7 +547,7 @@
       "url": "https://www.magyariskola.at/event-details/rajztabla-2026",
       "description": "Rajzi technika, kompozíció és árnyékolás 10–16 éveseknek, biztos vizuális alapokkal. A gyermek szeret rajzolni, de strukturált segítségre van szüksége a technika, arányok, perspektíva és vizuális gondolkodás fejlődéséhez. Biztosabb rajzi alapok, tudatosabb eszközhasználat, kompozíció, fény-árnyék és perspektíva.",
       "provider": {
-        "@id": "https://www.magyariskola.at/#school"
+        "@id": "https://www.magyariskola.at/#organization"
       },
       "audience": {
         "@type": "EducationalAudience",
@@ -579,7 +579,7 @@
       "url": "https://www.magyariskola.at/event-details/varazsceruza-2026",
       "description": "Elmélyült kreatív alkotóműhely 9–14 éveseknek sokféle anyaggal és technikával. A gyermek szeret alkotni, és olyan nyugodt, magyar nyelvű műhelyt keresel, ahol többféle anyagot és technikát próbálhat ki. Kreatív önállóság, anyagismeret, elmélyült alkotás és közösségi élmény.",
       "provider": {
-        "@id": "https://www.magyariskola.at/#school"
+        "@id": "https://www.magyariskola.at/#organization"
       },
       "audience": {
         "@type": "EducationalAudience",
@@ -611,7 +611,7 @@
       "url": "https://www.magyariskola.at/event-details/becscraft-2026",
       "description": "Minecraft, építészet, történelem és helyszíni mérés egy közös bécsi projektben. A gyermeket a Minecraft és a digitális alkotás motiválja, és ezen keresztül szeretnéd közelebb hozni hozzá Bécs építészetét, történetét és a projektmunkát. Minecraft-alapú közös építés, helyszíni megfigyelés, mérés, történelmi és építészeti ismeretek.",
       "provider": {
-        "@id": "https://www.magyariskola.at/#school"
+        "@id": "https://www.magyariskola.at/#organization"
       },
       "audience": {
         "@type": "EducationalAudience",
@@ -643,7 +643,7 @@
       "url": "https://www.magyariskola.at/event-details/kicsisvung-2026",
       "description": "Színjátszás, improvizáció és magyar nyelvi önkifejezés 8–13 éves gyermekeknek. A gyermek szeretne bátrabban megszólalni, szerepelni vagy történeteket alkotni, és közben természetes magyar beszédhelyzetekre is szüksége van. Önbizalom, improvizáció, színpadi önkifejezés, együttműködés és aktív magyar nyelvhasználat.",
       "provider": {
-        "@id": "https://www.magyariskola.at/#school"
+        "@id": "https://www.magyariskola.at/#organization"
       },
       "audience": {
         "@type": "EducationalAudience",
@@ -675,7 +675,7 @@
       "url": "https://www.magyariskola.at/event-details/mammut-2026",
       "description": "Ének, tánc és színpadi játék saját musical-projektekben, magyar nyelvi közegben. A gyermek szeret énekelni, táncolni vagy szerepelni, és egy összetett színpadi közösségben szeretné kipróbálni magát. Ének, tánc, színpadi jelenlét, együttműködés és közös musical-projekt.",
       "provider": {
-        "@id": "https://www.magyariskola.at/#school"
+        "@id": "https://www.magyariskola.at/#organization"
       },
       "audience": {
         "@type": "EducationalAudience",
@@ -713,7 +713,7 @@
       "url": "https://www.magyariskola.at/event-details/gimisvung-2026",
       "description": "Improvizáció, drámaírás és közös színpadi alkotás 14–18 éveseknek magyar nyelven. A kamasz magyarul is szeretne önazonosan kommunikálni, kreatívan megszólalni és hasonló korú magyar fiatalokhoz kapcsolódni. Improvizáció, drámaírás, önkifejezés, közös alkotás és magyar kortársközösség.",
       "provider": {
-        "@id": "https://www.magyariskola.at/#school"
+        "@id": "https://www.magyariskola.at/#organization"
       },
       "audience": {
         "@type": "EducationalAudience",
@@ -745,7 +745,7 @@
       "url": "https://www.magyariskola.at/event-details/filmesmuhely-2026",
       "description": "Forgatókönyv, kamera, hang, rendezés és vágás egy teljes tanéves közös filmprojektben. A fiatal érdeklődik a filmkészítés iránt, de szeretné átlátni és kipróbálni a teljes folyamatot az ötlettől a vágásig, csapatban. Forgatókönyv, kamera, hang, rendezés, vágás és egy közösen elkészített filmprojekt tapasztalata.",
       "provider": {
-        "@id": "https://www.magyariskola.at/#school"
+        "@id": "https://www.magyariskola.at/#organization"
       },
       "audience": {
         "@type": "EducationalAudience",
@@ -777,7 +777,7 @@
       "url": "https://www.magyariskola.at/event-details/sakk-2026",
       "description": "Sakkfeladványok, taktikai megnyitások és játszmák a logika, stratégiai gondolkodás és koncentráció fejlesztésére. Logikai kihívást, stratégiai gondolkodást és koncentrációt fejlesztő, játékos közeget keresel. Sakkfeladványok, megnyitások és játszmák révén tudatosabb tervezés, figyelem és stratégiai gondolkodás.",
       "provider": {
-        "@id": "https://www.magyariskola.at/#school"
+        "@id": "https://www.magyariskola.at/#organization"
       },
       "audience": {
         "@type": "EducationalAudience",
@@ -809,7 +809,7 @@
       "url": "https://www.magyariskola.at/event-details/fecskeklub-2026",
       "description": "Játékos, képekkel és rövid videókkal kísért magyar kultúrtörténeti felfedezés, beszélgetéssel és kreatív alkotással 8–14 éveseknek. A gyermek beszél magyarul, de szeretnéd élményszerűen közelebb hozni hozzá a magyar kultúrát és történelmet, nem tankönyvszerű formában. Kultúrtörténeti felfedezés képekkel, videókkal, beszélgetéssel és kreatív alkotással.",
       "provider": {
-        "@id": "https://www.magyariskola.at/#school"
+        "@id": "https://www.magyariskola.at/#organization"
       },
       "audience": {
         "@type": "EducationalAudience",
@@ -841,7 +841,7 @@
       "url": "https://taltosdob.magyariskola.at",
       "description": "6–14 éves gyermek dobcsapat magyar néphagyománnyal, közös dobolással és történetekkel. A gyermek számára élő, közösségi formában szeretnéd átadni a magyar néphagyományt, ritmust, történeteket és együtt zenélést. Közös dobolás, néphagyomány, történetek, ritmusélmény és összetartó gyermekközösség.",
       "provider": {
-        "@id": "https://www.magyariskola.at/#school"
+        "@id": "https://www.magyariskola.at/#organization"
       },
       "audience": {
         "@type": "EducationalAudience",
@@ -873,7 +873,7 @@
       "url": "https://napraforgok.at/r%C3%B3lunk#napraforgocskak",
       "description": "Magyar gyermeknéptánc, zene és közösség 6–15 éveseknek a Napraforgók vezetésével. A gyermek szeret mozogni és zenére táncolni, miközben magyar közösséghez és népi kultúrához is szeretnéd kapcsolni. Magyar néptánc, ritmus, zenei élmény, mozgáskoordináció és közösségi kötődés.",
       "provider": {
-        "@id": "https://www.magyariskola.at/#school"
+        "@id": "https://www.magyariskola.at/#organization"
       },
       "audience": {
         "@type": "EducationalAudience",
@@ -911,7 +911,7 @@
       "url": "https://cserkesz.at/cserkesz-raj/",
       "description": "Kiscserkész, cserkész és vándor korosztály magyar közösségben, természetben és hagyományőrző programokon. Magyar kortársközösséget, természetközeli programokat, önállósodást és közös élményeket keresel a gyermeknek vagy fiatalnak. Korosztályos cserkészközösség, természetben szerzett tapasztalatok, együttműködés és magyar kulturális kötődés.",
       "provider": {
-        "@id": "https://www.magyariskola.at/#school"
+        "@id": "https://www.magyariskola.at/#organization"
       },
       "audience": {
         "@type": "EducationalAudience",
@@ -943,7 +943,7 @@
       "url": "https://www.magyariskola.at/event-details/fotoklub-2026",
       "description": "Fotográfiai látásmód, alkotás és technika felnőtteknek, művészeti és művészettörténeti vezetéssel. Szeretsz fotózni, de szeretnél tudatosabban látni, technikailag fejlődni és inspiráló alkotói közösséghez kapcsolódni. Fotográfiai látásmód, technikai fejlődés, művészeti kontextus, közös elemzés és alkotói gyakorlat.",
       "provider": {
-        "@id": "https://www.magyariskola.at/#school"
+        "@id": "https://www.magyariskola.at/#organization"
       },
       "audience": {
         "@type": "EducationalAudience",
@@ -981,7 +981,7 @@
       "url": "https://www.magyariskola.at/event-details/fokuszcsoport-2026",
       "description": "Homloklebeny-tréning fókuszhoz, tervezéshez, időgazdálkodáshoz és mentális egyensúlyhoz. Nehezen tartod a fókuszt, szeretnél tudatosabban tervezni, jobban gazdálkodni az időddel vagy kiegyensúlyozottabban szervezni a mindennapokat. Strukturált gyakorlatok a fókusz, tervezés, időgazdálkodás, érzelmi szabályozás és mentális egyensúly támogatására.",
       "provider": {
-        "@id": "https://www.magyariskola.at/#school"
+        "@id": "https://www.magyariskola.at/#organization"
       },
       "audience": {
         "@type": "EducationalAudience",
@@ -1013,7 +1013,7 @@
       "url": "https://napraforgok.at/r%C3%B3lunk#kezdocsoport",
       "description": "Belépő szintű magyar néptánc közösségi formában, előzetes tánctudás nélkül is. Felnőttként szeretnél mozogni, magyar közösséghez kapcsolódni és néptáncot tanulni úgy, hogy nincs szükség előzetes tánctudásra. Belépő szintű néptánctudás, rendszeres mozgás, zenei és kulturális élmény, felnőtt közösség.",
       "provider": {
-        "@id": "https://www.magyariskola.at/#school"
+        "@id": "https://www.magyariskola.at/#organization"
       },
       "audience": {
         "@type": "EducationalAudience",
@@ -1051,7 +1051,7 @@
       "url": "https://mos.magyariskola.at",
       "description": "Magyar nyelvű, gyakorlati Word-, Excel- és PowerPoint-képzés, célzott felkészítéssel a Microsoft Office Specialist vizsgára. A munkához Word-, Excel- vagy PowerPoint-tudásra van szükséged, szeretnéd rendszerezni a gyakorlati ismereteidet, és fontos a hivatalosan igazolható MOS-minősítés. Gyakorlati Office-feladatok, próbavizsga, célzott felkészítés és a választott csomaghoz tartozó MOS-vizsga.",
       "provider": {
-        "@id": "https://www.magyariskola.at/#school"
+        "@id": "https://www.magyariskola.at/#organization"
       },
       "audience": {
         "@type": "EducationalAudience",
@@ -1083,7 +1083,7 @@
       "url": "https://www.magyariskola.at/event-details/rekreacio-2026",
       "description": "Kreatív, befogadó felnőtt közösségi workshop, ahol hétköznapi vagy feleslegessé vált tárgyakból új, esztétikus és használható alkotások születnek környezettudatos szemlélettel. Felnőttként kreatív közösséget keresel, szeretnél kiszakadni a hétköznapi rutinból, alkotni és új értéket adni hétköznapi vagy feleslegessé vált tárgyaknak. Közös alkotás, kreatív feltöltődés, újrahasznosító szemlélet és rendszeresen találkozó befogadó közösség.",
       "provider": {
-        "@id": "https://www.magyariskola.at/#school"
+        "@id": "https://www.magyariskola.at/#organization"
       },
       "audience": {
         "@type": "EducationalAudience",
@@ -1115,7 +1115,7 @@
       "url": "https://www.magyariskola.at/event-details/zongoraoktatas-schwedenplatz",
       "description": "Személyre szabott egyéni zongoraoktatás Bécsben 7 éves kortól felnőttkorig, kezdőknek, újrakezdőknek és haladóknak, klasszikus, jazz, pop és rock repertoárral. Szeretnél Bécsben személyre szabott zongoraoktatást, ahol a tananyag nem sablonos, hanem a saját céljaidhoz, zenei ízlésedhez és előzetes tudásodhoz igazodik. Egyéni fejlesztési terv, biztosabb hangszeres alapok, repertoár- és zenei készségfejlődés klasszikus, jazz, pop vagy rock stílusban, türelmes és felszabadult tanulási környezetben.",
       "provider": {
-        "@id": "https://www.magyariskola.at/#school"
+        "@id": "https://www.magyariskola.at/#organization"
       },
       "audience": {
         "@type": "EducationalAudience",
@@ -1147,7 +1147,7 @@
       "url": "https://zenebona.magyariskola.at",
       "description": "Magyar nyelvű zenés szülő–gyermek foglalkozás 0–3 éveseknek énekléssel, mondókákkal, mozgással, ritmikus játékokkal és hangszeres felfedezéssel Hietzingben. Kisgyermekkel olyan magyar nyelvű közös programot keresel Bécsben, ahol a zene, mondóka, ritmus, mozgás és az egymásra figyelés természetesen kapcsolódik össze. Közös éneklés, mondókázás, mozgás, ritmikus játék, hangszeres felfedezés és rendszeres magyar nyelvű szülő–gyermek közösségi élmény.",
       "provider": {
-        "@id": "https://www.magyariskola.at/#school"
+        "@id": "https://www.magyariskola.at/#organization"
       },
       "audience": {
         "@type": "EducationalAudience",
@@ -1185,7 +1185,7 @@
       "url": "https://www.magyariskola.at/event-details/oromzene-2026",
       "description": "Közös dobolás, éneklés és magyar dallamok minden korosztálynak. Havi egy alkalom 18:00-tól; zenei vagy dobos előképzettség nem szükséges, saját hangszer hozható. Olyan bécsi magyar közösségi programot keresel, ahol gyermekek, fiatalok, szülők és felnőttek együtt kapcsolódhatnak, és a zenéléshez nem kell előképzettség. Közös dobolás, éneklés, magyar dallamok, generációkat összekötő közösségi élmény és felszabadult örömzenélés teljesítménykényszer nélkül.",
       "provider": {
-        "@id": "https://www.magyariskola.at/#school"
+        "@id": "https://www.magyariskola.at/#organization"
       },
       "audience": {
         "@type": "EducationalAudience",
