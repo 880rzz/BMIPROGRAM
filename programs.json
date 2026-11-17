@@ -1851,6 +1851,63 @@
       "primaryCategory6": "mozgas"
     },
     {
+      "id": "oromzene",
+      "name": "Együtt dobban Bécs – Közös örömzene | Schwedenplatz",
+      "minAge": 0,
+      "maxAge": 99,
+      "ageText": "Minden korosztály – kicsik és nagyok",
+      "interests": [
+        "nyelv",
+        "mozgas"
+      ],
+      "needs": [
+        "kozosseg-identitas",
+        "tanc-hagyomany",
+        "mozgas-fejlodes"
+      ],
+      "painPoint": "Olyan bécsi magyar közösségi programot keresel, ahol gyermekek, fiatalok, szülők és felnőttek együtt kapcsolódhatnak, és a zenéléshez nem kell előképzettség.",
+      "outcome": "Közös dobolás, éneklés, magyar dallamok, generációkat összekötő közösségi élmény és felszabadult örömzenélés teljesítménykényszer nélkül.",
+      "day": "szombat",
+      "weekday": "szombat",
+      "weekdays": [
+        "szombat",
+        "vasarnap"
+      ],
+      "pace": "rugalmas",
+      "when": "Havonta 1 alkalom 18:00-tól",
+      "period": "2026/27-es tanév; alkalmak: 2026.09.27.; 2026.10.24.; 2026.11.28.; 2027.01.16.; 2027.02.13.; 2027.03.13.; 2027.04.17.; 2027.05.22.; évzáró: 2027.06.19. vagy 06.26., egyeztetés alatt",
+      "eventDates": [
+        "2026-09-27",
+        "2026-10-24",
+        "2026-11-28",
+        "2027-01-16",
+        "2027-02-13",
+        "2027-03-13",
+        "2027-04-17",
+        "2027-05-22"
+      ],
+      "tentativeEventDates": [
+        "2027-06-19",
+        "2027-06-26"
+      ],
+      "location": "Bécsi Magyar Iskola, Schwedenplatz 2. / Laurenzerberg 5., 1010 Wien",
+      "routeLocation": "Schwedenplatz 2, 1010 Wien, Austria",
+      "language": "Magyar",
+      "teacher": "Hupczik Andrea",
+      "teacherContact": "+43 670 6539011 · taltosdob@gmail.com",
+      "teacherBackground": "Informatikatanár és hagyományőrző közösségi szervező; az Együtt dobban Bécs / Közös örömzene foglalkozásvezetője és helyi kapcsolattartója.",
+      "fee": "5 € / fő; a közvetlenül előtte zajló gyermek dobos foglalkozás résztvevőinek ingyenes",
+      "capacity": "10–30 fő",
+      "duration": "1,5 óra",
+      "firstDate": "2026. szeptember 27., vasárnap 18:00",
+      "url": "https://www.magyariskola.at/event-details/oromzene-2026",
+      "provider": "Regélő Fehér Táltos Hagyományőrző Egyesület",
+      "relationship": "bmi-partner",
+      "sourceType": "Wix Events 2026/27 · BMI Partner Program",
+      "why": "Közös dobolás, éneklés és magyar dallamok minden korosztálynak. Havi egy alkalom 18:00-tól; zenei vagy dobos előképzettség nem szükséges, saját hangszer hozható.",
+      "primaryCategory6": "mozgas"
+    },
+    {
       "id": "hangolodj-onmagadra-zeneterapia-2026-11-29",
       "name": "HANGOLÓDJ ÖNMAGADRA! | Zeneterápiás önismereti csoport",
       "minAge": 18,
