@@ -32,7 +32,18 @@ jobs:
             canonicalTeacherDirectory:'https://tanarok.magyariskola.at/',
             history:'https://hu.wikipedia.org/wiki/Bécsi_Magyar_Iskola'
           };
-          fs.writeFileSync('programs.json',JSON.stringify({schemaVersion:'2026-09-02-v3',schoolYear:cfg.sourcePolicy?.schoolYear||'2026/2027',identity,categories6:taxonomy.categories,interests:cfg.interests,needs:cfg.needs,programs:cfg.programs},null,2)+'\n');
+          // The canonical runtime contains 29 programs. Two separately verified Wix
+          // events are curated in programs.json; preserve them during regeneration.
+          const prior=JSON.parse(fs.readFileSync('programs.json','utf8'));
+          const eventIds=[
+            'hangolodj-onmagadra-zeneterapia-2026-11-29',
+            'kicsi-svung-narnia-nyomaban-2026-12-06'
+          ];
+          const additional=eventIds.map(id=>prior.programs.find(p=>p.id===id));
+          if(additional.some(p=>!p))throw new Error('Curated Wix event missing from published program register');
+          const full=[...cfg.programs,...additional];
+          if(full.length!==31||new Set(full.map(p=>p.id)).size!==31)throw new Error('Program catalog must preserve 29 core plus 2 event entries');
+          fs.writeFileSync('programs.json',JSON.stringify({schemaVersion:'2026-09-02-v3',schoolYear:cfg.sourcePolicy?.schoolYear||'2026/2027',identity,categories6:taxonomy.categories,interests:cfg.interests,needs:cfg.needs,programs:full},null,2)+'\n');
           const school='https://www.magyariskola.at/#organization';
           const graph=[
             {'@type':'EducationalOrganization','@id':school,name:'Bécsi Magyar Iskola',alternateName:['BMI','Wiener Ungarische Schule'],url:'https://www.magyariskola.at/',foundingDate:'1987',description:'A Bécsi Magyar Iskolát 1987-ben alapították Bécsben; 2027-ben ünnepli fennállásának 40. évfordulóját.',sameAs:['https://hu.wikipedia.org/wiki/Bécsi_Magyar_Iskola']},
