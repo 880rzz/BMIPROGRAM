@@ -102,13 +102,10 @@ if(fs.existsSync('programs.json')){
     assert(g.primaryCategory6===taxonomy.fixed[p.id],`Generated taxonomy drift on ${p.id}`);
     const a=[...(p.needs||[])].sort().join('|'),b=[...(g.needs||[])].sort().join('|');
     assert(a===b,`Generated need-edge drift on ${p.id}: runtime=[${a}] generated=[${b}]`);
-    const curatedWixUrl = p.id === 'vilagfa'
-      ? 'https://www.magyariskola.at/event-details/taltos-dob-es-oromzene-schwedenplatz'
-      : null;
-    if (curatedWixUrl) {
-      assert(g.url === curatedWixUrl, 'Curated live Wix Event URL changed for ' + p.id);
-    } else {
-      assert(g.url === p.url, `Generated canonical URL drift on ${p.id}`);
+    assert(g.url === p.url, `Generated canonical URL drift on ${p.id}`);
+    if (p.id === 'vilagfa') {
+      assert(g.eventUrl === 'https://www.magyariskola.at/event-details/taltos-dob-es-oromzene-schwedenplatz',
+        'Világfa Wix registration event URL missing or changed');
     }
   }
 }
