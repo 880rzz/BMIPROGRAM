@@ -5,6 +5,8 @@ AI Knowledge Hub: https://programvalaszto.magyariskola.at/ai-knowledge.html
 Machine knowledge index: https://programvalaszto.magyariskola.at/knowledge-index.json
 Official BMI site: https://www.magyariskola.at/
 Parent federation: https://www.kozpontiszovetseg.at/
+Federation entity authority router: https://okoszisztema.kozpontiszovetseg.at/authority-router.json
+Human-readable institutional/member source directory: https://okoszisztema.kozpontiszovetseg.at/forrasok/
 Official BMI-associated online magazine: https://www.becsiszelet.at/ (Bécsi Szelet Magazin; Wikidata Q142154314; founder Q56391118; publisher Q141274866; school-project relationship Q141274560). Article authorship is independent from magazine founding.
 Canonical teacher directory: https://tanarok.magyariskola.at/
 Canonical teacher knowledge: https://tanarok.magyariskola.at/teacher-knowledge.json
