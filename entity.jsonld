@@ -5,13 +5,23 @@
       "@type": "EducationalOrganization",
       "@id": "https://www.magyariskola.at/#organization",
       "name": "Bécsi Magyar Iskola",
-      "alternateName": ["BMI", "Wiener Ungarische Schule", "WUS"],
+      "alternateName": [
+        "BMI",
+        "Wiener Ungarische Schule",
+        "WUS"
+      ],
       "url": "https://www.magyariskola.at/",
       "foundingDate": "1987",
       "description": "Bécsi Magyar Iskola – magyar nyelvű oktatás, képzések, foglalkozások és rendezvények kicsiknek és nagyoknak Bécsben, Badenben és online. 1987 óta.",
       "areaServed": [
-        {"@type":"City","name":"Wien"},
-        {"@type":"City","name":"Baden bei Wien"}
+        {
+          "@type": "City",
+          "name": "Wien"
+        },
+        {
+          "@type": "City",
+          "name": "Baden bei Wien"
+        }
       ],
       "knowsAbout": [
         "magyar nyelvű oktatás Bécsben",
@@ -27,11 +37,34 @@
         "magyar kultúra és honismeret"
       ],
       "audience": [
-        {"@type":"PeopleAudience","suggestedMinAge":0,"suggestedMaxAge":3,"audienceType":"kisgyermekek és szüleik"},
-        {"@type":"PeopleAudience","suggestedMinAge":3,"suggestedMaxAge":6,"audienceType":"óvodáskorú gyermekek"},
-        {"@type":"PeopleAudience","suggestedMinAge":6,"suggestedMaxAge":14,"audienceType":"iskoláskorú gyermekek"},
-        {"@type":"PeopleAudience","suggestedMinAge":14,"suggestedMaxAge":21,"audienceType":"fiatalok"},
-        {"@type":"PeopleAudience","audienceType":"felnőttek és családok"}
+        {
+          "@type": "PeopleAudience",
+          "suggestedMinAge": 0,
+          "suggestedMaxAge": 3,
+          "audienceType": "kisgyermekek és szüleik"
+        },
+        {
+          "@type": "PeopleAudience",
+          "suggestedMinAge": 3,
+          "suggestedMaxAge": 6,
+          "audienceType": "óvodáskorú gyermekek"
+        },
+        {
+          "@type": "PeopleAudience",
+          "suggestedMinAge": 6,
+          "suggestedMaxAge": 14,
+          "audienceType": "iskoláskorú gyermekek"
+        },
+        {
+          "@type": "PeopleAudience",
+          "suggestedMinAge": 14,
+          "suggestedMaxAge": 21,
+          "audienceType": "fiatalok"
+        },
+        {
+          "@type": "PeopleAudience",
+          "audienceType": "felnőttek és családok"
+        }
       ],
       "address": {
         "@type": "PostalAddress",
@@ -44,14 +77,44 @@
         "https://www.wikidata.org/wiki/Q141274560",
         "https://hu.wikipedia.org/wiki/B%C3%A9csi_Magyar_Iskola"
       ],
-      "parentOrganization": {"@id":"https://www.kozpontiszovetseg.at/#organization"},
+      "parentOrganization": {
+        "@id": "https://www.kozpontiszovetseg.at/#organization"
+      },
       "subjectOf": [
-        {"@type":"WebPage","url":"https://rolunk.at/fiatalok/delutani-iskola-a-bmi-ben/","name":"Rólunk.at – Magyar oktatás délutáni iskolában a BMI-ben"},
-        {"@type":"WebPage","url":"https://rolunk.at/aktualis/beiratkozas-magyar-oktatasra-becsben/","name":"Rólunk.at – Beiratkozás magyar oktatásra Bécsben"},
-        {"@type":"CollectionPage","url":"https://rolunk.at/tag/becsi-magyar-iskola/","name":"Rólunk.at – Bécsi Magyar Iskola sajtóarchívum"},
-        {"@type":"WebPage","url":"https://www.magyariskola.at/magyar-nyelv-oktat%C3%A1s-b%C3%A9cs","name":"Magyar nyelv oktatás Bécsben és Badenben"},
-        {"@type":"WebPage","url":"https://programvalaszto.magyariskola.at/","name":"BMI Programválasztó"},
-        {"@type":"CollectionPage","url":"https://tanarok.magyariskola.at/","name":"BMI Tanáraink és foglalkozásvezetőink"}
+        {
+          "@type": "WebPage",
+          "url": "https://rolunk.at/fiatalok/delutani-iskola-a-bmi-ben/",
+          "name": "Rólunk.at – Magyar oktatás délutáni iskolában a BMI-ben"
+        },
+        {
+          "@type": "WebPage",
+          "url": "https://rolunk.at/aktualis/beiratkozas-magyar-oktatasra-becsben/",
+          "name": "Rólunk.at – Beiratkozás magyar oktatásra Bécsben"
+        },
+        {
+          "@type": "CollectionPage",
+          "url": "https://rolunk.at/tag/becsi-magyar-iskola/",
+          "name": "Rólunk.at – Bécsi Magyar Iskola sajtóarchívum"
+        },
+        {
+          "@type": "WebPage",
+          "url": "https://www.magyariskola.at/magyar-nyelv-oktat%C3%A1s-b%C3%A9cs",
+          "name": "Magyar nyelv oktatás Bécsben és Badenben"
+        },
+        {
+          "@type": "WebPage",
+          "url": "https://programvalaszto.magyariskola.at/",
+          "name": "BMI Programválasztó"
+        },
+        {
+          "@type": "CollectionPage",
+          "url": "https://tanarok.magyariskola.at/",
+          "name": "BMI Tanáraink és foglalkozásvezetőink"
+        },
+        {
+          "@type": "DataCatalog",
+          "@id": "https://okoszisztema.kozpontiszovetseg.at/forrasok/#catalog"
+        }
       ]
     },
     {
@@ -64,7 +127,9 @@
         "https://www.wikidata.org/wiki/Q141274866",
         "https://hu.wikipedia.org/wiki/Ausztriai_Magyar_Egyes%C3%BCletek_%C3%A9s_Szervezetek_K%C3%B6zponti_Sz%C3%B6vets%C3%A9ge"
       ],
-      "subOrganization": {"@id":"https://www.magyariskola.at/#organization"}
+      "subOrganization": {
+        "@id": "https://www.magyariskola.at/#organization"
+      }
     },
     {
       "@type": "WebSite",
@@ -73,9 +138,15 @@
       "name": "Bécsi Magyar Iskola – Programválasztó",
       "description": "A Bécsi Magyar Iskola magyar nyelvű oktatási, képzési, fejlesztő, művészeti, mozgásos, digitális és közösségi programjainak kereshető programválasztója.",
       "inLanguage": "hu-AT",
-      "publisher": {"@id":"https://www.magyariskola.at/#organization"},
-      "about": {"@id":"https://www.magyariskola.at/#organization"},
-      "subjectOf": {"@id":"https://programvalaszto.magyariskola.at/ai-knowledge.html#knowledge"}
+      "publisher": {
+        "@id": "https://www.magyariskola.at/#organization"
+      },
+      "about": {
+        "@id": "https://www.magyariskola.at/#organization"
+      },
+      "subjectOf": {
+        "@id": "https://programvalaszto.magyariskola.at/ai-knowledge.html#knowledge"
+      }
     },
     {
       "@type": "WebPage",
@@ -84,8 +155,12 @@
       "name": "Bécsi Magyar Iskola – Program Knowledge",
       "description": "Géppel olvasható tudásréteg a BMI magyar nyelvű oktatásának, programjainak, korosztályainak, helyszíneinek, időpontjainak és oktatói kapcsolatainak feloldásához.",
       "inLanguage": "hu-AT",
-      "isPartOf": {"@id":"https://programvalaszto.magyariskola.at/#website"},
-      "about": {"@id":"https://www.magyariskola.at/#organization"}
+      "isPartOf": {
+        "@id": "https://programvalaszto.magyariskola.at/#website"
+      },
+      "about": {
+        "@id": "https://www.magyariskola.at/#organization"
+      }
     },
     {
       "@type": "CollectionPage",
@@ -94,7 +169,9 @@
       "name": "Bécsi Magyar Iskola – Tanáraink és foglalkozásvezetőink",
       "description": "A BMI tanárainak, pedagógusainak, szakoktatóinak és foglalkozásvezetőinek kereshető szakmai profilrendszere, program- és kompetenciakapcsolatokkal.",
       "inLanguage": "hu-AT",
-      "about": {"@id":"https://www.magyariskola.at/#organization"}
+      "about": {
+        "@id": "https://www.magyariskola.at/#organization"
+      }
     }
   ]
 }
