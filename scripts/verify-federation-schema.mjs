@@ -36,7 +36,12 @@ assert(graph.find(x => x['@id'] === SCHOOL)?.parentOrganization?.['@id'] === FED
   'The real parent organization must remain separate and linked');
 const programs = JSON.parse(fs.readFileSync('programs.json', 'utf8'));
 assert.equal(programs.identity.school.id, SCHOOL);
-assert.equal(programs.programs.length, 29, 'Do not lose existing programs');
+assert.equal(programs.programs.length, 31, 'Preserve 29 live programs and 2 independently published event programs');
+assert.equal(new Set(programs.programs.map(x=>x.id)).size, 31, 'Program IDs must be unique');
+for (const id of ['oromzene', 'hangolodj-onmagadra-zeneterapia-2026-11-29',
+                  'kicsi-svung-narnia-nyomaban-2026-12-06']) {
+  assert(programs.programs.some(p => p.id === id), 'Published core or event item missing: ' + id);
+}
 const catalog = JSON.parse(fs.readFileSync('program-catalog.jsonld','utf8'));
 assert(catalog['@graph'].some(x=>x['@id']===SCHOOL), 'Generated program catalog must reference canonical BMI ID');
 for (const path of ['index.html','en/index.html','de/index.html']) {
@@ -50,4 +55,4 @@ for (const path of ['.github/workflows/unify-school-schema-id-20260902.yml',
   assert(!text.includes('git push') && !text.includes('contents: write'),
     'Historical schema workflow can still mutate main: ' + path);
 }
-console.log('PASS: BMI canonical @id stable in 33 source files, HU/EN/DE, programs and read-only legacy workflows.');
+console.log('PASS: BMI canonical @id stable across HU/EN/DE and 31 programs (29 core + 2 events).');
