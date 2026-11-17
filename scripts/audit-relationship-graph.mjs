@@ -55,7 +55,7 @@ for(const p of cfg.programs){
 const canonicalExternal={
   zenebona:'https://zenebona.magyariskola.at',
   mos:'https://mos.magyariskola.at',
-  vilagfa:'https://www.magyariskola.at/event-details/taltos-dob-es-oromzene-schwedenplatz',
+  vilagfa:'https://taltosdob.magyariskola.at',
   cserkeszet:'https://cserkesz.at/cserkesz-raj/',
   'kezdo-neptanc':'https://napraforgok.at/r%C3%B3lunk#kezdocsoport',
   napraforgocskak:'https://napraforgok.at/r%C3%B3lunk#napraforgocskak'
