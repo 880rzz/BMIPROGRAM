@@ -63,7 +63,7 @@ const canonicalExternal={
 for(const [id,url] of Object.entries(canonicalExternal)){
   const p=cfg.programs.find(x=>x.id===id);
   assert(p,`External canonical programme missing: ${id}`);
-  assert(p.url===url,`Canonical URL drift on ${id}: ${p.url}`);
+  assert(new URL(p.url).href===new URL(url).href,`Canonical URL drift on ${id}: ${JSON.stringify(p.url)} vs ${JSON.stringify(url)}`);
   assert(p.relationship!=='bmi',`External canonical programme incorrectly marked bmi: ${id}`);
 }
 
